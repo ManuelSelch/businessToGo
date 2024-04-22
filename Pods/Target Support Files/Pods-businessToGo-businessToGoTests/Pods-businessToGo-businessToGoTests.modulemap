@@ -1,0 +1,6 @@
+framework module Pods_businessToGo_businessToGoTests {
+  umbrella header "Pods-businessToGo-businessToGoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

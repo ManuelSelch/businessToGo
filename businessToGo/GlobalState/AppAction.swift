@@ -2,7 +2,7 @@ import Foundation
 
 enum MenuAction {
     case navigate(AppScreen)
-    
+    case logout
     case resetDatabase
 }
 

@@ -5,7 +5,7 @@ import SQLite
 protocol ITrackTable {
     func clear(_ tableName: String)
     func insert(_ recordID: Int, _ tableName: String, _ type: DatabaseChangeType)
-    func delete(_ id: Int)
+    func delete(by recordID: Int)
     func getChange(_ recordID: Int, _ tableName: String) -> DatabaseChange?
     func getAll(_ records: [any TableProtocol], _ tableName: String) -> [DatabaseChange]
 }
@@ -63,10 +63,10 @@ class TrackTable: ITrackTable {
     
     
     
-    func delete(_ id: Int){
+    func delete(by recordID: Int){
         do {
             try db?.run(
-                table.filter(self.id == id).delete()
+                table.filter(self.recordID == recordID).delete()
             )
         } catch {
             LogService.log("\(error); \(recordID) \(tableName)T")
@@ -128,7 +128,7 @@ class TrackTableMock: ITrackTable {
         
     }
     
-    func delete(_ id: Int) {
+    func delete(by recordID: Int) {
         
     }
     

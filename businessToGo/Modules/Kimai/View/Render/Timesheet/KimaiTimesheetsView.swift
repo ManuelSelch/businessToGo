@@ -6,6 +6,7 @@ struct KimaiTimesheetsView: View {
     let changes: [DatabaseChange]
     
     let onTimesheetClicked: (Int) -> Void
+    let onStopClicked: (Int) -> Void
     
     var timesheetsFiltered: [KimaiTimesheet] {
         var t = timesheets
@@ -37,13 +38,11 @@ struct KimaiTimesheetsView: View {
                         change: changes.first(where: { $0.tableName == "timesheets" && $0.recordID == timesheet.id }),
                         activity: activities.first(where: { $0.id == timesheet.activity }),
                         
-                        onTimesheetClicked: onTimesheetClicked
+                        onTimesheetClicked: onTimesheetClicked,
+                        onStopClicked: onStopClicked
                     )
+                    .frame(maxWidth: .infinity)
                 }
-            }
-            
-            Grid {
-                
             }
         }
     }

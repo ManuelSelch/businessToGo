@@ -53,12 +53,6 @@ extension TaigaState {
                 .map { .setImage(project.id, $0) }
                 .eraseToAnyPublisher()
             
-            
-        case .setStatus(let taskStory, let status):
-            if var sourceItem =  Env.taiga.taskStories.get().first(where: {$0.id == taskStory.id}){
-                sourceItem.status = status.id
-                Env.taiga.taskStories.add(sourceItem)
-            }
         }
         
         return Empty().eraseToAnyPublisher()

@@ -10,8 +10,13 @@ import SwiftUI
 struct KimaiHeaderView: View {
     @Binding var isPresentingPlayView: Bool
     let isBack: Bool
+    let isChart: Bool
+    let isSync: Bool
+    let isPlay: Bool
+    
     let onSync: () -> Void
     let onBack: () -> Void
+    let onChart: () -> Void
     
     var body: some View {
         HStack {
@@ -25,18 +30,31 @@ struct KimaiHeaderView: View {
             
             Spacer()
             
-            Button(action: {
-                onSync()
-            }){
-                Image(systemName: "arrow.triangle.2.circlepath")
+            if(isChart){
+                Button(action: {
+                    onChart()
+                }){
+                    Image(systemName: "chart.bar.xaxis.ascending")
+                }
             }
             
-            Button(action: {
-                isPresentingPlayView = true
-                // selectedCustomer = project.customer
-                // selectedProject = project.id
-            }){
-                Image(systemName: "play.fill")
+            
+            if(isSync){
+                Button(action: {
+                    onSync()
+                }){
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                }
+            }
+            
+            if(isPlay){
+                Button(action: {
+                    isPresentingPlayView = true
+                    // selectedCustomer = project.customer
+                    // selectedProject = project.id
+                }){
+                    Image(systemName: "play.fill")
+                }
             }
         }
         .padding()

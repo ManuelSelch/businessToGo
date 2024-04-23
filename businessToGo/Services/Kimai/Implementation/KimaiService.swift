@@ -33,7 +33,7 @@ class KimaiService: IKimaiService {
         
         timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
             tables.timesheets, provider, .getTimesheets,
-            KimaiRequest.insertTimesheet
+            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet
         )
         
         activities = RequestService<KimaiActivity, KimaiRequest>(
@@ -52,7 +52,7 @@ class KimaiService: IKimaiService {
         
         timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
             tables.timesheets, provider, .getTimesheets,
-            KimaiRequest.insertTimesheet
+            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet
         )
         
         activities = RequestService<KimaiActivity, KimaiRequest>(
@@ -69,11 +69,6 @@ class KimaiService: IKimaiService {
         return Just(true)
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
-    }
-    
-    func createTimesheet(_ project: Int, _ activity: Int, _ begin: String, _ description: String?) {
-        let timesheet = KimaiTimesheet(project, activity, begin, description)
-        timesheets.add(timesheet)
     }
 }
 

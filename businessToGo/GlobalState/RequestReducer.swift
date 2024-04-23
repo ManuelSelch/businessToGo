@@ -18,6 +18,12 @@ struct RequestReducer {
         
         case .hasSynced(let change):
             service.hasSynced(change)
+        
+        case .create(let item):
+            service.create(item)
+            
+        case .update(let item):
+            service.update(item)
         }
         return Empty().eraseToAnyPublisher()
     }

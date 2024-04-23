@@ -22,29 +22,45 @@ struct KimaiContainerView: View {
     
     var body: some View {
         VStack {
+            var isTimesheet: Bool {
+                switch(kimaiStore.state.scene){
+                    case .timesheet(_): return true
+                    default: return false
+                }
+            }
+            
+            
             KimaiHeaderView(
                 isPresentingPlayView: $isPresentingPlayView,
                 isBack: kimaiStore.state.scene != .customers,
+                isChart: kimaiStore.state.scene == .customers,
+                isSync: !isTimesheet,
+                isPlay: !isTimesheet,
                 onSync: sync,
-                onBack: goBack
+                onBack: goBack,
+                onChart: showChart
             )
             
             switch(kimaiStore.state.scene){
             case .customers:
                 getCustomersView()
+            
+            case .chart:
+                getChartView()
                 
             case .customer(let id):
                 getCustomerView(id)
                 
             case .project(let id):
                 getProjectView(id)
+                    .onAppear {
+                        kimaiCustomerMenuSelection = KimaiCustomerMenu.time
+                    }
                 
             case .timesheet(let id):
                 getTimesheetView(id)
             }
-        }
-        .onAppear {
-            kimaiStore.send(.sync)
+            
         }
         .sheet(isPresented: $isPresentingPlayView) {
             getTimesheetView()
@@ -61,14 +77,23 @@ extension KimaiContainerView {
         )
     }
     
+    @ViewBuilder func getChartView() -> some View {
+        KimaiChartView(
+            projects: Env.kimai.projects.get(),
+            timesheets: Env.kimai.timesheets.get()
+        )
+    }
+    
     @ViewBuilder func getCustomerView(_ id: Int) -> some View {
         // todo: reset kimaiCustomerMenuSelection = .time
-        if let customer = Env.kimai.customers.get().first(where: {$0.id == id}) {
+        if let customer = Env.kimai.customers.get(by: id) {
             KimaiCustomerView(
                 customer: customer,
                 projects: Env.kimai.projects.get(),
                 onProjectClicked: showProject
             )
+        }else {
+            Text("Error: Customer not found")
         }
     }
     
@@ -77,10 +102,9 @@ extension KimaiContainerView {
         var menus: [KimaiCustomerMenu] {
             var menus: [KimaiCustomerMenu] = [.time]
             
-            let integration = Env.integrations.get().first { $0.id == id }
-            let taigaProject = Env.taiga.projects.get().first { $0.id ==  integration?.taigaProjectId}
-            
-            if let taigaProject = taigaProject {
+            if let integration = Env.integrations.get(by: id),
+               let taigaProject = Env.taiga.projects.get(by: integration.taigaProjectId) 
+            {
                 menus.append(.kanban)
                 if(taigaProject.is_backlog_activated){
                     menus.append(.backlog)
@@ -90,10 +114,16 @@ extension KimaiContainerView {
             return menus
         }
         
-        if let kimaiProject = Env.kimai.projects.get().first(where: { $0.id == id }) {
-            let integration = Env.integrations.get().first { $0.id == id }
-            let taigaProject = Env.taiga.projects.get().first { $0.id ==  integration?.taigaProjectId}
+        if let kimaiProject = Env.kimai.projects.get(by: id)
+        {
+            let integration = Env.integrations.get(by: id)
             
+            var taigaProject: TaigaProject? {
+                if let integration = integration {
+                    return Env.taiga.projects.get(by: integration.taigaProjectId)
+                }
+                return nil
+            }
             
             
             Picker("", selection: $kimaiCustomerMenuSelection) {
@@ -122,10 +152,6 @@ extension KimaiContainerView {
     
     @ViewBuilder func getProjectTimeView(_ kimaiProject: KimaiProject, _ taigaProject: TaigaProject?) -> some View {
         VStack {
-            KimaiProjectView(
-                kimaiProject: kimaiProject,
-                taigaProject: taigaProject
-            )
             let timesheets = Env.kimai.timesheets.get().filter { $0.project == kimaiProject.id }
             
             KimaiTimesheetsView(
@@ -133,7 +159,8 @@ extension KimaiContainerView {
                 activities: Env.kimai.activities.get(),
                 changes: Env.track.getAll(timesheets, "timesheets"),
                 
-                onTimesheetClicked: showTimesheet
+                onTimesheetClicked: showTimesheet,
+                onStopClicked: stopTimesheet
             )
         }
     }
@@ -143,11 +170,8 @@ extension KimaiContainerView {
             if(taigaProject.is_backlog_activated){
                 TaigaBacklogView(
                     project: taigaProject,
-                    milestones: Env.taiga.milestones.get()
+                    milestones: Env.taiga.milestones.get().filter { $0.project == taigaProject.id }
                 )
-                .onAppear{
-                    taigaStore.send(.milestones(.fetch))
-                }
             }
         }
     }
@@ -156,47 +180,30 @@ extension KimaiContainerView {
         if let taigaProject = taigaProject {
             TaigaKanbanView(
                 project: taigaProject,
-                statusList: Env.taiga.taskStoryStatus.get(),
+                statusList: Env.taiga.taskStoryStatus.get().filter { $0.project == taigaProject.id },
                 storyList: Env.taiga.taskStories.get(),
                 tasks: Env.taiga.tasks.get(),
                 
                 onSetStatus: setStatus
             )
-            .onAppear {
-                taigaStore.send(.sync)
-            }
         }
     }
-        
+    
     
     @ViewBuilder func getTimesheetView(_ id: Int? = nil) -> some View {
-        if let id = id, let timesheet = Env.kimai.timesheets.get().first(where: { $0.id == id }) {
-            // edit existing timesheet record
-            KimaiPlayView(
-                timesheet: timesheet,
-                
-                isPresentingPlayView: $isPresentingPlayView,
-                
-                customers: Env.kimai.customers.get(),
-                projects: Env.kimai.projects.get(),
-                activities: Env.kimai.activities.get(),
-                
-                onSave: createTimesheet
-            )
-        }else {
-            // create new timesheet record
-            KimaiPlayView(
-                timesheet: KimaiTimesheet.new,
-                
-                isPresentingPlayView: $isPresentingPlayView,
-                
-                customers: Env.kimai.customers.get(),
-                projects: Env.kimai.projects.get(),
-                activities: Env.kimai.activities.get(),
-                
-                onSave: createTimesheet
-            )
-        }
+        let timesheet = Env.kimai.timesheets.get().first { $0.id == id }
+        
+        KimaiPlayView(
+            timesheet: timesheet,
+            
+            isPresentingPlayView: $isPresentingPlayView,
+            
+            customers: Env.kimai.customers.get(),
+            projects: Env.kimai.projects.get(),
+            activities: Env.kimai.activities.get(),
+            
+            onSave: saveTimesheet
+        )
         
         
     }
@@ -205,21 +212,25 @@ extension KimaiContainerView {
 extension KimaiContainerView {
     func sync(){
         kimaiStore.send(.sync)
+        taigaStore.send(.sync)
     }
     
     func goBack(){
         switch(kimaiStore.state.scene){
         case .customers:
             break
-            
+        case .chart:
+            kimaiStore.send(.navigate(.customers))
         case .customer(_):
             kimaiStore.send(.navigate(.customers))
         case .project(let id):
-            if let project = Env.kimai.projects.get().first(where: {$0.id == id}) {
+            if let project = Env.kimai.projects.get(by: id) {
                 kimaiStore.send(.navigate(.customer(project.customer)))
             }
         case .timesheet(let id):
-            kimaiStore.send(.navigate(.customers))
+            if let timesheet = Env.kimai.timesheets.get(by: id) {
+                kimaiStore.send(.navigate(.project(timesheet.project)))
+            }
         }
     }
     
@@ -239,12 +250,31 @@ extension KimaiContainerView {
         kimaiStore.send(.navigate(.timesheet(id)))
     }
     
-    func setStatus(_ task: TaigaTaskStory, _ status: TaigaTaskStoryStatus){
-        taigaStore.send(.setStatus(task, status))
+    func stopTimesheet(_ id: Int){
+        if var timesheet = Env.kimai.timesheets.get(by: id) {
+            timesheet.end = "\(Date.now)"
+            kimaiStore.send(.timesheets(.update(timesheet)))
+        }
     }
     
-    func createTimesheet(_ project: Int, _ activity: Int, _ begin: String, _ description: String){
-        kimaiStore.send(.createTimesheet(project, activity, begin, description))
+    func setStatus(_ task: TaigaTaskStory, _ status: TaigaTaskStoryStatus){
+        var task = task
+        task.status = status.id
+        taigaStore.send(.taskStories(.update(task)))
+    }
+    
+    func saveTimesheet(_ timesheeet: KimaiTimesheet){
+        if(timesheeet.id == -1){ // create
+            kimaiStore.send(.timesheets(.create(timesheeet)))
+        }else { // update
+            kimaiStore.send(.timesheets(.update(timesheeet)))
+            goBack()
+        }
+        
+    }
+    
+    func showChart() {
+        kimaiStore.send(.navigate(.chart))
     }
     
     

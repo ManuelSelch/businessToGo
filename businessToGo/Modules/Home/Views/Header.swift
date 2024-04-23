@@ -9,12 +9,13 @@ import SwiftUI
 
 struct Header: View {
     @Binding var showSidebar: Bool
+    var title: String
     
     var body: some View {
         ZStack {
             HStack {
                 Spacer()
-                Text("Home")
+                Text(title)
                     .foregroundColor(Color.white)
                 Spacer()
             }

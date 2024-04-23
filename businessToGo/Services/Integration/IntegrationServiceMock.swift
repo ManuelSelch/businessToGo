@@ -13,5 +13,9 @@ struct IntegrationServiceMock: IIntegrationService {
         return []
     }
     
+    func get(by id: Int) -> Integration? {
+        return nil
+    }
+    
     
 }

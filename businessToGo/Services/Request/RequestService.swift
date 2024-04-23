@@ -30,7 +30,11 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
     }
     
     override func get() -> [Table] {
-        return table.getAll()
+        return table.get()
+    }
+    
+    override func get(by id: Int) -> Table? {
+        return table.get(by: id)
     }
     
 
@@ -38,12 +42,16 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
         return Env.request(provider, fetchMethod)
     }
     
-    /// add local record
-    override func add(_ item: Table){
-        _ = table.insertCreateOffline(item)
+    
+    override func create(_ item: Table){
+        table.create(item)
     }
     
-    override func sync(_ remoteRecords: [Table]) -> AnyPublisher<DatabaseChange, Error> {
+    override func update(_ item: Table) {
+        table.update(item, isTrack: true)
+    }
+    
+    override func sync(_ remoteRecords: [Table]) -> AnyPublisher<SyncResponse<Table>, Error> {
         LogService.log("********** sync \(table.getName()) **********")
         // 1. get remote data
         // 2. get local changes
@@ -59,9 +67,9 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
         
         // ------------------------------
         
-        var publishers: [AnyPublisher<DatabaseChange, Error>] = []
+        var publishers: [AnyPublisher<SyncResponse<Table>, Error>] = []
         
-        let localRecords = table.getAll()
+        let localRecords = table.get()
         
         for localRecord in localRecords {
             if let change = table.getTrack()?.getChange(localRecord.id, table.getName()) {
@@ -72,7 +80,7 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
                             let p: AnyPublisher<Table, Error> = Env.request(provider, insertMethod(localRecord))
                             publishers.append(
                                 p
-                                    .map { _ in  change}
+                                    .map { SyncResponse(change: change, result: $0) }
                                     .eraseToAnyPublisher()
                             )
                         }
@@ -82,7 +90,7 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
                             let p: AnyPublisher<Table, Error> = Env.request(provider, updateMethod(localRecord))
                             publishers.append(
                                 p
-                                    .map { _ in  change}
+                                    .map { SyncResponse(change: change, result: $0) }
                                     .eraseToAnyPublisher()
                             )
                         }
@@ -93,7 +101,7 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
                             let p: AnyPublisher<Table, Error> = Env.request(provider, deleteMethod(localRecord))
                             publishers.append(
                                 p
-                                    .map { _ in  change}
+                                    .map { SyncResponse(change: change, result: $0) }
                                     .eraseToAnyPublisher()
                             )
                         }
@@ -108,20 +116,19 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
                     if change.type == .insert {
                         LogService.log("insert local too: \(remoteRecord.id)")
                         // remote and local id are new records -> insert local too
-                        _ = table.insert(remoteRecord) // local record will be overwritten but later fetched again
-                        publishers.append(Env.just(change))
+                        table.insert(remoteRecord, isTrack: false) // local record will be overwritten but later fetched again
                     }
                     // else: remoteRecord old
                 } else if localRecord != remoteRecord {
                     LogService.log("update local: \(remoteRecord.id)")
                     // remote data changed -> update local
-                    _ = table.insert(remoteRecord)
+                    table.update(remoteRecord, isTrack: false)
                 }
             } else {
                 if table.getTrack()?.getChange(remoteRecord.id, table.getName()) == nil {
                     LogService.log("insert local: \(remoteRecord.id)")
                     // local record not found and was not deleted -> insert local
-                    _ = table.insert(remoteRecord)
+                    table.insert(remoteRecord, isTrack: false)
                 }
                 // else: local record is deleted
                 
@@ -135,8 +142,15 @@ class RequestService<Table: TableProtocol, Target: TargetType>: IRequestService<
         return Publishers.MergeMany(publishers).eraseToAnyPublisher()
     }
     
-    override func hasSynced(_ change: DatabaseChange){
-        table.getTrack()?.delete(change.id)
+    override func hasSynced(_ response: SyncResponse<Table>){
+        table.getTrack()?.delete(by: response.change.recordID)
+        if(response.change.recordID != response.result.id){
+            // id has changed -> delete and reinsert record
+            table.delete(response.change.recordID, isTrack: false)
+            table.insert(response.result, isTrack: false)
+        }else {
+            table.update(response.result, isTrack: false)
+        }
     }
     
     

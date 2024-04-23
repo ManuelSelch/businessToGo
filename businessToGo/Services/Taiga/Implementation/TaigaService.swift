@@ -4,7 +4,7 @@ import Moya
 
 
 class TaigaService: ITaigaService {
-    private var database = TaigaTable()
+    private var tables: TaigaTable
     private var provider: MoyaProvider<TaigaRequest>
     
     var projects: IRequestService<TaigaProject, TaigaRequest>
@@ -14,22 +14,29 @@ class TaigaService: ITaigaService {
     var tasks: IRequestService<TaigaTask, TaigaRequest>
     
     
-    init(){
+    init(_ db: IDatabase, _ track: ITrackTable){
+        tables = TaigaTable(db, track)
         provider = MoyaProvider<TaigaRequest>()
         
-        projects = RequestService(database.projects, provider, .getProjects)
-        taskStories = RequestService(database.taskStories, provider, .getTaskStories)
-        taskStoryStatus = RequestService(database.taskStatus, provider, .getStatusList)
-        milestones = RequestService(database.milestones, provider, .getMilestones)
-        tasks = RequestService(database.tasks, provider, TaigaRequest.getTasks)
+        projects = RequestService(tables.projects, provider, .getProjects)
+        taskStories = RequestService(
+            tables.taskStories, provider,
+            TaigaRequest.getTaskStories
+        )
+        taskStoryStatus = RequestService(tables.taskStatus, provider, .getStatusList)
+        milestones = RequestService(tables.milestones, provider, .getMilestones)
+        tasks = RequestService(tables.tasks, provider, TaigaRequest.getTasks)
     }
     
     func initRequests(){
-        projects = RequestService(database.projects, provider, .getProjects)
-        taskStories = RequestService(database.taskStories, provider, .getTaskStories)
-        taskStoryStatus = RequestService(database.taskStatus, provider, .getStatusList)
-        milestones = RequestService(database.milestones, provider, .getMilestones)
-        tasks = RequestService(database.tasks, provider, .getTasks)
+        projects = RequestService(tables.projects, provider, .getProjects)
+        taskStories = RequestService(
+            tables.taskStories, provider,
+            TaigaRequest.getTaskStories
+        )
+        taskStoryStatus = RequestService(tables.taskStatus, provider, .getStatusList)
+        milestones = RequestService(tables.milestones, provider, .getMilestones)
+        tasks = RequestService(tables.tasks, provider, .getTasks)
     }
     
 

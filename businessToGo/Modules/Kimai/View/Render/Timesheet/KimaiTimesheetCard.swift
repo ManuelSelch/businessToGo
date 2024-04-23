@@ -9,25 +9,29 @@ import SwiftUI
 
 struct KimaiTimesheetCard: View {
     let timesheet: KimaiTimesheet
-    let change: DatabaseChange?
+    let change: DatabaseChange? 
     let activity: KimaiActivity?
     
     let onTimesheetClicked: (Int) -> Void
+    let onStopClicked: (Int) -> Void
     
     var body: some View {
-        Button(action: {
-            onTimesheetClicked(timesheet.id)
-        }){
+        GridRow {
+            
             if(change != nil){
                 Image(systemName: "icloud.and.arrow.up")
             }else {
                 Text("")
             }
             
-            if let date = getDate(timesheet.begin){
-                Text(date.formatted())
-            }else{
-                Text(timesheet.begin)
+            Button(action: {
+                onTimesheetClicked(timesheet.id)
+            }){
+                if let date = getDate(timesheet.begin){
+                    Text(date.formatted())
+                }else{
+                    Text(timesheet.begin)
+                }
             }
             
             if let activity = activity {
@@ -37,8 +41,12 @@ struct KimaiTimesheetCard: View {
             }
             
             if(timesheet.end == nil){
-                Image(systemName: "pause.circle.fill")
-                    .foregroundStyle(Color.red)
+                Button(action: {
+                    onStopClicked(timesheet.id)
+                }){
+                    Image(systemName: "pause.circle.fill")
+                        .foregroundStyle(Color.red)
+                }
             }else {
                 Text("")
             }

@@ -61,16 +61,8 @@ extension TaigaContainerView {
     }
     
     func setStatus(_ taskStory: TaigaTaskStory, _ status: TaigaTaskStoryStatus){
-        store.send(.setStatus(taskStory, status))
+        var taskStory = taskStory
+        taskStory.status = status.id
+        store.send(.taskStories(.update(taskStory)))
     }
-}
-
-#Preview {
-    TaigaContainerView()
-        .environmentObject(
-            Store<TaigaState, TaigaAction>(
-                initialState: TaigaState(),
-                reducer: TaigaState.reduce
-            )
-        )
 }

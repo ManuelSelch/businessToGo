@@ -40,7 +40,7 @@ struct KimaiTimesheet: TableProtocol {
     }
     
     init(_ project: Int, _ activity: Int, _ begin: String, _ description: String?){
-        self.id = 0
+        self.id = -1
         
         self.project = project
         self.activity = activity
@@ -51,4 +51,29 @@ struct KimaiTimesheet: TableProtocol {
 
 extension KimaiTimesheet {
     static let new = KimaiTimesheet(0, 0, "", "")
+    
+    func getDate(_ dateStr: String) -> Date? {
+        let strategy = Date.ParseStrategy(
+            format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))",
+            timeZone: .current
+        )
+        
+        return try? Date(dateStr, strategy: strategy)
+    }
+    
+    func calculateDuration() -> TimeInterval? {
+        // Convert beginDate and endDate strings to Date objects
+        guard let beginDate = getDate(begin),
+              let end = end,
+              let endDate = getDate(end)
+        else {
+            return nil
+        }
+        
+        // Calculate time difference in seconds
+        let timeEntryDuration = endDate.timeIntervalSince(beginDate)
+        return timeEntryDuration
+    }
 }
+
+

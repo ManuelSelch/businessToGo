@@ -10,27 +10,30 @@ import SwiftUI
 struct KimaiPlayView: View {
     @Binding var isPresentingPlayView: Bool
     
-    let timesheet: KimaiTimesheet
+    var timesheet: KimaiTimesheet?
     
-    let customers: [KimaiCustomer]
-    let projects: [KimaiProject]
-    let activities: [KimaiActivity]
+    var customers: [KimaiCustomer]
+    var projects: [KimaiProject]
+    var activities: [KimaiActivity]
     
-    let onSave: (_ project: Int, _ activity: Int, _ begin: String, _ description: String) -> Void
+    let onSave: (_ timesheet: KimaiTimesheet) -> Void
     
+    @State var isCreate = true
     @State var selectedCustomer: Int = 0
     @State var selectedProject: Int = 0
     @State var selectedActivity: Int = 0
     @State var description: String = ""
     @State var startTime: Date = Date.now
+    @State var endTime: Date = Date.now
+    @State var isEndTime: Bool = false
     
     init(
-        timesheet: KimaiTimesheet,
+        timesheet: KimaiTimesheet?,
         isPresentingPlayView: Binding<Bool>,
         customers: [KimaiCustomer],
         projects: [KimaiProject],
         activities: [KimaiActivity],
-        onSave: @escaping (_ project: Int, _ activity: Int, _ begin: String, _ description: String) -> Void
+        onSave: @escaping (_ timesheet: KimaiTimesheet) -> Void
     )
     {
         self._isPresentingPlayView = isPresentingPlayView
@@ -39,14 +42,6 @@ struct KimaiPlayView: View {
         self.projects = projects
         self.activities = activities
         self.onSave = onSave
-        
-        let project = projects.first { $0.id == timesheet.project }
-        selectedCustomer = customers.first { $0.id ==  project?.id }?.id ?? 0
-        
-        selectedProject = timesheet.project
-        selectedActivity = timesheet.activity
-        description = timesheet.description ?? ""
-        startTime = Date.now
     }
     
     
@@ -114,14 +109,24 @@ struct KimaiPlayView: View {
                         Spacer()
                         
                         HStack {
-                            Image(systemName: "pause.circle.fill")
-                                .foregroundStyle(Color.red)
+                            if(isEndTime){
+                                Image(systemName: "clock.fill")
+                            }else {
+                                Image(systemName: "pause.circle.fill")
+                                    .foregroundStyle(Color.red)
+                            }
                             VStack {
                                 Text("End time")
                                     .font(.system(size: 8))
                                 
-                                Text("Stop")
-                                    .foregroundStyle(Color.red)
+                                if(isEndTime) {
+                                    DatePicker("end time", selection: $endTime, displayedComponents: .hourAndMinute)
+                                        .labelsHidden()
+                                }else {
+                                    Text("Stop")
+                                        .foregroundStyle(Color.red)
+                                }
+                                    
                             }
                         }
                         
@@ -134,16 +139,53 @@ struct KimaiPlayView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    let label = isCreate ? "Create" : "Save"
+                    Button(label) {
                         isPresentingPlayView = false
-                        onSave(selectedProject, selectedActivity, "\(startTime)", description)
+                        
+                        var timesheet = self.timesheet ?? KimaiTimesheet.new
+                        timesheet.project = selectedProject
+                        timesheet.activity = selectedActivity
+                        timesheet.begin = "\(startTime)"
+                        timesheet.end = isEndTime ? "\(endTime)" : nil
+                        timesheet.description = description
+                        
+                        onSave(timesheet)
                     }
+                    
                 }
             }
         }
-        .onDisappear {
+        .onAppear {
+            isCreate = (timesheet == nil)
             
+            if let timesheet = timesheet {
+                
+                let project = projects.first { $0.id == timesheet.project }
+                selectedCustomer = customers.first { $0.id ==  project?.customer }?.id ?? 0
+                
+                selectedProject = timesheet.project
+                selectedActivity = timesheet.activity
+                description = timesheet.description ?? ""
+                startTime = getDate(timesheet.begin) ?? Date.now
+                endTime = getDate(timesheet.end ?? "") ?? Date.now
+                isEndTime = (timesheet.end != nil)
+
+            } else {
+                selectedCustomer = customers.first?.id ?? 0
+                selectedProject = projectsFiltered.first?.id ?? 0
+                selectedActivity = activitiesFiltered.first?.id ?? 0
+            }
         }
+    }
+    
+    func getDate(_ dateStr: String) -> Date? {
+        let strategy = Date.ParseStrategy(
+            format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))",
+            timeZone: .current
+        )
+        
+        return try? Date(dateStr, strategy: strategy)
     }
 }
 

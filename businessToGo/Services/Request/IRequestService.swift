@@ -12,23 +12,33 @@ class IRequestService<Table: TableProtocol, Target: TargetType> {
     func get() -> [Table] {
         return []
     }
+    
+    /// get local record by id
+    func get(by id: Int) -> Table? {
+        return nil
+    }
     /// load remote records
     func fetch() -> AnyPublisher<[Table], Error> {
         return Empty().eraseToAnyPublisher()
     }
     
-    /// add local record
-    func add(_ item: Table){
+    /// create local record
+    func create(_ item: Table){
+        
+    }
+    
+    /// update local record
+    func update(_ item: Table){
         
     }
     
     ///  sync remote with local records
-    func sync(_ remoteRecords: [Table]) -> AnyPublisher<DatabaseChange, Error>{
+    func sync(_ remoteRecords: [Table]) -> AnyPublisher<SyncResponse<Table>, Error>{
         return Empty().eraseToAnyPublisher()
     }
     
     /// this change has been synced -> delete change history
-    func hasSynced(_ change: DatabaseChange) {
+    func hasSynced(_ response: SyncResponse<Table>) {
         
     }
 }

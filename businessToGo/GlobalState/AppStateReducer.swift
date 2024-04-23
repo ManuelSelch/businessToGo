@@ -10,6 +10,11 @@ extension AppState {
             switch(action){
             case .navigate(let scene):
                 state.scene = scene
+            case .logout:
+                return Publishers.Merge(
+                    Env.just(.login(.deleteAccount)),
+                    Env.just(.menu(.navigate(.login)))
+                ).eraseToAnyPublisher()
             case .resetDatabase:
                 Env.reset()
             }

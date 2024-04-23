@@ -9,7 +9,7 @@ struct IntegrationService: IIntegrationService {
     
     func setIntegration(_ kimaiProjectId: Int, _ taigaProjectId: Int){
         let integration = Integration(kimaiProjectId, taigaProjectId)
-        _ = integrations.insert(integration)
+        integrations.insert(integration, isTrack: false)
     }
     
     func getTaigaProject(_ kimaiProject: Int) -> AnyPublisher<Integration?, Error> {
@@ -17,7 +17,11 @@ struct IntegrationService: IIntegrationService {
     }
     
     func get() -> [Integration] {
-        return integrations.getAll()
+        return integrations.get()
+    }
+    
+    func get(by id: Int) -> Integration? {
+        return integrations.get(by: id)
     }
 }
 

@@ -24,6 +24,7 @@ class DatabaseTable<T: TableProtocol> {
     private var dbPath: String?
     
     private var id = Expression<Int>("id")
+    private var fields: [String: Expression<Any>] = [:]
     
     private let track: ITrackTable?
     
@@ -44,89 +45,83 @@ class DatabaseTable<T: TableProtocol> {
         }
     }
     
-    func insertCreateOffline(_ item: T) -> Bool {
+    /// sets record it to lastID+1 and track changes
+    func create(_ item: T){
         var item = item
-        do {
-            item.id = getLastId() + 1
-            try db?.run(table.insert(or: .replace, encodable: item))
-            track?.insert(item.id, tableName, .insert)
-            
-        } catch {
-            LogService.log("\(error); \(item.id)T")
-            return false
-        }
+        item.id = getLastId() + 1
+        insert(item, isTrack: true)
         
-        return true
     }
     
-    func insert(_ item: T) -> Bool {
+    func insert(_ item: T, isTrack: Bool) {
         let item = item
         do {
             try db?.run(table.insert(or: .replace, encodable: item))
+            if(isTrack){
+                track?.insert(item.id, tableName, .insert)
+            }
         } catch {
             LogService.log("\(error); \(item.id)T")
-            return false
         }
-        
-        return true
     }
     
     func getLastId() -> Int {
-        return getAll().max(by: { $0.id < $1.id })?.id ?? 0
-    }
-    
-    func insertAll(_ items: [T]) -> Bool {
-        if (T.self as? TableSyncProtocol) == nil {
-            // no sync service -> just replace data
-            clear()
-        }
-        
-        for item in items {
-            _ = insert(item)
-        }
-        
-        return true
+        return get().max(by: { $0.id < $1.id })?.id ?? 0
     }
     
     func getTimestamp(_ item: T) -> String {
         return (get(by: item.id) as? TableSyncProtocol)?.metaFields["timestamp"] ?? "\(Date.now)"
     }
     
-    func update(_ item: T) {
+    func update(_ item: T, isTrack: Bool) {
         do {
             try db?.run(table.filter(id == item.id).update(item))
-            track?.insert(item.id, tableName, .update)
+            if(isTrack){
+                track?.insert(item.id, tableName, .update)
+            }
         } catch {
             LogService.log("Error updating item: \(error); \(item.id)")
         }
     }
     
-    func delete(_ item: T) {
+    func delete(_ id: Int, isTrack: Bool) {
         do {
-            try db?.run(table.filter(id == item.id).delete())
-            track?.insert(item.id, tableName, .delete)
+            try db?.run(table.filter(self.id == id).delete())
+            if(isTrack){
+                track?.insert(id, tableName, .delete)
+            }
         } catch {
-            LogService.log("Error deleting item: \(error); \(item.id)")
+            LogService.log("Error deleting item: \(error); \(id)")
         }
     }
     
-    func getAll() -> [T] {
+    func get(where filter: Expression<Bool>?=nil) -> [T] {
         guard let db = db else { return [] }
+        
         do {
-            let records: [T] = try db.prepare(table).map { row in
+            var query = table
+            if let filter = filter {
+                query = table.filter(filter)
+            }
+            let records: [T] = try db.prepare(query).map { row in
                 return try row.decode()
             }
             return records
+            
         } catch {
             return []
         }
     }
     
     func get(by id: Int) -> T? {
+        guard let db = db else { return nil }
+        
         do {
-            let query = table.filter(self.id == id)
-            let row = try db?.pluck(query)
-            return try row?.decode()
+            let records: [T] = try db.prepare(table.filter(self.id == id)).map { row in
+                return try row.decode()
+            }
+            return records.first
+           
         } catch {
             return nil
         }
@@ -142,11 +137,8 @@ class DatabaseTable<T: TableProtocol> {
                 
                 let type = type(of: value)
                 
-                
-                
                 if(name == "id"){
-                    // table.column(id, primaryKey: .default)
-                    table.column(id)
+                    table.column(id, primaryKey: .default)
                 }else{
                     switch type {
                     case is String.Type:
@@ -171,6 +163,8 @@ class DatabaseTable<T: TableProtocol> {
                         table.column(Expression<String>(name))
                     }
                 }
+                
+                
                 
                 
             }

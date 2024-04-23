@@ -16,3 +16,8 @@ enum DatabaseChangeType: Int {
     /// locally deleted record
     case delete = 2
 }
+
+struct SyncResponse<Target> {
+    var change: DatabaseChange
+    var result: Target
+}

@@ -5,6 +5,8 @@ enum KimaiAction {
     
     case sync
     
+    case loginSuccess
+    
     case customers(RequestAction<KimaiCustomer>)
     case projects(RequestAction<KimaiProject>)
     case timesheets(RequestAction<KimaiTimesheet>)
@@ -12,9 +14,6 @@ enum KimaiAction {
     
     // integrations
     case connect(_ kimai: Int, _ taiga: Int)
-    
-    // timesheet
-    case createTimesheet(_ project: Int, _ activity: Int, _ begin: String, _ description: String?)
 }
 
 enum RequestAction<Model> {
@@ -23,5 +22,10 @@ enum RequestAction<Model> {
     /// sync by remote data
     case sync([Model])
     /// delete synced change history
-    case hasSynced(DatabaseChange)
+    case hasSynced(SyncResponse<Model>)
+    
+    /// create local record
+    case create(Model)
+    /// update local record
+    case update(Model)
 }

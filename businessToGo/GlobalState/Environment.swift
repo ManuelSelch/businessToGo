@@ -30,11 +30,10 @@ struct Environment {
 extension Environment {
     init(){
         db = Database("businessToGo")
-        
         track = TrackTable(Database("track").connection)
         
         kimai = KimaiService(db, track)
-        taiga = TaigaService()
+        taiga = TaigaService(db, track)
         integrations = IntegrationService(db)
         keychain = KeychainService()
     }

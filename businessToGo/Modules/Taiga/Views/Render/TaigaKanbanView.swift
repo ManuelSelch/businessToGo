@@ -40,6 +40,15 @@ struct TaigaKanbanView: View {
     @ViewBuilder
     func TaskView(_ taskStory: TaigaTaskStory) -> some View {
         VStack {
+            // todo: show local changes
+            /*
+            if(change != nil){
+                Image(systemName: "icloud.and.arrow.up")
+            }else {
+                Text("")
+            }
+            */
+            
             Text(taskStory.subject)
             Divider()
             ForEach(tasks.filter { $0.user_story == taskStory.id }){ task in

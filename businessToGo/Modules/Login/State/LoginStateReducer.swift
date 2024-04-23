@@ -7,6 +7,7 @@ extension LoginState {
             case .navigate(let scene):
                 state.scene = scene
             
+            
             case .check(let username, let password):
                 switch(state.scene){
                     case .kimai:
@@ -57,12 +58,13 @@ extension LoginState {
                 
             case .setAccount(let account): //todo: refactor :-)
                 state.account = account
-            
+                
                 return Publishers.MergeMany(
                     kimaiLogin(account.kimai),
                     taigaLogin(account.taiga),
                     loginFinished(account)
                 ).eraseToAnyPublisher()
+                 
             
             case .setTaigaToken(let token):
                 Env.taiga.setToken(token)
@@ -84,7 +86,7 @@ extension LoginState {
         if let kimai = account {
             return Env.kimai.login(kimai.username, kimai.password)
                 .flatMap { result in
-                    return Env.just(AppAction.login(.navigate(.accounts)))
+                    return Env.just(AppAction.kimai(.loginSuccess))
                 }
                 .replaceError(with: .login(.status(.error("login failed"))))
                 .setFailureType(to: Error.self)

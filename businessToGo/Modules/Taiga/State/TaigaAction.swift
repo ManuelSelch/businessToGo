@@ -12,10 +12,6 @@ enum TaigaAction {
     case taskStories(RequestAction<TaigaTaskStory>)
     case tasks(RequestAction<TaigaTask>)
     
-    // todo: action for: var projectImages: [Int: UIImage]
-    
     case loadImage(TaigaProject)
     case setImage(Int, UIImage)
-    
-    case setStatus(TaigaTaskStory, TaigaTaskStoryStatus)
 }

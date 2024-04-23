@@ -7,6 +7,9 @@ extension KimaiState {
         switch(action){
             case .navigate(let scene):
                 state.scene = scene
+            
+            case .loginSuccess:
+                return Env.just(.sync)
                 
             case .sync:
                 return Publishers.MergeMany([
@@ -53,9 +56,6 @@ extension KimaiState {
             case .connect(let kimaiProject, let taigaProject):
                 Env.integrations.setIntegration(kimaiProject, taigaProject)
 
-            
-            case .createTimesheet(let project, let activity, let begin, let description):
-                _ = Env.kimai.createTimesheet(project, activity, begin, description)
         }
         
         return Empty().eraseToAnyPublisher()

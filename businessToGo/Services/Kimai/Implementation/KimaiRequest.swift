@@ -7,6 +7,7 @@ enum KimaiRequest {
     
     case getTimesheets
     case insertTimesheet(KimaiTimesheet)
+    case updateTimesheet(KimaiTimesheet)
     
     case getActivities
 }
@@ -16,7 +17,7 @@ extension KimaiRequest: TargetType {
         switch self {
         case .getCustomers, .getProjects, .getTimesheets, .getActivities:
             return .requestPlain
-        case .insertTimesheet(_):
+        case .insertTimesheet(_), .updateTimesheet(_):
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
@@ -41,6 +42,8 @@ extension KimaiRequest: TargetType {
             return "/projects"
         case .getTimesheets, .insertTimesheet(_):
             return "/timesheets"
+        case .updateTimesheet(let timesheet):
+            return "/timesheets/\(timesheet.id)"
         case .getActivities:
             return "/activities"
         }
@@ -52,6 +55,8 @@ extension KimaiRequest: TargetType {
             return .get
         case .insertTimesheet(_):
             return .post
+        case .updateTimesheet(_):
+            return .patch
         }
     }
     
@@ -59,11 +64,13 @@ extension KimaiRequest: TargetType {
         switch self {
         case .getCustomers, .getProjects, .getTimesheets, .getActivities:
             return [:]
-        case .insertTimesheet(let timesheet):
+        case .insertTimesheet(let timesheet), .updateTimesheet(let timesheet):
             return [
                 "project": timesheet.project,
                 "activity": timesheet.activity,
-                "begin": timesheet.begin
+                "begin": timesheet.begin,
+                "end": timesheet.end as Any,
+                "description": timesheet.description as Any
             ]
         }
     }

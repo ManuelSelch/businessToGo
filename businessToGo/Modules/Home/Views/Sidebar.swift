@@ -34,7 +34,14 @@ struct Sidebar: View {
                 }
                 
                 Button(action: {
-                    store.send(.navigate(.login))
+                    store.send(.navigate(.kimaiSettings))
+                    showSidebar = false
+                }){
+                    Text("Einstellungen")
+                }
+                
+                Button(action: {
+                    store.send(.logout)
                     showSidebar = false
                 }){
                     Text("Logout")

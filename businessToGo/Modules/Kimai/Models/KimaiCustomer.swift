@@ -1,4 +1,5 @@
 import Foundation
+import SQLite
 
 struct KimaiCustomer: TableProtocol {
     var id: Int

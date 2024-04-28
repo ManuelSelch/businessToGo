@@ -1,5 +1,5 @@
 import SwiftUI
-// import Redux
+import Redux
 
 struct LogView: View {
     @EnvironmentObject var store: Store<LogState, LogAction>

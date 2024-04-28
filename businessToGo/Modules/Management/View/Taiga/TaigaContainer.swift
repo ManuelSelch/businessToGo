@@ -1,5 +1,5 @@
 import SwiftUI
-// import Redux
+import Redux
 
 enum TaigaProjectMenu: String, Equatable, CaseIterable {
     case backlog = "Backlog"

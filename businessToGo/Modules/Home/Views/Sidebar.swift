@@ -1,5 +1,5 @@
 import SwiftUI
-// import Redux
+import Redux
 
 struct Sidebar: View {
     @EnvironmentObject private var router: AppRouter

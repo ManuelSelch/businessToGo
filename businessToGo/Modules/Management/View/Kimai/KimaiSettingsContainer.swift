@@ -1,5 +1,5 @@
 import SwiftUI
-// import Redux
+import Redux
 
 struct KimaiSettingsContainer: View {
     @EnvironmentObject var store: Store<ManagementState, ManagementAction>

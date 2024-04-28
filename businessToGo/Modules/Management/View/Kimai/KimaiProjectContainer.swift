@@ -1,5 +1,5 @@
 import SwiftUI
-// import Redux
+import Redux
 
 struct KimaiProjectContainer: View {
     @EnvironmentObject var router: ManagementRouter

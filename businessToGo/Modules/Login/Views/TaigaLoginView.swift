@@ -1,5 +1,5 @@
 import SwiftUI
-// import Redux
+import Redux
 
 struct TaigaLoginView: View {
     @EnvironmentObject private var store: Store<LoginState, LoginAction>

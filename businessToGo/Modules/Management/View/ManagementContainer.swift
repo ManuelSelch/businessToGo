@@ -1,4 +1,5 @@
 import SwiftUI
+import Redux
 
 struct ManagementContainer: View {
     @EnvironmentObject var router: ManagementRouter

@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "redux",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:ManuelSelch/Redux.git",
+      "state" : {
+        "revision" : "b15d9e53768f1ee455e2c4dcce46011245045c87",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "testablecombinepublishers",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/albertbori/TestableCombinePublishers.git",

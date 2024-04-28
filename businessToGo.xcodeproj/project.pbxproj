@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,6 @@
 		841D9E852BC9ED19002990C7 /* KimaiCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E842BC9ED19002990C7 /* KimaiCustomerView.swift */; };
 		841D9E872BC9EF93002990C7 /* KimaiContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E862BC9EF93002990C7 /* KimaiContainer.swift */; };
 		841D9E892BC9F3E6002990C7 /* TaigaTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E882BC9F3E6002990C7 /* TaigaTable.swift */; };
-		84220F8C2BDC572F00059F63 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84220F8B2BDC572F00059F63 /* Store.swift */; };
 		84220F8E2BDC57B200059F63 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84220F8D2BDC57B200059F63 /* AppRouter.swift */; };
 		84220F902BDC58FF00059F63 /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84220F8F2BDC58FF00059F63 /* AppScreen.swift */; };
 		8422903E2BCD4E0C001C884B /* KimaiTimesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422903D2BCD4E0C001C884B /* KimaiTimesheet.swift */; };
@@ -76,6 +75,8 @@
 		8464257D2BCE410700BDD86E /* KimaiHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464257C2BCE410700BDD86E /* KimaiHeaderView.swift */; };
 		8464257F2BCE43B900BDD86E /* TaigaProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464257E2BCE43B900BDD86E /* TaigaProjectCardView.swift */; };
 		846425812BCE455100BDD86E /* TaigaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846425802BCE455100BDD86E /* TaigaHeaderView.swift */; };
+		8467DEB92BDEA8690077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEB82BDEA8690077E331 /* Redux */; };
+		8467DEBC2BDEAB6B0077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEBB2BDEAB6B0077E331 /* Redux */; };
 		846AB1902BD06C0D00EDC72F /* DatabaseChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AB18F2BD06C0D00EDC72F /* DatabaseChange.swift */; };
 		846AB1942BD162C700EDC72F /* TrackTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AB1932BD162C700EDC72F /* TrackTable.swift */; };
 		846AB1962BD2FBD300EDC72F /* IRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AB1952BD2FBD300EDC72F /* IRequestService.swift */; };
@@ -137,7 +138,6 @@
 		841D9E842BC9ED19002990C7 /* KimaiCustomerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomerView.swift; sourceTree = "<group>"; };
 		841D9E862BC9EF93002990C7 /* KimaiContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiContainer.swift; sourceTree = "<group>"; };
 		841D9E882BC9F3E6002990C7 /* TaigaTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaTable.swift; sourceTree = "<group>"; };
-		84220F8B2BDC572F00059F63 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		84220F8D2BDC57B200059F63 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		84220F8F2BDC58FF00059F63 /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
 		8422903D2BCD4E0C001C884B /* KimaiTimesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTimesheet.swift; sourceTree = "<group>"; };
@@ -242,7 +242,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8467DEBC2BDEAB6B0077E331 /* Redux in Frameworks */,
 				BF7C6E20A9572468E8569009 /* Pods_businessToGo.framework in Frameworks */,
+				8467DEB92BDEA8690077E331 /* Redux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,7 +677,6 @@
 				847334AD2BDCF20A00129D26 /* Router.swift */,
 				84266D232BD683AA0020B386 /* RequestReducer.swift */,
 				84458AF12BC41D0C0041E40F /* Environment.swift */,
-				84220F8B2BDC572F00059F63 /* Store.swift */,
 			);
 			path = GlobalState;
 			sourceTree = "<group>";
@@ -806,6 +807,8 @@
 			);
 			name = businessToGo;
 			packageProductDependencies = (
+				8467DEB82BDEA8690077E331 /* Redux */,
+				8467DEBB2BDEAB6B0077E331 /* Redux */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -886,7 +889,7 @@
 			mainGroup = 84C5A2892BC40EEC00C25A0C;
 			packageReferences = (
 				845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */,
-				84D7E9902BD92B3800DE59DA /* XCLocalSwiftPackageReference "../Redux" */,
+				8467DEBA2BDEAB6B0077E331 /* XCRemoteSwiftPackageReference "Redux" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1058,7 +1061,6 @@
 				8452402E2BC48AF600A894EE /* KimaiCustomer.swift in Sources */,
 				8424BB562BCAB17800929F13 /* KeychainService.swift in Sources */,
 				845240242BC479EF00A894EE /* LogViews.swift in Sources */,
-				84220F8C2BDC572F00059F63 /* Store.swift in Sources */,
 				842F359E2BC939EA00A29448 /* TaigaRequest.swift in Sources */,
 				84458AF22BC41D0C0041E40F /* Environment.swift in Sources */,
 				846AB1942BD162C700EDC72F /* TrackTable.swift in Sources */,
@@ -1476,13 +1478,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		84D7E9902BD92B3800DE59DA /* XCLocalSwiftPackageReference "../Redux" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Redux;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1492,9 +1487,26 @@
 				minimumVersion = 1.2.1;
 			};
 		};
+		8467DEBA2BDEAB6B0077E331 /* XCRemoteSwiftPackageReference "Redux" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ManuelSelch/Redux.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8467DEB82BDEA8690077E331 /* Redux */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Redux;
+		};
+		8467DEBB2BDEAB6B0077E331 /* Redux */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8467DEBA2BDEAB6B0077E331 /* XCRemoteSwiftPackageReference "Redux" */;
+			productName = Redux;
+		};
 		8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestableCombinePublishers;

@@ -1,20 +1,34 @@
 import Foundation
 import Combine
 
-typealias Reducer<State, Action> = (inout State, Action) -> AnyPublisher<Action, Error>?
+@available(iOS 16.0, *)
+public typealias Reducer<State, Action> = (inout State, Action) -> AnyPublisher<Action, Error>?
 
-class Store<State, Action>: ObservableObject {
-    @Published private(set) var state: State
+@available(iOS 16.0, *)
+public typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>?
 
-    private let reducer: Reducer<State, Action>
+
+ 
+@available(iOS 16.0, *)
+public class Store<State, Action>: ObservableObject {
+    @Published public private(set) var state: State
+    
     private var cancellables: Set<AnyCancellable> = []
+    
+    private let reducer: Reducer<State, Action>
+    private var middlewares:  [Middleware<State, Action>]
 
-    init(initialState: State, reducer: @escaping Reducer<State, Action>) {
+    public init(
+        initialState: State,
+        reducer: @escaping Reducer<State, Action>,
+        middlewares: [Middleware<State, Action>] = []
+    ) {
         self.state = initialState
         self.reducer = reducer
+        self.middlewares = middlewares
     }
 
-    func send(_ action: Action) {
+    public func send(_ action: Action) {
         handleLog(action)
         
         guard let effect = reducer(&state, action) else {
@@ -33,10 +47,23 @@ class Store<State, Action>: ObservableObject {
                 }
             }, receiveValue: send)
             .store(in: &cancellables)
+        
+        
+        middlewares.forEach { middleware in
+            
+            guard let publisher = middleware(state, action) else {
+                return
+            }
+            
+            publisher
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: send)
+                .store(in: &cancellables)
+        }
     }
     
     
-    func lift<DerivedState: Equatable, ExtractedAction>(
+    public func lift<DerivedState: Equatable, ExtractedAction>(
         _ deriveState: @escaping (State) -> DerivedState,
         _ embedAction: @escaping (ExtractedAction) -> Action
     ) -> Store<DerivedState, ExtractedAction> {
@@ -58,56 +85,11 @@ class Store<State, Action>: ObservableObject {
         return derivedStore
     }
     
-    func handleError(_ error: Error) {
-        LogService.log("\(error)")
+    public func handleError(_ error: Error) {
+        LogService.log(error.localizedDescription)
     }
     
-    func handleLog(_ action: Action) {
-        // LogService.log("\(action)")
+    public func handleLog(_ action: Action) {
+       
     }
 }
-
-class AppStore: Store<AppState, AppAction> {
-    override func handleError(_ error: Error) {
-        LogService.log("\(error)")
-        
-        self.send(.log(.error("\(error)")))
-    }
-    
-    override func handleLog(_ action: AppAction){
-        let actionStr = "\(action)"
-        
-        let methods = actionStr.split(separator: "(")
-        var methodsFormatted: [String] = []
-        for method in methods {
-            if(
-                method.contains(":") ||
-                method.contains("\"") ||
-                method.contains("-") ||
-                method.contains("[") ||
-                method.contains("]")
-            ){
-                continue // only show action but no data
-            }
-            
-            if let methodFormatted = method.split(separator: ".").last {
-                let strMethodFormatted = String(methodFormatted).replacing(")",with: "")
-                if(
-                    strMethodFormatted.split(separator: " ").count == 1
-                ){
-                    methodsFormatted.append(strMethodFormatted)
-                }
-            }
-        
-        }
-        
-        var actionFormatted = ""
-        for method in methodsFormatted {
-            actionFormatted += "." + method
-        }
-        
-        LogService.log(actionFormatted)
-    }
-}
-
-

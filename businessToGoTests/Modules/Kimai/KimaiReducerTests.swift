@@ -12,6 +12,6 @@ final class KimaiReducerTests: XCTestCase {
     
     func testNavigate() throws {
         store.send(.navigate(.customer(3)))
-        XCTAssertEqual(KimaiScreen.customer(3), store.state.scene)
+        XCTAssertEqual(KimaiRoute.customer(3), store.state.scene)
     }
 }

@@ -8,13 +8,8 @@ extension AppState {
         
         case .menu(let action):
             switch(action){
-            case .navigate(let scene):
-                state.scene = scene
             case .logout:
-                return Publishers.Merge(
-                    Env.just(.login(.deleteAccount)),
-                    Env.just(.menu(.navigate(.login)))
-                ).eraseToAnyPublisher()
+                return Env.just(.login(.deleteAccount))
             case .resetDatabase:
                 Env.reset()
             }
@@ -27,14 +22,9 @@ extension AppState {
         case .login(let action):
             return LoginState.reduce(&state.login, action)
         
-        case .kimai(let action):
-            return KimaiState.reduce(&state.kimai, action)
-                .map { AppAction.kimai($0) }
-                .eraseToAnyPublisher()
-        
-        case .taiga(let action):
-            return TaigaState.reduce(&state.taiga, action)
-                .map { AppAction.taiga($0) }
+        case .management(let action):
+            return ManagementState.reduce(&state.management, action)
+                .map { AppAction.management($0) }
                 .eraseToAnyPublisher()
         
         }

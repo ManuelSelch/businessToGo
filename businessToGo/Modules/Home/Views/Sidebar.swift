@@ -1,6 +1,8 @@
 import SwiftUI
+// import Redux
 
 struct Sidebar: View {
+    @EnvironmentObject private var router: AppRouter
     @EnvironmentObject private var store: Store<AppScreen, MenuAction>
     
     @Binding var showSidebar: Bool
@@ -11,14 +13,14 @@ struct Sidebar: View {
             
             Section(header: Text("Dashboard")) {
                 Button(action: {
-                    store.send(.navigate(.kimai))
+                    router.tab = .management
                     showSidebar = false
                 }){
                     Text("Time")
                 }
                 
                 Button(action: {
-                    store.send(.navigate(.taiga))
+                    router.tab = .management
                     showSidebar = false
                 }){
                     Text("Project")
@@ -34,7 +36,7 @@ struct Sidebar: View {
                 }
                 
                 Button(action: {
-                    store.send(.navigate(.kimaiSettings))
+                    router.tab = .kimaiSettings
                     showSidebar = false
                 }){
                     Text("Einstellungen")

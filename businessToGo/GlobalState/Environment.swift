@@ -5,6 +5,8 @@ import Moya
 struct Environment {
     private let db: IDatabase
     
+    var router: AppRouter
+    
     // MARK: - services
     let track: ITrackTable
     var kimai: IKimaiService
@@ -19,6 +21,7 @@ struct Environment {
     // MARK: - mock
     static let mock = Environment(
         db: Database.mock,
+        router: AppRouter(),
         track: TrackTable.mock,
         kimai: KimaiService.mock,
         taiga: TaigaService.mock,
@@ -31,6 +34,8 @@ extension Environment {
     init(){
         db = Database("businessToGo")
         track = TrackTable(Database("track").connection)
+        
+        router = AppRouter()
         
         kimai = KimaiService(db, track)
         taiga = TaigaService(db, track)

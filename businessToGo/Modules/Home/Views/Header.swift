@@ -22,6 +22,7 @@ struct Header: View {
                 
             HStack {
                 Spacer()
+                
                 Button(action: {
                     self.showSidebar.toggle()
                 }){

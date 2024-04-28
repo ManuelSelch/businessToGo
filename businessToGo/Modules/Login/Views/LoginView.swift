@@ -1,4 +1,5 @@
 import SwiftUI
+// import Redux
 
 struct LoginView: View {
     @EnvironmentObject var store: Store<LoginState, LoginAction>
@@ -13,8 +14,4 @@ struct LoginView: View {
             TaigaLoginView()
         }
     }
-}
-
-#Preview {
-    KimaiContainerView()
 }

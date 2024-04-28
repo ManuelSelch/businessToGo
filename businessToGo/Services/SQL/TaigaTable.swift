@@ -15,10 +15,10 @@ extension TaigaTable {
     init(_ db: IDatabase, _ track: ITrackTable) {
         self.db = db
         
-        projects = DatabaseTable(db.connection, "projects")
-        taskStories = DatabaseTable(db.connection, "taskStories", track)
-        milestones = DatabaseTable(db.connection, "milestones")
-        tasks = DatabaseTable(db.connection, "tasks")
-        taskStatus = DatabaseTable(db.connection, "taskStatus")
+        projects = DatabaseTable(db.connection, "taiga_projects")
+        taskStories = DatabaseTable(db.connection, "taiga_taskStories", track)
+        milestones = DatabaseTable(db.connection, "taiga_milestones")
+        tasks = DatabaseTable(db.connection, "taiga_tasks")
+        taskStatus = DatabaseTable(db.connection, "taiga_taskStatus")
     }
 }

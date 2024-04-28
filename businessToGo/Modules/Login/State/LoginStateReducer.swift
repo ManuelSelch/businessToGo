@@ -68,7 +68,7 @@ extension LoginState {
             
             case .setTaigaToken(let token):
                 Env.taiga.setToken(token)
-                return Env.just(.taiga(.sync))
+            return Env.just(.management(.taiga(.sync)))
             
             case .status(let status):
                 state.loginStatus = status
@@ -86,7 +86,7 @@ extension LoginState {
         if let kimai = account {
             return Env.kimai.login(kimai.username, kimai.password)
                 .flatMap { result in
-                    return Env.just(AppAction.kimai(.loginSuccess))
+                    return Env.just(AppAction.management(.kimai(.loginSuccess)))
                 }
                 .replaceError(with: .login(.status(.error("login failed"))))
                 .setFailureType(to: Error.self)
@@ -108,7 +108,8 @@ extension LoginState {
     
     private static func loginFinished(_ account: Account) -> AnyPublisher<AppAction, Error> {
         if(account.kimai != nil && account.taiga != nil) {
-            return Env.just(.menu(.navigate(.kimai)))
+            return Empty().eraseToAnyPublisher()
+            // todo: navigate
         } else{
             return Empty().eraseToAnyPublisher()
         }

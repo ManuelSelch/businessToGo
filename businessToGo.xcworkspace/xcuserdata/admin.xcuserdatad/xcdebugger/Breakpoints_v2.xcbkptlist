@@ -3,4 +3,22 @@
    uuid = "09B0604B-21FE-4523-9C71-4B40565C9E98"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D73BF063-633A-4DB7-A471-7AF79CD0F403"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../var/folders/fv/1kyrr5ks0dlf_hm_9x6wsvk80000gp/T/swift-generated-sources/@__swiftmacro_12businessToGo33_676B93377FAD54C068FD8BD3290E7341Ll7PreviewfMf_.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1"
+            endingLineNumber = "1"
+            landmarkName = "$s12businessToGo33_676B93377FAD54C068FD8BD3290E7341Ll7PreviewfMf_15PreviewRegistryfMu_"
+            landmarkType = "37">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -95,14 +95,11 @@ class DatabaseTable<T: TableProtocol> {
         }
     }
     
-    func get(where filter: Expression<Bool>?=nil) -> [T] {
+    func get() -> [T] {
         guard let db = db else { return [] }
         
         do {
             var query = table
-            if let filter = filter {
-                query = table.filter(filter)
-            }
             let records: [T] = try db.prepare(query).map { row in
                 return try row.decode()
             }
@@ -136,6 +133,8 @@ class DatabaseTable<T: TableProtocol> {
                 guard let name = name else { continue }
                 
                 let type = type(of: value)
+                
+                LogService.log("name: \(name), type: \(type)")
                 
                 if(name == "id"){
                     table.column(id, primaryKey: .default)

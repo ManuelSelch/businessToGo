@@ -3,26 +3,28 @@ import Combine
 import Moya 
 
 extension KimaiState {
-    static func reduce(_ state: inout KimaiState, _ action: KimaiAction) -> AnyPublisher<KimaiAction, Error>  {
+    static func reduce(_ state: inout KimaiState, _ action: KimaiAction, _ env: ManagementDependency) -> AnyPublisher<KimaiAction, Error>  {
         switch(action){
-            case .navigate(let scene):
-                state.scene = scene
-            
             case .loginSuccess:
-                return Env.just(.sync)
+                return env.just(.sync)
                 
             case .sync:
+                state.customers = env.kimai.customers.get()
+                state.projects = env.kimai.projects.get()
+                state.timesheets = env.kimai.timesheets.get()
+                state.activities = env.kimai.activities.get()
+            
                 return Publishers.MergeMany([
-                    Env.just(.customers(.fetch)),
-                    Env.just(.projects(.fetch)),
-                    Env.just(.timesheets(.fetch)),
-                    Env.just(.activities(.fetch))
+                    env.just(.customers(.fetch)),
+                    env.just(.projects(.fetch)),
+                    env.just(.timesheets(.fetch)),
+                    env.just(.activities(.fetch))
                 ]).eraseToAnyPublisher()
             
             case .customers(let action):
                 return RequestReducer.reduce(
                     action,
-                    Env.kimai.customers
+                    env.kimai.customers
                 )
                 .map { .customers($0) }
                 .eraseToAnyPublisher()
@@ -30,7 +32,7 @@ extension KimaiState {
             case .projects(let action):
                 return RequestReducer.reduce(
                     action,
-                    Env.kimai.projects
+                    env.kimai.projects
                 )
                 .map { .projects($0) }
                 .eraseToAnyPublisher()
@@ -38,7 +40,7 @@ extension KimaiState {
             case .timesheets(let action):
                 return RequestReducer.reduce(
                     action,
-                    Env.kimai.timesheets
+                    env.kimai.timesheets
                 )
                 .map { .timesheets($0) }
                 .eraseToAnyPublisher()
@@ -46,7 +48,7 @@ extension KimaiState {
             case .activities(let action):
                 return RequestReducer.reduce(
                     action,
-                    Env.kimai.activities
+                    env.kimai.activities
                 )
                 .map { .activities($0) }
                 .eraseToAnyPublisher()
@@ -54,7 +56,7 @@ extension KimaiState {
             
 
             case .connect(let kimaiProject, let taigaProject):
-                Env.integrations.setIntegration(kimaiProject, taigaProject)
+                env.integrations.setIntegration(kimaiProject, taigaProject)
 
         }
         

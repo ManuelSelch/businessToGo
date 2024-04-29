@@ -1,9 +1,12 @@
 import Foundation
 import Combine
 import Moya
+import SwiftUI
+import Redux
+import OfflineSync
 
 
-class TaigaService: ITaigaService {
+class TaigaService: ITaigaService, IService {
     private var tables: TaigaTable
     private var provider: MoyaProvider<TaigaRequest>
     
@@ -42,7 +45,7 @@ class TaigaService: ITaigaService {
 
     
     func login(_ username: String, _ password: String) -> AnyPublisher<TaigaUserAuthDetail, Error> {
-        return Env.request(provider, .checkLogin(username, password))
+        return request(provider, .checkLogin(username, password))
     }
     
     func setToken(_ token: String){
@@ -52,11 +55,11 @@ class TaigaService: ITaigaService {
     }
     
     func updateTaskStory(_ taskStory: TaigaTaskStory) -> AnyPublisher<TaigaTaskStory, Error> {
-        return Env.request(provider, .updateTaskStory(taskStory))
+        return request(provider, .updateTaskStory(taskStory))
     }
     
-    func loadImage(_ url: String?) -> AnyPublisher<UIImage, Error> {
-        return Future<UIImage, Error> { promise in
+    func loadImage(_ url: String?) -> AnyPublisher<CustomImage, Error> {
+        return Future<CustomImage, Error> { promise in
             // Image not found, fetch from URL
             if let img = url {
                 
@@ -64,16 +67,16 @@ class TaigaService: ITaigaService {
                     if let loadedImage = loadedImage {
                         promise(.success(loadedImage))
                     }else{
-                        promise(.success(UIImage(named: "taiga")!))
+                        promise(.success(CustomImage(named: "taiga")!))
                     }
                 }
             }else {
-                promise(.success(UIImage(named: "taiga")!))
+                promise(.success(CustomImage(named: "taiga")!))
             }
         }.eraseToAnyPublisher()
     }
     
-    private func loadImageFromURL(urlString: String, completion: @escaping (UIImage?) -> Void) {
+    private func loadImageFromURL(urlString: String, completion: @escaping (CustomImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
@@ -85,7 +88,7 @@ class TaigaService: ITaigaService {
                 return
             }
             
-            let loadedImage = UIImage(data: data)
+            let loadedImage = CustomImage(data: data)
             completion(loadedImage)
         }.resume()
     }

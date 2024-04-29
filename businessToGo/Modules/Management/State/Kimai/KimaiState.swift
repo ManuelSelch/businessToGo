@@ -9,12 +9,18 @@ enum KimaiRoute: Equatable, Hashable {
 }
 
 struct KimaiState: Equatable {
-    var scene: KimaiRoute
+    var customers: [KimaiCustomer]
+    var projects: [KimaiProject]
+    var timesheets: [KimaiTimesheet]
+    var activities: [KimaiActivity]
 }
 
 extension KimaiState {
     init() {
-        scene = .customers
+        customers = []
+        projects = []
+        timesheets = []
+        activities = []
     }
 }
 

@@ -1,4 +1,5 @@
 import Foundation
+import OfflineSync
 
 struct TaigaUserAuthDetail: TableProtocol, Decodable, Equatable {
     // var accepted_terms: Bool

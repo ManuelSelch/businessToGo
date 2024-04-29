@@ -2,10 +2,7 @@ import Foundation
 import Combine
 import Moya
 import CoreData
-
-// init<U: IRequestService>(_ service: U) where U.Table == Table, U.Target == Target, U.Input == Input {
-
-
+import OfflineSync
 
 // MARK: - admin middleware
 class KimaiService: IKimaiService {

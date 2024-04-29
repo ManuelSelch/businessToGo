@@ -1,10 +1,12 @@
 struct ManagementState: Equatable {
     var kimai: KimaiState
     var taiga: TaigaState
+    var integrations: [Integration]
 
     init(){
         kimai = KimaiState()
         taiga = TaigaState()
+        integrations = []
     }
 }
 

@@ -1,5 +1,6 @@
 import Combine
 import SwiftUI
+import OfflineSync
 
 
 class TaigaServiceMock: ITaigaService {
@@ -37,7 +38,7 @@ class TaigaServiceMock: ITaigaService {
         return Empty().eraseToAnyPublisher()
     }
     
-    func loadImage(_ url: String?) -> AnyPublisher<UIImage, Error> {
+    func loadImage(_ url: String?) -> AnyPublisher<CustomImage, Error> {
         return Empty().eraseToAnyPublisher()
     }
     

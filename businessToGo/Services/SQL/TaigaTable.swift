@@ -1,5 +1,6 @@
 import Foundation
 import SQLite
+import OfflineSync
 
 struct TaigaTable {
     private var db: IDatabase

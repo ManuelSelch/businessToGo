@@ -1,3 +1,4 @@
+import Foundation
 import Moya
 
 enum KimaiRequest {
@@ -12,7 +13,7 @@ enum KimaiRequest {
     case getActivities
 }
  
-extension KimaiRequest: TargetType {
+extension KimaiRequest: Moya.TargetType {
     var task: Moya.Task {
         switch self {
         case .getCustomers, .getProjects, .getTimesheets, .getActivities:
@@ -29,6 +30,7 @@ extension KimaiRequest: TargetType {
         ]
         
     }
+    
     
     var baseURL: URL {
         return URL(string: "https://time.manuelselch.de/api")!

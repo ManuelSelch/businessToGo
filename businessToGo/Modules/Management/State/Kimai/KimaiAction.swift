@@ -1,8 +1,7 @@
 import Foundation
+import OfflineSync
 
 enum KimaiAction {
-    case navigate(KimaiRoute)
-    
     case sync
     
     case loginSuccess

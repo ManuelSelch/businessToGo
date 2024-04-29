@@ -124,7 +124,9 @@ struct TaigaKanbanView: View {
                     }
                 )
             }
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .principal) { 
                     VStack {

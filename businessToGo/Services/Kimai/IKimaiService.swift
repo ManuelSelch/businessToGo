@@ -1,5 +1,5 @@
 import Combine
-
+import OfflineSync
 
 protocol IKimaiService  {
     func login(_ username: String, _ password: String) -> AnyPublisher<Bool, Error>

@@ -1,29 +1,30 @@
 import Foundation
 import Combine
+import Log
 
 extension AppState {
     
-    static func reduce(_ state: inout AppState, _ action: AppAction) -> AnyPublisher<AppAction, Error>  {
+    static func reduce(_ state: inout AppState, _ action: AppAction, _ env: Environment) -> AnyPublisher<AppAction, Error>  {
         switch action {
         
         case .menu(let action):
             switch(action){
             case .logout:
-                return Env.just(.login(.deleteAccount))
+                return env.just(.login(.deleteAccount))
             case .resetDatabase:
-                Env.reset()
+                env.reset()
             }
         
         case .log(let action):
-            return LogState.reduce(&state.log, action)
+            return LogState.reduce(&state.log, action, Log.Dependency())
                 .map { AppAction.log($0) }
                 .eraseToAnyPublisher()
         
         case .login(let action):
-            return LoginState.reduce(&state.login, action)
+            return LoginState.reduce(&state.login, action, env)
         
         case .management(let action):
-            return ManagementState.reduce(&state.management, action)
+            return ManagementState.reduce(&state.management, action, env.management)
                 .map { AppAction.management($0) }
                 .eraseToAnyPublisher()
         

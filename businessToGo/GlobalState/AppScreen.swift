@@ -45,23 +45,23 @@ extension AppScreen {
         Label(title, systemImage: "tree")
     }
     
-    func createView(_ store: Store<AppState, AppAction>, _ router: AppRouter) -> some View {
+    func createView(_ store: Store<AppState, AppAction, Environment>, _ router: AppRouter) -> some View {
         switch self {
         case .login:
             AnyView(
                 LoginView()
-                    .environmentObject(store.lift(\.login, AppAction.login))
+                    .environmentObject(store.lift(\.login, AppAction.login, store.dependencies))
             )
         case .management:
             AnyView(
                 ManagementContainer()
-                    .environmentObject(store.lift(\.management, AppAction.management))
+                    .environmentObject(store.lift(\.management, AppAction.management, store.dependencies.management))
                     .environmentObject(router.management)
             )
         case .kimaiSettings:
             AnyView(
                 KimaiSettingsContainer()
-                    .environmentObject(store.lift(\.management, AppAction.management))
+                    .environmentObject(store.lift(\.management, AppAction.management, store.dependencies.management))
             )
         }
     }

@@ -1,6 +1,8 @@
 import Combine
+import Redux
+import OfflineSync
 
-struct IntegrationService: IIntegrationService {
+struct IntegrationService: IIntegrationService, IService {
     var integrations: DatabaseTable<Integration>
     
     init(_ db: IDatabase){
@@ -13,7 +15,7 @@ struct IntegrationService: IIntegrationService {
     }
     
     func getTaigaProject(_ kimaiProject: Int) -> AnyPublisher<Integration?, Error> {
-        return Env.just(integrations.get(by: kimaiProject))
+        return just(integrations.get(by: kimaiProject))
     }
     
     func get() -> [Integration] {

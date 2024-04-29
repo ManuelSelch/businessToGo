@@ -1,4 +1,5 @@
 import Foundation
+import OfflineSync
 
 struct TaigaTask: TableProtocol, Decodable, Identifiable, Equatable {
     var id: Int

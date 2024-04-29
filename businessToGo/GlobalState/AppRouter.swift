@@ -1,7 +1,7 @@
 import SwiftUI
 
 class AppRouter: ObservableObject {
-    var tab = AppScreen.management
+    var tab = AppScreen.login
     
     var management = ManagementRouter()
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		525BA65980D458674C211EDC /* Pods_businessToGo_businessToGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F5C069AAD7BEDC76BD40B2 /* Pods_businessToGo_businessToGoTests.framework */; };
 		841D9E672BC95BDC002990C7 /* TaigaProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E662BC95BDC002990C7 /* TaigaProjectsView.swift */; };
 		841D9E742BC99251002990C7 /* TaigaKanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E732BC99251002990C7 /* TaigaKanbanView.swift */; };
 		841D9E7F2BC9A77C002990C7 /* TaigaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E7E2BC9A77C002990C7 /* TaigaService.swift */; };
@@ -40,8 +39,6 @@
 		8424BB7F2BCAC98400929F13 /* IntegrationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB7E2BCAC98300929F13 /* IntegrationServiceMock.swift */; };
 		8424BB8F2BCBB15300929F13 /* KimaiPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB8E2BCBB15300929F13 /* KimaiPlayView.swift */; };
 		8424BB912BCBB9AB00929F13 /* KimaiChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB902BCBB9AB00929F13 /* KimaiChartView.swift */; };
-		8424BB932BCC4FF300929F13 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB922BCC4FF300929F13 /* Database.swift */; };
-		8424BB952BCC59BF00929F13 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB942BCC59BF00929F13 /* RequestService.swift */; };
 		84266D222BD678400020B386 /* KimaiReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84266D212BD678400020B386 /* KimaiReducerTests.swift */; };
 		84266D242BD683AA0020B386 /* RequestReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84266D232BD683AA0020B386 /* RequestReducer.swift */; };
 		84266D282BD6AAB20020B386 /* KimaiSettingsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84266D272BD6AAB20020B386 /* KimaiSettingsContainer.swift */; };
@@ -62,12 +59,7 @@
 		84458AF42BC41E520041E40F /* KimaiAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AF32BC41E520041E40F /* KimaiAction.swift */; };
 		84458AF72BC41EB80041E40F /* KimaiCustomersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AF62BC41EB80041E40F /* KimaiCustomersView.swift */; };
 		84458AF92BC41F5B0041E40F /* KimaiStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AF82BC41F5B0041E40F /* KimaiStateReducer.swift */; };
-		8452401E2BC479A600A894EE /* LogState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452401D2BC479A600A894EE /* LogState.swift */; };
-		845240202BC479B600A894EE /* LogStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452401F2BC479B600A894EE /* LogStateReducer.swift */; };
-		845240222BC479C600A894EE /* LogAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845240212BC479C600A894EE /* LogAction.swift */; };
-		845240242BC479EF00A894EE /* LogViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845240232BC479EF00A894EE /* LogViews.swift */; };
 		845240262BC4802A00A894EE /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845240252BC4802A00A894EE /* LogService.swift */; };
-		845240292BC4887300A894EE /* DatabaseTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845240282BC4887300A894EE /* DatabaseTable.swift */; };
 		8452402E2BC48AF600A894EE /* KimaiCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452402D2BC48AF600A894EE /* KimaiCustomer.swift */; };
 		845240302BC48B2300A894EE /* KimaiTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452402F2BC48B2300A894EE /* KimaiTeam.swift */; };
 		845503E62BCEB5F400BCA93B /* kimaiCustomers.json in Resources */ = {isa = PBXBuildFile; fileRef = 845503E52BCEB5F400BCA93B /* kimaiCustomers.json */; };
@@ -76,10 +68,14 @@
 		8464257F2BCE43B900BDD86E /* TaigaProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464257E2BCE43B900BDD86E /* TaigaProjectCardView.swift */; };
 		846425812BCE455100BDD86E /* TaigaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846425802BCE455100BDD86E /* TaigaHeaderView.swift */; };
 		8467DEB92BDEA8690077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEB82BDEA8690077E331 /* Redux */; };
-		8467DEBC2BDEAB6B0077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEBB2BDEAB6B0077E331 /* Redux */; };
-		846AB1902BD06C0D00EDC72F /* DatabaseChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AB18F2BD06C0D00EDC72F /* DatabaseChange.swift */; };
-		846AB1942BD162C700EDC72F /* TrackTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AB1932BD162C700EDC72F /* TrackTable.swift */; };
-		846AB1962BD2FBD300EDC72F /* IRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AB1952BD2FBD300EDC72F /* IRequestService.swift */; };
+		8467DEC22BDECA300077E331 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC12BDECA300077E331 /* SQLite */; };
+		8467DEC52BDECB500077E331 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC42BDECB500077E331 /* OHHTTPStubs */; };
+		8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */; };
+		8467DECF2BDED6600077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DECE2BDED6600077E331 /* Redux */; };
+		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
+		8467DED52BDEE2130077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED42BDEE2130077E331 /* Log */; };
+		8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED72BDEECFC0077E331 /* OfflineSync */; };
+		8467DEDB2BDEF0DC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEDA2BDEF0DC0077E331 /* OfflineSync */; };
 		847334AC2BDCF02400129D26 /* ManagementRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334AB2BDCF02400129D26 /* ManagementRouter.swift */; };
 		847334AE2BDCF20A00129D26 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334AD2BDCF20A00129D26 /* Router.swift */; };
 		847334B62BDCF50C00129D26 /* ManagementState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B52BDCF50C00129D26 /* ManagementState.swift */; };
@@ -95,6 +91,7 @@
 		84C5A2A82BC40EEE00C25A0C /* KimaiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2A72BC40EEE00C25A0C /* KimaiServiceTests.swift */; };
 		84C5A2B22BC40EEE00C25A0C /* businessToGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B12BC40EEE00C25A0C /* businessToGoUITests.swift */; };
 		84C5A2B42BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */; };
+		84CF31432BDF68A60064BDD1 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF31422BDF68A60064BDD1 /* UIImage.swift */; };
 		84CFD5AA2BD7D93200691400 /* KimaiIntegrationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5A92BD7D93200691400 /* KimaiIntegrationsView.swift */; };
 		84CFD5AC2BD7D94F00691400 /* KimaiIntegrationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5AB2BD7D94F00691400 /* KimaiIntegrationCard.swift */; };
 		84CFD5B22BD7F7D100691400 /* TaigaStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5B12BD7F7D100691400 /* TaigaStateReducer.swift */; };
@@ -107,7 +104,6 @@
 		84FC58492BC9484300594E14 /* TaigaAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58482BC9484300594E14 /* TaigaAction.swift */; };
 		84FC58502BC94F6900594E14 /* TaigaContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC584F2BC94F6900594E14 /* TaigaContainer.swift */; };
 		84FC58582BC9559200594E14 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* Header.swift */; };
-		BF7C6E20A9572468E8569009 /* Pods_businessToGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55446C7AC1014DCA87E71BF2 /* Pods_businessToGo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,9 +124,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		341CBBB7B9DFD5ECAC23659C /* Pods-businessToGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-businessToGo.release.xcconfig"; path = "Target Support Files/Pods-businessToGo/Pods-businessToGo.release.xcconfig"; sourceTree = "<group>"; };
-		4ACED59B6C5ACBFEDAB184D6 /* Pods-businessToGo-businessToGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-businessToGo-businessToGoTests.debug.xcconfig"; path = "Target Support Files/Pods-businessToGo-businessToGoTests/Pods-businessToGo-businessToGoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		55446C7AC1014DCA87E71BF2 /* Pods_businessToGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_businessToGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841D9E662BC95BDC002990C7 /* TaigaProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectsView.swift; sourceTree = "<group>"; };
 		841D9E732BC99251002990C7 /* TaigaKanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaKanbanView.swift; sourceTree = "<group>"; };
 		841D9E7E2BC9A77C002990C7 /* TaigaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaService.swift; sourceTree = "<group>"; };
@@ -163,8 +156,6 @@
 		8424BB7E2BCAC98300929F13 /* IntegrationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationServiceMock.swift; sourceTree = "<group>"; };
 		8424BB8E2BCBB15300929F13 /* KimaiPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiPlayView.swift; sourceTree = "<group>"; };
 		8424BB902BCBB9AB00929F13 /* KimaiChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiChartView.swift; sourceTree = "<group>"; };
-		8424BB922BCC4FF300929F13 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		8424BB942BCC59BF00929F13 /* RequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		84266D212BD678400020B386 /* KimaiReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiReducerTests.swift; sourceTree = "<group>"; };
 		84266D232BD683AA0020B386 /* RequestReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReducer.swift; sourceTree = "<group>"; };
 		84266D272BD6AAB20020B386 /* KimaiSettingsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiSettingsContainer.swift; sourceTree = "<group>"; };
@@ -185,12 +176,7 @@
 		84458AF32BC41E520041E40F /* KimaiAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiAction.swift; sourceTree = "<group>"; };
 		84458AF62BC41EB80041E40F /* KimaiCustomersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomersView.swift; sourceTree = "<group>"; };
 		84458AF82BC41F5B0041E40F /* KimaiStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiStateReducer.swift; sourceTree = "<group>"; };
-		8452401D2BC479A600A894EE /* LogState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogState.swift; sourceTree = "<group>"; };
-		8452401F2BC479B600A894EE /* LogStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStateReducer.swift; sourceTree = "<group>"; };
-		845240212BC479C600A894EE /* LogAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogAction.swift; sourceTree = "<group>"; };
-		845240232BC479EF00A894EE /* LogViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViews.swift; sourceTree = "<group>"; };
 		845240252BC4802A00A894EE /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
-		845240282BC4887300A894EE /* DatabaseTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTable.swift; sourceTree = "<group>"; };
 		8452402D2BC48AF600A894EE /* KimaiCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomer.swift; sourceTree = "<group>"; };
 		8452402F2BC48B2300A894EE /* KimaiTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTeam.swift; sourceTree = "<group>"; };
 		845503E52BCEB5F400BCA93B /* kimaiCustomers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kimaiCustomers.json; sourceTree = "<group>"; };
@@ -198,9 +184,6 @@
 		8464257C2BCE410700BDD86E /* KimaiHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiHeaderView.swift; sourceTree = "<group>"; };
 		8464257E2BCE43B900BDD86E /* TaigaProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectCardView.swift; sourceTree = "<group>"; };
 		846425802BCE455100BDD86E /* TaigaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaHeaderView.swift; sourceTree = "<group>"; };
-		846AB18F2BD06C0D00EDC72F /* DatabaseChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseChange.swift; sourceTree = "<group>"; };
-		846AB1932BD162C700EDC72F /* TrackTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTable.swift; sourceTree = "<group>"; };
-		846AB1952BD2FBD300EDC72F /* IRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRequestService.swift; sourceTree = "<group>"; };
 		847334AB2BDCF02400129D26 /* ManagementRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementRouter.swift; sourceTree = "<group>"; };
 		847334AD2BDCF20A00129D26 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		847334B52BDCF50C00129D26 /* ManagementState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementState.swift; sourceTree = "<group>"; };
@@ -219,6 +202,7 @@
 		84C5A2AD2BC40EEE00C25A0C /* businessToGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = businessToGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C5A2B12BC40EEE00C25A0C /* businessToGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessToGoUITests.swift; sourceTree = "<group>"; };
 		84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessToGoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		84CF31422BDF68A60064BDD1 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		84CFD5A92BD7D93200691400 /* KimaiIntegrationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiIntegrationsView.swift; sourceTree = "<group>"; };
 		84CFD5AB2BD7D94F00691400 /* KimaiIntegrationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiIntegrationCard.swift; sourceTree = "<group>"; };
 		84CFD5B12BD7F7D100691400 /* TaigaStateReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaigaStateReducer.swift; sourceTree = "<group>"; };
@@ -232,9 +216,6 @@
 		84FC58482BC9484300594E14 /* TaigaAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaAction.swift; sourceTree = "<group>"; };
 		84FC584F2BC94F6900594E14 /* TaigaContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaContainer.swift; sourceTree = "<group>"; };
 		84FC58572BC9559200594E14 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
-		CBD1ECAEFD9823BABB3CCE24 /* Pods-businessToGo-businessToGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-businessToGo-businessToGoTests.release.xcconfig"; path = "Target Support Files/Pods-businessToGo-businessToGoTests/Pods-businessToGo-businessToGoTests.release.xcconfig"; sourceTree = "<group>"; };
-		D5F5C069AAD7BEDC76BD40B2 /* Pods_businessToGo_businessToGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_businessToGo_businessToGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA8DF4B362558245B17ABCCE /* Pods-businessToGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-businessToGo.debug.xcconfig"; path = "Target Support Files/Pods-businessToGo/Pods-businessToGo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,9 +223,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8467DEBC2BDEAB6B0077E331 /* Redux in Frameworks */,
-				BF7C6E20A9572468E8569009 /* Pods_businessToGo.framework in Frameworks */,
+				8467DECF2BDED6600077E331 /* Redux in Frameworks */,
+				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
+				8467DEDB2BDEF0DC0077E331 /* OfflineSync in Frameworks */,
+				8467DED52BDEE2130077E331 /* Log in Frameworks */,
+				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
 				8467DEB92BDEA8690077E331 /* Redux in Frameworks */,
+				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +238,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8486FBCB2BCEB0390052DF18 /* TestableCombinePublishers in Frameworks */,
-				525BA65980D458674C211EDC /* Pods_businessToGo_businessToGoTests.framework in Frameworks */,
+				8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */,
+				8467DEC52BDECB500077E331 /* OHHTTPStubs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,17 +253,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B34F66EBED73A1B3CC87623 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FA8DF4B362558245B17ABCCE /* Pods-businessToGo.debug.xcconfig */,
-				341CBBB7B9DFD5ECAC23659C /* Pods-businessToGo.release.xcconfig */,
-				4ACED59B6C5ACBFEDAB184D6 /* Pods-businessToGo-businessToGoTests.debug.xcconfig */,
-				CBD1ECAEFD9823BABB3CCE24 /* Pods-businessToGo-businessToGoTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		8424BB422BCA6C3800929F13 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,40 +433,9 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8452401A2BC4798300A894EE /* Logs */ = {
-			isa = PBXGroup;
-			children = (
-				8452401C2BC4799400A894EE /* Views */,
-				8452401B2BC4799000A894EE /* State */,
-			);
-			path = Logs;
-			sourceTree = "<group>";
-		};
-		8452401B2BC4799000A894EE /* State */ = {
-			isa = PBXGroup;
-			children = (
-				8452401D2BC479A600A894EE /* LogState.swift */,
-				8452401F2BC479B600A894EE /* LogStateReducer.swift */,
-				845240212BC479C600A894EE /* LogAction.swift */,
-			);
-			path = State;
-			sourceTree = "<group>";
-		};
-		8452401C2BC4799400A894EE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				845240232BC479EF00A894EE /* LogViews.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		845240272BC4884900A894EE /* SQL */ = {
 			isa = PBXGroup;
 			children = (
-				8424BB922BCC4FF300929F13 /* Database.swift */,
-				845240282BC4887300A894EE /* DatabaseTable.swift */,
-				846AB1932BD162C700EDC72F /* TrackTable.swift */,
-				846AB18F2BD06C0D00EDC72F /* DatabaseChange.swift */,
 				848100282BC491EA00EE2660 /* KimaiTable.swift */,
 				841D9E882BC9F3E6002990C7 /* TaigaTable.swift */,
 			);
@@ -513,15 +457,6 @@
 				845503E52BCEB5F400BCA93B /* kimaiCustomers.json */,
 			);
 			path = data;
-			sourceTree = "<group>";
-		};
-		845809D92BCCAB3C002BBD1C /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				8424BB942BCC59BF00929F13 /* RequestService.swift */,
-				846AB1952BD2FBD300EDC72F /* IRequestService.swift */,
-			);
-			path = Request;
 			sourceTree = "<group>";
 		};
 		8464257A2BCDC3E300BDD86E /* Render */ = {
@@ -547,6 +482,13 @@
 				841D9E732BC99251002990C7 /* TaigaKanbanView.swift */,
 			);
 			path = Render;
+			sourceTree = "<group>";
+		};
+		8467DEDC2BDEF3A80077E331 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		847334AF2BDCF44800129D26 /* Management */ = {
@@ -610,7 +552,6 @@
 				84C5A2A62BC40EEE00C25A0C /* businessToGoTests */,
 				84C5A2B02BC40EEE00C25A0C /* businessToGoUITests */,
 				84C5A2932BC40EEC00C25A0C /* Products */,
-				1B34F66EBED73A1B3CC87623 /* Pods */,
 				D35B2B6914CACF30228B3011 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -677,6 +618,7 @@
 				847334AD2BDCF20A00129D26 /* Router.swift */,
 				84266D232BD683AA0020B386 /* RequestReducer.swift */,
 				84458AF12BC41D0C0041E40F /* Environment.swift */,
+				84CF31422BDF68A60064BDD1 /* UIImage.swift */,
 			);
 			path = GlobalState;
 			sourceTree = "<group>";
@@ -685,7 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				845240252BC4802A00A894EE /* LogService.swift */,
-				845809D92BCCAB3C002BBD1C /* Request */,
 				8424BB772BCAC75800929F13 /* Keychain */,
 				8424BB722BCAC13A00929F13 /* Integration */,
 				845240272BC4884900A894EE /* SQL */,
@@ -701,7 +642,7 @@
 				8424BB422BCA6C3800929F13 /* Login */,
 				84FC58512BC9529800594E14 /* Home */,
 				847334AF2BDCF44800129D26 /* Management */,
-				8452401A2BC4798300A894EE /* Logs */,
+				8467DEDC2BDEF3A80077E331 /* Settings */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -781,9 +722,7 @@
 		D35B2B6914CACF30228B3011 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55446C7AC1014DCA87E71BF2 /* Pods_businessToGo.framework */,
 				84D7E98E2BD9294D00DE59DA /* Redux */,
-				D5F5C069AAD7BEDC76BD40B2 /* Pods_businessToGo_businessToGoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -795,11 +734,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C5A2B72BC40EEE00C25A0C /* Build configuration list for PBXNativeTarget "businessToGo" */;
 			buildPhases = (
-				763EE77722706FC7A5B74F8C /* [CP] Check Pods Manifest.lock */,
 				84C5A28E2BC40EEC00C25A0C /* Sources */,
 				84C5A28F2BC40EEC00C25A0C /* Frameworks */,
 				84C5A2902BC40EEC00C25A0C /* Resources */,
-				8F7DF799A6D223C780120330 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -808,7 +745,12 @@
 			name = businessToGo;
 			packageProductDependencies = (
 				8467DEB82BDEA8690077E331 /* Redux */,
-				8467DEBB2BDEAB6B0077E331 /* Redux */,
+				8467DEC12BDECA300077E331 /* SQLite */,
+				8467DECE2BDED6600077E331 /* Redux */,
+				8467DED12BDEDC4B0077E331 /* Log */,
+				8467DED42BDEE2130077E331 /* Log */,
+				8467DED72BDEECFC0077E331 /* OfflineSync */,
+				8467DEDA2BDEF0DC0077E331 /* OfflineSync */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -818,11 +760,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84C5A2BA2BC40EEE00C25A0C /* Build configuration list for PBXNativeTarget "businessToGoTests" */;
 			buildPhases = (
-				195E5FA18FF0508B4D6A158D /* [CP] Check Pods Manifest.lock */,
 				84C5A29F2BC40EEE00C25A0C /* Sources */,
 				84C5A2A02BC40EEE00C25A0C /* Frameworks */,
 				84C5A2A12BC40EEE00C25A0C /* Resources */,
-				F6584F5AACE8A662F79A4433 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -832,6 +772,8 @@
 			name = businessToGoTests;
 			packageProductDependencies = (
 				8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */,
+				8467DEC42BDECB500077E331 /* OHHTTPStubs */,
+				8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */,
 			);
 			productName = businessToGoTests;
 			productReference = 84C5A2A32BC40EEE00C25A0C /* businessToGoTests.xctest */;
@@ -889,7 +831,11 @@
 			mainGroup = 84C5A2892BC40EEC00C25A0C;
 			packageReferences = (
 				845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */,
-				8467DEBA2BDEAB6B0077E331 /* XCRemoteSwiftPackageReference "Redux" */,
+				8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+				8467DECD2BDED6600077E331 /* XCRemoteSwiftPackageReference "Redux" */,
+				8467DED32BDEE2130077E331 /* XCRemoteSwiftPackageReference "Log" */,
+				8467DED92BDEF0DC0077E331 /* XCRemoteSwiftPackageReference "OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -929,87 +875,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		195E5FA18FF0508B4D6A158D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-businessToGo-businessToGoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		763EE77722706FC7A5B74F8C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-businessToGo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8F7DF799A6D223C780120330 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-businessToGo/Pods-businessToGo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-businessToGo/Pods-businessToGo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-businessToGo/Pods-businessToGo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6584F5AACE8A662F79A4433 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-businessToGo-businessToGoTests/Pods-businessToGo-businessToGoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-businessToGo-businessToGoTests/Pods-businessToGo-businessToGoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-businessToGo-businessToGoTests/Pods-businessToGo-businessToGoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		84C5A28E2BC40EEC00C25A0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1025,13 +890,11 @@
 				8422903E2BCD4E0C001C884B /* KimaiTimesheet.swift in Sources */,
 				841D9E852BC9ED19002990C7 /* KimaiCustomerView.swift in Sources */,
 				8464257D2BCE410700BDD86E /* KimaiHeaderView.swift in Sources */,
-				845240222BC479C600A894EE /* LogAction.swift in Sources */,
 				84CFD5AC2BD7D94F00691400 /* KimaiIntegrationCard.swift in Sources */,
 				8424BB8F2BCBB15300929F13 /* KimaiPlayView.swift in Sources */,
 				84FC583C2BC944DF00594E14 /* TaigaMilestone.swift in Sources */,
 				841D9E832BC9E503002990C7 /* KimaiProject.swift in Sources */,
 				84458ADB2BC415880041E40F /* KimaiRequest.swift in Sources */,
-				846AB1902BD06C0D00EDC72F /* DatabaseChange.swift in Sources */,
 				84FC58492BC9484300594E14 /* TaigaAction.swift in Sources */,
 				8424BB762BCAC17C00929F13 /* Integration.swift in Sources */,
 				847334AC2BDCF02400129D26 /* ManagementRouter.swift in Sources */,
@@ -1048,7 +911,6 @@
 				847334AE2BDCF20A00129D26 /* Router.swift in Sources */,
 				84458AF42BC41E520041E40F /* KimaiAction.swift in Sources */,
 				8424BB462BCA6C8600929F13 /* AccountsView.swift in Sources */,
-				845240292BC4887300A894EE /* DatabaseTable.swift in Sources */,
 				84458AE32BC41A720041E40F /* AppState.swift in Sources */,
 				8424BB792BCAC81200929F13 /* IKeychainService.swift in Sources */,
 				84458AE12BC419E80041E40F /* KimaiService.swift in Sources */,
@@ -1059,11 +921,10 @@
 				84220F902BDC58FF00059F63 /* AppScreen.swift in Sources */,
 				847334B62BDCF50C00129D26 /* ManagementState.swift in Sources */,
 				8452402E2BC48AF600A894EE /* KimaiCustomer.swift in Sources */,
+				84CF31432BDF68A60064BDD1 /* UIImage.swift in Sources */,
 				8424BB562BCAB17800929F13 /* KeychainService.swift in Sources */,
-				845240242BC479EF00A894EE /* LogViews.swift in Sources */,
 				842F359E2BC939EA00A29448 /* TaigaRequest.swift in Sources */,
 				84458AF22BC41D0C0041E40F /* Environment.swift in Sources */,
-				846AB1942BD162C700EDC72F /* TrackTable.swift in Sources */,
 				841D9E742BC99251002990C7 /* TaigaKanbanView.swift in Sources */,
 				8424BB6B2BCABE4100929F13 /* TaigaServiceMock.swift in Sources */,
 				8424BB482BCA6C9600929F13 /* LoginState.swift in Sources */,
@@ -1083,7 +944,6 @@
 				8424BB4A2BCA6CF700929F13 /* LoginAction.swift in Sources */,
 				841D9E872BC9EF93002990C7 /* KimaiContainer.swift in Sources */,
 				8424BB502BCA757E00929F13 /* LoginStateReducer.swift in Sources */,
-				8424BB952BCC59BF00929F13 /* RequestService.swift in Sources */,
 				847334BE2BDD081E00129D26 /* Sidebar.swift in Sources */,
 				8424BB592BCAB1BB00929F13 /* Account.swift in Sources */,
 				84CFD5B22BD7F7D100691400 /* TaigaStateReducer.swift in Sources */,
@@ -1091,18 +951,14 @@
 				845240302BC48B2300A894EE /* KimaiTeam.swift in Sources */,
 				847334BA2BDCF71A00129D26 /* ManagementAction.swift in Sources */,
 				8424BB7F2BCAC98400929F13 /* IntegrationServiceMock.swift in Sources */,
-				846AB1962BD2FBD300EDC72F /* IRequestService.swift in Sources */,
 				842290402BCD518A001C884B /* KimaiTimesheetsView.swift in Sources */,
 				84266D282BD6AAB20020B386 /* KimaiSettingsContainer.swift in Sources */,
 				8424BB912BCBB9AB00929F13 /* KimaiChartView.swift in Sources */,
 				84458AE92BC41B4C0041E40F /* ServiceError.swift in Sources */,
 				8424BB542BCA91F900929F13 /* TaigaLoginView.swift in Sources */,
 				84458AE72BC41AC20041E40F /* KimaiState.swift in Sources */,
-				8452401E2BC479A600A894EE /* LogState.swift in Sources */,
 				846425812BCE455100BDD86E /* TaigaHeaderView.swift in Sources */,
 				847334B82BDCF6F700129D26 /* ManagementContainer.swift in Sources */,
-				845240202BC479B600A894EE /* LogStateReducer.swift in Sources */,
-				8424BB932BCC4FF300929F13 /* Database.swift in Sources */,
 				8424BB712BCAC04000929F13 /* KimaiServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1257,7 +1113,6 @@
 		};
 		84C5A2B82BC40EEE00C25A0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA8DF4B362558245B17ABCCE /* Pods-businessToGo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1289,7 +1144,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1299,7 +1154,6 @@
 		};
 		84C5A2B92BC40EEE00C25A0C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 341CBBB7B9DFD5ECAC23659C /* Pods-businessToGo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1331,7 +1185,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1341,7 +1195,6 @@
 		};
 		84C5A2BB2BC40EEE00C25A0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4ACED59B6C5ACBFEDAB184D6 /* Pods-businessToGo-businessToGoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1367,7 +1220,6 @@
 		};
 		84C5A2BC2BC40EEE00C25A0C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBD1ECAEFD9823BABB3CCE24 /* Pods-businessToGo-businessToGoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1487,12 +1339,44 @@
 				minimumVersion = 1.2.1;
 			};
 		};
-		8467DEBA2BDEAB6B0077E331 /* XCRemoteSwiftPackageReference "Redux" */ = {
+		8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:ManuelSelch/Redux.git";
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
+		8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		8467DECD2BDED6600077E331 /* XCRemoteSwiftPackageReference "Redux" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/Redux.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+		8467DED32BDEE2130077E331 /* XCRemoteSwiftPackageReference "Log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/Log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+		8467DED92BDEF0DC0077E331 /* XCRemoteSwiftPackageReference "OfflineSync" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/OfflineSync.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1502,10 +1386,43 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Redux;
 		};
-		8467DEBB2BDEAB6B0077E331 /* Redux */ = {
+		8467DEC12BDECA300077E331 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8467DEBA2BDEAB6B0077E331 /* XCRemoteSwiftPackageReference "Redux" */;
+			package = 8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+		8467DEC42BDECB500077E331 /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubs;
+		};
+		8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
+		};
+		8467DECE2BDED6600077E331 /* Redux */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8467DECD2BDED6600077E331 /* XCRemoteSwiftPackageReference "Redux" */;
 			productName = Redux;
+		};
+		8467DED12BDEDC4B0077E331 /* Log */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Log;
+		};
+		8467DED42BDEE2130077E331 /* Log */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8467DED32BDEE2130077E331 /* XCRemoteSwiftPackageReference "Log" */;
+			productName = Log;
+		};
+		8467DED72BDEECFC0077E331 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
+		};
+		8467DEDA2BDEF0DC0077E331 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8467DED92BDEF0DC0077E331 /* XCRemoteSwiftPackageReference "OfflineSync" */;
+			productName = OfflineSync;
 		};
 		8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -9,7 +9,8 @@ enum TaigaProjectMenu: String, Equatable, CaseIterable {
 }
 
 struct TaigaContainer: View {
-    @EnvironmentObject var store: Store<TaigaState, TaigaAction>
+    @EnvironmentObject var router: ManagementRouter
+    @EnvironmentObject var store: Store<TaigaState, TaigaAction, Environment>
     var route: TaigaScreen
     
     @State var selectedProjectMenu = TaigaProjectMenu.kanban
@@ -19,7 +20,7 @@ struct TaigaContainer: View {
             switch(route){
             case .projects:
                 TaigaProjectsView(
-                    projects: Env.taiga.projects.get(),
+                    projects: store.state.projects,
                     images: store.state.projectImages,
                     
                     onProjectClicked: showProject,
@@ -27,7 +28,7 @@ struct TaigaContainer: View {
                 )
                 
             case .project(let id):
-                if let project = Env.taiga.projects.get(by: id) {
+                if let project = store.state.projects.first(where: {$0.id == id}) {
                     var menus: [TaigaProjectMenu] {
                         var menus: [TaigaProjectMenu] = []
                         
@@ -54,16 +55,16 @@ struct TaigaContainer: View {
                         case .kanban:
                             TaigaKanbanView(
                                 project: project,
-                                statusList: Env.taiga.taskStoryStatus.get().filter { $0.project == id },
-                                storyList: Env.taiga.taskStories.get(),
-                                tasks: Env.taiga.tasks.get(),
+                                statusList: store.state.taskStoryStatus.filter { $0.project == id },
+                                storyList: store.state.taskStories,
+                                tasks: store.state.tasks,
                                 
                                 onSetStatus: setStatus
                             )
                         case .backlog:
                             TaigaBacklogView(
                                 project: project,
-                                milestones: Env.taiga.milestones.get().filter { $0.project == id }
+                                milestones: store.state.milestones.filter { $0.project == id }
                             )
                         }
                     }
@@ -82,7 +83,7 @@ struct TaigaContainer: View {
 
 extension TaigaContainer {
     func showProject(_ project: TaigaProject){
-        store.send(.navigate(.project(project.id)))
+        router.navigate(.taiga(.project(project.id)))
     }
     
     func loadImage(_ project: TaigaProject){
@@ -92,12 +93,7 @@ extension TaigaContainer {
     }
     
     func goBack(){
-        switch(store.state.scene){
-        case .projects:
-            break
-        case .project(_):
-            store.send(.navigate(.projects))
-        }
+        router.back()
     }
     
     func setStatus(_ taskStory: TaigaTaskStory, _ status: TaigaTaskStoryStatus){

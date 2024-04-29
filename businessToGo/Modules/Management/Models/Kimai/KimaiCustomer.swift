@@ -1,5 +1,5 @@
 import Foundation
-import SQLite
+import OfflineSync
 
 struct KimaiCustomer: TableProtocol {
     var id: Int

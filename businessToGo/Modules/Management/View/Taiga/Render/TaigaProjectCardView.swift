@@ -12,9 +12,9 @@ struct TaigaProjectCardView: View {
     private var height: CGFloat = 50
     
     @State var project: TaigaProject
-    let image: UIImage?
+    let image: CustomImage?
     
-    init(_ project: TaigaProject, _ image: UIImage?){
+    init(_ project: TaigaProject, _ image: CustomImage?){
         self.project = project
         self.image = image
     }
@@ -25,7 +25,7 @@ struct TaigaProjectCardView: View {
         HStack {
             // store.state.projectImages[project.id]
             if let image = image {
-                Image(uiImage: image)
+                CustomImageHelper.create(from: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                 

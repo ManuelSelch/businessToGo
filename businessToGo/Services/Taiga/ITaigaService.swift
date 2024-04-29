@@ -1,6 +1,6 @@
 import Combine
+import OfflineSync
 import SwiftUI
-
 
 protocol ITaigaService {
     var projects: IRequestService<TaigaProject, TaigaRequest> {get}
@@ -15,6 +15,6 @@ protocol ITaigaService {
     func setToken(_ token: String)
     
     func updateTaskStory(_ taskStory: TaigaTaskStory) -> AnyPublisher<TaigaTaskStory, Error> 
-    func loadImage(_ url: String?) -> AnyPublisher<UIImage, Error>
+    func loadImage(_ url: String?) -> AnyPublisher<CustomImage, Error>
 }
 

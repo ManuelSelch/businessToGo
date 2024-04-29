@@ -1,4 +1,5 @@
 import Foundation
+import OfflineSync
 
 struct KimaiTimesheet: TableProtocol {
     var activity: Int

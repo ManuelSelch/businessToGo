@@ -3,7 +3,7 @@ import Redux
 
 struct ManagementContainer: View {
     @EnvironmentObject var router: ManagementRouter
-    @EnvironmentObject var store: Store<ManagementState, ManagementAction>
+    @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
     
     var body: some View {
         NavigationStack(path: $router.routes) {
@@ -21,8 +21,8 @@ struct ManagementContainer: View {
 
 extension ManagementContainer {
     @ViewBuilder func kimai(_ route: KimaiRoute) -> some View {
-        KimaiContainer(route: route)
-            .environmentObject(store.lift(\.kimai, ManagementAction.kimai))
+        KimaiContainer(route: route, showTaigaProject: showTaigaProject)
+            .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
             .toolbar {
                 
                 
@@ -40,14 +40,19 @@ extension ManagementContainer {
     
     @ViewBuilder func taiga(_ route: TaigaScreen) -> some View {
         TaigaContainer(route: route)
-            .environmentObject(store.lift(\.taiga, ManagementAction.taiga))
+            .environmentObject(store.lift(\.taiga, ManagementAction.taiga, store.dependencies))
     }
 }
 
 extension ManagementContainer {
     func sync(){
-        store.send(.kimai(.sync))
-        store.send(.taiga(.sync))
+        store.send(.sync)
     }
     
+    func showTaigaProject(_ kimaiProject: Int){
+        if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
+        {
+            router.navigate(.taiga(.project(integration.taigaProjectId)))
+        }
+    }
 }

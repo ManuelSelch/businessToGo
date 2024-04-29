@@ -1,4 +1,5 @@
 import SwiftUI
+import OfflineSync
 
 struct KimaiTimesheetsView: View {
     let timesheets: [KimaiTimesheet]

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TaigaProjectsView: View {
     let projects: [TaigaProject]
-    let images: [Int: UIImage]
+    let images: [Int: CustomImage]
     
     let onProjectClicked: (TaigaProject) -> Void
     let onLoadImage: (TaigaProject) -> Void

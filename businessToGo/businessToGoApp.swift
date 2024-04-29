@@ -1,14 +1,14 @@
 import SwiftUI
 import Combine
 import Redux
-
-var Env = Environment()
+import Log
 
 @main
 struct businessToGoApp: App {
     let store = Store(
         initialState: AppState(),
         reducer: AppState.reduce,
+        dependencies: Environment(),
         middlewares: [LogMiddleware().handle]
     )
     
@@ -19,7 +19,7 @@ struct businessToGoApp: App {
             VStack(spacing: 0) {
                 Header(
                     showSidebar: $showSidebar,
-                    title: Env.router.tab.title
+                    title: store.dependencies.router.tab.title
                 )
                 
                 ZStack {
@@ -29,7 +29,7 @@ struct businessToGoApp: App {
                         Spacer()
                         
                         LogView()
-                            .environmentObject(store.lift(\.log, AppAction.log))
+                            .environmentObject(store.lift(\.log, AppAction.log, store.dependencies.log))
                             
                     }
                     
@@ -37,7 +37,7 @@ struct businessToGoApp: App {
                 }
                 
             }
-            .environmentObject(Env.router)
+            .environmentObject(store.dependencies.router)
         }
     }
 }
@@ -45,7 +45,7 @@ struct businessToGoApp: App {
 
 struct AppTabView: View {
     @EnvironmentObject var router: AppRouter
-    let store: Store<AppState, AppAction>
+    let store: Store<AppState, AppAction, Environment>
     
     var body: some View {
         TabView(selection: $router.tab) {
@@ -61,7 +61,12 @@ struct AppTabView: View {
 
 
 class LogMiddleware {
-    func handle(_ state: AppState, _ action: AppAction) -> AnyPublisher<AppAction, Never> {
+    func handle(_ state: AppState, _ action: AppAction, _ env: Environment) -> AnyPublisher<AppAction, Never> {
+        switch(action){
+        case .log(_): return Empty().eraseToAnyPublisher()
+        default: break
+        }
+        
         let actionStr = "\(action)"
                 
         let methods = actionStr.split(separator: "(")
@@ -95,6 +100,6 @@ class LogMiddleware {
         
         LogService.log(actionFormatted)
         
-        return Empty().eraseToAnyPublisher()
+        return Just(.log(.message(actionFormatted))).eraseToAnyPublisher()
     }
 }

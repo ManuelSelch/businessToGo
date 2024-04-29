@@ -1,3 +1,5 @@
+import OfflineSync
+
 struct KimaiActivity: TableProtocol {
     var id: Int
     var project: Int?

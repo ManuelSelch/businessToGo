@@ -1,17 +1,38 @@
 import Foundation
 import Combine
 import Moya
+import OfflineSync
+import Log
+import Redux
 
-struct Environment {
-    private let db: IDatabase
-    
-    var router: AppRouter
-    
-    // MARK: - services
-    let track: ITrackTable
+struct ManagementDependency: IService {
     var kimai: IKimaiService
     var taiga: ITaigaService
     var integrations: IIntegrationService
+}
+
+extension ManagementDependency {
+    init(_ db: IDatabase, _ track: ITrackTable){
+        kimai = KimaiService(db, track)
+        taiga = TaigaService(db, track)
+        integrations = IntegrationService(db)
+    }
+    
+    static let mock = ManagementDependency(kimai: KimaiService.mock, taiga: TaigaService.mock, integrations: IntegrationService.mock)
+}
+
+
+struct Environment {
+    // MARK: - global
+    private let db: IDatabase
+    var router: AppRouter
+    let track: ITrackTable
+    
+    // MARK: - modules
+    let log: Log.Dependency
+    let management: ManagementDependency
+    
+    // MARK: - services
     var keychain: IKeychainService
     
     func reset(){
@@ -21,11 +42,12 @@ struct Environment {
     // MARK: - mock
     static let mock = Environment(
         db: Database.mock,
-        router: AppRouter(),
+        router: .init(),
         track: TrackTable.mock,
-        kimai: KimaiService.mock,
-        taiga: TaigaService.mock,
-        integrations: IntegrationService.mock,
+        
+        log: .init(),
+        management: .mock,
+        
         keychain: KeychainService.mock
     )
 }
@@ -33,13 +55,12 @@ struct Environment {
 extension Environment {
     init(){
         db = Database("businessToGo")
+        router = .init()
         track = TrackTable(Database("track").connection)
         
-        router = AppRouter()
+        log = .init()
+        management = .init(db, track)
         
-        kimai = KimaiService(db, track)
-        taiga = TaigaService(db, track)
-        integrations = IntegrationService(db)
         keychain = KeychainService()
     }
 }

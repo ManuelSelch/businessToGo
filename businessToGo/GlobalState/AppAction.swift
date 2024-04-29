@@ -1,5 +1,5 @@
 import Foundation
-
+import Log
 
 enum MenuAction {
     case logout

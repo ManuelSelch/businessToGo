@@ -1,4 +1,5 @@
 import Foundation
+import OfflineSync
 
 struct KimaiProject: TableProtocol {
     var id: Int

@@ -1,4 +1,5 @@
 import Foundation
+import OfflineSync
 
 struct Integration: TableProtocol, Equatable {
     var id: Int // kimaiProjectId

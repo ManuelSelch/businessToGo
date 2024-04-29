@@ -7,15 +7,22 @@ enum TaigaScreen: Equatable, Hashable {
 }
 
 struct TaigaState: Equatable {
-    var scene: TaigaScreen
-    
-    var projectImages: [Int: UIImage]
+    var projects: [TaigaProject]
+    var taskStoryStatus: [TaigaTaskStoryStatus]
+    var taskStories: [TaigaTaskStory]
+    var tasks: [TaigaTask]
+    var milestones: [TaigaMilestone]
+    var projectImages: [Int: CustomImage]
 }
 
 
 extension TaigaState {
     init(){
-        scene = .projects
+        projects = []
+        taskStoryStatus = []
+        taskStories = []
+        tasks = []
+        milestones = []
         projectImages = [:]
     }
 }

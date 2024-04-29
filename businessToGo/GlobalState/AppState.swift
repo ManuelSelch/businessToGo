@@ -1,4 +1,5 @@
 import Foundation
+import Log
 
 struct AppState: Equatable {
     var log: LogState

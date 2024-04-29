@@ -1,8 +1,9 @@
 import Security
 import Foundation
 import Combine
+import Redux
 
-struct KeychainService: IKeychainService {
+struct KeychainService: IKeychainService, IService {
     let service = "de.selch.businessToGo"
     let kimaiService: String
     let taigaService: String
@@ -41,7 +42,7 @@ struct KeychainService: IKeychainService {
         if status != errSecSuccess {
             return Fail(error: ServiceError.keychainSaveFailed).eraseToAnyPublisher()
         }else{
-            return Env.just(true)
+            return just(true)
         }
     }
     
@@ -79,9 +80,9 @@ struct KeychainService: IKeychainService {
             
             let account = AccountData(username, password)
             
-            return Env.just(account)
+            return just(account)
         }else {
-            return Env.just(nil)
+            return just(nil)
         }
         
   
@@ -94,7 +95,7 @@ struct KeychainService: IKeychainService {
         let status = SecItemDelete(delete as CFDictionary)
         LogService.log("Delete status: \(status)")
         
-        return Env.just(Account())
+        return just(Account())
     }
 }
 

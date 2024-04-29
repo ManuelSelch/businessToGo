@@ -4,11 +4,13 @@ import Redux
 
 struct KimaiContainer: View {
     @EnvironmentObject var router: ManagementRouter
-    @EnvironmentObject var store: Store<KimaiState, KimaiAction>
+    @EnvironmentObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
     
     @State var isPresentingPlayView = false
     
     var route: KimaiRoute
+    
+    var showTaigaProject: (_ kimaiProject: Int) -> ()
     
     var body: some View {
         VStack {
@@ -23,7 +25,7 @@ struct KimaiContainer: View {
                 getCustomerView(id)
                 
             case .project(let id):
-                KimaiProjectContainer(id)
+                KimaiProjectContainer(id: id, changes: []) // todo: reference changes
                 
             case .timesheet(let id):
                 getTimesheetView(id)
@@ -42,23 +44,23 @@ struct KimaiContainer: View {
 extension KimaiContainer {
     @ViewBuilder func getCustomersView() -> some View {
         KimaiCustomersView(
-            customers: Env.kimai.customers.get(),
+            customers: store.state.customers,
             onCustomerSelected: showCustomer
         )
     }
     
     @ViewBuilder func getChartView() -> some View {
         KimaiChartView(
-            projects: Env.kimai.projects.get(),
-            timesheets: Env.kimai.timesheets.get()
+            projects: store.state.projects,
+            timesheets: store.state.timesheets
         )
     }
     
     @ViewBuilder func getCustomerView(_ id: Int) -> some View {
-        if let customer = Env.kimai.customers.get(by: id) {
+        if let customer = store.state.customers.first(where: {$0.id == id}) {
             KimaiCustomerView(
                 customer: customer,
-                projects: Env.kimai.projects.get(),
+                projects: store.state.projects,
                 onProjectClicked: showProject
             )
         }else {
@@ -68,16 +70,16 @@ extension KimaiContainer {
     
     
     @ViewBuilder func getTimesheetView(_ id: Int? = nil) -> some View {
-        let timesheet = Env.kimai.timesheets.get().first { $0.id == id }
+        let timesheet = store.state.timesheets.first { $0.id == id }
         
         KimaiPlayView(
             timesheet: timesheet,
             
             isPresentingPlayView: $isPresentingPlayView,
             
-            customers: Env.kimai.customers.get(),
-            projects: Env.kimai.projects.get(),
-            activities: Env.kimai.activities.get(),
+            customers: store.state.customers,
+            projects: store.state.projects,
+            activities: store.state.activities,
             
             onSave: saveTimesheet
         )
@@ -123,14 +125,4 @@ extension KimaiContainer {
     func showChart() {
         router.navigate(.kimai(.chart))
     }
-    
-    func showTaigaProject(_ kimaiProject: Int){
-        if let integration = Env.integrations.get(by: kimaiProject)
-        {
-            router.navigate(.taiga(.project(integration.taigaProjectId)))
-        }
-    }
-    
-    
-    
 }

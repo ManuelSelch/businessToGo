@@ -1,5 +1,5 @@
 import Combine
-
+import OfflineSync
 
 class KimaiServiceMock: IKimaiService {
     var customers: IRequestService<KimaiCustomer, KimaiRequest>

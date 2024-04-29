@@ -1,32 +1,20 @@
 import SwiftUI
 import Redux
+import OfflineSync
 
 struct KimaiProjectContainer: View {
     @EnvironmentObject var router: ManagementRouter
-    @EnvironmentObject var store: Store<KimaiState, KimaiAction>
+    @EnvironmentObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
     
     let id: Int
+    let changes: [DatabaseChange]
     
-    init(_ id: Int){
-        self.id = id
-    }
     
     var body: some View {
         VStack {
-            if let kimaiProject = Env.kimai.projects.get(by: id)
+            if let kimaiProject = store.state.projects.first(where: {$0.id == id})
             {
-                let integration = Env.integrations.get(by: id)
-                
-                var taigaProject: TaigaProject? {
-                    if let integration = integration {
-                        return Env.taiga.projects.get(by: integration.taigaProjectId)
-                    }
-                    return nil
-                }
-                
-                getProjectTimeView(kimaiProject, taigaProject)
-
-                
+                getProjectTimeView(kimaiProject)
             }else {
                 Text("error loading project")
             }
@@ -36,14 +24,14 @@ struct KimaiProjectContainer: View {
 }
 
 extension KimaiProjectContainer {
-    @ViewBuilder func getProjectTimeView(_ kimaiProject: KimaiProject, _ taigaProject: TaigaProject?) -> some View {
+    @ViewBuilder func getProjectTimeView(_ kimaiProject: KimaiProject) -> some View {
         VStack {
-            let timesheets = Env.kimai.timesheets.get().filter { $0.project == kimaiProject.id }
+            let timesheets = store.state.timesheets.filter { $0.project == kimaiProject.id }
             
             KimaiTimesheetsView(
                 timesheets: timesheets,
-                activities: Env.kimai.activities.get(),
-                changes: Env.track.getAll(timesheets, "timesheets"),
+                activities: store.state.activities,
+                changes: changes,
                 
                 onTimesheetClicked: showTimesheet,
                 onStopClicked: stopTimesheet
@@ -58,7 +46,7 @@ extension KimaiProjectContainer {
     }
     
     func stopTimesheet(_ id: Int){
-        if var timesheet = Env.kimai.timesheets.get(by: id) {
+        if var timesheet = store.state.timesheets.first(where: {$0.id == id}) {
             timesheet.end = "\(Date.now)"
             store.send(.timesheets(.update(timesheet)))
         }

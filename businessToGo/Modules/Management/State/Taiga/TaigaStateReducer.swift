@@ -2,42 +2,45 @@ import Foundation
 import Combine
 
 extension TaigaState {
-    static func reduce(_ state: inout TaigaState, _ action: TaigaAction) -> AnyPublisher<TaigaAction, Error>  {
+    static func reduce(_ state: inout TaigaState, _ action: TaigaAction, _ env: ManagementDependency) -> AnyPublisher<TaigaAction, Error>  {
         switch(action){
-        case .navigate(let scene):
-            state.scene = scene
-            
         case .sync:
+            state.projects = env.taiga.projects.get()
+            state.taskStoryStatus = env.taiga.taskStoryStatus.get()
+            state.taskStories = env.taiga.taskStories.get()
+            state.tasks = env.taiga.tasks.get()
+            state.milestones = env.taiga.milestones.get()
+            
             return Publishers.MergeMany([
-                Env.just(.projects(.fetch)),
-                Env.just(.milestones(.fetch)),
-                Env.just(.statusList(.fetch)),
-                Env.just(.taskStories(.fetch)),
-                Env.just(.tasks(.fetch))
+                env.just(.projects(.fetch)),
+                env.just(.milestones(.fetch)),
+                env.just(.statusList(.fetch)),
+                env.just(.taskStories(.fetch)),
+                env.just(.tasks(.fetch))
             ]).eraseToAnyPublisher()
         
         case .projects(let action):
-            return RequestReducer.reduce(action, Env.taiga.projects)
+            return RequestReducer.reduce(action, env.taiga.projects)
                 .map { .projects($0) }
                 .eraseToAnyPublisher()
         
         case .milestones(let action):
-            return RequestReducer.reduce(action, Env.taiga.milestones)
+            return RequestReducer.reduce(action, env.taiga.milestones)
                 .map { .milestones($0) }
                 .eraseToAnyPublisher()
         
         case .statusList(let action):
-            return RequestReducer.reduce(action, Env.taiga.taskStoryStatus)
+            return RequestReducer.reduce(action, env.taiga.taskStoryStatus)
                 .map { .statusList($0) }
                 .eraseToAnyPublisher()
             
         case .taskStories(let action):
-            return RequestReducer.reduce(action, Env.taiga.taskStories)
+            return RequestReducer.reduce(action, env.taiga.taskStories)
                 .map { .taskStories($0) }
                 .eraseToAnyPublisher()
             
         case .tasks(let action):
-            return RequestReducer.reduce(action, Env.taiga.tasks)
+            return RequestReducer.reduce(action, env.taiga.tasks)
                 .map { .tasks($0) }
                 .eraseToAnyPublisher()
             
@@ -49,7 +52,7 @@ extension TaigaState {
             
             
         case .loadImage(let project):
-            return Env.taiga.loadImage(project.logo_big_url)
+            return env.taiga.loadImage(project.logo_big_url)
                 .map { .setImage(project.id, $0) }
                 .eraseToAnyPublisher()
             

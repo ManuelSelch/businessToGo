@@ -2,14 +2,14 @@ import SwiftUI
 import Redux
 
 struct KimaiSettingsContainer: View {
-    @EnvironmentObject var store: Store<ManagementState, ManagementAction>
+    @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
     
     var body: some View {
         KimaiIntegrationsView(
-            customers: Env.kimai.customers.get(),
-            projects: Env.kimai.projects.get(),
-            taigaProjects: Env.taiga.projects.get(),
-            integrations: Env.integrations.get(),
+            customers: store.state.kimai.customers,
+            projects: store.state.kimai.projects,
+            taigaProjects: store.state.taiga.projects,
+            integrations: store.state.integrations,
             onConnect: connect
         )
     }

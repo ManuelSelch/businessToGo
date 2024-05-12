@@ -11,7 +11,7 @@ struct SettingsView: View {
                 Button(action: {
                     navigate(.kimaiCustomers)
                 }){
-                    Text("Customer")
+                    Text("Kunden")
                 }
                 
                 Button(action: {
@@ -24,6 +24,12 @@ struct SettingsView: View {
                     navigate(.debug)
                 }){
                     Text("Debug")
+                }
+                
+                Button(action: {
+                    navigate(.kimaiProjects)
+                }){
+                    Text("Projekte")
                 }
                 
             }

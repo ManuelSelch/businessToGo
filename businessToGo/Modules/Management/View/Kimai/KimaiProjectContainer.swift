@@ -8,6 +8,7 @@ struct KimaiProjectContainer: View {
     
     let id: Int
     let changes: [DatabaseChange]
+    @Binding var timesheetView: KimaiTimesheet?
     
     
     var body: some View {
@@ -42,7 +43,7 @@ extension KimaiProjectContainer {
 
 extension KimaiProjectContainer {
     func showTimesheet(_ id: Int){
-        router.navigate(.kimai(.timesheet(id)))
+        timesheetView = store.state.timesheets.first(where: { $0.id == id })
     }
     
     func stopTimesheet(_ id: Int){

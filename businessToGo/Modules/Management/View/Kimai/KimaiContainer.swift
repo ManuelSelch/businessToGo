@@ -6,7 +6,10 @@ struct KimaiContainer: View {
     @EnvironmentObject var router: ManagementRouter
     @EnvironmentObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
     
-    @Binding var isPresentingPlayView: Bool
+    @Binding var timesheetView: KimaiTimesheet?
+    
+    @State var customerView: KimaiCustomer?
+    @State var projectView: KimaiProject?
     
     var route: KimaiRoute
     let changes: [DatabaseChange]
@@ -21,18 +24,40 @@ struct KimaiContainer: View {
                 getCustomersChartView()
                 
             case .customer(let id):
-                getProjectsChartView(id)
-                // getCustomerView(id)
+                getProjectsChartView(id) 
                 
             case .project(let id):
-                KimaiProjectContainer(id: id, changes: changes) // todo: reference changes
-                
-            case .timesheet(let id):
-                getTimesheetView(id)
+                KimaiProjectContainer(id: id, changes: changes, timesheetView: $timesheetView) // todo: reference changes
             }
         }
-        .sheet(isPresented: $isPresentingPlayView) {
-            getTimesheetView()
+        .sheet(item: $customerView){ customer in
+            KimaiCustomerSheet(
+                customer: customer,
+                onSave: { customer in
+                    let isCreate = (customer.id == KimaiCustomer.new.id)
+                    if(isCreate){
+                        store.send(.customers(.create(customer)))
+                    }else {
+                        store.send(.customers(.update(customer)))
+                    }
+                    customerView = nil
+                }
+            )
+        }
+        .sheet(item: $projectView){ project in
+            KimaiProjectSheet(
+                project: project,
+                customers: store.state.customers,
+                onSave: { project in
+                    let isCreate = (project.id == KimaiProject.new.id)
+                    if(isCreate){
+                        store.send(.projects(.create(project)))
+                    }else {
+                        store.send(.projects(.update(project)))
+                    }
+                    projectView = nil
+                }
+            )
         }
     }
     
@@ -44,6 +69,9 @@ extension KimaiContainer {
             customers: store.state.customers,
             onCustomerSelected: { customer in
                 router.navigate(.kimai(.customer(customer)))
+            },
+            onEdit: { customer in
+                customerView = customer
             }
         )
     }
@@ -66,52 +94,11 @@ extension KimaiContainer {
             timesheets: store.state.timesheets,
             projectClicked: { project in
                 router.navigate(.kimai(.project(project)))
+            },
+            onEdit: { project in
+                projectView = project
             }
         )
     }
     
-    @ViewBuilder func getCustomerView(_ id: Int) -> some View {
-        if let customer = store.state.customers.first(where: {$0.id == id}) {
-            KimaiCustomerView(
-                customer: customer,
-                projects: store.state.projects,
-                onProjectClicked: { project in
-                    router.navigate(.kimai(.project(project)))
-                }
-            )
-        }else {
-            Text("Error: Customer not found")
-        }
-    }
-    
-    
-    @ViewBuilder func getTimesheetView(_ id: Int? = nil) -> some View {
-        let timesheet = store.state.timesheets.first { $0.id == id }
-        
-        KimaiPlayView(
-            timesheet: timesheet,
-            
-            isPresentingPlayView: $isPresentingPlayView,
-            
-            customers: store.state.customers,
-            projects: store.state.projects,
-            activities: store.state.activities,
-            
-            onSave: saveTimesheet
-        )
-        
-        
-    }
-}
-
-extension KimaiContainer {
-    func saveTimesheet(_ timesheeet: KimaiTimesheet){
-        if(timesheeet.id == -1){ // create
-            store.send(.timesheets(.create(timesheeet)))
-        }else { // update
-            store.send(.timesheets(.update(timesheeet)))
-            router.back()
-        }
-        
-    }
 }

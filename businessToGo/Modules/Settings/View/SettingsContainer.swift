@@ -5,6 +5,8 @@ struct SettingsContainer: View {
     @EnvironmentObject var router: SettingsRouter
     @EnvironmentObject var store: Store<AppState, AppAction, Environment>
     
+    @State var projectView: KimaiProject?
+    
     var body: some View {
         NavigationStack(path: $router.routes){
             SettingsView(
@@ -14,8 +16,9 @@ struct SettingsContainer: View {
                 .navigationDestination(for: SettingsRoute.self){ route in
                     switch(route){
                     case .kimaiCustomers:
-                        CustomerSettingsView(
-                            customer: store.state.management.kimai.customers
+                        KimaiCustomerSettingsView(
+                            customer: store.state.management.kimai.customers,
+                            onCreate: {}
                         )
                     case .integrations:
                         IntegrationsView(
@@ -38,10 +41,31 @@ struct SettingsContainer: View {
                                 store.dependencies.router.management.routes = []
                             }
                         )
+                    case .kimaiProjects:
+                        KimaiProjectSettingsView(
+                            projects: store.state.management.kimai.projects,
+                            onEdit: { project in
+                                projectView = project
+                            }
+                        )
                     }
                 }
         }
         .tint(Color.theme)
+        .sheet(item: $projectView){ project in
+            KimaiProjectSheet(
+                project: project,
+                customers: store.state.management.kimai.customers,
+                onSave: { project in
+                    if(project.id == KimaiProject.new.id){
+                        store.send(.management(.kimai(.projects(.create(project)))))
+                    }else {
+                        store.send(.management(.kimai(.projects(.update(project)))))
+                    }
+                    projectView = nil
+                }
+            )
+        }
     }
     
     func navigate(_ route: SettingsRoute){

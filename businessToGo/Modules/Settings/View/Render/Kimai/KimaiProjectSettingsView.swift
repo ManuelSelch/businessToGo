@@ -1,13 +1,19 @@
 import SwiftUI
 
-struct CustomerSettingsView: View {
-    var customer: [KimaiCustomer]
+struct KimaiProjectSettingsView: View {
+    
+    var projects: [KimaiProject]
+    var onEdit: (KimaiProject) -> ()
     
     var body: some View {
         VStack {
             List {
-                ForEach(customer) { customer in
-                    Text(customer.name)
+                ForEach(projects) { project in
+                    Button(action: {
+                        onEdit(project)
+                    }){
+                        Text(project.name)
+                    }
                 }
             }
         }
@@ -15,7 +21,7 @@ struct CustomerSettingsView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
-                    
+                    onEdit(KimaiProject.new)
                 }){
                     Image(systemName: "plus")
                         .padding()
@@ -26,5 +32,4 @@ struct CustomerSettingsView: View {
         }
     }
 }
-
 

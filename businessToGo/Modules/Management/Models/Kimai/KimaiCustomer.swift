@@ -13,4 +13,6 @@ extension KimaiCustomer {
         name = ""
         number = ""
     }
+    
+    static let new = KimaiCustomer(id: -1, name: "", number: "")
 }

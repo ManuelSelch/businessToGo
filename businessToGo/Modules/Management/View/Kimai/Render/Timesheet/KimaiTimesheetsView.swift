@@ -33,41 +33,49 @@ struct KimaiTimesheetsView: View {
         })
         
         
-        ScrollView {
+        List {
             ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ key in
                 
                 HStack {
                     Text(key.formatted(date: .numeric, time: .omitted))
+                        .foregroundColor(Color.theme)
                     Spacer()
                 }
                 
                 
-                LazyVGrid(columns: [
-                    GridItem(.fixed(40)),
-                    GridItem(),
-                    GridItem(),
-                    GridItem(.fixed(40)),
-                ]) {
-                    let timesheetEntries = timesheetsByDate[key] ?? []
-                    ForEach(timesheetEntries){ timesheet in
-                        KimaiTimesheetCard(
-                            timesheet: timesheet,
-                            change: changes.first(where: { $0.tableName == "timesheets" && $0.recordID == timesheet.id }),
-                            activity: activities.first(where: { $0.id == timesheet.activity }),
+                let timesheetEntries = timesheetsByDate[key] ?? []
+                ForEach(timesheetEntries){ timesheet in
+                    KimaiTimesheetCard(
+                        timesheet: timesheet,
+                        change: changes.first(where: { $0.tableName == "timesheets" && $0.recordID == timesheet.id }),
+                        activity: activities.first(where: { $0.id == timesheet.activity }),
+                        onStopClicked: onStopClicked
+                    )
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .cancel) {
                             
-                            onTimesheetClicked: onTimesheetClicked,
-                            onStopClicked: onStopClicked
-                        )
-                        .frame(maxWidth: .infinity)
+                        } label: {
+                            Text("Delete")
+                                .foregroundColor(.white)
+                        }
+                        .tint(.red)
+                        
+                        Button(role: .cancel) {
+                            onTimesheetClicked(timesheet.id)
+                        } label: {
+                            Text("Edit")
+                                .foregroundColor(.white)
+                        }
+                        .tint(.gray)
                     }
                 }
+                
             }
             
             
             
         }
         .background(Color.background)
-        .padding()
     }
     
     func getDate(_ dateStr: String) -> Date? {

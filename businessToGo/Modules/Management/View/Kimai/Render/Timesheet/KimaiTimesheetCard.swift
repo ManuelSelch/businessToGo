@@ -13,47 +13,56 @@ struct KimaiTimesheetCard: View {
     let change: DatabaseChange? 
     let activity: KimaiActivity?
     
-    let onTimesheetClicked: (Int) -> Void
     let onStopClicked: (Int) -> Void
     
     var body: some View {
-        GridRow {
+        HStack(spacing: 0){
             
+            
+            
+            if let begin = getDate(timesheet.begin) {
+                Text(begin.formatted(date: .omitted, time: .shortened))
+                
+                if let end = getDate(timesheet.end ?? "") {
+                    Text(" - ")
+                    
+                    Text(end.formatted(date: .omitted, time: .shortened))
+                }else{
+                    Text("")
+                }
+            } else {
+                Text("")
+            }
+            
+            Spacer()
             if(change != nil){
                 Image(systemName: "icloud.and.arrow.up")
             }else {
                 Text("")
             }
             
-            Button(action: {
-                onTimesheetClicked(timesheet.id)
-            }){
-                if let date = getDate(timesheet.begin){
-                    Text(date.formatted(date: .omitted, time: .shortened))
-                        .foregroundColor(Color.theme)
-                }else{
-                    Text(timesheet.begin)
-                        .foregroundColor(Color.theme)
-                }
-            }
+            Spacer()
             
-            if let activity = activity {
-                Text(activity.name)
-            }else {
-                Text("\(timesheet.activity)")
-            }
+            Text(activity?.name ?? "\(timesheet.activity)")
             
+            
+            /*
             if(timesheet.end == nil){
                 Button(action: {
                     onStopClicked(timesheet.id)
                 }){
                     Image(systemName: "pause.circle.fill")
+                        .font(.system(size: 20))
                         .foregroundStyle(Color.red)
                 }
             }else {
                 Text("")
             }
+             */
+            
+            
         }
+        
     }
     
     func getDate(_ dateStr: String) -> Date? {

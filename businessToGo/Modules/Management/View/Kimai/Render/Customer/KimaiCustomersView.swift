@@ -11,6 +11,8 @@ struct KimaiCustomersView: View {
         return c
     }
     
+    var onEdit: (KimaiCustomer) -> ()
+    
     var body: some View {
         VStack {
             if(customersFiltered.count == 0){
@@ -23,6 +25,34 @@ struct KimaiCustomersView: View {
                 }){
                     Text(customer.name)
                         .foregroundColor(Color.theme)
+                }
+                .swipeActions(edge: .trailing) {
+                    Button(role: .cancel) {
+                        
+                    } label: {
+                        Text("Delete")
+                            .foregroundColor(.white)
+                    }
+                    .tint(.red)
+                    
+                    Button(role: .cancel) {
+                        onEdit(customer)
+                    } label: {
+                        Text("Edit")
+                            .foregroundColor(.white)
+                    }
+                    .tint(.gray)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing){
+                    Button(action: {
+                        onEdit(KimaiCustomer.new)
+                    }){
+                        Image(systemName: "plus")
+                            .font(.system(size: 20))
+                            .foregroundStyle(Color.theme)
+                    }
                 }
             }
             

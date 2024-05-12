@@ -44,6 +44,7 @@ struct KimaiTimesheet: TableProtocol {
 }
 
 extension KimaiTimesheet {
+    
     static let new = KimaiTimesheet(0, 0, "", "")
     
     init(_ project: Int, _ activity: Int, _ begin: String, _ description: String?){
@@ -66,9 +67,13 @@ extension KimaiTimesheet {
     
     func calculateDuration() -> TimeInterval? {
         // Convert beginDate and endDate strings to Date objects
-        guard let beginDate = getDate(begin),
-              let end = end,
-              let endDate = getDate(end)
+        var endDate = Date.now
+        if let end = end
+        {
+            endDate = getDate(end) ?? Date.now
+        }
+        
+        guard let beginDate = getDate(begin)
         else {
             return nil
         }

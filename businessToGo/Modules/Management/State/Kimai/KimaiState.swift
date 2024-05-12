@@ -5,7 +5,6 @@ enum KimaiRoute: Equatable, Hashable {
     case chart
     case customer(Int)
     case project(Int)
-    case timesheet(Int)
 }
 
 struct KimaiState: Equatable {

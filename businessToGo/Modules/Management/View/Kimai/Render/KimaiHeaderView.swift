@@ -8,20 +8,13 @@
 import SwiftUI
 
 struct KimaiHeaderView: View {
-    @Binding var isPresentingPlayView: Bool
+    @Binding var timesheetView: KimaiTimesheet?
     let route: KimaiRoute
     
     var projectId: Int? {
         switch(route){
             case .project(let id): return id
             default: return nil
-        }
-    }
-    
-    var isTimesheet: Bool {
-        switch(route){
-            case .timesheet(_): return true
-            default: return false
         }
     }
     
@@ -50,15 +43,15 @@ struct KimaiHeaderView: View {
                 }
             }
             
-            if(!isTimesheet){
-                Button(action: {
-                    isPresentingPlayView = true
-                }){
-                    Image(systemName: "play.fill")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color.theme)
-                }
+            
+            Button(action: {
+                timesheetView = KimaiTimesheet.new
+            }){
+                Image(systemName: "play.fill")
+                    .font(.system(size: 15))
+                    .foregroundColor(Color.theme)
             }
+            
         }
     }
 }

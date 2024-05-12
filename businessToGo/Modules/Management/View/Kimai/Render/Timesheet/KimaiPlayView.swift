@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct KimaiPlayView: View {
-    @Binding var isPresentingPlayView: Bool
-    
-    var timesheet: KimaiTimesheet?
-    
+    var timesheet: KimaiTimesheet
     var customers: [KimaiCustomer]
     var projects: [KimaiProject]
     var activities: [KimaiActivity]
     
     let onSave: (_ timesheet: KimaiTimesheet) -> Void
     
-    @State var isCreate = true
     @State var selectedCustomer: Int = 0
     @State var selectedProject: Int = 0
     @State var selectedActivity: Int = 0
@@ -27,23 +23,7 @@ struct KimaiPlayView: View {
     @State var endTime: Date = Date.now
     @State var isEndTime: Bool = false
     
-    init(
-        timesheet: KimaiTimesheet?,
-        isPresentingPlayView: Binding<Bool>,
-        customers: [KimaiCustomer],
-        projects: [KimaiProject],
-        activities: [KimaiActivity],
-        onSave: @escaping (_ timesheet: KimaiTimesheet) -> Void
-    )
-    {
-        self._isPresentingPlayView = isPresentingPlayView
-        self.timesheet = timesheet
-        self.customers = customers
-        self.projects = projects
-        self.activities = activities
-        self.onSave = onSave
-    }
-    
+    @Binding var timesheetView: KimaiTimesheet?
     
     
     
@@ -63,46 +43,30 @@ struct KimaiPlayView: View {
     
     var body: some View {
         Form {
-            HStack {
-                let label = isCreate ? "Create" : "Save"
-                Spacer()
-                Button(label) {
-                    isPresentingPlayView = false
-                    
-                    var timesheet = self.timesheet ?? KimaiTimesheet.new
-                    timesheet.project = selectedProject
-                    timesheet.activity = selectedActivity
-                    timesheet.begin = "\(startTime)"
-                    timesheet.end = isEndTime ? "\(endTime)" : nil
-                    timesheet.description = description
-                    
-                    onSave(timesheet)
-                }
-            }
             Section(header: Text("Branch Info")) {
                 
-                Picker("customer", selection: $selectedCustomer) {
+                Picker("Kunde", selection: $selectedCustomer) {
                     ForEach(customers, id: \.id) {
                         Text($0.name)
                     }
                 }
                 .pickerStyle(.menu)
                 
-                Picker("project", selection: $selectedProject) {
+                Picker("Projekt", selection: $selectedProject) {
                     ForEach(projectsFiltered, id: \.id) {
                         Text($0.name)
                     }
                 }
                 .pickerStyle(.menu)
                 
-                Picker("activity", selection: $selectedActivity) {
+                Picker("Tätigkeit", selection: $selectedActivity) {
                     ForEach(activitiesFiltered, id: \.id) {
                         Text($0.name)
                     }
                 }
                 .pickerStyle(.menu)
                 
-                TextField("Description", text: $description)
+                TextField("Beschreibung", text: $description)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 
@@ -128,6 +92,7 @@ struct KimaiPlayView: View {
                             Image(systemName: "clock.fill")
                         }else {
                             Image(systemName: "pause.circle.fill")
+                                .font(.system(size: 20))
                                 .foregroundStyle(Color.red)
                         }
                         VStack {
@@ -153,10 +118,13 @@ struct KimaiPlayView: View {
         
         
         .onAppear {
-            isCreate = (timesheet == nil)
+            let isCreate = (timesheet.id == KimaiTimesheet.new.id)
             
-            if let timesheet = timesheet {
-                
+            if(isCreate){
+                selectedCustomer = customers.first?.id ?? 0
+                selectedProject = projectsFiltered.first?.id ?? 0
+                selectedActivity = activitiesFiltered.first?.id ?? 0
+            }else {
                 let project = projects.first { $0.id == timesheet.project }
                 selectedCustomer = customers.first { $0.id ==  project?.customer }?.id ?? 0
                 
@@ -167,10 +135,25 @@ struct KimaiPlayView: View {
                 endTime = getDate(timesheet.end ?? "") ?? Date.now
                 isEndTime = (timesheet.end != nil)
 
-            } else {
-                selectedCustomer = customers.first?.id ?? 0
-                selectedProject = projectsFiltered.first?.id ?? 0
-                selectedActivity = activitiesFiltered.first?.id ?? 0
+            }
+        }
+        
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                let isCreate = timesheet.id == KimaiTimesheet.new.id
+                let label = isCreate ? "Create" : "Save"
+                Button(label) {
+                    var timesheet = timesheet
+                    timesheet.project = selectedProject
+                    timesheet.activity = selectedActivity
+                    timesheet.begin = "\(startTime)"
+                    timesheet.end = isEndTime ? "\(endTime)" : nil
+                    timesheet.description = description
+                    
+                    onSave(timesheet)
+                    
+                    timesheetView = nil
+                }
             }
         }
     }

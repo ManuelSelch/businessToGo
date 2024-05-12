@@ -10,8 +10,14 @@ extension ManagementState {
                 env.just(.kimai(.sync)), 
                 env.just(.taiga(.sync))
             ).eraseToAnyPublisher()
+        
+        
+        case .connect(let kimaiProject, let taigaProject):
+            env.integrations.setIntegration(kimaiProject, taigaProject)
+            state.integrations = env.integrations.get()
             
         case .kimai(let action):
+            state.changes = env.track.getAll(state.kimai.timesheets, "timesheets")
             return KimaiState.reduce(&state.kimai, action, env)
                 .map { .kimai($0) }
                 .eraseToAnyPublisher()
@@ -20,6 +26,12 @@ extension ManagementState {
             return TaigaState.reduce(&state.taiga, action, env)
                 .map { .taiga($0) }
                 .eraseToAnyPublisher()
+            
+        case .resetDatabase:
+            env.reset()
+            state = .init()
         }
+        
+        return Empty().eraseToAnyPublisher()
     }
 }

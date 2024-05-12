@@ -1,16 +1,15 @@
 import SwiftUI
 import Redux
-
+import OfflineSync
 
 struct KimaiContainer: View {
     @EnvironmentObject var router: ManagementRouter
     @EnvironmentObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
     
-    @State var isPresentingPlayView = false
+    @Binding var isPresentingPlayView: Bool
     
     var route: KimaiRoute
-    
-    var showTaigaProject: (_ kimaiProject: Int) -> ()
+    let changes: [DatabaseChange]
     
     var body: some View {
         VStack {
@@ -19,20 +18,18 @@ struct KimaiContainer: View {
                 getCustomersView()
                 
             case .chart:
-                getChartView()
+                getCustomersChartView()
                 
             case .customer(let id):
-                getCustomerView(id)
+                getProjectsChartView(id)
+                // getCustomerView(id)
                 
             case .project(let id):
-                KimaiProjectContainer(id: id, changes: []) // todo: reference changes
+                KimaiProjectContainer(id: id, changes: changes) // todo: reference changes
                 
             case .timesheet(let id):
                 getTimesheetView(id)
             }
-        }
-        .toolbar {
-            KimaiHeaderView(isPresentingPlayView: $isPresentingPlayView, route: route, onChart: showChart, onProjectClicked: showTaigaProject)
         }
         .sheet(isPresented: $isPresentingPlayView) {
             getTimesheetView()
@@ -45,14 +42,31 @@ extension KimaiContainer {
     @ViewBuilder func getCustomersView() -> some View {
         KimaiCustomersView(
             customers: store.state.customers,
-            onCustomerSelected: showCustomer
+            onCustomerSelected: { customer in
+                router.navigate(.kimai(.customer(customer)))
+            }
         )
     }
     
-    @ViewBuilder func getChartView() -> some View {
-        KimaiChartView(
+    @ViewBuilder func getCustomersChartView() -> some View {
+        KimaiCustomersChartView(
+            customers: store.state.customers,
             projects: store.state.projects,
-            timesheets: store.state.timesheets
+            timesheets: store.state.timesheets,
+            
+            customerClicked: { customer in
+                router.navigate(.kimai(.customer(customer)))
+            }
+        )
+    }
+    
+    @ViewBuilder func getProjectsChartView(_ customer: Int) -> some View {
+        KimaiProjectsChartView(
+            projects: store.state.projects.filter { $0.customer == customer },
+            timesheets: store.state.timesheets,
+            projectClicked: { project in
+                router.navigate(.kimai(.project(project)))
+            }
         )
     }
     
@@ -61,7 +75,9 @@ extension KimaiContainer {
             KimaiCustomerView(
                 customer: customer,
                 projects: store.state.projects,
-                onProjectClicked: showProject
+                onProjectClicked: { project in
+                    router.navigate(.kimai(.project(project)))
+                }
             )
         }else {
             Text("Error: Customer not found")
@@ -89,40 +105,13 @@ extension KimaiContainer {
 }
 
 extension KimaiContainer {
-    
-    func goBack(){
-        router.back()
-    }
-
-    func showCustomers(){
-        router.navigate(.kimai(.customers))
-    }
-    
-    func showCustomer(_ customer: Int){
-        router.navigate(.kimai(.customer(customer)))
-    }
-    
-    func showProject(_ project: Int){
-        router.navigate(.kimai(.project(project)))
-    }
-    
-    
-    
-    
-    
-   
-    
     func saveTimesheet(_ timesheeet: KimaiTimesheet){
         if(timesheeet.id == -1){ // create
             store.send(.timesheets(.create(timesheeet)))
         }else { // update
             store.send(.timesheets(.update(timesheeet)))
-            goBack()
+            router.back()
         }
         
-    }
-    
-    func showChart() {
-        router.navigate(.kimai(.chart))
     }
 }

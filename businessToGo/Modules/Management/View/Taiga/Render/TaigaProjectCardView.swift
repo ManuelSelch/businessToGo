@@ -53,7 +53,7 @@ struct TaigaProjectCardView: View {
                 
                 Text(project.name)
                     .font(.footnote)
-                    .foregroundColor(Color.textHeaderSecondary)
+                    .foregroundColor(Color.contrast)
             }
             
             Spacer()
@@ -61,7 +61,7 @@ struct TaigaProjectCardView: View {
         .frame(width: width, height: height)
         .padding()
         .background(Color.background)
-        .cornerRadius(10)
+        .cornerRadius(5)
         
     }
     

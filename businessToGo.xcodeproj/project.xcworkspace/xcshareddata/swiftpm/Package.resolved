@@ -10,12 +10,30 @@
       }
     },
     {
+      "identity" : "chart",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/Chart.git",
+      "state" : {
+        "revision" : "9143350de0b1ac74740a01c47f69e345c3c47bb5",
+        "version" : "1.0.1"
+      }
+    },
+    {
       "identity" : "log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Log.git",
       "state" : {
-        "revision" : "39fb0732dff3b0c7ccdab5050e6a41fddad0d500",
-        "version" : "1.0.1"
+        "revision" : "74eeda085ac5fa40814aa79ff3ce3590c1644d7d",
+        "version" : "1.0.7"
+      }
+    },
+    {
+      "identity" : "login",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/Login.git",
+      "state" : {
+        "revision" : "a1de710e052b75b792365bee6cf0b5221cf9d8ba",
+        "version" : "1.0.6"
       }
     },
     {
@@ -32,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/OfflineSync.git",
       "state" : {
-        "revision" : "08072d671848543397543d44c1dfc3a85a9be88b",
-        "version" : "1.0.1"
+        "revision" : "ba6a8957a1538c3fde4e2742d6b1e74287bd6c12",
+        "version" : "1.1.1"
       }
     },
     {
@@ -59,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Redux.git",
       "state" : {
-        "revision" : "715e507c282061e0d26a39701a5d872c1b77201a",
-        "version" : "1.0.5"
+        "revision" : "81ff97ce98959a704b0bc0182c465583747bd346",
+        "version" : "1.0.8"
       }
     },
     {
@@ -68,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "5949cbd3d4f3f97968bb40b6cd232f8315c6341c",
-        "version" : "6.7.0"
+        "revision" : "b06a8c8596e4c3e8e7788e08e720e3248563ce6a",
+        "version" : "6.7.1"
       }
     },
     {

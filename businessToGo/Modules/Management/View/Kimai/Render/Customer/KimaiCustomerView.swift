@@ -30,5 +30,6 @@ struct KimaiCustomerView: View {
                 }
             }
         }
+        .background(Color.background)
     }
 }

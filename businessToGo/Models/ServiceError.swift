@@ -5,6 +5,7 @@ enum ServiceError: Error {
     
     case tokenMissing
     case decodeFailed
+    case urlDecodeFailed
     
     case keychainReadFailed
     case keychainSaveFailed

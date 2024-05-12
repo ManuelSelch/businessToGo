@@ -4,27 +4,45 @@ import OfflineSync
 struct RequestReducer {
     static func reduce<Model, Target>(
         _ action: RequestAction<Model>,
-        _ service: IRequestService<Model, Target>
+        _ service: RequestService<Model, Target>,
+        _ state: inout [Model]
     ) -> AnyPublisher<RequestAction<Model>, Error> {
         switch(action){
-        case .fetch:
-            return service.fetch()
-                .map { .sync($0) }
-                .eraseToAnyPublisher()
+        case .sync:
+            return Future<RequestAction<Model>, Error> { promise in
+                Task {
+                    do {
+                        let fetch = try await service.fetch(1)
+                        var remoteRecords = fetch.response
+                        var current = Int(fetch.headers["X-Page"] as? String ?? "0") ?? 0
+                        let max = Int(fetch.headers["X-Total-Pages"] as? String ?? "0") ?? 0
+                        while(current < max){
+                            current += 1
+                            let fetchPage = try await service.fetch(current)
+                            remoteRecords.append(contentsOf: fetchPage.response)
+                        }
+                        
+                        let records = try await service.sync(remoteRecords)
+                        promise(.success(.set(records)))
+                    } catch {
+                        promise(.failure(ServiceError.unknown("\(error)")))
+                    }
+                }
+            }
+            .eraseToAnyPublisher()
             
-        case .sync(let value):
-            return service.sync(value)
-                .map { .hasSynced($0) }
-                .eraseToAnyPublisher()
-        
-        case .hasSynced(let change):
-            service.hasSynced(change)
-        
+        case .set(let records):
+            state = records
+            
         case .create(let item):
             service.create(item)
+            state = service.get()
             
         case .update(let item):
             service.update(item)
+            if let index = state.firstIndex(where: { $0.id == item.id }) {
+                state[index] = item
+            }
         }
         return Empty().eraseToAnyPublisher()
     }

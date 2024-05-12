@@ -1,117 +1,123 @@
 import Foundation
 import Combine
+import OfflineSync
 
 extension LoginState {
-    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: Environment) -> AnyPublisher<AppAction, Error>  {
+    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: Environment) -> AnyPublisher<LoginAction, Error>  {
         switch(action){
             case .navigate(let scene):
                 state.scene = scene
+                
+            case .logout:
+                state.scene = .accounts
+                state.current = nil
+                env.keychain.logout()
+                env.router.tab = .login
+                env.router.management.routes = []
+                env.router.settings.routes = []
             
+            case .reset:
+                do {
+                    try env.keychain.removeAccounts()
+                    state.accounts = []
+                } catch {
+                    return Fail(error: error).eraseToAnyPublisher()
+                }
             
-            case .check(let username, let password):
+            case .loadAccounts:
+                do {
+                    state.accounts = try env.keychain.getAccounts()
+                    if(state.accounts.isEmpty){
+                        state.accounts.append(Account.demo)
+                        try env.keychain.saveAccount(Account.demo)
+                    }
+                    if(state.current == nil){
+                        if let account = try env.keychain.getCurrentAccount(state.accounts) {
+                            return env.just(.login(account))
+                        }
+                    }
+                } catch {
+                    return Fail(error: error).eraseToAnyPublisher()
+                }
+            
+            case .login(let account):
                 switch(state.scene){
                     case .kimai:
-                        return env.management.kimai.login(username, password)
-                            .flatMap { result in
-                                if(result){
-                                    let account = AccountData(username, password)
-                                    return env.just(AppAction.login(.saveAccountData(account)))
-                                }else{
-                                    return env.just(AppAction.login(.status(.error("login failed"))))
-                                }
-                            }
-                            .replaceError(with: .login(.status(.error("login failed"))))
-                            .setFailureType(to: Error.self)
-                            .eraseToAnyPublisher()
+                        return loginKimai(account, env) // -> saveAccount
                     case .taiga:
-                        return env.management.taiga.login(username, password)
-                            .flatMap { user in
-                                env.management.taiga.setToken(user.auth_token)
-                                
-                                let account = AccountData(username, password)
-                                return env.just(AppAction.login(.saveAccountData(account)))
-                            }
-                            .replaceError(with: .login(.status(.error("login failed"))))
-                            .setFailureType(to: Error.self)
-                            .eraseToAnyPublisher()
-                    default: break
-                }
-                
-                
-            case .saveAccountData(let account):
-                switch(state.scene){
-                case .kimai:
-                    state.account.kimai = account
-                case .taiga:
-                    state.account.taiga = account
+                        return loginTaiga(account, env) // -> saveAccount
+                    case .accounts:
+                        state.current = account
+                        env.router.tab = .management
+                        env.management.changeDB("businessToGo_\(account.identifier)")
+                        env.keychain.login(account)
+                        return Publishers.Merge(
+                            loginKimai(account, env), loginTaiga(account, env)
+                        ).eraseToAnyPublisher()
+                    
                 default: break
                 }
             
-                _ = env.keychain.saveAccount(state.account)
-                
-                state.scene = .accounts
-          
-            case .loadStoredAccount:
-                return env.keychain.getAccount()
-                    .map { .login(.setAccount($0)) }
-                    .eraseToAnyPublisher()
-                
-            case .setAccount(let account): //todo: refactor :-)
-                state.account = account
-                
-                return Publishers.MergeMany(
-                    kimaiLogin(account.kimai, env),
-                    taigaLogin(account.taiga, env),
-                    loginFinished(account, env.router)
-                ).eraseToAnyPublisher()
-                 
+            case .createAccount:
+                let id = state.accounts.count
+                let account = Account(id: id)
+                state.scene = .account(account)
             
-            case .setTaigaToken(let token):
-                env.management.taiga.setToken(token)
-            return env.just(.management(.taiga(.sync)))
+            case .saveAccount(let account):
+                state.scene = .account(account)
+                try? env.keychain.saveAccount(account)
             
             case .status(let status):
                 state.loginStatus = status
             
-            case .deleteAccount:
-                return env.keychain.removeAccount()
-                .map { .login(.setAccount($0)) }
-                .eraseToAnyPublisher()
+            case .deleteAccount(let account):
+                do {
+                    try env.keychain.removeAccount(account)
+                    state.accounts.removeAll(where: { $0.identifier == account.identifier })
+                } catch {
+                    return Fail(error: error).eraseToAnyPublisher()
+                }
         }
         
         return Empty().eraseToAnyPublisher()
     }
     
-    private static func kimaiLogin(_ account: AccountData?, _ env: Environment) -> AnyPublisher<AppAction, Error> {
-        if let kimai = account {
-            return env.management.kimai.login(kimai.username, kimai.password)
-                .flatMap { result in
-                    return env.just(AppAction.management(.kimai(.loginSuccess)))
+    
+    static func loginKimai(_ account: Account, _ env: Environment) -> AnyPublisher<LoginAction, Error> {
+        return Future<LoginAction, Error> { promise in
+            Task {
+                do {
+                    guard let kimai = account.kimai else { promise(.failure(ServiceError.unknown("kimai account not found"))); return }
+                    let success = try await env.management.kimai.login(kimai)
+                    
+                    if(success){
+                        promise(.success(.saveAccount(account)))
+                    }else {
+                        promise(.failure(ServiceError.unknown("kimai login failed")))
+                    }
+                } catch {
+                    promise(.failure(error))
                 }
-                .replaceError(with: .login(.status(.error("login failed"))))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        } else {
-            return Empty().eraseToAnyPublisher()
-        }
+            }
+        }.eraseToAnyPublisher()
+        
+        
     }
     
-    private static func taigaLogin(_ account: AccountData?, _ env: Environment) -> AnyPublisher<AppAction, Error> {
-        if let taiga = account {
-            return env.management.taiga.login(taiga.username, taiga.password)
-                .map { AppAction.login(.setTaigaToken($0.auth_token)) }
-                .eraseToAnyPublisher()
-        } else{
-            return Empty().eraseToAnyPublisher()
-        }
-    }
-    
-    private static func loginFinished(_ account: Account, _ router: AppRouter) -> AnyPublisher<AppAction, Error> {
-        if(account.kimai != nil && account.taiga != nil) {
-            router.tab = .management
-            return Empty().eraseToAnyPublisher()
-        } else{
-            return Empty().eraseToAnyPublisher()
-        }
+    static func loginTaiga(_ account: Account, _ env: Environment) -> AnyPublisher<LoginAction, Error> {
+        return Future<LoginAction, Error> { promise in
+            Task {
+                do {
+                    guard let taiga = account.taiga else { promise(.failure(ServiceError.unknown("taiga account not found"))); return }
+                    let user = try await env.management.taiga.login(taiga)
+                    env.management.taiga.setToken(user.auth_token)
+                    
+                    promise(.success(.saveAccount(account)))
+                } catch {
+                    return promise(.failure(error))
+                }
+            }
+        
+        }.eraseToAnyPublisher()
     }
 }

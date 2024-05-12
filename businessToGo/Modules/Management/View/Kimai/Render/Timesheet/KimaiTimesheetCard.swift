@@ -29,7 +29,7 @@ struct KimaiTimesheetCard: View {
                 onTimesheetClicked(timesheet.id)
             }){
                 if let date = getDate(timesheet.begin){
-                    Text(date.formatted())
+                    Text(date.formatted(date: .omitted, time: .shortened))
                         .foregroundColor(Color.theme)
                 }else{
                     Text(timesheet.begin)

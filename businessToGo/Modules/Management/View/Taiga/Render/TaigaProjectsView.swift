@@ -31,6 +31,7 @@ struct TaigaProjectsView: View {
                 }
                 .padding()
             }
+            .background(Color.background)
             .padding()
             
         }

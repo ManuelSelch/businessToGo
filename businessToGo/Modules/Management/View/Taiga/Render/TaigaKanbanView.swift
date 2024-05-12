@@ -10,20 +10,27 @@ struct TaigaKanbanView: View {
     
     
     @State private var currentlyDragging: TaigaTaskStory?
-    @State private var folded: [Bool] = []
     
     
     var body: some View {
-        VStack {
-            ScrollView(.horizontal){
-                HStack(spacing: 2){
-                    ForEach(statusList) { status in
-                        Column(status)
-                            .frame(width: 150)
+        HStack {
+            VStack {
+                GeometryReader { geometry in
+                    ScrollView(.horizontal){
+                        
+                        HStack(spacing: 2){
+                            ForEach(statusList) { status in
+                                Column(status)
+                                    // .frame(width: (geometry.size.width) / CGFloat(statusList.count))
+                                    .frame(width: 200)
+                            }
+                        }
                     }
                 }
             }
+            .frame(width: .infinity, alignment: .center)
         }
+        .background(Color.background)
     }
     
     @ViewBuilder
@@ -39,7 +46,7 @@ struct TaigaKanbanView: View {
     
     @ViewBuilder
     func TaskView(_ taskStory: TaigaTaskStory) -> some View {
-        VStack {
+        VStack(alignment: .center) {
             // todo: show local changes
             /*
             if(change != nil){
@@ -48,18 +55,28 @@ struct TaigaKanbanView: View {
                 Text("")
             }
             */
+            HStack {
+                Spacer()
+                Text(taskStory.subject)
+                    .foregroundStyle(Color.black)
+                Spacer()
+            }
+                
             
-            Text(taskStory.subject)
-            Divider()
-            ForEach(tasks.filter { $0.user_story == taskStory.id }){ task in
-                Text(task.subject)
+            if(tasks.filter { $0.user_story == taskStory.id }.count > 0){
+                Divider()
+                ForEach(tasks.filter { $0.user_story == taskStory.id }){ task in
+                    Text(task.subject)
+                        .foregroundStyle(Color.black)
+                }
             }
         }
         .font(.callout)
+        .frame(width: .infinity)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.white)
-        .cornerRadius(10)
-        .padding()
+        .cornerRadius(5)
+        // .padding()
     }
     
     @ViewBuilder
@@ -117,27 +134,18 @@ struct TaigaKanbanView: View {
     @ViewBuilder
     func Column(_ status: TaigaTaskStoryStatus) -> some View {
         VStack {
+            Text(status.name).font(.subheadline)
             ScrollView(.vertical){
                 TasksView(
                     storyList.filter{
                         $0.status == status.id
                     }
                 )
+                .frame(maxWidth: .infinity)
             }
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
-            .toolbar {
-                ToolbarItem(placement: .principal) { 
-                    VStack {
-                        Text(status.name).font(.subheadline)
-                    }
-                }
-            }
-            
-            
-    
-            .frame(maxWidth: .infinity)
             .background(.ultraThinMaterial)
             .dropDestination(for: String.self){ items, location in
                 withAnimation(.spring()){

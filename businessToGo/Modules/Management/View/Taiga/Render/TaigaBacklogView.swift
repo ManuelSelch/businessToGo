@@ -90,6 +90,7 @@ struct TaigaBacklogView: View {
             
             MilestonesList(milestones: milestonesFiltered)
         }
+        .background(Color.background)
     }
     
     func calcOptimalY(_ index: Int) -> Double{

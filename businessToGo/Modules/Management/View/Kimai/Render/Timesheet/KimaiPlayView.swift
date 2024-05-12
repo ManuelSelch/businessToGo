@@ -63,6 +63,22 @@ struct KimaiPlayView: View {
     
     var body: some View {
         Form {
+            HStack {
+                let label = isCreate ? "Create" : "Save"
+                Spacer()
+                Button(label) {
+                    isPresentingPlayView = false
+                    
+                    var timesheet = self.timesheet ?? KimaiTimesheet.new
+                    timesheet.project = selectedProject
+                    timesheet.activity = selectedActivity
+                    timesheet.begin = "\(startTime)"
+                    timesheet.end = isEndTime ? "\(endTime)" : nil
+                    timesheet.description = description
+                    
+                    onSave(timesheet)
+                }
+            }
             Section(header: Text("Branch Info")) {
                 
                 Picker("customer", selection: $selectedCustomer) {
@@ -134,24 +150,7 @@ struct KimaiPlayView: View {
                 
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                let label = isCreate ? "Create" : "Save"
-                Button(label) {
-                    isPresentingPlayView = false
-                    
-                    var timesheet = self.timesheet ?? KimaiTimesheet.new
-                    timesheet.project = selectedProject
-                    timesheet.activity = selectedActivity
-                    timesheet.begin = "\(startTime)"
-                    timesheet.end = isEndTime ? "\(endTime)" : nil
-                    timesheet.description = description
-                    
-                    onSave(timesheet)
-                }
-                
-            }
-        }
+        
         
         .onAppear {
             isCreate = (timesheet == nil)

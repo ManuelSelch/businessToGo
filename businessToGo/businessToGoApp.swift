@@ -5,101 +5,82 @@ import Log
 
 @main
 struct businessToGoApp: App {
+    var body: some Scene {
+        WindowGroup {
+            BusinessToGoView()
+                .scrollContentBackground(.hidden)
+        }
+    }
+}
+
+struct BusinessToGoView: View {
     let store = Store(
         initialState: AppState(),
         reducer: AppState.reduce,
         dependencies: Environment(),
-        middlewares: [LogMiddleware().handle]
+        middlewares: [
+            { state, action, env in
+                switch(action){
+                    case .log(_): return Empty().eraseToAnyPublisher()
+                    default:
+                    return LogMiddleware().handle(state.log, action)
+                            .map { .log($0) }
+                            .eraseToAnyPublisher()
+                }
+            }
+        ],
+        errorAction: { error in
+            return .log(.error("\(error)"))
+        }
     )
     
     @State var showSidebar = false
     
-    var body: some Scene {
-        WindowGroup {
-            VStack(spacing: 0) {
-                Header(
-                    showSidebar: $showSidebar,
-                    title: store.dependencies.router.tab.title
-                )
+    var body: some View {
+        VStack(spacing: 0) {
+            Header(
+                showSidebar: $showSidebar
+            )
+            
+            ZStack {
+                AppTabView()
                 
-                ZStack {
-                    VStack {
-                        AppTabView(store: store)
-                        
-                        Spacer()
-                        
-                        LogView()
-                            .environmentObject(store.lift(\.log, AppAction.log, store.dependencies.log))
-                            
-                    }
-                    
-                    Sidebar(showSidebar: $showSidebar)
+                VStack {
+                    Spacer()
+                    LogView()
+                        .environmentObject(store.lift(\.log, AppAction.log, store.dependencies.log))
                 }
                 
+                Sidebar(showSidebar: $showSidebar)
             }
-            .environmentObject(store.dependencies.router)
+            
         }
+        .environmentObject(store)
+        .environmentObject(store.dependencies.router)
     }
 }
-
 
 struct AppTabView: View {
     @EnvironmentObject var router: AppRouter
-    let store: Store<AppState, AppAction, Environment>
+    @EnvironmentObject var store: Store<AppState, AppAction, Environment>
     
     var body: some View {
-        TabView(selection: $router.tab) {
-            ForEach(AppScreen.allCases) { tab in
-                tab.createView(store, router)
-                    .tag(tab as AppScreen?)
-                    .tabItem { tab.label }
-                
+        if(router.tab == .login){
+            AppScreen.login.createView(store, router)
+        }else {
+            TabView(selection: $router.tab) {
+                createTab(.management)
+                createTab(.kimaiSettings)
             }
         }
+    }
+    
+    @ViewBuilder
+    func createTab(_ tab: AppScreen) -> some View {
+        tab.createView(store, router)
+            .tag(tab)
+            .tabItem {tab.label }
     }
 }
 
 
-class LogMiddleware {
-    func handle(_ state: AppState, _ action: AppAction, _ env: Environment) -> AnyPublisher<AppAction, Never> {
-        switch(action){
-        case .log(_): return Empty().eraseToAnyPublisher()
-        default: break
-        }
-        
-        let actionStr = "\(action)"
-                
-        let methods = actionStr.split(separator: "(")
-        var methodsFormatted: [String] = []
-        for method in methods {
-            if(
-                method.contains(":") ||
-                method.contains("\"") ||
-                method.contains("-") ||
-                method.contains("[") ||
-                method.contains("]")
-            ){
-                continue // only show action but no data
-            }
-            
-            if let methodFormatted = method.split(separator: ".").last {
-                let strMethodFormatted = String(methodFormatted).replacing(")",with: "")
-                if(
-                    strMethodFormatted.split(separator: " ").count == 1
-                ){
-                    methodsFormatted.append(strMethodFormatted)
-                }
-            }
-        
-        }
-        
-        var actionFormatted = ""
-        for method in methodsFormatted {
-            actionFormatted += "." + method
-        }
-        
-        LogService.log(actionFormatted)
-        
-        return Just(.log(.message(actionFormatted))).eraseToAnyPublisher()
-    }
-}

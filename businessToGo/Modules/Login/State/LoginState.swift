@@ -9,21 +9,24 @@ enum LoginStatus: Equatable {
 
 enum LoginScreen: Equatable {
     case accounts
-    case kimai
-    case taiga
+    case account(Account)
+    case kimai(Account)
+    case taiga(Account)
 }
 
 struct LoginState: Equatable {
     var scene: LoginScreen
     
-    var account: Account
+    var accounts: [Account]
+    var current: Account?
+    
     var loginStatus: LoginStatus
 }
 
 extension LoginState {
     init(){
         scene = .accounts
-        account = Account()
+        accounts = []
         loginStatus = .show
     }
 }

@@ -30,9 +30,6 @@ struct KimaiHeaderView: View {
     
     var body: some View {
         HStack {
-            
-            Spacer()
-            
             if(route == .customers){
                 Button(action: {
                     onChart()
@@ -63,6 +60,5 @@ struct KimaiHeaderView: View {
                 }
             }
         }
-        .padding()
     }
 }

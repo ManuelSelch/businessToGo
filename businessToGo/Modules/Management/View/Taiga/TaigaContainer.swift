@@ -10,7 +10,7 @@ enum TaigaProjectMenu: String, Equatable, CaseIterable {
 
 struct TaigaContainer: View {
     @EnvironmentObject var router: ManagementRouter
-    @EnvironmentObject var store: Store<TaigaState, TaigaAction, Environment>
+    @EnvironmentObject var store: Store<TaigaState, TaigaAction, ManagementDependency>
     var route: TaigaScreen
     
     @State var selectedProjectMenu = TaigaProjectMenu.kanban

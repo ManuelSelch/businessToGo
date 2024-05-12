@@ -12,35 +12,36 @@ extension TaigaState {
             state.milestones = env.taiga.milestones.get()
             
             return Publishers.MergeMany([
-                env.just(.projects(.fetch)),
-                env.just(.milestones(.fetch)),
-                env.just(.statusList(.fetch)),
-                env.just(.taskStories(.fetch)),
-                env.just(.tasks(.fetch))
+                env.just(.projects(.sync)),
+                env.just(.milestones(.sync)),
+                env.just(.statusList(.sync)),
+                env.just(.taskStories(.sync)),
+                env.just(.tasks(.sync))
             ]).eraseToAnyPublisher()
         
         case .projects(let action):
-            return RequestReducer.reduce(action, env.taiga.projects)
+            return RequestReducer.reduce(action, env.taiga.projects, &state.projects)
                 .map { .projects($0) }
                 .eraseToAnyPublisher()
         
         case .milestones(let action):
-            return RequestReducer.reduce(action, env.taiga.milestones)
+            return RequestReducer.reduce(action, env.taiga.milestones, &state.milestones)
                 .map { .milestones($0) }
                 .eraseToAnyPublisher()
         
         case .statusList(let action):
-            return RequestReducer.reduce(action, env.taiga.taskStoryStatus)
+            return RequestReducer.reduce(action, env.taiga.taskStoryStatus, &state.taskStoryStatus)
                 .map { .statusList($0) }
                 .eraseToAnyPublisher()
             
         case .taskStories(let action):
-            return RequestReducer.reduce(action, env.taiga.taskStories)
+            return RequestReducer.reduce(action, env.taiga.taskStories, &state.taskStories)
                 .map { .taskStories($0) }
                 .eraseToAnyPublisher()
+        
             
         case .tasks(let action):
-            return RequestReducer.reduce(action, env.taiga.tasks)
+            return RequestReducer.reduce(action, env.taiga.tasks, &state.tasks)
                 .map { .tasks($0) }
                 .eraseToAnyPublisher()
             

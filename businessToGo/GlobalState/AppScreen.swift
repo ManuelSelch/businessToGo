@@ -12,18 +12,6 @@ enum AppScreen: Hashable, Identifiable, CaseIterable {
 }
 
 extension AppScreen {
-    var action: Any {
-        switch self {
-        default: return LoginAction.self
-        }
-    }
-    
-    var state: Any {
-        return LoginState.self
-    }
-}
-
-extension AppScreen {
     
     var title: String {
         switch self {
@@ -36,20 +24,24 @@ extension AppScreen {
         }
     }
     
-    var image: String {
-        return "tree"
+    private var image: String {
+        switch self {
+        case .login: return "person"
+        case .management: return "house"
+        case .kimaiSettings: return "gear"
+        }
     }
     
     @ViewBuilder
     var label: some View {
-        Label(title, systemImage: "tree")
+        Label(title, systemImage: image)
     }
     
     func createView(_ store: Store<AppState, AppAction, Environment>, _ router: AppRouter) -> some View {
         switch self {
         case .login:
             AnyView(
-                LoginView()
+                LoginContainer()
                     .environmentObject(store.lift(\.login, AppAction.login, store.dependencies))
             )
         case .management:
@@ -60,8 +52,8 @@ extension AppScreen {
             )
         case .kimaiSettings:
             AnyView(
-                KimaiSettingsContainer()
-                    .environmentObject(store.lift(\.management, AppAction.management, store.dependencies.management))
+                SettingsContainer()
+                    .environmentObject(router.settings)
             )
         }
     }

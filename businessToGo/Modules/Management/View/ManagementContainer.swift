@@ -5,6 +5,8 @@ struct ManagementContainer: View {
     @EnvironmentObject var router: ManagementRouter
     @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
     
+    @State var isPresentingPlayView = false
+    
     var body: some View {
         NavigationStack(path: $router.routes) {
             kimai(.customers)
@@ -15,16 +17,19 @@ struct ManagementContainer: View {
                     }
                 }
         }
+        .onAppear {
+            store.send(.sync)
+        }
         
     }
 }
 
 extension ManagementContainer {
     @ViewBuilder func kimai(_ route: KimaiRoute) -> some View {
-        KimaiContainer(route: route, showTaigaProject: showTaigaProject)
+        KimaiContainer(isPresentingPlayView: $isPresentingPlayView, route: route, changes: store.state.changes)
             .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
             .toolbar {
-                
+                Spacer()
                 
                 Button(action: {
                     sync()
@@ -33,6 +38,20 @@ extension ManagementContainer {
                         .font(.system(size: 15))
                         .foregroundColor(Color.theme)
                 }
+                
+                KimaiHeaderView(
+                    isPresentingPlayView: $isPresentingPlayView,
+                    route: route,
+                    onChart: {
+                        router.navigate(.kimai(.chart))
+                    },
+                    onProjectClicked: { kimaiProject in
+                        if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
+                        {
+                            router.navigate(.taiga(.project(integration.taigaProjectId)))
+                        }
+                    }
+                )
                 
                 Spacer()
             }
@@ -47,12 +66,5 @@ extension ManagementContainer {
 extension ManagementContainer {
     func sync(){
         store.send(.sync)
-    }
-    
-    func showTaigaProject(_ kimaiProject: Int){
-        if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
-        {
-            router.navigate(.taiga(.project(integration.taigaProjectId)))
-        }
     }
 }

@@ -4,7 +4,7 @@ import OfflineSync
 struct KimaiCustomer: TableProtocol {
     var id: Int
     var name: String
-    var number: String
+    var number: String?
 }
 
 extension KimaiCustomer {

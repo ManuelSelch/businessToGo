@@ -21,11 +21,13 @@ class KimaiService {
         tables = KimaiTable(db, track)
         
         customers = RequestService(
-            tables.customers, provider, .simple(.getCustomers)
+            tables.customers, provider, .simple(.getCustomers),
+            KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
         )
         
         projects = RequestService<KimaiProject, KimaiRequest>(
-            tables.projects, provider, .simple(.getProjects)
+            tables.projects, provider, .simple(.getProjects),
+            KimaiRequest.insertProject, KimaiRequest.updateProject
         )
         
         timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
@@ -40,11 +42,13 @@ class KimaiService {
     
     func initRequests(){
         customers = RequestService(
-            tables.customers, provider, .simple(.getCustomers)
+            tables.customers, provider, .simple(.getCustomers),
+            KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
         )
         
         projects = RequestService<KimaiProject, KimaiRequest>(
-            tables.projects, provider, .simple(.getProjects)
+            tables.projects, provider, .simple(.getProjects),
+            KimaiRequest.insertProject, KimaiRequest.updateProject
         )
         
         timesheets = RequestService<KimaiTimesheet, KimaiRequest>(

@@ -35,6 +35,7 @@ struct RequestReducer {
             
         case .set(let records):
             state = records
+            changes = track.getAll(state, service.getName())
             
         case .create(let item):
             service.create(item)

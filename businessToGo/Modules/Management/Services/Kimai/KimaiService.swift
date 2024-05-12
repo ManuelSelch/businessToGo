@@ -5,7 +5,7 @@ import CoreData
 import OfflineSync
 
 // MARK: - admin middleware
-class KimaiService: IKimaiService {
+class KimaiService {
     private var db: IDatabase
     private var tables: KimaiTable
     private var provider = MoyaProvider<KimaiRequest>()

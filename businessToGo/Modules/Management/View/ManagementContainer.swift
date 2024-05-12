@@ -36,7 +36,7 @@ struct ManagementContainer: View {
 
 extension ManagementContainer {
     @ViewBuilder func kimai(_ route: KimaiRoute) -> some View {
-        KimaiContainer(timesheetView: $timesheetView, route: route, changes: store.state.changes)
+        KimaiContainer(timesheetView: $timesheetView, route: route)
             .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
             .toolbar {
                 Spacer()

@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
- 
+import OfflineSync
+
 enum TaigaScreen: Equatable, Hashable {
     case projects
     case project(Int)
@@ -13,6 +14,13 @@ struct TaigaState: Equatable {
     var tasks: [TaigaTask]
     var milestones: [TaigaMilestone]
     var projectImages: [Int: CustomImage]
+    
+    var projectTracks: [DatabaseChange]
+    var statusTracks: [DatabaseChange]
+    var storyTracks: [DatabaseChange]
+    var taskTracks: [DatabaseChange]
+    var milestoneTracks: [DatabaseChange]
+    
 }
 
 
@@ -24,5 +32,11 @@ extension TaigaState {
         tasks = []
         milestones = []
         projectImages = [:]
+        
+        projectTracks = []
+        statusTracks = []
+        storyTracks = []
+        taskTracks = []
+        milestoneTracks = []
     }
 }

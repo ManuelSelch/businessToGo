@@ -20,28 +20,58 @@ extension TaigaState {
             ]).eraseToAnyPublisher()
         
         case .projects(let action):
-            return RequestReducer.reduce(action, env.taiga.projects, &state.projects)
+            return RequestReducer.reduce(
+                action,
+                env.taiga.projects,
+                env.track,
+                &state.projects,
+                &state.projectTracks
+            )
                 .map { .projects($0) }
                 .eraseToAnyPublisher()
         
         case .milestones(let action):
-            return RequestReducer.reduce(action, env.taiga.milestones, &state.milestones)
+            return RequestReducer.reduce(
+                action,
+                env.taiga.milestones,
+                env.track,
+                &state.milestones,
+                &state.milestoneTracks
+            )
                 .map { .milestones($0) }
                 .eraseToAnyPublisher()
         
         case .statusList(let action):
-            return RequestReducer.reduce(action, env.taiga.taskStoryStatus, &state.taskStoryStatus)
+            return RequestReducer.reduce(
+                action,
+                env.taiga.taskStoryStatus,
+                env.track,
+                &state.taskStoryStatus,
+                &state.statusTracks
+            )
                 .map { .statusList($0) }
                 .eraseToAnyPublisher()
             
         case .taskStories(let action):
-            return RequestReducer.reduce(action, env.taiga.taskStories, &state.taskStories)
+            return RequestReducer.reduce(
+                action,
+                env.taiga.taskStories,
+                env.track,
+                &state.taskStories,
+                &state.storyTracks
+            )
                 .map { .taskStories($0) }
                 .eraseToAnyPublisher()
         
             
         case .tasks(let action):
-            return RequestReducer.reduce(action, env.taiga.tasks, &state.tasks)
+            return RequestReducer.reduce(
+                action,
+                env.taiga.tasks,
+                env.track,
+                &state.tasks,
+                &state.taskTracks
+            )
                 .map { .tasks($0) }
                 .eraseToAnyPublisher()
             

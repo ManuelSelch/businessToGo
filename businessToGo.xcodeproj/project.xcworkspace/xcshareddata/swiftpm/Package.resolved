@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Chart.git",
       "state" : {
-        "revision" : "9143350de0b1ac74740a01c47f69e345c3c47bb5",
-        "version" : "1.0.1"
+        "revision" : "d375995519e8b83824cda55fdce80aa8a23c12d3",
+        "version" : "1.0.2"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/OfflineSync.git",
       "state" : {
-        "revision" : "ba6a8957a1538c3fde4e2742d6b1e74287bd6c12",
-        "version" : "1.1.1"
+        "revision" : "1b8e141c847e8427520e39d80f573de028430471",
+        "version" : "1.1.2"
       }
     },
     {

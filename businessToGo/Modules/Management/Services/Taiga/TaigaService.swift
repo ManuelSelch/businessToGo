@@ -6,7 +6,7 @@ import Redux
 import OfflineSync
 
 
-class TaigaService: ITaigaService, IService {
+class TaigaService: IService {
     private var tables: TaigaTable
     private var provider: MoyaProvider<TaigaRequest>
     

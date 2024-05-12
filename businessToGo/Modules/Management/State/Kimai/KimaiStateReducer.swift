@@ -22,7 +22,9 @@ extension KimaiState {
                 return RequestReducer.reduce(
                     action,
                     env.kimai.customers,
-                    &state.customers
+                    env.track,
+                    &state.customers,
+                    &state.customerTracks
                 )
                 .map { .customers($0) }
                 .eraseToAnyPublisher()
@@ -31,7 +33,9 @@ extension KimaiState {
                 return RequestReducer.reduce(
                     action,
                     env.kimai.projects,
-                    &state.projects
+                    env.track,
+                    &state.projects,
+                    &state.projectTracks
                 )
                 .map { .projects($0) }
                 .eraseToAnyPublisher()
@@ -40,7 +44,9 @@ extension KimaiState {
                 return RequestReducer.reduce(
                     action,
                     env.kimai.timesheets,
-                    &state.timesheets
+                    env.track,
+                    &state.timesheets,
+                    &state.timesheetTracks
                 )
                 .map { .timesheets($0) }
                 .eraseToAnyPublisher()
@@ -49,7 +55,9 @@ extension KimaiState {
                 return RequestReducer.reduce(
                     action,
                     env.kimai.activities,
-                    &state.activities
+                    env.track,
+                    &state.activities,
+                    &state.activityTracks
                 )
                 .map { .activities($0) }
                 .eraseToAnyPublisher()

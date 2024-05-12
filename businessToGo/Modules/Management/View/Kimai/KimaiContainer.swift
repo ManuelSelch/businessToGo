@@ -12,7 +12,6 @@ struct KimaiContainer: View {
     @State var projectView: KimaiProject?
     
     var route: KimaiRoute
-    let changes: [DatabaseChange]
     
     var body: some View {
         VStack {
@@ -27,7 +26,7 @@ struct KimaiContainer: View {
                 getProjectsChartView(id) 
                 
             case .project(let id):
-                KimaiProjectContainer(id: id, changes: changes, timesheetView: $timesheetView) // todo: reference changes
+                getTimesheetsView(id)
             }
         }
         .sheet(item: $customerView){ customer in
@@ -67,6 +66,7 @@ extension KimaiContainer {
     @ViewBuilder func getCustomersView() -> some View {
         KimaiCustomersView(
             customers: store.state.customers,
+            changes: store.state.customerTracks,
             onCustomerSelected: { customer in
                 router.navigate(.kimai(.customer(customer)))
             },
@@ -101,4 +101,23 @@ extension KimaiContainer {
         )
     }
     
+    @ViewBuilder func getTimesheetsView(_ project: Int) -> some View {
+        let timesheets = store.state.timesheets.filter { $0.project == project }
+        
+        KimaiTimesheetsView(
+            timesheets: timesheets,
+            activities: store.state.activities,
+            changes: store.state.timesheetTracks,
+            
+            onTimesheetClicked: { id in
+                timesheetView = store.state.timesheets.first(where: { $0.id == id })
+            },
+            onStopClicked: { id in
+                if var timesheet = store.state.timesheets.first(where: {$0.id == id}) {
+                    timesheet.end = "\(Date.now)"
+                    store.send(.timesheets(.update(timesheet)))
+                }
+            }
+        )
+    }
 }

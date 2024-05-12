@@ -35,10 +35,9 @@ struct KimaiTimesheetCard: View {
             }
             
             Spacer()
+            
             if(change != nil){
                 Image(systemName: "icloud.and.arrow.up")
-            }else {
-                Text("")
             }
             
             Spacer()

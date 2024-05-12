@@ -17,7 +17,6 @@ extension ManagementState {
             state.integrations = env.integrations.get()
             
         case .kimai(let action):
-            state.changes = env.track.getAll(state.kimai.timesheets, "timesheets")
             return KimaiState.reduce(&state.kimai, action, env)
                 .map { .kimai($0) }
                 .eraseToAnyPublisher()

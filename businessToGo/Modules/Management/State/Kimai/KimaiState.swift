@@ -1,4 +1,5 @@
 import Foundation
+import OfflineSync
 
 enum KimaiRoute: Equatable, Hashable {
     case customers
@@ -12,6 +13,11 @@ struct KimaiState: Equatable {
     var projects: [KimaiProject]
     var timesheets: [KimaiTimesheet]
     var activities: [KimaiActivity]
+    
+    var customerTracks: [DatabaseChange]
+    var projectTracks: [DatabaseChange]
+    var timesheetTracks: [DatabaseChange]
+    var activityTracks: [DatabaseChange]
 }
 
 extension KimaiState {
@@ -20,6 +26,11 @@ extension KimaiState {
         projects = []
         timesheets = []
         activities = []
+        
+        customerTracks = []
+        projectTracks = []
+        timesheetTracks = []
+        activityTracks = []
     }
 }
 

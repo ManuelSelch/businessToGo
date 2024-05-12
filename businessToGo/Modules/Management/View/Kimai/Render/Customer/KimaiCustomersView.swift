@@ -1,7 +1,9 @@
 import SwiftUI
+import OfflineSync
 
 struct KimaiCustomersView: View {
     let customers: [KimaiCustomer]
+    let changes: [DatabaseChange]
     let onCustomerSelected: (Int) -> Void
     
     
@@ -20,29 +22,28 @@ struct KimaiCustomersView: View {
             }
             
             List(customersFiltered, id: \.id) { customer in
-                Button(action: {
-                    onCustomerSelected(customer.id)
-                }){
-                    Text(customer.name)
-                        .foregroundColor(Color.theme)
-                }
-                .swipeActions(edge: .trailing) {
-                    Button(role: .cancel) {
+                KimaiCustomerCard(
+                    customer: customer, 
+                    change: changes.first(where: { $0.recordID == customer.id }),
+                    onCustomerSelected: onCustomerSelected
+                )
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .cancel) {
+                            
+                        } label: {
+                            Text("Delete")
+                                .foregroundColor(.white)
+                        }
+                        .tint(.red)
                         
-                    } label: {
-                        Text("Delete")
-                            .foregroundColor(.white)
+                        Button(role: .cancel) {
+                            onEdit(customer)
+                        } label: {
+                            Text("Edit")
+                                .foregroundColor(.white)
+                        }
+                        .tint(.gray)
                     }
-                    .tint(.red)
-                    
-                    Button(role: .cancel) {
-                        onEdit(customer)
-                    } label: {
-                        Text("Edit")
-                            .foregroundColor(.white)
-                    }
-                    .tint(.gray)
-                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){

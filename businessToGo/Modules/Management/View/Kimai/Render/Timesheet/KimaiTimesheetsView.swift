@@ -47,7 +47,7 @@ struct KimaiTimesheetsView: View {
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
-                        change: changes.first(where: { $0.tableName == "timesheets" && $0.recordID == timesheet.id }),
+                        change: changes.first(where: { $0.recordID == timesheet.id }),
                         activity: activities.first(where: { $0.id == timesheet.activity }),
                         onStopClicked: onStopClicked
                     )

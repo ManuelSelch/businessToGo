@@ -18,9 +18,9 @@ extension KimaiTable {
         self.db = db
         self.track = track
         
-        customers = DatabaseTable(db.connection, "customers")
-        projects = DatabaseTable(db.connection, "projects")
-        timesheets = DatabaseTable(db.connection, "timesheets", track)
-        activities = DatabaseTable(db.connection, "activities")
+        customers = DatabaseTable(db.connection, "kimai_customers", track)
+        projects = DatabaseTable(db.connection, "kimai_projects", track)
+        timesheets = DatabaseTable(db.connection, "kimai_timesheets", track)
+        activities = DatabaseTable(db.connection, "kimai_activities", track)
     }
 }

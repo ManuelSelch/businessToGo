@@ -6,8 +6,8 @@ class ManagementDependency: IService {
     var track: ITrackTable
     var db: IDatabase
     
-    var kimai: IKimaiService
-    var taiga: ITaigaService
+    var kimai: KimaiService
+    var taiga: TaigaService
     var integrations: IIntegrationService
     
     init(){

@@ -5,7 +5,9 @@ struct RequestReducer {
     static func reduce<Model, Target>(
         _ action: RequestAction<Model>,
         _ service: RequestService<Model, Target>,
-        _ state: inout [Model]
+        _ track: ITrackTable,
+        _ state: inout [Model],
+        _ changes: inout [DatabaseChange]
     ) -> AnyPublisher<RequestAction<Model>, Error> {
         switch(action){
         case .sync:
@@ -37,12 +39,15 @@ struct RequestReducer {
         case .create(let item):
             service.create(item)
             state = service.get()
+            changes = track.getAll(state, service.getName())
+        
             
         case .update(let item):
             service.update(item)
             if let index = state.firstIndex(where: { $0.id == item.id }) {
                 state[index] = item
             }
+            changes = track.getAll(state, service.getName())
         }
         return Empty().eraseToAnyPublisher()
     }

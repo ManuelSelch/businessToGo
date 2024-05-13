@@ -11,6 +11,8 @@ struct ManagementHeaderView: View {
         }
     }
     
+    var projects: [KimaiProject]
+    
     let onChart: () -> Void
     let onProjectClicked: (Int) -> Void
     let onSync: () -> ()
@@ -27,7 +29,7 @@ struct ManagementHeaderView: View {
                     .foregroundColor(Color.theme)
             }
             
-            if(route == .kimai(.customers)){
+            if(route == nil){
                 Button(action: {
                     onChart()
                 }){
@@ -49,7 +51,20 @@ struct ManagementHeaderView: View {
             
             
             Button(action: {
-                timesheetView = KimaiTimesheet.new
+                switch(route){
+                case .kimai(.customer(let customer)):
+                    let project = projects.first { $0.customer ==  customer}
+                    var timesheet = KimaiTimesheet.new
+                    timesheet.project = project?.id ?? 0
+                    timesheetView = timesheet
+                case .kimai(.project(let project)):
+                    var timesheet = KimaiTimesheet.new
+                    timesheet.project = project
+                    timesheetView = timesheet
+                default:
+                    timesheetView = KimaiTimesheet.new
+                }
+                
             }){
                 Image(systemName: "play.fill")
                     .font(.system(size: 15))

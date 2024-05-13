@@ -100,7 +100,8 @@ extension ManagementContainer {
     @ViewBuilder func getHeader() -> some View {
         ManagementHeaderView(
             timesheetView: $timesheetView,
-            route: router.routes.last,
+            route: router.routes.last, 
+            projects: store.state.kimai.projects,
             onChart: {
                 router.navigate(.kimai(.chart))
             },

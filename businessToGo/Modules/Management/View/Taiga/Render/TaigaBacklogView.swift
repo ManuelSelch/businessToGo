@@ -15,6 +15,7 @@ struct TaigaBacklogView: View {
     var body: some View {
         VStack {
             Chart {
+                // MARK: optimal points
                 ForEach(0 ... Int(project.total_milestones ?? 100), id: \.self) { i in
                     LineMark(
                         x: .value("Time", i),
@@ -32,24 +33,45 @@ struct TaigaBacklogView: View {
                     .foregroundStyle(Color.gray)
                 }
                 
+                // MARK: first point = max points
+                LineMark(
+                    x: .value("Time", 0),
+                    y: .value("Points", calcOptimalY(0)),
+                    series: .value("", "actual")
+                )
+                .foregroundStyle(Color.green)
+                
+                PointMark(
+                    x: .value("Time", 0),
+                    y: .value("Points", calcOptimalY(0))
+                )
+                .foregroundStyle(Color.green)
+                
+                AreaMark(
+                    x: .value("Time", 0),
+                    y: .value("Points", calcOptimalY(0)),
+                    series: .value("", "actual")
+                )
+                .foregroundStyle(Color.green.opacity(0.5))
                 
                 
+                // MARK: show sprints
                 ForEach(milestonesFiltered.reversed()){ milestone in
                     LineMark(
-                        x: .value("Time", calcXValue(milestone)),
+                        x: .value("Time", calcXValue(milestone)+1),
                         y: .value("Points", calcYValue(milestone)),
                         series: .value("", "actual")
                     )
                     .foregroundStyle(Color.green)
                     
                     PointMark(
-                        x: .value("Time", calcXValue(milestone)),
+                        x: .value("Time", calcXValue(milestone)+1),
                         y: .value("Points", calcYValue(milestone))
                     )
                     .foregroundStyle(Color.green)
                     
                     AreaMark(
-                        x: .value("Time", calcXValue(milestone)),
+                        x: .value("Time", calcXValue(milestone)+1),
                         y: .value("Points", calcYValue(milestone)),
                         series: .value("", "actual")
                     )
@@ -57,27 +79,7 @@ struct TaigaBacklogView: View {
                     
                 }
                 
-                if let lastMilestone = milestonesFiltered.reversed().last {
-                    LineMark(
-                        x: .value("Time", calcXValue(lastMilestone)+1),
-                        y: .value("Points", calcYValue(lastMilestone)),
-                        series: .value("", "actual")
-                    )
-                    .foregroundStyle(Color.green)
-                    
-                    PointMark(
-                        x: .value("Time", calcXValue(lastMilestone)+1),
-                        y: .value("Points", calcYValue(lastMilestone))
-                    )
-                    .foregroundStyle(Color.green)
-                    
-                    AreaMark(
-                        x: .value("Time", calcXValue(lastMilestone)+1),
-                        y: .value("Points", calcYValue(lastMilestone)),
-                        series: .value("", "actual")
-                    )
-                    .foregroundStyle(Color.green.opacity(0.5))
-                }
+               
                 
                 
                 
@@ -114,10 +116,10 @@ struct TaigaBacklogView: View {
     func calcYValue(_ current: TaigaMilestone) -> Double{
         var closedPoints: Double = 0
         for milestone in milestonesFiltered.reversed(){
+            closedPoints += (milestone.closed_points ?? 0)
             if(current.id == milestone.id){
                 break
             }
-            closedPoints += (milestone.closed_points ?? 0)
         }
         
         return (project.total_story_points ?? 100) - closedPoints

@@ -87,28 +87,42 @@ struct KimaiPlayView: View {
                     
                     Spacer()
                     
-                    HStack {
-                        if(isEndTime){
+                    if(isEndTime){
+                        HStack {
                             Image(systemName: "clock.fill")
-                        }else {
+                            
+                            VStack {
+                                Text("End time")
+                                    .font(.system(size: 8))
+                                
+                                DatePicker("end time", selection: $endTime, displayedComponents: .hourAndMinute)
+                                    .labelsHidden()
+                                    
+                            }
+                        }
+                    }else {
+                        HStack {
                             Image(systemName: "pause.circle.fill")
                                 .font(.system(size: 20))
                                 .foregroundStyle(Color.red)
-                        }
-                        VStack {
-                            Text("End time")
-                                .font(.system(size: 8))
                             
-                            if(isEndTime) {
-                                DatePicker("end time", selection: $endTime, displayedComponents: .hourAndMinute)
-                                    .labelsHidden()
-                            }else {
+                            VStack {
+                                Text("End time")
+                                    .font(.system(size: 8))
+                                
                                 Text("Stop")
                                     .foregroundStyle(Color.red)
+                                    
                             }
-                                
                         }
+                        .onTapGesture {
+                            isEndTime = true
+                        }
+                        
+                        
                     }
+                    
+                    
                     
                     Spacer()
                 }
@@ -116,26 +130,27 @@ struct KimaiPlayView: View {
             }
         }
         
+        .onChange(of: selectedCustomer){
+            selectedProject = projectsFiltered.first?.id ?? 0
+        }
         
         .onAppear {
-            let isCreate = (timesheet.id == KimaiTimesheet.new.id)
-            
-            if(isCreate){
+            let project = projects.first { $0.id == timesheet.project }
+            if let customer = customers.first(where: { $0.id ==  project?.customer }) {
+                // use stored data
+                selectedCustomer = customer.id
+                selectedProject = timesheet.project
+            } else {
+                // fallback to default data
                 selectedCustomer = customers.first?.id ?? 0
                 selectedProject = projectsFiltered.first?.id ?? 0
-                selectedActivity = activitiesFiltered.first?.id ?? 0
-            }else {
-                let project = projects.first { $0.id == timesheet.project }
-                selectedCustomer = customers.first { $0.id ==  project?.customer }?.id ?? 0
-                
-                selectedProject = timesheet.project
-                selectedActivity = timesheet.activity
-                description = timesheet.description ?? ""
-                startTime = getDate(timesheet.begin) ?? Date.now
-                endTime = getDate(timesheet.end ?? "") ?? Date.now
-                isEndTime = (timesheet.end != nil)
-
             }
+            
+            selectedActivity = timesheet.activity
+            description = timesheet.description ?? ""
+            startTime = getDate(timesheet.begin) ?? Date.now
+            endTime = getDate(timesheet.end ?? "") ?? Date.now
+            isEndTime = (timesheet.end != nil)
         }
         
         .toolbar {

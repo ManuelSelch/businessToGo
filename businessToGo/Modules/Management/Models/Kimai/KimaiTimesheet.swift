@@ -20,12 +20,20 @@ struct KimaiTimesheet: TableProtocol {
     
     // var metaFields: [String : String]
     
+    
+    
+}
+
+extension KimaiTimesheet {
+    
+    static let new = KimaiTimesheet()
+    
     init(){
         activity = 0
         project = 0
         // user = 0
         // tags = []
-        id = 0
+        id = -1
         begin = ""
         end = ""
         description = ""
@@ -40,21 +48,6 @@ struct KimaiTimesheet: TableProtocol {
         // metaFields = [:]
     }
     
-    
-}
-
-extension KimaiTimesheet {
-    
-    static let new = KimaiTimesheet(0, 0, "", "")
-    
-    init(_ project: Int, _ activity: Int, _ begin: String, _ description: String?){
-        self.id = -1
-        
-        self.project = project
-        self.activity = activity
-        self.begin = begin
-        self.description = description
-    }
     
     func getDate(_ dateStr: String) -> Date? {
         let strategy = Date.ParseStrategy(

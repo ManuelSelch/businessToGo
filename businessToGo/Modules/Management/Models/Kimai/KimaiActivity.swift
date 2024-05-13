@@ -6,12 +6,18 @@ struct KimaiActivity: TableProtocol {
     var name: String
     var visible: Bool
     var billable: Bool
-    
+    var color: String?
+}
+
+extension KimaiActivity {
     init(){
-        id = 0
+        id = -1
         project = 0
         name = ""
         visible = false
         billable = false
+        color = ""
     }
+    
+    static let new = KimaiActivity()
 }

@@ -15,7 +15,7 @@ class KimaiService {
     var timesheets: RequestService<KimaiTimesheet, KimaiRequest>
     var activities: RequestService<KimaiActivity, KimaiRequest>
     
-    init(_ db: IDatabase, _ track: ITrackTable) {
+    init(_ db: IDatabase, _ track: TrackTable) {
         self.db = db
         
         tables = KimaiTable(db, track)
@@ -32,7 +32,7 @@ class KimaiService {
         
         timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
             tables.timesheets, provider, .page(KimaiRequest.getTimesheets),
-            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet
+            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
         )
         
         activities = RequestService<KimaiActivity, KimaiRequest>(
@@ -53,7 +53,7 @@ class KimaiService {
         
         timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
             tables.timesheets, provider, .page(KimaiRequest.getTimesheets),
-            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet
+            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
         )
         
         activities = RequestService<KimaiActivity, KimaiRequest>(

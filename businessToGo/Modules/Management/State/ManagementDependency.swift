@@ -3,7 +3,7 @@ import Redux
 import OfflineSync
 
 class ManagementDependency: IService {
-    var track: ITrackTable
+    var track: TrackTable
     var db: IDatabase
     
     var kimai: KimaiService
@@ -20,6 +20,13 @@ class ManagementDependency: IService {
     }
     
     func reset(){
+        db.reset()
+        
+        track = TrackTable(db.connection)
+        kimai = KimaiService(db, track)
+        taiga = TaigaService(db, track)
+        integrations = IntegrationService(db)
+        
         track.clear()
         kimai.clear()
         taiga.clear()

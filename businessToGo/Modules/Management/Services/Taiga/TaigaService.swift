@@ -17,7 +17,7 @@ class TaigaService: IService {
     var tasks: RequestService<TaigaTask, TaigaRequest>
     
     
-    init(_ db: IDatabase, _ track: ITrackTable){
+    init(_ db: IDatabase, _ track: TrackTable){
         tables = TaigaTable(db, track)
         provider = MoyaProvider<TaigaRequest>()
         

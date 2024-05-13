@@ -28,14 +28,6 @@ struct KimaiProjectsChartView: View {
                 }
                 .swipeActions(edge: .trailing) {
                     Button(role: .cancel) {
-                        
-                    } label: {
-                        Text("Delete")
-                            .foregroundColor(.white)
-                    }
-                    .tint(.red)
-                    
-                    Button(role: .cancel) {
                         onEdit(project)
                     } label: {
                         Text("Edit")

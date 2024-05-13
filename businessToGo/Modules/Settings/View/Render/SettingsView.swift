@@ -9,12 +9,6 @@ struct SettingsView: View {
         VStack {
             List {
                 Button(action: {
-                    navigate(.kimaiCustomers)
-                }){
-                    Text("Kunden")
-                }
-                
-                Button(action: {
                     navigate(.integrations)
                 }){
                     Text("Integrations")
@@ -24,12 +18,6 @@ struct SettingsView: View {
                     navigate(.debug)
                 }){
                     Text("Debug")
-                }
-                
-                Button(action: {
-                    navigate(.kimaiProjects)
-                }){
-                    Text("Projekte")
                 }
                 
             }

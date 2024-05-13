@@ -5,7 +5,7 @@ struct RequestReducer {
     static func reduce<Model, Target>(
         _ action: RequestAction<Model>,
         _ service: RequestService<Model, Target>,
-        _ track: ITrackTable,
+        _ track: TrackTable,
         _ state: inout [Model],
         _ changes: inout [DatabaseChange]
     ) -> AnyPublisher<RequestAction<Model>, Error> {
@@ -49,6 +49,12 @@ struct RequestReducer {
                 state[index] = item
             }
             changes = track.getAll(state, service.getName())
+        
+        case .delete(let item):
+            service.delete(item)
+            if let index = state.firstIndex(where: { $0.id == item.id }) {
+                state.remove(at: index)
+            }
         }
         return Empty().eraseToAnyPublisher()
     }

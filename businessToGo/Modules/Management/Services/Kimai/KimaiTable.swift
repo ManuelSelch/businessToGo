@@ -10,11 +10,11 @@ struct KimaiTable {
     var timesheets: DatabaseTable<KimaiTimesheet>
     var activities: DatabaseTable<KimaiActivity>
     
-    private var track: ITrackTable
+    private var track: TrackTable
 }
 
 extension KimaiTable {
-    init(_ db: IDatabase, _ track: ITrackTable) {
+    init(_ db: IDatabase, _ track: TrackTable) {
         self.db = db
         self.track = track
         

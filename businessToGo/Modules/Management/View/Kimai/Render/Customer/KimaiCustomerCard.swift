@@ -12,6 +12,12 @@ struct KimaiCustomerCard: View {
                 Image(systemName: "icloud.and.arrow.up")
             }
             
+            if let color = customer.color {
+                Circle()
+                    .frame(width: 20, height: 20)
+                    .foregroundStyle(Color(hex: color))
+            }
+            
             Button(action: {
                 onCustomerSelected(customer.id)
             }){
@@ -20,4 +26,12 @@ struct KimaiCustomerCard: View {
             }
         }
     }
+}
+
+#Preview {
+    let customer = KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500")
+    return KimaiCustomerCard(
+        customer: customer,
+        onCustomerSelected: { _ in}
+    )
 }

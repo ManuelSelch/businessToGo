@@ -1,29 +1,33 @@
-//
-//  KimaiHeaderView.swift
-//  businessToGo
-//
-//  Created by Admin  on 16.04.24.
-//
-
 import SwiftUI
 
-struct KimaiHeaderView: View {
+struct ManagementHeaderView: View {
     @Binding var timesheetView: KimaiTimesheet?
-    let route: KimaiRoute
+    let route: ManagementRoute?
     
     var projectId: Int? {
         switch(route){
-            case .project(let id): return id
+        case .kimai(.project(let id)): return id
             default: return nil
         }
     }
     
     let onChart: () -> Void
     let onProjectClicked: (Int) -> Void
+    let onSync: () -> ()
     
     var body: some View {
         HStack {
-            if(route == .customers){
+            Spacer()
+            
+            Button(action: {
+                onSync()
+            }){
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .font(.system(size: 15))
+                    .foregroundColor(Color.theme)
+            }
+            
+            if(route == .kimai(.customers)){
                 Button(action: {
                     onChart()
                 }){

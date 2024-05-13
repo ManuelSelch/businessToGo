@@ -109,7 +109,7 @@ extension KimaiContainer {
             activities: store.state.activities,
             changes: store.state.timesheetTracks,
             
-            onTimesheetClicked: { id in
+            onEditClicked: { id in
                 timesheetView = store.state.timesheets.first(where: { $0.id == id })
             },
             onStopClicked: { id in
@@ -117,6 +117,9 @@ extension KimaiContainer {
                     timesheet.end = "\(Date.now)"
                     store.send(.timesheets(.update(timesheet)))
                 }
+            },
+            onDeleteClicked: { timesheet in
+                store.send(.timesheets(.delete(timesheet)))
             }
         )
     }

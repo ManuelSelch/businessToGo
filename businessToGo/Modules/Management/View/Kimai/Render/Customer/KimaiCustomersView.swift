@@ -29,14 +29,6 @@ struct KimaiCustomersView: View {
                 )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {
-                            
-                        } label: {
-                            Text("Delete")
-                                .foregroundColor(.white)
-                        }
-                        .tint(.red)
-                        
-                        Button(role: .cancel) {
                             onEdit(customer)
                         } label: {
                             Text("Edit")
@@ -60,4 +52,18 @@ struct KimaiCustomersView: View {
         }
         .background(Color.background)
     }
+}
+
+
+#Preview {
+    let customers = [
+        KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500"),
+        KimaiCustomer(id: 1, name: "Customer 2", color: "008080")
+    ]
+    return KimaiCustomersView(
+        customers: customers,
+        changes: [],
+        onCustomerSelected: { _ in},
+        onEdit: { _ in}
+    )
 }

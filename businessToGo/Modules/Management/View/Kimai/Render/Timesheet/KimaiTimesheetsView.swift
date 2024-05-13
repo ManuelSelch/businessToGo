@@ -6,8 +6,9 @@ struct KimaiTimesheetsView: View {
     let activities: [KimaiActivity]
     let changes: [DatabaseChange]
     
-    let onTimesheetClicked: (Int) -> Void
+    let onEditClicked: (Int) -> Void
     let onStopClicked: (Int) -> Void
+    let onDeleteClicked: (KimaiTimesheet) -> Void
     
     var timesheetsFiltered: [KimaiTimesheet] {
         var t = timesheets
@@ -34,16 +35,16 @@ struct KimaiTimesheetsView: View {
         
         
         List {
-            ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ key in
+            ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
                 
                 HStack {
-                    Text(key.formatted(date: .numeric, time: .omitted))
+                    Text(formatDate(date))
                         .foregroundColor(Color.theme)
                     Spacer()
                 }
                 
                 
-                let timesheetEntries = timesheetsByDate[key] ?? []
+                let timesheetEntries = timesheetsByDate[date] ?? []
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
@@ -53,7 +54,7 @@ struct KimaiTimesheetsView: View {
                     )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {
-                            
+                            onDeleteClicked(timesheet)
                         } label: {
                             Text("Delete")
                                 .foregroundColor(.white)
@@ -61,7 +62,7 @@ struct KimaiTimesheetsView: View {
                         .tint(.red)
                         
                         Button(role: .cancel) {
-                            onTimesheetClicked(timesheet.id)
+                            onEditClicked(timesheet.id)
                         } label: {
                             Text("Edit")
                                 .foregroundColor(.white)
@@ -86,4 +87,20 @@ struct KimaiTimesheetsView: View {
         
         return try? Date(dateStr, strategy: strategy)
     }
+    
+    func formatDate(_ date: Date) -> String {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date.now)
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)
+        let entryDay = calendar.startOfDay(for: date)
+        
+        if entryDay == today {
+            return "Heute"
+        } else if entryDay == yesterday {
+            return "Gestern"
+        }else {
+            return date.formatted(date: .numeric, time: .omitted)
+        }
+    }
+    
 }

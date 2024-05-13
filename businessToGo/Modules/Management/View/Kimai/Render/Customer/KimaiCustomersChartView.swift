@@ -32,15 +32,4 @@ struct KimaiCustomersChartView: View {
         
         return customerTimes
     }
-    
-    func getDate(_ dateStr: String) -> Date? {
-        let strategy = Date.ParseStrategy(
-            format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))",
-            timeZone: .current
-        )
-        
-        return try? Date(dateStr, strategy: strategy)
-    }
-    
-    
 }

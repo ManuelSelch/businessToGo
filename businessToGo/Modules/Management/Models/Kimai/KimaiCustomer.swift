@@ -5,14 +5,16 @@ struct KimaiCustomer: TableProtocol {
     var id: Int
     var name: String
     var number: String?
+    var color: String?
 }
 
 extension KimaiCustomer {
     init() {
-        id = 0
+        id = -1
         name = ""
         number = ""
+        color = ""
     }
     
-    static let new = KimaiCustomer(id: -1, name: "", number: "")
+    static let new = KimaiCustomer()
 }

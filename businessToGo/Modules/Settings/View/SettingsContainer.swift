@@ -15,11 +15,6 @@ struct SettingsContainer: View {
             )
                 .navigationDestination(for: SettingsRoute.self){ route in
                     switch(route){
-                    case .kimaiCustomers:
-                        KimaiCustomerSettingsView(
-                            customer: store.state.management.kimai.customers,
-                            onCreate: {}
-                        )
                     case .integrations:
                         IntegrationsView(
                             customers: store.state.management.kimai.customers,
@@ -39,13 +34,6 @@ struct SettingsContainer: View {
                                 store.send(.management(.resetDatabase))
                                 store.dependencies.router.tab = .management
                                 store.dependencies.router.management.routes = []
-                            }
-                        )
-                    case .kimaiProjects:
-                        KimaiProjectSettingsView(
-                            projects: store.state.management.kimai.projects,
-                            onEdit: { project in
-                                projectView = project
                             }
                         )
                     }

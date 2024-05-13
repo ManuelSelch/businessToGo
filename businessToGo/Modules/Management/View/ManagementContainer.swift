@@ -10,16 +10,21 @@ struct ManagementContainer: View {
     var body: some View {
         VStack {
             
-            timesheetPopup()
+            getTimesheetPopup()
             
             NavigationStack(path: $router.routes) {
-                kimai(.customers)
+                getKimai(.customers)
+                    .toolbar { getHeader() }
                     .navigationDestination(for: ManagementRoute.self) { route in
-                        switch route {
-                        case .kimai(let route): kimai(route)
-                        case .taiga(let route): taiga(route)
+                        VStack {
+                            switch route {
+                            case .kimai(let route): getKimai(route)
+                            case .taiga(let route): getTaiga(route)
+                            }
                         }
+                        .toolbar { getHeader() }
                     }
+                
             }
         }
         .sheet(item: $timesheetView) { timesheet in
@@ -35,39 +40,12 @@ struct ManagementContainer: View {
 }
 
 extension ManagementContainer {
-    @ViewBuilder func kimai(_ route: KimaiRoute) -> some View {
+    @ViewBuilder func getKimai(_ route: KimaiRoute) -> some View {
         KimaiContainer(timesheetView: $timesheetView, route: route)
             .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
-            .toolbar {
-                Spacer()
-                
-                Button(action: {
-                    sync()
-                }){
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color.theme)
-                }
-                
-                KimaiHeaderView(
-                    timesheetView: $timesheetView,
-                    route: route,
-                    onChart: {
-                        router.navigate(.kimai(.chart))
-                    },
-                    onProjectClicked: { kimaiProject in
-                        if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
-                        {
-                            router.navigate(.taiga(.project(integration.taigaProjectId)))
-                        }
-                    }
-                )
-                
-                Spacer()
-            }
     }
     
-    @ViewBuilder func taiga(_ route: TaigaScreen) -> some View {
+    @ViewBuilder func getTaiga(_ route: TaigaScreen) -> some View {
         TaigaContainer(route: route)
             .environmentObject(store.lift(\.taiga, ManagementAction.taiga, store.dependencies))
     }
@@ -86,7 +64,7 @@ extension ManagementContainer {
         
     }
     
-    @ViewBuilder func timesheetPopup() -> some View {
+    @ViewBuilder func getTimesheetPopup() -> some View {
         if let timesheet = store.state.kimai.timesheets.first(where: { $0.end == nil }) {
             if
                 let project = store.state.kimai.projects.first(where: { $0.id == timesheet.project }),
@@ -118,13 +96,26 @@ extension ManagementContainer {
             
         }
     }
+    
+    @ViewBuilder func getHeader() -> some View {
+        ManagementHeaderView(
+            timesheetView: $timesheetView,
+            route: router.routes.last,
+            onChart: {
+                router.navigate(.kimai(.chart))
+            },
+            onProjectClicked: { kimaiProject in
+                if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
+                {
+                    router.navigate(.taiga(.project(integration.taigaProjectId)))
+                }
+            },
+            onSync: { store.send(.sync) }
+        )
+    }
 }
 
 extension ManagementContainer {
-    func sync(){
-        store.send(.sync)
-    }
-    
     func saveTimesheet(_ timesheeet: KimaiTimesheet){
         if(timesheeet.id == KimaiTimesheet.new.id){ // create
             store.send(.kimai(.timesheets(.create(timesheeet))))

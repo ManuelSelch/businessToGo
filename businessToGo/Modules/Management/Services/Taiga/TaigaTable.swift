@@ -13,7 +13,7 @@ struct TaigaTable {
 }
 
 extension TaigaTable {
-    init(_ db: IDatabase, _ track: ITrackTable) {
+    init(_ db: IDatabase, _ track: TrackTable) {
         self.db = db
         
         projects = DatabaseTable(db.connection, "taiga_projects")

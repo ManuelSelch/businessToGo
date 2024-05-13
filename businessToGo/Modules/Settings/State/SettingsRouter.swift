@@ -6,9 +6,6 @@ class SettingsRouter: Router {
 }
 
 enum SettingsRoute {
-    case kimaiCustomers
     case integrations
     case debug
-    
-    case kimaiProjects
 }

@@ -15,6 +15,7 @@ enum KimaiRequest {
     case getTimesheets(_ page: Int)
     case insertTimesheet(KimaiTimesheet)
     case updateTimesheet(KimaiTimesheet)
+    case deleteTimesheet(Int)
     
     
 }
@@ -22,7 +23,7 @@ enum KimaiRequest {
 extension KimaiRequest: Moya.TargetType {
     var task: Moya.Task {
         switch self {
-        case .getCustomers, .getProjects, .getActivities:
+        case .getCustomers, .getProjects, .getActivities, .deleteTimesheet(_):
             return .requestPlain
         case .getTimesheets(_):
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
@@ -59,6 +60,8 @@ extension KimaiRequest: Moya.TargetType {
             return "/timesheets"
         case .updateTimesheet(let timesheet):
             return "/timesheets/\(timesheet.id)"
+        case .deleteTimesheet(let id):
+            return "/timesheets/\(id)"
             
         case .getActivities:
             return "/activities"
@@ -73,12 +76,14 @@ extension KimaiRequest: Moya.TargetType {
             return .post
         case .updateTimesheet(_), .updateProject(_), .updateCustomer(_):
             return .patch
+        case .deleteTimesheet(_):
+            return .delete
         }
     }
     
     var parameters: [String: Any] {
         switch self {
-        case .getProjects, .getCustomers, .getActivities:
+        case .getProjects, .getCustomers, .getActivities, .deleteTimesheet(_):
             return [:]
         case .getTimesheets(let page):
             return [
@@ -93,7 +98,6 @@ extension KimaiRequest: Moya.TargetType {
                 "end": timesheet.end as Any,
                 "description": timesheet.description as Any
             ]
-            
         case .insertProject(let project), .updateProject(let project):
             return [
                 "name": project.name,
@@ -105,6 +109,7 @@ extension KimaiRequest: Moya.TargetType {
             return [
                 "name": customer.name,
                 "number": customer.number as Any,
+                "color": customer.color as Any,
                 "country": "DE",
                 "currency": "EUR",
                 "timezone": "Europe/Berlin",
@@ -114,7 +119,8 @@ extension KimaiRequest: Moya.TargetType {
         case .updateCustomer(let customer):
             return [
                 "name": customer.name,
-                "number": customer.number as Any
+                "number": customer.number as Any,
+                "color": customer.color as Any,
             ]
             
         }

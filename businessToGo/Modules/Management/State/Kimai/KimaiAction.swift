@@ -20,4 +20,6 @@ enum RequestAction<Model> {
     case create(Model)
     /// update local record
     case update(Model)
+    /// delete local record
+    case delete(Model)
 }

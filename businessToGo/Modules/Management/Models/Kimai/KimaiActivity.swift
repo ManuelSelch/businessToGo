@@ -12,11 +12,11 @@ struct KimaiActivity: TableProtocol {
 extension KimaiActivity {
     init(){
         id = -1
-        project = 0
+        project = nil
         name = ""
-        visible = false
-        billable = false
-        color = ""
+        visible = true
+        billable = true
+        color = nil
     }
     
     static let new = KimaiActivity()

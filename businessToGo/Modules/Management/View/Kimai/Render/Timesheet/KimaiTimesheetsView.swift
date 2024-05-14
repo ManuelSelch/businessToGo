@@ -20,9 +20,6 @@ struct KimaiTimesheetsView: View {
     
    
     var body: some View {
-        
-       
-        
         let timesheetsByDate = Dictionary(grouping: timesheetsFiltered, by: {
             Calendar.current.date(
                 from: Calendar.current.dateComponents(

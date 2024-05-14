@@ -37,6 +37,13 @@ struct KimaiPlayView: View {
         var t = activities.filter {
             $0.project == selectedProject || $0.project == nil
         }
+        
+        if let project = projects.first(where: { $0.id == selectedProject }) {
+            if(!project.globalActivities){
+                t = t.filter { $0.project == project.id }
+            }
+        }
+        
         t.sort { $0.name < $1.name }
         return t
     }
@@ -146,10 +153,10 @@ struct KimaiPlayView: View {
                 selectedProject = projectsFiltered.first?.id ?? 0
             }
             
-            if let activity = activities.first(where: { $0.id == timesheet.activity }) {
+            if let activity = activitiesFiltered.first(where: { $0.id == timesheet.activity }) {
                 selectedActivity = activity.id
             } else {
-                selectedActivity = activities.first?.id ?? 0
+                selectedActivity = activitiesFiltered.first?.id ?? 0
             }
             
             description = timesheet.description ?? ""

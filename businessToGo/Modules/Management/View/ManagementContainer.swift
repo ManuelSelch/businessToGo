@@ -32,10 +32,6 @@ struct ManagementContainer: View {
                 getTimesheetSheet(timesheet)
             }
         }
-        .onAppear {
-            store.send(.sync)
-        }
-        
     }
 }
 

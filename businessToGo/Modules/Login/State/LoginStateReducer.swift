@@ -3,7 +3,7 @@ import Combine
 import OfflineSync
 
 extension LoginState {
-    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: Environment) -> AnyPublisher<LoginAction, Error>  {
+    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: Environment) -> AnyPublisher<AppAction, Error>  {
         switch(action){
             case .navigate(let scene):
                 state.scene = scene
@@ -33,7 +33,7 @@ extension LoginState {
                     }
                     if(state.current == nil){
                         if let account = try env.keychain.getCurrentAccount(state.accounts) {
-                            return env.just(.login(account))
+                            return env.just(.login(.login(account)))
                         }
                     }
                 } catch {
@@ -44,8 +44,12 @@ extension LoginState {
                 switch(state.scene){
                     case .kimai:
                         return loginKimai(account, env) // -> saveAccount
+                            .map { .login($0) }
+                            .eraseToAnyPublisher()
                     case .taiga:
                         return loginTaiga(account, env) // -> saveAccount
+                            .map { .login($0) }
+                            .eraseToAnyPublisher()
                     case .accounts:
                         state.current = account
                         env.router.tab = .management
@@ -53,7 +57,9 @@ extension LoginState {
                         env.keychain.login(account)
                         return Publishers.Merge(
                             loginKimai(account, env), loginTaiga(account, env)
-                        ).eraseToAnyPublisher()
+                        )
+                        .map { .login($0) }
+                        .eraseToAnyPublisher()
                     
                 default: break
                 }
@@ -66,6 +72,7 @@ extension LoginState {
             case .saveAccount(let account):
                 state.scene = .account(account)
                 try? env.keychain.saveAccount(account)
+                return env.just(.management(.sync))
             
             case .status(let status):
                 state.loginStatus = status
@@ -100,8 +107,6 @@ extension LoginState {
                 }
             }
         }.eraseToAnyPublisher()
-        
-        
     }
     
     static func loginTaiga(_ account: Account, _ env: Environment) -> AnyPublisher<LoginAction, Error> {

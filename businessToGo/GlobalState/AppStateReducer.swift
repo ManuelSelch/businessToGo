@@ -14,8 +14,6 @@ extension AppState {
         
         case .login(let action):
             return LoginState.reduce(&state.login, action, env)
-                .map { .login($0) }
-                .eraseToAnyPublisher()
         
         case .management(let action):
             return ManagementState.reduce(&state.management, action, env.management)

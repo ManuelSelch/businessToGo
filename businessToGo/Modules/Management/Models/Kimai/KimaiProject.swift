@@ -6,8 +6,6 @@ struct KimaiProject: TableProtocol {
     var customer: Int
     var name: String
     var globalActivities: Bool
-    
-    
 }
 
 
@@ -16,7 +14,7 @@ extension KimaiProject {
         id = -1
         customer = 0
         name = ""
-        globalActivities = false
+        globalActivities = true
     }
     
     static let new = KimaiProject()

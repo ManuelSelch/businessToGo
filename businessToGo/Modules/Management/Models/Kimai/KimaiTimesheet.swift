@@ -35,7 +35,7 @@ extension KimaiTimesheet {
         // tags = []
         id = -1
         begin = ""
-        end = ""
+        end = nil
         description = ""
         
         /*

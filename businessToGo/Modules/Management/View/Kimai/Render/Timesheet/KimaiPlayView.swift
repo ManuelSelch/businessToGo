@@ -146,7 +146,12 @@ struct KimaiPlayView: View {
                 selectedProject = projectsFiltered.first?.id ?? 0
             }
             
-            selectedActivity = timesheet.activity
+            if let activity = activities.first(where: { $0.id == timesheet.activity }) {
+                selectedActivity = activity.id
+            } else {
+                selectedActivity = activities.first?.id ?? 0
+            }
+            
             description = timesheet.description ?? ""
             startTime = getDate(timesheet.begin) ?? Date.now
             endTime = getDate(timesheet.end ?? "") ?? Date.now

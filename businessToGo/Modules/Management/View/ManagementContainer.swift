@@ -47,7 +47,7 @@ extension ManagementContainer {
     }
     
     @ViewBuilder func getTimesheetSheet(_ timesheet: KimaiTimesheet) -> some View {
-        KimaiPlayView(
+        KimaiTimesheetSheet(
             timesheet: timesheet,
             customers: store.state.kimai.customers,
             projects: store.state.kimai.projects,

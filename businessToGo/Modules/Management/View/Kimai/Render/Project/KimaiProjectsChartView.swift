@@ -21,11 +21,11 @@ struct KimaiProjectsChartView: View {
         
         List {
             ForEach(projectsFiltered) { project in
-                Button(action: {
-                    projectClicked(project.id)
-                }){
-                    Text(project.name)
-                }
+                KimaiProjectCard(
+                    kimaiProject: project,
+                    change: nil,
+                    onOpenProject: projectClicked
+                )
                 .swipeActions(edge: .trailing) {
                     Button(role: .cancel) {
                         onEdit(project)

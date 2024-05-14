@@ -29,7 +29,7 @@
 		8424BB762BCAC17C00929F13 /* Integration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB752BCAC17C00929F13 /* Integration.swift */; };
 		8424BB7D2BCAC8AE00929F13 /* IIntegrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB7C2BCAC8AE00929F13 /* IIntegrationService.swift */; };
 		8424BB7F2BCAC98400929F13 /* IntegrationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB7E2BCAC98300929F13 /* IntegrationServiceMock.swift */; };
-		8424BB8F2BCBB15300929F13 /* KimaiPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB8E2BCBB15300929F13 /* KimaiPlayView.swift */; };
+		8424BB8F2BCBB15300929F13 /* KimaiTimesheetSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB8E2BCBB15300929F13 /* KimaiTimesheetSheet.swift */; };
 		8424BB912BCBB9AB00929F13 /* KimaiTimesheetsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB902BCBB9AB00929F13 /* KimaiTimesheetsChartView.swift */; };
 		84266D222BD678400020B386 /* KimaiReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84266D212BD678400020B386 /* KimaiReducerTests.swift */; };
 		84266D242BD683AA0020B386 /* RequestReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84266D232BD683AA0020B386 /* RequestReducer.swift */; };
@@ -148,7 +148,7 @@
 		8424BB752BCAC17C00929F13 /* Integration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integration.swift; sourceTree = "<group>"; };
 		8424BB7C2BCAC8AE00929F13 /* IIntegrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IIntegrationService.swift; sourceTree = "<group>"; };
 		8424BB7E2BCAC98300929F13 /* IntegrationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationServiceMock.swift; sourceTree = "<group>"; };
-		8424BB8E2BCBB15300929F13 /* KimaiPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiPlayView.swift; sourceTree = "<group>"; };
+		8424BB8E2BCBB15300929F13 /* KimaiTimesheetSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTimesheetSheet.swift; sourceTree = "<group>"; };
 		8424BB902BCBB9AB00929F13 /* KimaiTimesheetsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTimesheetsChartView.swift; sourceTree = "<group>"; };
 		84266D212BD678400020B386 /* KimaiReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiReducerTests.swift; sourceTree = "<group>"; };
 		84266D232BD683AA0020B386 /* RequestReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReducer.swift; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 				84266D2B2BD6AD760020B386 /* KimaiTimesheetCard.swift */,
 				849BF1632BF12333008F8B6A /* KimaiTimesheetPopup.swift */,
 				8422903F2BCD518A001C884B /* KimaiTimesheetsView.swift */,
-				8424BB8E2BCBB15300929F13 /* KimaiPlayView.swift */,
+				8424BB8E2BCBB15300929F13 /* KimaiTimesheetSheet.swift */,
 			);
 			path = Timesheet;
 			sourceTree = "<group>";
@@ -884,7 +884,7 @@
 				8464257D2BCE410700BDD86E /* ManagementHeaderView.swift in Sources */,
 				841C30162BF25221007367A8 /* CustomColorPicker.swift in Sources */,
 				84CFD5AC2BD7D94F00691400 /* IntegrationCard.swift in Sources */,
-				8424BB8F2BCBB15300929F13 /* KimaiPlayView.swift in Sources */,
+				8424BB8F2BCBB15300929F13 /* KimaiTimesheetSheet.swift in Sources */,
 				84FC583C2BC944DF00594E14 /* TaigaMilestone.swift in Sources */,
 				841D9E832BC9E503002990C7 /* KimaiProject.swift in Sources */,
 				84458ADB2BC415880041E40F /* KimaiRequest.swift in Sources */,

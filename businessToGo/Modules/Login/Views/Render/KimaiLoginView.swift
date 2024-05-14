@@ -82,9 +82,9 @@ struct KimaiLoginView: View {
         }
         .padding()
         .onAppear {
-            self.username = account.taiga?.username ?? ""
-            self.password = account.taiga?.password ?? ""
-            self.server = account.taiga?.server ?? ""
+            self.username = account.kimai?.username ?? ""
+            self.password = account.kimai?.password ?? ""
+            self.server = account.kimai?.server ?? ""
         }
     }
 }

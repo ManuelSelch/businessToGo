@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct KimaiPlayView: View {
+struct KimaiTimesheetSheet: View {
     var timesheet: KimaiTimesheet
     var customers: [KimaiCustomer]
     var projects: [KimaiProject]

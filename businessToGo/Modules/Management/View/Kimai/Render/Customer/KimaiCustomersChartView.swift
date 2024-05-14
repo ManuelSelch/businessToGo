@@ -12,6 +12,8 @@ struct KimaiCustomersChartView: View {
         let customerTimes = calculateCustomersTimes()
         ChartView(customerTimes, customerClicked)
             .background(Color.background)
+        
+        ChartListView(customerTimes, customerClicked)
     }
     
     func calculateCustomersTimes() -> [ChartItem] {

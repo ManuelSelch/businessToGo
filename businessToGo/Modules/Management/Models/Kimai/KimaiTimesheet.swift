@@ -4,24 +4,17 @@ import OfflineSync
 struct KimaiTimesheet: TableProtocol {
     var activity: Int
     var project: Int
-    // var user: Int
-    // var tags: [String]
+    var user: Int
+    var tags: [String]
     var id: Int
     var begin: String
     var end: String?
-    // var duration: Int
     
     var description: String?
-    /*
+
     var rate: Double
     var exported: Bool
     var billable: Bool
-    */
-    
-    // var metaFields: [String : String]
-    
-    
-    
 }
 
 extension KimaiTimesheet {
@@ -31,21 +24,15 @@ extension KimaiTimesheet {
     init(){
         activity = 0
         project = 0
-        // user = 0
-        // tags = []
+        user = 0
+        tags = []
         id = -1
         begin = ""
         end = nil
         description = ""
-        
-        /*
-        duration = 0
-        description = ""
         rate = 0
         exported = false
-        billable = false
-        */
-        // metaFields = [:]
+        billable = true
     }
     
     

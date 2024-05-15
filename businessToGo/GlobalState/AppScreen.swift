@@ -52,7 +52,8 @@ extension AppScreen {
             )
         case .kimaiSettings:
             AnyView(
-                SettingsContainer()
+                ReportView()
+                // SettingsContainer()
                     .environmentObject(router.settings)
             )
         }

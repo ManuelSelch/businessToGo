@@ -3,11 +3,13 @@ import SwiftUI
 struct KimaiProjectSheet: View {
     var project: KimaiProject
     var customers: [KimaiCustomer]
+    var onSave: (KimaiProject) -> ()
     
     @State var name = ""
     @State var selectedCustomer: Int = 0
+    @State var color: String?
     
-    var onSave: (KimaiProject) -> ()
+    
     
     var body: some View {
         NavigationStack {
@@ -23,6 +25,12 @@ struct KimaiProjectSheet: View {
                 }
                 .pickerStyle(.menu)
                 
+                HStack {
+                    Text("Farbe: ")
+                    Spacer()
+                    CustomColorPicker(selectedColor: $color)
+                }
+                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
@@ -30,6 +38,7 @@ struct KimaiProjectSheet: View {
                         var project = project
                         project.name = name
                         project.customer = selectedCustomer
+                        project.color = color
                         onSave(project)
                     }){
                         let isCreate = project.id == KimaiProject.new.id
@@ -42,6 +51,7 @@ struct KimaiProjectSheet: View {
         .onAppear {
             name = project.name
             selectedCustomer = customers.first { $0.id == project.customer }?.id ?? 0
+            color = project.color
         }
     }
 }

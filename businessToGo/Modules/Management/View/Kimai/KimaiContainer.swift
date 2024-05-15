@@ -6,6 +6,7 @@ struct KimaiContainer: View {
     @EnvironmentObject var router: ManagementRouter
     @EnvironmentObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
     
+    @Binding var selectedTeam: Int
     @Binding var timesheetView: KimaiTimesheet?
     
     @State var customerView: KimaiCustomer?
@@ -32,6 +33,7 @@ struct KimaiContainer: View {
         .sheet(item: $customerView){ customer in
             KimaiCustomerSheet(
                 customer: customer,
+                teams: store.state.teams,
                 onSave: { customer in
                     let isCreate = (customer.id == KimaiCustomer.new.id)
                     if(isCreate){
@@ -65,7 +67,13 @@ struct KimaiContainer: View {
 extension KimaiContainer {
     @ViewBuilder func getCustomersView() -> some View {
         KimaiCustomersView(
-            customers: store.state.customers,
+            customers: store.state.customers.filter { 
+                if selectedTeam == -1 {
+                    return true
+                } else {
+                    return $0.teams.contains(selectedTeam)
+                }
+            },
             changes: store.state.customerTracks,
             onCustomerSelected: { customer in
                 router.navigate(.kimai(.customer(customer)))
@@ -92,6 +100,7 @@ extension KimaiContainer {
         KimaiProjectsChartView(
             projects: store.state.projects.filter { $0.customer == customer },
             timesheets: store.state.timesheets,
+            changes: store.state.projectTracks,
             projectClicked: { project in
                 router.navigate(.kimai(.project(project)))
             },

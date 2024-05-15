@@ -29,7 +29,7 @@ struct KimaiCustomerCard: View {
 }
 
 #Preview {
-    let customer = KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500")
+    let customer = KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500", teams: [])
     return KimaiCustomerCard(
         customer: customer,
         onCustomerSelected: { _ in}

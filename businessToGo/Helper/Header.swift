@@ -8,10 +8,18 @@ struct Header: View {
         ZStack {
             HStack {
                 Spacer()
-                Text(router.tab.title)
-                    .foregroundColor(Color.white)
+                switch(router.tab){
+                case .login:
+                    Text(router.tab.title)
+                case .management:
+                    Text(router.management.title)
+                case .kimaiSettings:
+                    Text(router.settings.title)
+                }
+               
                 Spacer()
             }
+            .foregroundStyle(Color.white)
                 
             HStack {
                 Spacer()

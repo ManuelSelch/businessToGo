@@ -2,7 +2,12 @@ import SwiftUI
 
 struct KimaiCustomerSheet: View {
     var customer: KimaiCustomer
+    var teams: [KimaiTeam]
     var onSave: (KimaiCustomer) -> ()
+    
+    var selectedTeams: [KimaiTeam] {
+        return teams.filter { customer.teams.contains($0.id) }
+    }
     
     @State var name = ""
     @State var color: String?
@@ -23,6 +28,23 @@ struct KimaiCustomerSheet: View {
                     Spacer()
                     CustomColorPicker(selectedColor: $color)
                 }
+                
+                
+                HStack {
+                    Text("Teams: ")
+                    Spacer()
+                    
+                    ForEach(selectedTeams, id: \.id) { team in
+                        Button(action: {}) {
+                            Text(team.name)
+                                .foregroundColor(.gray)
+                        }
+                        .buttonStyle(.bordered)
+                        .disabled(true)
+                    }
+                }
+                .padding(.horizontal)
+                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
@@ -46,13 +68,4 @@ struct KimaiCustomerSheet: View {
         }
         
     }
-}
-
-
-#Preview {
-    let customer = KimaiCustomer.new
-    return KimaiCustomerSheet(
-        customer: customer,
-        onSave: {_ in return}
-    )
 }

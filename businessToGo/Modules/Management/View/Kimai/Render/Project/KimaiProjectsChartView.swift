@@ -1,9 +1,11 @@
 import SwiftUI
 import MyChart
+import OfflineSync
 
 struct KimaiProjectsChartView: View {
     let projects: [KimaiProject]
     let timesheets: [KimaiTimesheet]
+    let changes: [DatabaseChange]
     
     var projectClicked: (_ id: Int) -> ()
     var onEdit: (KimaiProject) -> ()
@@ -23,7 +25,7 @@ struct KimaiProjectsChartView: View {
             ForEach(projectsFiltered) { project in
                 KimaiProjectCard(
                     kimaiProject: project,
-                    change: nil,
+                    change: changes.first { $0.recordID == project.id },
                     onOpenProject: projectClicked
                 )
                 .swipeActions(edge: .trailing) {

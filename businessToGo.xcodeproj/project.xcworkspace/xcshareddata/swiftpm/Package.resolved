@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "log",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Log.git",
-      "state" : {
-        "revision" : "74eeda085ac5fa40814aa79ff3ce3590c1644d7d",
-        "version" : "1.0.7"
-      }
-    },
-    {
       "identity" : "login",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Login.git",
@@ -43,15 +34,6 @@
       "state" : {
         "revision" : "c263811c1f3dbf002be9bd83107f7cdc38992b26",
         "version" : "15.0.3"
-      }
-    },
-    {
-      "identity" : "offlinesync",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/OfflineSync.git",
-      "state" : {
-        "revision" : "53394adceb11f8d3e65d717f684192e76218c1cd",
-        "version" : "1.1.8"
       }
     },
     {
@@ -77,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Redux.git",
       "state" : {
-        "revision" : "81ff97ce98959a704b0bc0182c465583747bd346",
-        "version" : "1.0.8"
+        "revision" : "d2e47c020a1d25970ec06d1135004729c5644dde",
+        "version" : "1.0.9"
       }
     },
     {

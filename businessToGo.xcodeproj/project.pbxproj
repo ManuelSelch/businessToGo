@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,9 +63,7 @@
 		8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */; };
 		8467DECF2BDED6600077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DECE2BDED6600077E331 /* Redux */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
-		8467DED52BDEE2130077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED42BDEE2130077E331 /* Log */; };
 		8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED72BDEECFC0077E331 /* OfflineSync */; };
-		8467DEDB2BDEF0DC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEDA2BDEF0DC0077E331 /* OfflineSync */; };
 		847334AC2BDCF02400129D26 /* ManagementDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334AB2BDCF02400129D26 /* ManagementDependency.swift */; };
 		847334B62BDCF50C00129D26 /* ManagementState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B52BDCF50C00129D26 /* ManagementState.swift */; };
 		847334B82BDCF6F700129D26 /* ManagementContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B72BDCF6F700129D26 /* ManagementContainer.swift */; };
@@ -93,11 +91,15 @@
 		84C5A2A82BC40EEE00C25A0C /* KimaiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2A72BC40EEE00C25A0C /* KimaiServiceTests.swift */; };
 		84C5A2B22BC40EEE00C25A0C /* businessToGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B12BC40EEE00C25A0C /* businessToGoUITests.swift */; };
 		84C5A2B42BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */; };
+		84CD11F72BF410E8006AE4C7 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F62BF410E8006AE4C7 /* Log */; };
+		84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F92BF41393006AE4C7 /* OfflineSync */; };
+		84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11FC2BF413D6006AE4C7 /* OfflineSync */; };
 		84CF31432BDF68A60064BDD1 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF31422BDF68A60064BDD1 /* UIImage.swift */; };
 		84CFD5AA2BD7D93200691400 /* IntegrationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5A92BD7D93200691400 /* IntegrationsView.swift */; };
 		84CFD5AC2BD7D94F00691400 /* IntegrationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5AB2BD7D94F00691400 /* IntegrationCard.swift */; };
 		84CFD5B22BD7F7D100691400 /* TaigaStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5B12BD7F7D100691400 /* TaigaStateReducer.swift */; };
 		84D96FD92BC511DD00114438 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D96FD82BC511DD00114438 /* DatabaseError.swift */; };
+		84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84E6DCA52BF400A00051E148 /* OfflineSync */; };
 		84FC58382BC9448C00594E14 /* TaigaBacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58372BC9448C00594E14 /* TaigaBacklogView.swift */; };
 		84FC583C2BC944DF00594E14 /* TaigaMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583B2BC944DF00594E14 /* TaigaMilestone.swift */; };
 		84FC583E2BC944F200594E14 /* TaigaTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583D2BC944F200594E14 /* TaigaTask.swift */; };
@@ -228,12 +230,14 @@
 				849BF1622BF0C99B008F8B6A /* MyChart in Frameworks */,
 				8467DECF2BDED6600077E331 /* Redux in Frameworks */,
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
-				8467DEDB2BDEF0DC0077E331 /* OfflineSync in Frameworks */,
-				8467DED52BDEE2130077E331 /* Log in Frameworks */,
 				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
+				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
 				8467DEB92BDEA8690077E331 /* Redux in Frameworks */,
 				849BF1492BEE6A3B008F8B6A /* Login in Frameworks */,
+				84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */,
 				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
+				84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */,
+				84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,11 +740,13 @@
 				8467DEC12BDECA300077E331 /* SQLite */,
 				8467DECE2BDED6600077E331 /* Redux */,
 				8467DED12BDEDC4B0077E331 /* Log */,
-				8467DED42BDEE2130077E331 /* Log */,
 				8467DED72BDEECFC0077E331 /* OfflineSync */,
-				8467DEDA2BDEF0DC0077E331 /* OfflineSync */,
 				849BF1482BEE6A3B008F8B6A /* Login */,
 				849BF1612BF0C99B008F8B6A /* MyChart */,
+				84E6DCA52BF400A00051E148 /* OfflineSync */,
+				84CD11F62BF410E8006AE4C7 /* Log */,
+				84CD11F92BF41393006AE4C7 /* OfflineSync */,
+				84CD11FC2BF413D6006AE4C7 /* OfflineSync */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -824,10 +830,10 @@
 				8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				8467DECD2BDED6600077E331 /* XCRemoteSwiftPackageReference "Redux" */,
-				8467DED32BDEE2130077E331 /* XCRemoteSwiftPackageReference "Log" */,
-				8467DED92BDEF0DC0077E331 /* XCRemoteSwiftPackageReference "OfflineSync" */,
 				849BF1472BEE6A3B008F8B6A /* XCRemoteSwiftPackageReference "Login" */,
 				849BF15E2BF0C782008F8B6A /* XCRemoteSwiftPackageReference "Chart" */,
+				84CD11F52BF410E8006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */,
+				84CD11FB2BF413D6006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1322,6 +1328,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		84CD11F52BF410E8006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/Log;
+		};
+		84CD11FB2BF413D6006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/OfflineSync;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1352,23 +1369,7 @@
 			repositoryURL = "https://github.com/ManuelSelch/Redux.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.8;
-			};
-		};
-		8467DED32BDEE2130077E331 /* XCRemoteSwiftPackageReference "Log" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/Log.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.7;
-			};
-		};
-		8467DED92BDEF0DC0077E331 /* XCRemoteSwiftPackageReference "OfflineSync" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/OfflineSync.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.8;
+				minimumVersion = 1.0.9;
 			};
 		};
 		849BF1472BEE6A3B008F8B6A /* XCRemoteSwiftPackageReference "Login" */ = {
@@ -1418,18 +1419,8 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Log;
 		};
-		8467DED42BDEE2130077E331 /* Log */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8467DED32BDEE2130077E331 /* XCRemoteSwiftPackageReference "Log" */;
-			productName = Log;
-		};
 		8467DED72BDEECFC0077E331 /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
-		8467DEDA2BDEF0DC0077E331 /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8467DED92BDEF0DC0077E331 /* XCRemoteSwiftPackageReference "OfflineSync" */;
 			productName = OfflineSync;
 		};
 		8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */ = {
@@ -1445,6 +1436,22 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 849BF15E2BF0C782008F8B6A /* XCRemoteSwiftPackageReference "Chart" */;
 			productName = MyChart;
+		};
+		84CD11F62BF410E8006AE4C7 /* Log */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Log;
+		};
+		84CD11F92BF41393006AE4C7 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
+		};
+		84CD11FC2BF413D6006AE4C7 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
+		};
+		84E6DCA52BF400A00051E148 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

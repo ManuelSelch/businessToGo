@@ -57,8 +57,8 @@ struct KimaiCustomersView: View {
 
 #Preview {
     let customers = [
-        KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500"),
-        KimaiCustomer(id: 1, name: "Customer 2", color: "008080")
+        KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500", teams: []),
+        KimaiCustomer(id: 1, name: "Customer 2", color: "008080", teams: [])
     ]
     return KimaiCustomersView(
         customers: customers,

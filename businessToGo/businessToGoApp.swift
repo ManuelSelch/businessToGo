@@ -14,7 +14,7 @@ struct businessToGoApp: App {
 }
 
 struct BusinessToGoView: View {
-    let store = Store(
+    @StateObject var store = Store(
         initialState: AppState(),
         reducer: AppState.reduce,
         dependencies: Environment(),

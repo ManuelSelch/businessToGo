@@ -6,6 +6,7 @@ struct ManagementContainer: View {
     @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
     
     @State var timesheetView: KimaiTimesheet?
+    @State var selectedTeam: Int = -1
     
     var body: some View {
         VStack {
@@ -14,7 +15,7 @@ struct ManagementContainer: View {
             
             NavigationStack(path: $router.routes) {
                 getKimai(.customers)
-                    .toolbar { getHeader() }
+                    .toolbar { ToolbarItem(placement: .topBarTrailing) { getHeader() } }
                     .navigationDestination(for: ManagementRoute.self) { route in
                         VStack {
                             switch route {
@@ -22,7 +23,7 @@ struct ManagementContainer: View {
                             case .taiga(let route): getTaiga(route)
                             }
                         }
-                        .toolbar { getHeader() }
+                        .toolbar { ToolbarItem(placement: .topBarTrailing) { getHeader() } }
                     }
                 
             }
@@ -37,7 +38,7 @@ struct ManagementContainer: View {
 
 extension ManagementContainer {
     @ViewBuilder func getKimai(_ route: KimaiRoute) -> some View {
-        KimaiContainer(timesheetView: $timesheetView, route: route)
+        KimaiContainer(selectedTeam: $selectedTeam, timesheetView: $timesheetView, route: route)
             .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
     }
     
@@ -96,8 +97,10 @@ extension ManagementContainer {
     @ViewBuilder func getHeader() -> some View {
         ManagementHeaderView(
             timesheetView: $timesheetView,
-            route: router.routes.last, 
+            selectedTeam: $selectedTeam,
+            route: router.routes.last,
             projects: store.state.kimai.projects,
+            teams: store.state.kimai.teams,
             onChart: {
                 router.navigate(.kimai(.chart))
             },

@@ -14,6 +14,7 @@ class KimaiService {
     var projects: RequestService<KimaiProject, KimaiRequest>
     var timesheets: RequestService<KimaiTimesheet, KimaiRequest>
     var activities: RequestService<KimaiActivity, KimaiRequest>
+    var teams: RequestService<KimaiTeam, KimaiRequest>
     
     init(_ db: IDatabase, _ track: TrackTable) {
         self.db = db
@@ -38,6 +39,10 @@ class KimaiService {
         activities = RequestService<KimaiActivity, KimaiRequest>(
             tables.activities, provider, .simple(.getActivities)
         )
+        
+        teams = RequestService<KimaiTeam, KimaiRequest>(
+            tables.teams, provider, .simple(.getTeams)
+        )
     }
     
     func initRequests(){
@@ -58,6 +63,10 @@ class KimaiService {
         
         activities = RequestService<KimaiActivity, KimaiRequest>(
             tables.activities, provider, .simple(.getActivities)
+        )
+        
+        teams = RequestService<KimaiTeam, KimaiRequest>(
+            tables.teams, provider, .simple(.getTeams)
         )
     }
     

@@ -34,9 +34,7 @@ struct KimaiTimesheetSheet: View {
     }
     
     var activitiesFiltered: [KimaiActivity] {
-        var t = activities.filter {
-            $0.project == selectedProject || $0.project == nil
-        }
+        var t = activities
         
         if let project = projects.first(where: { $0.id == selectedProject }) {
             if(!project.globalActivities){
@@ -142,8 +140,10 @@ struct KimaiTimesheetSheet: View {
         }
         
         .onAppear {
-            let project = projects.first { $0.id == timesheet.project }
-            if let customer = customers.first(where: { $0.id ==  project?.customer }) {
+            
+            if  let project = projects.first(where: { $0.id == timesheet.project }),
+                let customer = customers.first(where: { $0.id ==  project.customer })
+            {
                 // use stored data
                 selectedCustomer = customer.id
                 selectedProject = timesheet.project

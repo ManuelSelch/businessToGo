@@ -8,6 +8,7 @@ enum KimaiAction {
     case projects(RequestAction<KimaiProject>)
     case timesheets(RequestAction<KimaiTimesheet>)
     case activities(RequestAction<KimaiActivity>)
+    case teams(RequestAction<KimaiTeam>)
 }
 
 enum RequestAction<Model> {

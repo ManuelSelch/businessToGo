@@ -9,6 +9,7 @@ struct KimaiTable {
     var projects: DatabaseTable<KimaiProject>
     var timesheets: DatabaseTable<KimaiTimesheet>
     var activities: DatabaseTable<KimaiActivity>
+    var teams: DatabaseTable<KimaiTeam>
     
     private var track: TrackTable
 }
@@ -22,5 +23,6 @@ extension KimaiTable {
         projects = DatabaseTable(db.connection, "kimai_projects", track)
         timesheets = DatabaseTable(db.connection, "kimai_timesheets", track)
         activities = DatabaseTable(db.connection, "kimai_activities", track)
+        teams = DatabaseTable(db.connection, "kimai_teams", track)
     }
 }

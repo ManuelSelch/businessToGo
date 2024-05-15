@@ -10,12 +10,14 @@ extension KimaiState {
                 state.projects = env.kimai.projects.get()
                 state.timesheets = env.kimai.timesheets.get()
                 state.activities = env.kimai.activities.get()
+                state.teams = env.kimai.teams.get()
             
                 return Publishers.MergeMany([
                     env.just(.customers(.sync)),
                     env.just(.projects(.sync)),
                     env.just(.timesheets(.sync)),
-                    env.just(.activities(.sync))
+                    env.just(.activities(.sync)),
+                    env.just(.teams(.sync))
                 ]).eraseToAnyPublisher()
             
             case .customers(let action):
@@ -61,6 +63,17 @@ extension KimaiState {
                 )
                 .map { .activities($0) }
                 .eraseToAnyPublisher()
+            
+        case .teams(let action):
+            return RequestReducer.reduce(
+                action,
+                env.kimai.teams,
+                env.track,
+                &state.teams,
+                &state.teamTracks
+            )
+            .map { .teams($0) }
+            .eraseToAnyPublisher()
 
         }
     }

@@ -2,24 +2,38 @@ import SwiftUI
 
 struct ManagementHeaderView: View {
     @Binding var timesheetView: KimaiTimesheet?
+    @Binding var selectedTeam: Int
+
+    
     let route: ManagementRoute?
     
-    var projectId: Int? {
-        switch(route){
-        case .kimai(.project(let id)): return id
-            default: return nil
-        }
-    }
-    
     var projects: [KimaiProject]
+    var teams: [KimaiTeam]
     
     let onChart: () -> Void
     let onProjectClicked: (Int) -> Void
     let onSync: () -> ()
+
     
     var body: some View {
         HStack {
-            Spacer()
+            
+            if(route == nil) {
+                
+                Picker("", selection: $selectedTeam) {
+                    Text("Alle Teams")
+                        .tag(-1)
+                    ForEach(teams, id: \.id) { team in
+                        Text(team.name)
+                            .tag(team.id)
+                    }
+                }
+                .pickerStyle(.menu)
+                .frame(width: 200)
+                .clipped()
+                
+            }
+            
             
             Button(action: {
                 onSync()
@@ -39,7 +53,8 @@ struct ManagementHeaderView: View {
                 }
             }
             
-            if let id = projectId {
+            switch(route){
+            case .kimai(.project(let id)):
                 Button(action: {
                     onProjectClicked(id)
                 }){
@@ -47,8 +62,9 @@ struct ManagementHeaderView: View {
                         .font(.system(size: 15))
                         .foregroundColor(Color.theme)
                 }
+            default: EmptyView()
             }
-            
+        
             
             Button(action: {
                 switch(route){

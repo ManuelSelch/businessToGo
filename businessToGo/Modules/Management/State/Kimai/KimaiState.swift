@@ -13,11 +13,13 @@ struct KimaiState: Equatable {
     var projects: [KimaiProject]
     var timesheets: [KimaiTimesheet]
     var activities: [KimaiActivity]
+    var teams: [KimaiTeam]
     
     var customerTracks: [DatabaseChange]
     var projectTracks: [DatabaseChange]
     var timesheetTracks: [DatabaseChange]
     var activityTracks: [DatabaseChange]
+    var teamTracks: [DatabaseChange]
 }
 
 extension KimaiState {
@@ -26,11 +28,13 @@ extension KimaiState {
         projects = []
         timesheets = []
         activities = []
+        teams = []
         
         customerTracks = []
         projectTracks = []
         timesheetTracks = []
         activityTracks = []
+        teamTracks = []
     }
 }
 

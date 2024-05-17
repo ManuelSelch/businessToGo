@@ -78,7 +78,8 @@ extension TaigaState {
         
             
         case .setImage(let id, let img):
-            state.projectImages[id] = img
+            // state.projectImages[id] = img
+            break // todo: add projectImage
 
             
             

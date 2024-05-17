@@ -137,16 +137,16 @@ struct KimaiTimesheetSheet: View {
         
         .onChange(of: selectedCustomer){
             selectedProject = projectsFiltered.first?.id ?? 0
-        }
+        } 
         
         .onAppear {
             
             if  let project = projects.first(where: { $0.id == timesheet.project }),
-                let customer = customers.first(where: { $0.id ==  project.customer })
+                let customer = customers.first(where: { $0.id == project.customer })
             {
                 // use stored data
                 selectedCustomer = customer.id
-                selectedProject = timesheet.project
+                selectedProject = project.id
             } else {
                 // fallback to default data
                 selectedCustomer = customers.first?.id ?? 0

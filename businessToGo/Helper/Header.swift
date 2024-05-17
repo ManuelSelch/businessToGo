@@ -9,12 +9,12 @@ struct Header: View {
             HStack {
                 Spacer()
                 switch(router.tab){
-                case .login:
-                    Text(router.tab.title)
                 case .management:
                     Text(router.management.title)
                 case .kimaiSettings:
                     Text(router.settings.title)
+                default:
+                    Text(router.tab.title)
                 }
                
                 Spacer()

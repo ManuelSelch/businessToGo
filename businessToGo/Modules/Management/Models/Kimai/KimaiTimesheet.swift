@@ -62,6 +62,12 @@ extension KimaiTimesheet {
         let timeEntryDuration = endDate.timeIntervalSince(beginDate)
         return timeEntryDuration
     }
+    
+    func getDuration() -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        return formatter.string(from: calculateDuration() ?? 0) ?? "--"
+    }
 }
 
 

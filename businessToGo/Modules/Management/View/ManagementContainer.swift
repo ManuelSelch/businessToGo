@@ -38,7 +38,17 @@ struct ManagementContainer: View {
 
 extension ManagementContainer {
     @ViewBuilder func getKimai(_ route: KimaiRoute) -> some View {
-        KimaiContainer(selectedTeam: $selectedTeam, timesheetView: $timesheetView, route: route)
+        KimaiContainer(
+            selectedTeam: $selectedTeam,
+            timesheetView: $timesheetView,
+            route: route,
+            onProjectClicked: { kimaiProject in
+                if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
+                {
+                    router.navigate(.taiga(.project(integration)))
+                }
+            }
+        )
             .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
     }
     
@@ -73,16 +83,16 @@ extension ManagementContainer {
                     customer: customer,
                     project: project,
                     activity: activity,
-                    onStop: {
-                        var timesheet = timesheet
-                        timesheet.end = "\(Date.now)"
-                        store.send(.kimai(.timesheets(.update(timesheet))))
-                    },
                     onShow: {
                         let route = ManagementRoute.kimai(.project(project.id))
                         if(router.routes.last != route){
                             router.navigate(route)
                         }
+                    },
+                    onStop: {
+                        var timesheet = timesheet
+                        timesheet.end = "\(Date.now)"
+                        store.send(.kimai(.timesheets(.update(timesheet))))
                     }
                 )
             } else {
@@ -101,15 +111,6 @@ extension ManagementContainer {
             route: router.routes.last,
             projects: store.state.kimai.projects,
             teams: store.state.kimai.teams,
-            onChart: {
-                router.navigate(.kimai(.chart))
-            },
-            onProjectClicked: { kimaiProject in
-                if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
-                {
-                    router.navigate(.taiga(.project(integration.taigaProjectId)))
-                }
-            },
             onSync: { store.send(.sync) }
         )
     }

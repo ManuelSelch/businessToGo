@@ -14,17 +14,16 @@ struct KimaiContainer: View {
     
     var route: KimaiRoute
     
+    var onProjectClicked: (_ kimaiProject: Int) -> ()
+    
     var body: some View {
         VStack {
             switch route {
             case .customers:
                 getCustomersView()
                 
-            case .chart:
-                getCustomersChartView()
-                
             case .customer(let id):
-                getProjectsChartView(id) 
+                getProjectsView(id)
                 
             case .project(let id):
                 getTimesheetsView(id)
@@ -84,26 +83,13 @@ extension KimaiContainer {
         )
     }
     
-    @ViewBuilder func getCustomersChartView() -> some View {
-        KimaiCustomersChartView(
-            customers: store.state.customers,
-            projects: store.state.projects,
-            timesheets: store.state.timesheets,
-            
-            customerClicked: { customer in
-                router.navigate(.kimai(.customer(customer)))
-            }
-        )
-    }
-    
-    @ViewBuilder func getProjectsChartView(_ customer: Int) -> some View {
-        KimaiProjectsChartView(
+    @ViewBuilder func getProjectsView(_ customer: Int) -> some View {
+        KimaiProjectsView(
+            customer: customer,
             projects: store.state.projects.filter { $0.customer == customer },
             timesheets: store.state.timesheets,
             changes: store.state.projectTracks,
-            projectClicked: { project in
-                router.navigate(.kimai(.project(project)))
-            },
+            projectClicked: onProjectClicked,
             onEdit: { project in
                 projectView = project
             }

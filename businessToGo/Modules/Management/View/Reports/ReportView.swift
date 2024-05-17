@@ -2,9 +2,9 @@
 import SwiftUI
 import Charts
 
-struct ToyShape: Identifiable {
-    var type: String
-    var count: Double
+struct WeekDay: Identifiable {
+    var name: String
+    var number: Int
     var id = UUID()
 }
 
@@ -64,12 +64,28 @@ struct HeaderView: View {
 }
 
 struct WeekPicker: View {
+    @State var selectedIndex = 0
+    let firstDay: Int // first day of week
+    let lastDay: Int // last day of month
+    
+    init() {
+        let start = Calendar.weekStart(for: Date.now) ?? Date.now
+        let calendarDateStart = Calendar.current.dateComponents([.day, .year, .month], from: start)
+        firstDay = calendarDateStart.day ?? 1
+        
+        let end = Date().endOfMonth()
+        let calendarDateEnd = Calendar.current.dateComponents([.day, .year, .month], from: end)
+        lastDay = calendarDateEnd.day ?? 1
+        
+        selectedIndex = firstDay
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ScrollView(.horizontal) {
                 LazyHStack {
-                    ForEach(0..<10) { i in
-                        WeekView()
+                    ForEach(0..<3) { i in
+                        WeekView(selectedIndex: $selectedIndex, firstDay: firstDay + i*7)
                             .frame(width: geo.size.width, height: 100)
                     }
                 }
@@ -83,35 +99,54 @@ struct WeekPicker: View {
 }
 
 struct WeekView: View {
+    @Binding var selectedIndex: Int
+    let firstDay: Int
+    
+    var data: [WeekDay] {
+        [
+            WeekDay(name: "Mo", number: firstDay),
+            WeekDay(name: "Di", number: firstDay+1),
+            WeekDay(name: "Mi", number: firstDay+2),
+            WeekDay(name: "Do", number: firstDay+3),
+            WeekDay(name: "Fr", number: firstDay+4),
+            WeekDay(name: "Sa", number: firstDay+5),
+            WeekDay(name: "So", number: firstDay+6)
+        ]
+    }
+
+    
     var body: some View {
         HStack {
-            DayView()
-            DayView(selected: true)
-            DayView()
-            DayView()
-            DayView()
-            DayView()
-            DayView()
+            ForEach(data) { weekDay in
+                DayView(day: weekDay, selected: $selectedIndex)
+            }
         }
         .frame(width: .infinity)
     }
 }
 
 struct DayView: View {
-    var selected: Bool = false
+    var day: WeekDay
+    @Binding var selected: Int
     
     var body: some View {
-        VStack {
-            Text("20")
-                .font(.system(size: 15, weight: .heavy))
-            Text("Mon")
-                .font(.system(size: 15, weight: .light))
-                .foregroundStyle(Color.textHeaderSecondary)
+        Button(action: {
+            selected = day.number
+        }) {
+            VStack {
+                Text("\(day.number)")
+                    .font(.system(size: 15, weight: .heavy))
+                Text(day.name)
+                    .font(.system(size: 15, weight: .light))
+            }
+            .padding(5)
+            .background(day.number == selected ? Color.contrast : Color.darkGray)
+            .foregroundColor(day.number == selected ? Color.background : Color.contrast)
+            .cornerRadius(8)
+            .frame(maxWidth: .infinity)
         }
-        .padding(5)
-        .background(selected ? Color.theme : Color.darkGray)
-        .cornerRadius(8)
-        .frame(maxWidth: .infinity)
+        .padding(0)
+        
     }
 }
 
@@ -143,26 +178,32 @@ struct ReportSession: View {
         HStack {
             VStack {
                 Text("19:08")
+                    .font(.system(size: 12))
                 
                 Image(systemName: "ellipsis")
                     .foregroundStyle(Color.contrast)
-                    .frame(width: 30, height: 20) // Adjust size as needed
-                    .rotationEffect(.degrees(90)) // Rotate the image 90 degrees clockwise
+                    .font(.system(size: 12))
+                    .frame(width: 30, height: 10)
+                    .rotationEffect(.degrees(90))
         
                 
                 Text("19:22")
+                    .font(.system(size: 12))
             }
             
             Rectangle()
                .frame(width: 2, height: 50)
                .foregroundColor(Color.theme)
             
+            Image(systemName: "icloud.and.arrow.up")
+            
             VStack(alignment: .leading) {
                 Text("T3")
+                    .font(.system(size: 12, weight: .heavy))
                     .foregroundStyle(Color.theme)
-                    .fontWeight(.heavy)
                 
                 Text("No notes")
+                    .font(.system(size: 12))
                     .foregroundStyle(Color.textHeaderSecondary)
                     .italic()
             }
@@ -170,12 +211,12 @@ struct ReportSession: View {
             Spacer()
             
             Text("0:13")
-                .fontWeight(.heavy)
+                .font(.system(size: 12, weight: .heavy))
             
             Image(systemName: "chevron.right")
                 .foregroundStyle(Color.textHeaderSecondary)
         }
-        .padding()
+        .padding(5)
         .background(Color.darkGray)
         .foregroundStyle(Color.contrast)
         .cornerRadius(8)
@@ -186,7 +227,7 @@ struct DayReport: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Time Tracked")
+                Text("Zeit")
                     .foregroundStyle(Color.textHeaderSecondary)
                 Text("0:18")
                     .font(.system(size: 20, weight: .heavy))
@@ -207,23 +248,24 @@ struct DayReport: View {
 }
 
 struct WeekReport: View {
-    var data: [ToyShape] = [
-        .init(type: "Mo", count: 0),
-        .init(type: "Di", count: 0),
-        .init(type: "Mi", count: 4),
-        .init(type: "Do", count: 0),
-        .init(type: "Fr", count: 0),
-        .init(type: "Sa", count: 8),
-        .init(type: "So", count: 0)
+    var data: [WeekDay] = [
+        .init(name: "Mo", number: 0),
+        .init(name: "Di", number: 0),
+        .init(name: "Mi", number: 4),
+        .init(name: "Do", number: 0),
+        .init(name: "Fr", number: 6),
+        .init(name: "Sa", number: 0),
+        .init(name: "So", number: 0)
     ]
     
     var body: some View {
+        
         VStack {
             Chart {
-                ForEach(data) { shape in
+                ForEach(data) { weekDay in
                     BarMark(
-                        x: .value("Shape Type", shape.type),
-                        y: .value("Total Count", shape.count)
+                        x: .value("Name", weekDay.name),
+                        y: .value("Number", weekDay.number)
                     )
                     .foregroundStyle(Color.theme)
                     .cornerRadius(7)
@@ -233,6 +275,25 @@ struct WeekReport: View {
             }
         }
         .padding()
+    }
+}
+
+extension Date {
+    func startOfMonth() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfMonth() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
+}
+
+extension Calendar {
+    static func weekStart(for date: Date = Date()) -> Date? {
+        guard let weekInterval = Self.autoupdatingCurrent.dateInterval(
+                of: .weekOfYear, for: date) else { return nil }
+
+        return weekInterval.start
     }
 }
 

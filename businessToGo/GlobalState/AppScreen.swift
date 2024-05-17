@@ -2,9 +2,10 @@ import Foundation
 import SwiftUI
 import Redux
 
-enum AppScreen: Hashable, Identifiable, CaseIterable {
+enum AppScreen: Hashable, Identifiable, CaseIterable, Codable {
     case login
     case management
+    case report
     
     case kimaiSettings
     
@@ -19,6 +20,8 @@ extension AppScreen {
             return "Login"
         case .management:
             return "Management"
+        case .report:
+            return "Report"
         case .kimaiSettings:
             return "Settings"
         }
@@ -28,6 +31,7 @@ extension AppScreen {
         switch self {
         case .login: return "person"
         case .management: return "house"
+        case .report: return "chart.bar.xaxis.ascending"
         case .kimaiSettings: return "gear"
         }
     }
@@ -50,10 +54,13 @@ extension AppScreen {
                     .environmentObject(store.lift(\.management, AppAction.management, store.dependencies.management))
                     .environmentObject(router.management)
             )
-        case .kimaiSettings:
+        case .report:
             AnyView(
                 ReportView()
-                // SettingsContainer()
+            )
+        case .kimaiSettings:
+            AnyView(
+                SettingsContainer()
                     .environmentObject(router.settings)
             )
         }

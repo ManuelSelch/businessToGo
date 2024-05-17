@@ -6,7 +6,7 @@ struct SettingsContainer: View {
     @EnvironmentObject var store: Store<AppState, AppAction, Environment>
     
     @State var projectView: KimaiProject?
-    
+
     var body: some View {
         NavigationStack(path: $router.routes){
             SettingsView(
@@ -24,9 +24,11 @@ struct SettingsContainer: View {
                             onConnect: connect
                         )
                     case .debug:
+                        
                         DebugView(
                             isLog: store.state.log.isLog,
                             current: store.state.login.current,
+                            state: store.state,
                             onUpdateLog: { isLog in
                                 store.send(.log(.setLog(isLog)))
                             },

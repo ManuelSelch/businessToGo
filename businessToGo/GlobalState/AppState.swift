@@ -1,7 +1,7 @@
 import Foundation
 import Log
 
-struct AppState: Equatable {
+struct AppState: Equatable, Codable {
     var log: LogState
     
     var login: LoginState

@@ -18,17 +18,9 @@ struct TaigaContainer: View {
     var body: some View {
         VStack {
             switch(route){
-            case .projects:
-                TaigaProjectsView(
-                    projects: store.state.projects,
-                    images: store.state.projectImages,
-                    
-                    onProjectClicked: showProject,
-                    onLoadImage: loadImage
-                )
                 
-            case .project(let id):
-                if let project = store.state.projects.first(where: {$0.id == id}) {
+            case .project(let integration):
+                if let project = store.state.projects.first(where: {$0.id == integration.taigaProjectId}) {
                     var menus: [TaigaProjectMenu] {
                         var menus: [TaigaProjectMenu] = []
                         
@@ -55,7 +47,7 @@ struct TaigaContainer: View {
                         case .kanban:
                             TaigaKanbanView(
                                 project: project,
-                                statusList: store.state.taskStoryStatus.filter { $0.project == id },
+                                statusList: store.state.taskStoryStatus.filter { $0.project == integration.taigaProjectId },
                                 storyList: store.state.taskStories,
                                 tasks: store.state.tasks,
                                 
@@ -64,7 +56,7 @@ struct TaigaContainer: View {
                         case .backlog:
                             TaigaBacklogView(
                                 project: project,
-                                milestones: store.state.milestones.filter { $0.project == id }
+                                milestones: store.state.milestones.filter { $0.project == integration.taigaProjectId }
                             )
                         }
                     }
@@ -82,16 +74,6 @@ struct TaigaContainer: View {
 }
 
 extension TaigaContainer {
-    func showProject(_ project: TaigaProject){
-        router.navigate(.taiga(.project(project.id)))
-    }
-    
-    func loadImage(_ project: TaigaProject){
-        if store.state.projectImages[project.id] == nil {
-            store.send(.loadImage(project))
-        }
-    }
-    
     func goBack(){
         router.back()
     }

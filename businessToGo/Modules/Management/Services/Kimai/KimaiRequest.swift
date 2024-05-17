@@ -107,7 +107,8 @@ extension KimaiRequest: Moya.TargetType {
             return [
                 "name": project.name,
                 "customer": project.customer,
-                "visible": true
+                "globalActivities": project.globalActivities,
+                "visible": true,
             ]
             
         case .insertCustomer(let customer):

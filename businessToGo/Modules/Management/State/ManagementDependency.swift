@@ -52,11 +52,9 @@ class ManagementRouter: Router {
             case .customers: return "Kunden"
             case .customer(_): return "Kunde"
             case .project(_): return "Projekt"
-            case .chart: return "Reports"
             }
         case .taiga(let taiga):
             switch(taiga){
-            case .projects: return "Projekte"
             case .project(_): return "Projekt"
             }
         case .none: return "Kunden"

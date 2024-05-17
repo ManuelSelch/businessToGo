@@ -20,6 +20,8 @@ struct KimaiTimesheetsView: View {
     
    
     var body: some View {
+        VStack {}
+        /*
         let timesheetsByDate = Dictionary(grouping: timesheetsFiltered, by: {
             Calendar.current.date(
                 from: Calendar.current.dateComponents(
@@ -29,16 +31,18 @@ struct KimaiTimesheetsView: View {
             ) ?? Date.now
          
         })
+         
         
         
         List {
             ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
                 
-                HStack {
-                    Text(formatDate(date))
+                /*HStack { // todo: error?
+                    var t = formatDate(date)
+                    Text("formatDate(date)")
                         .foregroundColor(Color.theme)
                     Spacer()
-                }
+                }*/
                 
                 
                 let timesheetEntries = timesheetsByDate[date] ?? []
@@ -74,6 +78,7 @@ struct KimaiTimesheetsView: View {
             
         }
         .background(Color.background)
+         */
     }
     
     func getDate(_ dateStr: String) -> Date? {

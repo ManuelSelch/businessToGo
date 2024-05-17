@@ -10,8 +10,6 @@ struct ManagementHeaderView: View {
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
     
-    let onChart: () -> Void
-    let onProjectClicked: (Int) -> Void
     let onSync: () -> ()
 
     
@@ -42,30 +40,7 @@ struct ManagementHeaderView: View {
                     .font(.system(size: 15))
                     .foregroundColor(Color.theme)
             }
-            
-            if(route == nil){
-                Button(action: {
-                    onChart()
-                }){
-                    Image(systemName: "chart.bar.xaxis.ascending")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color.theme)
-                }
-            }
-            
-            switch(route){
-            case .kimai(.project(let id)):
-                Button(action: {
-                    onProjectClicked(id)
-                }){
-                    Image(systemName: "shippingbox.fill")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color.theme)
-                }
-            default: EmptyView()
-            }
-        
-            
+             
             Button(action: {
                 switch(route){
                 case .kimai(.customer(let customer)):
@@ -76,6 +51,10 @@ struct ManagementHeaderView: View {
                 case .kimai(.project(let project)):
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = project
+                    timesheetView = timesheet
+                case .taiga(.project(let integration)):
+                    var timesheet = KimaiTimesheet.new
+                    timesheet.project = integration.id
                     timesheetView = timesheet
                 default:
                     timesheetView = KimaiTimesheet.new

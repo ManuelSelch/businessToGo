@@ -2,7 +2,8 @@ import SwiftUI
 import MyChart
 import OfflineSync
 
-struct KimaiProjectsChartView: View {
+struct KimaiProjectsView: View {
+    let customer: Int
     let projects: [KimaiProject]
     let timesheets: [KimaiTimesheet]
     let changes: [DatabaseChange]
@@ -42,6 +43,8 @@ struct KimaiProjectsChartView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing){
                 Button(action: {
+                    var project = KimaiProject.new
+                    project.customer = customer
                     onEdit(KimaiProject.new)
                 }){
                     Image(systemName: "plus")
@@ -57,7 +60,7 @@ struct KimaiProjectsChartView: View {
     
 }
 
-extension KimaiProjectsChartView {
+extension KimaiProjectsView {
     func calculateProjectTimes() -> [ChartItem] {
         var projectTimes: [ChartItem] = []
         

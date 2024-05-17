@@ -1,20 +1,20 @@
 import Foundation
 
-enum LoginStatus: Equatable {
+enum LoginStatus: Equatable, Codable {
     case show
     case loading
     case error(String)
     case success
 }
 
-enum LoginScreen: Equatable {
+enum LoginScreen: Equatable, Codable {
     case accounts
     case account(Account)
     case kimai(Account)
     case taiga(Account)
 }
 
-struct LoginState: Equatable {
+struct LoginState: Equatable, Codable {
     var scene: LoginScreen
     
     var accounts: [Account]

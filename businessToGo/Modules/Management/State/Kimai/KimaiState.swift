@@ -1,14 +1,13 @@
 import Foundation
 import OfflineSync
 
-enum KimaiRoute: Equatable, Hashable {
+enum KimaiRoute: Equatable, Hashable, Codable {
     case customers
-    case chart
     case customer(Int)
     case project(Int)
 }
 
-struct KimaiState: Equatable {
+struct KimaiState: Equatable, Codable {
     var customers: [KimaiCustomer]
     var projects: [KimaiProject]
     var timesheets: [KimaiTimesheet]

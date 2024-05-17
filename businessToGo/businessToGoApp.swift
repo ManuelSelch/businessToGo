@@ -70,6 +70,7 @@ struct AppTabView: View {
         }else {
             TabView(selection: $router.tab) {
                 createTab(.management)
+                createTab(.report)
                 createTab(.kimaiSettings)
             }
         }

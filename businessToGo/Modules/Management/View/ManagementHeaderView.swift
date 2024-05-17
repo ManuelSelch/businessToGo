@@ -48,10 +48,6 @@ struct ManagementHeaderView: View {
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = project?.id ?? 0
                     timesheetView = timesheet
-                case .kimai(.project(let project)):
-                    var timesheet = KimaiTimesheet.new
-                    timesheet.project = project
-                    timesheetView = timesheet
                 case .taiga(.project(let integration)):
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = integration.id

@@ -24,9 +24,6 @@ struct KimaiContainer: View {
                 
             case .customer(let id):
                 getProjectsView(id)
-                
-            case .project(let id):
-                getTimesheetsView(id)
             }
         }
         .sheet(item: $customerView){ customer in
@@ -92,29 +89,6 @@ extension KimaiContainer {
             projectClicked: onProjectClicked,
             onEdit: { project in
                 projectView = project
-            }
-        )
-    }
-    
-    @ViewBuilder func getTimesheetsView(_ project: Int) -> some View {
-        let timesheets = store.state.timesheets.filter { $0.project == project }
-        
-        KimaiTimesheetsView(
-            timesheets: timesheets,
-            activities: store.state.activities,
-            changes: store.state.timesheetTracks,
-            
-            onEditClicked: { id in
-                timesheetView = store.state.timesheets.first(where: { $0.id == id })
-            },
-            onStopClicked: { id in
-                if var timesheet = store.state.timesheets.first(where: {$0.id == id}) {
-                    timesheet.end = "\(Date.now)"
-                    store.send(.timesheets(.update(timesheet)))
-                }
-            },
-            onDeleteClicked: { timesheet in
-                store.send(.timesheets(.delete(timesheet)))
             }
         )
     }

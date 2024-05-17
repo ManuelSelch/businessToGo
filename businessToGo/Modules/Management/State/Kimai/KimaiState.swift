@@ -4,7 +4,6 @@ import OfflineSync
 enum KimaiRoute: Equatable, Hashable, Codable {
     case customers
     case customer(Int)
-    case project(Int)
 }
 
 struct KimaiState: Equatable, Codable {

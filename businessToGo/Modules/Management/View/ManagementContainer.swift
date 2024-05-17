@@ -83,11 +83,14 @@ extension ManagementContainer {
                     customer: customer,
                     project: project,
                     activity: activity,
-                    onShow: {
+                    onShow: { 
+                        // todo: show timesheet session
+                        /*
                         let route = ManagementRoute.kimai(.project(project.id))
                         if(router.routes.last != route){
                             router.navigate(route)
                         }
+                         */
                     },
                     onStop: {
                         var timesheet = timesheet

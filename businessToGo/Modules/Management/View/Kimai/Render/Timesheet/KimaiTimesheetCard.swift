@@ -14,8 +14,6 @@ struct KimaiTimesheetCard: View {
     let change: DatabaseChange?
     let activity: KimaiActivity?
     
-    let onStopClicked: (Int) -> Void
-    
     var body: some View {
         HStack {
             VStack {

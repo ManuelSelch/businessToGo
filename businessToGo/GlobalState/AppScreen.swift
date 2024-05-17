@@ -56,7 +56,8 @@ extension AppScreen {
             )
         case .report:
             AnyView(
-                ReportView()
+                ReportContainer()
+                    .environmentObject(store.lift(\.management, AppAction.management, store.dependencies.management))
             )
         case .kimaiSettings:
             AnyView(

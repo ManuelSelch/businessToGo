@@ -7,51 +7,45 @@ struct KimaiTimesheetsView: View {
     let changes: [DatabaseChange]
     
     let onEditClicked: (Int) -> Void
-    let onStopClicked: (Int) -> Void
     let onDeleteClicked: (KimaiTimesheet) -> Void
     
-    var timesheetsFiltered: [KimaiTimesheet] {
-        var t = timesheets
-        t.sort {
-            $0.begin > $1.begin
-        }
-        return t
-    }
-    
-   
-    var body: some View {
-        VStack {}
-        /*
-        let timesheetsByDate = Dictionary(grouping: timesheetsFiltered, by: {
+    var timesheetsByDate: Dictionary<Date, [KimaiTimesheet]> {
+        Dictionary(grouping: timesheets, by: {
             Calendar.current.date(
                 from: Calendar.current.dateComponents(
                     [.year, .month, .day],
-                    from: getDate($0.begin) ?? Date.now
+                    from: $0.getBeginDate() ?? Date.now
                 )
             ) ?? Date.now
-         
+            
         })
-         
-        
-        
-        List {
+    }
+     
+    
+    var body: some View {
+        LazyVStack(alignment: .leading) {
+            Text("Sessions")
+                .font(.system(size: 25, weight: .heavy))
+            
             ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
                 
-                /*HStack { // todo: error?
-                    var t = formatDate(date)
-                    Text("formatDate(date)")
-                        .foregroundColor(Color.theme)
+                HStack {
+                    Text(formatDate(date))
                     Spacer()
-                }*/
+                    Text(getTotalTime(for: timesheetsByDate[date] ?? []))
+                }
+                .font(.system(size: 15))
+                .textCase(.uppercase)
+                .foregroundStyle(.textHeaderSecondary)
                 
                 
                 let timesheetEntries = timesheetsByDate[date] ?? []
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
-                        change: changes.first(where: { $0.recordID == timesheet.id }),
-                        activity: activities.first(where: { $0.id == timesheet.activity }),
-                        onStopClicked: onStopClicked
+                        project: nil, // todo: add references
+                        change: nil,
+                        activity: nil
                     )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {
@@ -71,23 +65,9 @@ struct KimaiTimesheetsView: View {
                         .tint(.gray)
                     }
                 }
-                
             }
-            
-            
-            
         }
-        .background(Color.background)
-         */
-    }
-    
-    func getDate(_ dateStr: String) -> Date? {
-        let strategy = Date.ParseStrategy(
-            format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))",
-            timeZone: .current
-        )
-        
-        return try? Date(dateStr, strategy: strategy)
+        .padding()
     }
     
     func formatDate(_ date: Date) -> String {
@@ -101,8 +81,22 @@ struct KimaiTimesheetsView: View {
         } else if entryDay == yesterday {
             return "Gestern"
         }else {
-            return date.formatted(date: .numeric, time: .omitted)
+            return date.formatted(date: .complete, time: .omitted)
         }
     }
+    
+    func getTotalTime(for timesheets: [KimaiTimesheet]) -> String {
+        var time: TimeInterval = 0
+        for timesheet in timesheets {
+            time += timesheet.calculateDuration() ?? 0
+        }
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        return formatter.string(from: time) ?? "--"
+    }
+    
+   
+  
     
 }

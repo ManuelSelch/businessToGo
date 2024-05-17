@@ -36,7 +36,20 @@ extension KimaiTimesheet {
     }
     
     
-    func getDate(_ dateStr: String) -> Date? {
+    func getBeginDate() -> Date? {
+        return getDate(begin)
+    }
+    
+    func getEndDate() -> Date? {
+        if let end = end {
+            return getDate(end)
+        } else {
+            return nil
+        }
+        
+    }
+    
+    private func getDate(_ dateStr: String) -> Date? {
         let strategy = Date.ParseStrategy(
             format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))",
             timeZone: .current

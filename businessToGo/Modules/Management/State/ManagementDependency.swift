@@ -51,7 +51,6 @@ class ManagementRouter: Router {
             switch(kimai){
             case .customers: return "Kunden"
             case .customer(_): return "Kunde"
-            case .project(_): return "Projekt"
             }
         case .taiga(let taiga):
             switch(taiga){

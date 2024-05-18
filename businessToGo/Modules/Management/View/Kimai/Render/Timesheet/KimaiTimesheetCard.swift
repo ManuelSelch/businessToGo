@@ -17,18 +17,18 @@ struct KimaiTimesheetCard: View {
     var body: some View {
         HStack {
             VStack {
-                if let begin = getDate(timesheet.begin) {
-                    Text(begin.formatted(date: .omitted, time: .shortened))
+                if let end = getDate(timesheet.end ?? "") {
+                    Text(end.formatted(date: .omitted, time: .shortened))
                         .font(.system(size: 12))
                     
-                    if let end = getDate(timesheet.end ?? "") {
+                    if let begin = getDate(timesheet.begin) {
                         Image(systemName: "ellipsis")
                             .foregroundStyle(Color.contrast)
                             .font(.system(size: 12))
                             .frame(width: 30, height: 10)
                             .rotationEffect(.degrees(90))
                         
-                        Text(end.formatted(date: .omitted, time: .shortened))
+                        Text(begin.formatted(date: .omitted, time: .shortened))
                             .font(.system(size: 12))
                     }
                 }
@@ -38,7 +38,9 @@ struct KimaiTimesheetCard: View {
                .frame(width: 2, height: 50)
                .foregroundColor(Color(hex: project?.color ?? "#000000"))
             
-            Image(systemName: "icloud.and.arrow.up")
+            if(change != nil) {
+                Image(systemName: "icloud.and.arrow.up")
+            }
             
             VStack(alignment: .leading) {
                 Text(activity?.name ?? "\(timesheet.activity)")

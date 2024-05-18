@@ -113,6 +113,7 @@
 		84F5AEA82BF783F4007EE279 /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEA72BF783F4007EE279 /* ReportType.swift */; };
 		84F5AEAA2BF784CB007EE279 /* ReportWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEA92BF784CB007EE279 /* ReportWeekView.swift */; };
 		84F5AEAC2BF7859D007EE279 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEAB2BF7859D007EE279 /* DateExtension.swift */; };
+		84F5AEB02BF8A799007EE279 /* YearMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEAF2BF8A799007EE279 /* YearMonthPicker.swift */; };
 		84FC58382BC9448C00594E14 /* TaigaBacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58372BC9448C00594E14 /* TaigaBacklogView.swift */; };
 		84FC583C2BC944DF00594E14 /* TaigaMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583B2BC944DF00594E14 /* TaigaMilestone.swift */; };
 		84FC583E2BC944F200594E14 /* TaigaTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583D2BC944F200594E14 /* TaigaTask.swift */; };
@@ -237,6 +238,7 @@
 		84F5AEA72BF783F4007EE279 /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
 		84F5AEA92BF784CB007EE279 /* ReportWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportWeekView.swift; sourceTree = "<group>"; };
 		84F5AEAB2BF7859D007EE279 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		84F5AEAF2BF8A799007EE279 /* YearMonthPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthPicker.swift; sourceTree = "<group>"; };
 		84FC58372BC9448C00594E14 /* TaigaBacklogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaBacklogView.swift; sourceTree = "<group>"; };
 		84FC583B2BC944DF00594E14 /* TaigaMilestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaMilestone.swift; sourceTree = "<group>"; };
 		84FC583D2BC944F200594E14 /* TaigaTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaTask.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 				84F5AE9F2BF77FDE007EE279 /* Header */,
 				84F5AEA02BF780CA007EE279 /* ReportSummaryView.swift */,
 				84F5AEA92BF784CB007EE279 /* ReportWeekView.swift */,
+				84F5AEAF2BF8A799007EE279 /* YearMonthPicker.swift */,
 			);
 			path = Render;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				845240262BC4802A00A894EE /* LogService.swift in Sources */,
 				84FC58502BC94F6900594E14 /* TaigaContainer.swift in Sources */,
 				84D96FD92BC511DD00114438 /* DatabaseError.swift in Sources */,
+				84F5AEB02BF8A799007EE279 /* YearMonthPicker.swift in Sources */,
 				8424BB4A2BCA6CF700929F13 /* LoginAction.swift in Sources */,
 				841D9E872BC9EF93002990C7 /* KimaiContainer.swift in Sources */,
 				84F5AEAA2BF784CB007EE279 /* ReportWeekView.swift in Sources */,

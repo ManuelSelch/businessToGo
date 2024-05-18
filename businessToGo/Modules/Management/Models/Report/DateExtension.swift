@@ -1,7 +1,7 @@
 import Foundation
 
 extension Date {
-    static func getToday() -> Date {
+    static var today: Date {
         let calendar = Calendar.current
         let now = Date.now
         let startOfDay = calendar.startOfDay(for: now)
@@ -9,7 +9,7 @@ extension Date {
     }
     
     func startOfMonth() -> Date {
-        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Calendar.current.startOfDay(for: self)))!
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
     }
     
     func endOfMonth() -> Date {
@@ -33,6 +33,23 @@ extension Date {
     
     func getWeekday() -> Int? {
         return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
+    
+    func getWeekOfMonth() -> Int? {
+        return Calendar.current.dateComponents([.weekOfMonth], from: self).weekOfMonth
+    }
+    
+    func month() -> Int {
+        return Calendar.current.dateComponents([.month], from: self).month ?? 1
+    }
+    
+    func monthName() -> String {
+        return Calendar.current.shortMonthSymbols[month()-1]
+        // return DateFormatter().shortMonthSymbols[month()-1]
+    }
+    
+    func year() -> Int {
+        return Calendar.current.dateComponents([.year], from: self).year ?? 1
     }
     
     func isDay(of date: Date) -> Bool {

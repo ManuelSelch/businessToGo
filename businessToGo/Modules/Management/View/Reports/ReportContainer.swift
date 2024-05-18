@@ -4,7 +4,8 @@ import Redux
 struct ReportContainer: View {
     @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
     @State var selectedReportType: ReportType = .week
-    @State var selectedDate: Date = Date.getToday()
+    @State var selectedDate: Date = Date.today
+    @State var isCalendarPicker = false
     
     var timesheets: [KimaiTimesheet] {
         let timesheets = store.state.kimai.timesheets
@@ -23,7 +24,7 @@ struct ReportContainer: View {
     
     var body: some View {
         VStack {
-            ReportHeaderView(selectedReportType: $selectedReportType, selectedDate: $selectedDate)
+            ReportHeaderView(selectedReportType: $selectedReportType, selectedDate: $selectedDate, isCalendarPicker: $isCalendarPicker)
             
             ScrollView {
                 ReportSummaryView(timesheets: timesheets)
@@ -44,13 +45,18 @@ struct ReportContainer: View {
                 
                 
                 KimaiTimesheetsView(
-                    timesheets: timesheets, // todo: filter
-                    activities: [],
-                    changes: [],
+                    timesheets: timesheets,
+                    projects: store.state.kimai.projects,
+                    activities: store.state.kimai.activities,
+                    changes: store.state.kimai.timesheetTracks,
                     onEditClicked: {_ in},
                     onDeleteClicked: { _ in}
                 )
             }
+        }
+        .sheet(isPresented: $isCalendarPicker){
+            YearMonthPickerView(selectedDate: $selectedDate)
+                .presentationDetents([.medium])
         }
         
     }

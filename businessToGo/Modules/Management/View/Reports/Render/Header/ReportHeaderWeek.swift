@@ -18,11 +18,11 @@ struct ReportHeaderWeek: View {
 
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             ForEach(data) { weekDay in
                 ReportHeaderDay(day: weekDay, selected: $selectedDate)
             }
         }
-        .frame(width: .infinity)
+        
     }
 }

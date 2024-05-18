@@ -3,14 +3,18 @@ import OfflineSync
 
 struct KimaiTimesheetsView: View {
     let timesheets: [KimaiTimesheet]
+    let projects: [KimaiProject]
     let activities: [KimaiActivity]
     let changes: [DatabaseChange]
     
     let onEditClicked: (Int) -> Void
     let onDeleteClicked: (KimaiTimesheet) -> Void
     
+    
     var timesheetsByDate: Dictionary<Date, [KimaiTimesheet]> {
-        Dictionary(grouping: timesheets, by: {
+        var timesheets = timesheets
+        timesheets.sort(by: { $0.begin > $1.begin })
+        return Dictionary(grouping: timesheets, by: {
             Calendar.current.date(
                 from: Calendar.current.dateComponents(
                     [.year, .month, .day],
@@ -24,9 +28,6 @@ struct KimaiTimesheetsView: View {
     
     var body: some View {
         LazyVStack(alignment: .leading) {
-            Text("Sessions")
-                .font(.system(size: 25, weight: .heavy))
-            
             ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
                 
                 HStack {
@@ -43,9 +44,9 @@ struct KimaiTimesheetsView: View {
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
-                        project: nil, // todo: add references
-                        change: nil,
-                        activity: nil
+                        project: projects.first { $0.id == timesheet.project }, 
+                        change: changes.first { $0.recordID == timesheet.id },
+                        activity: activities.first{ $0.id == timesheet.activity }
                     )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {

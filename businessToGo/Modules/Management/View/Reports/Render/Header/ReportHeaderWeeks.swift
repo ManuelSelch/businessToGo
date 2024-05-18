@@ -2,30 +2,71 @@ import SwiftUI
 
 struct ReportHeaderWeeks: View {
     @Binding var selectedDate: Date
-    let firstDay: Date // first day of week
-    let lastDay: Date // last day of month
-    
-    init(selectedDate: Binding<Date>) {
-        firstDay = Date.now.startOfWeek()
-        lastDay = firstDay.endOfMonth()
-        
-        _selectedDate = selectedDate
+    var firstDay: Date {
+        selectedDate.startOfWeek()
     }
+    @State var scrolledID: Int? = 1
+    @State var lastID: Int = 1
     
+    @State var weeks: [Date] = [
+        Date.today.startOfMonth().startOfWeek(),
+        Date.today.startOfMonth().startOfWeek().addDays(+7),
+        Date.today.startOfMonth().startOfWeek().addDays(+14),
+        Date.today.startOfMonth().startOfWeek().addDays(+21)
+    ]
+
     var body: some View {
-        GeometryReader { geo in
-            ScrollView(.horizontal) {
-                LazyHStack {
-                    ForEach(0..<3) { i in
-                        ReportHeaderWeek(selectedDate: $selectedDate, firstDay: firstDay.addDays(i*7))
-                            .frame(width: geo.size.width, height: 100)
+        VStack(spacing: 0) {
+            GeometryReader { geo in
+                ScrollView(.horizontal) {
+                    LazyHStack {
+                        ForEach(0..<weeks.count, id: \.self) { i in
+                            ReportHeaderWeek(selectedDate: $selectedDate, firstDay: weeks[i])
+                                .id(i)
+                                .frame(width: geo.size.width, height: 100)
+                        }
+                    }
+                    .scrollTargetLayout()
+                }
+                .scrollTargetBehavior(.viewAligned)
+                .scrollIndicators(.hidden)
+                .onChange(of: scrolledID){
+                    if let newID = scrolledID
+                    {
+                        if(newID > lastID){
+                            selectedDate = selectedDate.addDays(+7)
+                        }else if(newID < lastID){
+                            selectedDate = selectedDate.addDays(-7)
+                        }
+                        lastID = newID
                     }
                 }
-                .scrollTargetLayout()
+                .onChange(of: selectedDate) {
+                    scrolledID = (selectedDate.getWeekOfMonth() ?? 1) - 1
+                    lastID = (selectedDate.getWeekOfMonth() ?? 1) - 1
+                }
+                .scrollPosition(id: $scrolledID)
+                
+                
             }
-            .scrollTargetBehavior(.viewAligned)
-            .scrollIndicators(.hidden)
+            .frame(height: 100)
+            
+            HStack {
+                Spacer()
+                Text(selectedDate.formatted(date: .complete, time: .omitted))
+                    .font(.system(size: 15))
+                Spacer()
+            }
         }
-        .frame(height: 100)
+        .onAppear {
+            scrolledID = (selectedDate.getWeekOfMonth() ?? 1) - 1
+            lastID = (selectedDate.getWeekOfMonth() ?? 1) - 1
+        }
     }
+}
+
+
+#Preview {
+    @State var selectedDate = Date.today
+    return ReportHeaderWeeks(selectedDate: $selectedDate)
 }

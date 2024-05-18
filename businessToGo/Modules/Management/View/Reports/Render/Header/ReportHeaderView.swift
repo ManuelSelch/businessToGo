@@ -3,17 +3,25 @@ import SwiftUI
 struct ReportHeaderView: View {
     @Binding var selectedReportType: ReportType
     @Binding var selectedDate: Date
+    @Binding var isCalendarPicker: Bool
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
+                Button(action: {
+                    isCalendarPicker = true
+                }){
+                    Image(systemName: "calendar")
+                        .foregroundStyle(Color.theme)
+                }
+                
                 Picker("Report Date", selection: $selectedReportType){
                     ForEach(ReportType.allCases) { option in
                         Text(option.rawValue)
                         
                     }
                 }
-                .frame(height: 15)
+                .frame(height: 20)
                 .pickerStyle(.segmented)
                 .labelsHidden()
                 .background(Color.darkGray)

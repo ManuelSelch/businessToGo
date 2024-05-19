@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "swipeactions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/c-villain/SwipeActions.git",
+      "state" : {
+        "revision" : "39c6d7f686746881adb3d44638ec330acbeb4f37",
+        "version" : "0.3.3"
+      }
+    },
+    {
       "identity" : "testablecombinepublishers",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/albertbori/TestableCombinePublishers.git",

@@ -47,21 +47,33 @@ struct KimaiTimesheetCard: View {
                     .font(.system(size: 12, weight: .heavy))
                     .foregroundStyle(Color.theme)
                 
+                Spacer()
+                
                 Text(timesheet.description ?? "")
                     .font(.system(size: 12))
                     .foregroundStyle(Color.textHeaderSecondary)
                     .italic()
             }
             
+           
+            
             Spacer()
             
-            Text(timesheet.getDuration())
-                .font(.system(size: 12, weight: .heavy))
+            VStack(alignment: .trailing) {
+                Text(timesheet.getDuration())
+                    .font(.system(size: 12, weight: .heavy))
+                
+                Spacer()
+                
+                Text(project?.name ?? "")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color.textHeaderSecondary)
+                    .italic()
+            }
         }
         .padding(5)
         .background(Color.darkGray)
         .foregroundStyle(Color.contrast)
-        .cornerRadius(8)
     }
     
     func getDate(_ dateStr: String) -> Date? {

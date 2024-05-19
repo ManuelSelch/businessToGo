@@ -29,9 +29,7 @@ struct ManagementContainer: View {
             }
         }
         .sheet(item: $timesheetView) { timesheet in
-            NavigationView {
-                getTimesheetSheet(timesheet)
-            }
+            getTimesheetSheet(timesheet)
         }
     }
 }

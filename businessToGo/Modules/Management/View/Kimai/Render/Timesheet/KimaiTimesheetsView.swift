@@ -1,5 +1,6 @@
 import SwiftUI
 import OfflineSync
+import SwipeActions
 
 struct KimaiTimesheetsView: View {
     let timesheets: [KimaiTimesheet]
@@ -7,7 +8,7 @@ struct KimaiTimesheetsView: View {
     let activities: [KimaiActivity]
     let changes: [DatabaseChange]
     
-    let onEditClicked: (Int) -> Void
+    let onEditClicked: (KimaiTimesheet) -> Void
     let onDeleteClicked: (KimaiTimesheet) -> Void
     
     
@@ -48,27 +49,55 @@ struct KimaiTimesheetsView: View {
                         change: changes.first { $0.recordID == timesheet.id },
                         activity: activities.first{ $0.id == timesheet.activity }
                     )
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .cancel) {
+                    /*
+                    .addFullSwipeAction(menu: .slided) {
+                                  Trailing {
+                                      
+                                      
+                                      Button {
+                                          
+                                      } label: {
+                                          Image(systemName: "trash")
+                                              .foregroundColor(.white)
+                                      }
+                                      .contentShape(Rectangle())
+                                      .frame(width: 60)
+                                      .frame(maxHeight: .infinity)
+                                      .background(Color.red) // <=== Look here
+                                  }
+                    } action: {
+                                  
+                    }
+                     */
+                    
+                    .addSwipeAction(edge: .trailing) {
+                        Button {
                             onDeleteClicked(timesheet)
                         } label: {
                             Text("Delete")
                                 .foregroundColor(.white)
                         }
-                        .tint(.red)
+                        .padding()
+                        .frame(maxHeight: .infinity)
+                        .background(.red)
                         
-                        Button(role: .cancel) {
-                            onEditClicked(timesheet.id)
+                        Button {
+                            onEditClicked(timesheet)
                         } label: {
                             Text("Edit")
                                 .foregroundColor(.white)
                         }
-                        .tint(.gray)
+                        .padding()
+                        .frame(maxHeight: .infinity)
+                        .background(.gray)
                     }
+                     
+                    
+                   
                 }
             }
         }
-        .padding()
+        // .padding()
     }
     
     func formatDate(_ date: Date) -> String {

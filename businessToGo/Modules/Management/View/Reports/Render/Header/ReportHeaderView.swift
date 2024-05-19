@@ -5,6 +5,8 @@ struct ReportHeaderView: View {
     @Binding var selectedDate: Date
     @Binding var isCalendarPicker: Bool
     
+    var onEdit: (KimaiTimesheet) -> ()
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -28,10 +30,13 @@ struct ReportHeaderView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .accentColor(Color.contrast)
                 
-                
-                Image(systemName: "play.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(Color.theme)
+                Button(action: {
+                    onEdit(KimaiTimesheet.new)
+                }){
+                    Image(systemName: "play.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color.theme)
+                }
             }
             
             switch(selectedReportType){

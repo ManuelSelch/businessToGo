@@ -6,6 +6,7 @@ struct ReportContainer: View {
     @State var selectedReportType: ReportType = .week
     @State var selectedDate: Date = Date.today
     @State var isCalendarPicker = false
+    @State var timesheetView: KimaiTimesheet?
     
     var timesheets: [KimaiTimesheet] {
         let timesheets = store.state.kimai.timesheets
@@ -24,43 +25,87 @@ struct ReportContainer: View {
     
     var body: some View {
         VStack {
-            ReportHeaderView(selectedReportType: $selectedReportType, selectedDate: $selectedDate, isCalendarPicker: $isCalendarPicker)
-            
+            getHeader()
             ScrollView {
-                ReportSummaryView(timesheets: timesheets)
-                
-                switch(selectedReportType){
-                case .week:
-                    WeekReportView(days: [
-                        DayReport(name: "Mo", time: getTotalTime(for: timesheets, weekday: 2)),
-                        DayReport(name: "Di", time: getTotalTime(for: timesheets, weekday: 3)),
-                        DayReport(name: "Mi", time: getTotalTime(for: timesheets, weekday: 4)),
-                        DayReport(name: "Do", time: getTotalTime(for: timesheets, weekday: 5)),
-                        DayReport(name: "Fr", time: getTotalTime(for: timesheets, weekday: 6)),
-                        DayReport(name: "Sa", time: getTotalTime(for: timesheets, weekday: 7)),
-                        DayReport(name: "So", time: getTotalTime(for: timesheets, weekday: 1))
-                    ])
-                default: EmptyView()
-                }
-                
-                
-                KimaiTimesheetsView(
-                    timesheets: timesheets,
-                    projects: store.state.kimai.projects,
-                    activities: store.state.kimai.activities,
-                    changes: store.state.kimai.timesheetTracks,
-                    onEditClicked: {_ in},
-                    onDeleteClicked: { _ in}
-                )
+                getReportChart()
+                getTimesheets()
             }
         }
         .sheet(isPresented: $isCalendarPicker){
             YearMonthPickerView(selectedDate: $selectedDate)
                 .presentationDetents([.medium])
         }
+        .sheet(item: $timesheetView){ timesheet in
+            getTimesheeetSheet(timesheet)
+        }
         
     }
     
+    
+}
+
+extension ReportContainer {
+    @ViewBuilder
+    func getHeader() -> some View {
+        ReportHeaderView(
+            selectedReportType: $selectedReportType,
+            selectedDate: $selectedDate,
+            isCalendarPicker: $isCalendarPicker,
+            onEdit: { timesheetView = $0 }
+        )
+    }
+    
+    @ViewBuilder
+    func getTimesheets() -> some View {
+        KimaiTimesheetsView(
+            timesheets: timesheets,
+            projects: store.state.kimai.projects,
+            activities: store.state.kimai.activities,
+            changes: store.state.kimai.timesheetTracks,
+            onEditClicked: { timesheetView = $0 },
+            onDeleteClicked: { store.send(.kimai(.timesheets(.delete($0)))) }
+        )
+    }
+    
+    @ViewBuilder
+    func getReportChart() -> some View {
+        ReportSummaryView(timesheets: timesheets)
+        
+        switch(selectedReportType){
+        case .week:
+            WeekReportView(days: [
+                DayReport(name: "Mo", time: getTotalTime(for: timesheets, weekday: 2)),
+                DayReport(name: "Di", time: getTotalTime(for: timesheets, weekday: 3)),
+                DayReport(name: "Mi", time: getTotalTime(for: timesheets, weekday: 4)),
+                DayReport(name: "Do", time: getTotalTime(for: timesheets, weekday: 5)),
+                DayReport(name: "Fr", time: getTotalTime(for: timesheets, weekday: 6)),
+                DayReport(name: "Sa", time: getTotalTime(for: timesheets, weekday: 7)),
+                DayReport(name: "So", time: getTotalTime(for: timesheets, weekday: 1))
+            ])
+        default: EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    func getTimesheeetSheet(_ timesheet: KimaiTimesheet) -> some View {
+        KimaiTimesheetSheet(
+            timesheet: timesheet,
+            customers: store.state.kimai.customers,
+            projects: store.state.kimai.projects,
+            activities: store.state.kimai.activities,
+            onSave: { timesheet in
+                if(timesheet.id == KimaiTimesheet.new.id){
+                    store.send(.kimai(.timesheets(.create(timesheet))))
+                } else {
+                    store.send(.kimai(.timesheets(.update(timesheet))))
+                }
+            },
+            timesheetView: $timesheetView
+        )
+    }
+}
+
+extension ReportContainer {
     func getTotalTime(for timesheets: [KimaiTimesheet], weekday: Int) -> TimeInterval {
         var time: TimeInterval = 0
         for timesheet in timesheets {

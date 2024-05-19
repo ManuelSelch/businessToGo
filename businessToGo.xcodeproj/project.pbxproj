@@ -114,6 +114,7 @@
 		84F5AEAA2BF784CB007EE279 /* ReportWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEA92BF784CB007EE279 /* ReportWeekView.swift */; };
 		84F5AEAC2BF7859D007EE279 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEAB2BF7859D007EE279 /* DateExtension.swift */; };
 		84F5AEB02BF8A799007EE279 /* YearMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5AEAF2BF8A799007EE279 /* YearMonthPicker.swift */; };
+		84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 84F5AEB22BF8B7E4007EE279 /* SwipeActions */; };
 		84FC58382BC9448C00594E14 /* TaigaBacklogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58372BC9448C00594E14 /* TaigaBacklogView.swift */; };
 		84FC583C2BC944DF00594E14 /* TaigaMilestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583B2BC944DF00594E14 /* TaigaMilestone.swift */; };
 		84FC583E2BC944F200594E14 /* TaigaTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583D2BC944F200594E14 /* TaigaTask.swift */; };
@@ -260,6 +261,7 @@
 				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
 				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
 				8467DEB92BDEA8690077E331 /* Redux in Frameworks */,
+				84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */,
 				849BF1492BEE6A3B008F8B6A /* Login in Frameworks */,
 				84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */,
 				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
@@ -821,6 +823,7 @@
 				84CD11F92BF41393006AE4C7 /* OfflineSync */,
 				84CD11FC2BF413D6006AE4C7 /* OfflineSync */,
 				84F5AE902BF74CA6007EE279 /* Moya */,
+				84F5AEB22BF8B7E4007EE279 /* SwipeActions */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -909,6 +912,7 @@
 				84CD11F52BF410E8006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */,
 				84CD11FB2BF413D6006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
 				845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */,
+				84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1484,6 +1488,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/c-villain/SwipeActions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1553,6 +1565,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		84F5AEB22BF8B7E4007EE279 /* SwipeActions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */;
+			productName = SwipeActions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

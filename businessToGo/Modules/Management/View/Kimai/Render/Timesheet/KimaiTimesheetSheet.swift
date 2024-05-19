@@ -1,197 +1,166 @@
-//
-//  KimaiPlayView.swift
-//  businessToGo
-//
-//  Created by Admin  on 14.04.24.
-//
-
 import SwiftUI
 
 struct KimaiTimesheetSheet: View {
-    var timesheet: KimaiTimesheet
+    @State var timesheet: KimaiTimesheet
     var customers: [KimaiCustomer]
     var projects: [KimaiProject]
     var activities: [KimaiActivity]
     
     let onSave: (_ timesheet: KimaiTimesheet) -> Void
     
-    @State var selectedCustomer: Int = 0
-    @State var selectedProject: Int = 0
-    @State var selectedActivity: Int = 0
-    @State var description: String = ""
-    @State var startTime: Date = Date.now
-    @State var endTime: Date = Date.now
-    @State var isEndTime: Bool = false
-    
     @Binding var timesheetView: KimaiTimesheet?
     
-    
+    @State private var selectedCustomer: Int = 0
+    @State private var selectedProject: Int = 0
+    @State private var selectedActivity: Int = 0
+    @State private var description: String = ""
+    @State private var startTime: Date = Date()
+    @State private var endTime: Date = Date()
+    @State private var isEndTime: Bool = false
     
     var projectsFiltered: [KimaiProject] {
-        return projects.filter {
-            $0.customer == selectedCustomer
-        }
+        projects.filter { $0.customer == selectedCustomer }
     }
     
     var activitiesFiltered: [KimaiActivity] {
-        var t = activities
-        
-        if let project = projects.first(where: { $0.id == selectedProject }) {
-            if(!project.globalActivities){
-                t = t.filter { $0.project == project.id }
-            }
+        var filteredActivities = activities
+        if let project = projects.first(where: { $0.id == selectedProject }), !project.globalActivities {
+            filteredActivities = filteredActivities.filter { $0.project == project.id }
         }
-        
-        t.sort { $0.name < $1.name }
-        return t
+        return filteredActivities.sorted { $0.name < $1.name }
+    }
+    
+    init(
+        timesheet: KimaiTimesheet,
+        customers: [KimaiCustomer],
+        projects: [KimaiProject],
+        activities: [KimaiActivity],
+        onSave: @escaping (_: KimaiTimesheet) -> Void,
+        timesheetView: Binding<KimaiTimesheet?>
+    ) {
+        _timesheet = State(initialValue: timesheet)
+        self.customers = customers
+        self.projects = projects
+        self.activities = activities
+        self.onSave = onSave
+        self._timesheetView = timesheetView
     }
     
     var body: some View {
-        Form {
-            Section(header: Text("Branch Info")) {
-                
-                Picker("Kunde", selection: $selectedCustomer) {
-                    ForEach(customers, id: \.id) {
-                        Text($0.name)
+        NavigationStack {
+            Form {
+                Section(header: Text("Branch Info")) {
+                    Picker("Kunde", selection: $selectedCustomer) {
+                        ForEach(customers, id: \.id) {
+                            Text($0.name)
+                        }
                     }
-                }
-                .pickerStyle(.menu)
-                
-                Picker("Projekt", selection: $selectedProject) {
-                    ForEach(projectsFiltered, id: \.id) {
-                        Text($0.name)
+                    .pickerStyle(MenuPickerStyle())
+                    .onChange(of: selectedCustomer) { old, new in
+                        if(old != 0){
+                            selectedProject = projectsFiltered.first?.id ?? 0
+                        }
                     }
-                }
-                .pickerStyle(.menu)
-                
-                Picker("Tätigkeit", selection: $selectedActivity) {
-                    ForEach(activitiesFiltered, id: \.id) {
-                        Text($0.name)
+                    
+                    Picker("Projekt", selection: $selectedProject) {
+                        ForEach(projectsFiltered, id: \.id) {
+                            Text($0.name)
+                        }
                     }
-                }
-                .pickerStyle(.menu)
-                
-                TextField("Beschreibung", text: $description)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                
-                HStack {
-                    Spacer()
+                    .pickerStyle(MenuPickerStyle())
+                    .onChange(of: selectedProject) { old, new in
+                        if(old != 0){
+                            selectedActivity = activitiesFiltered.first?.id ?? 0
+                        }
+                    }
+                    
+                    Picker("Tätigkeit", selection: $selectedActivity) {
+                        ForEach(activitiesFiltered, id: \.id) {
+                            Text($0.name)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    
+                    
+                    TextField("Beschreibung", text: $description)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     HStack {
-                        Image(systemName: "clock.fill")
+                        Spacer()
                         VStack {
                             Text("Start time")
                                 .font(.system(size: 8))
-                            
                             DatePicker("start time", selection: $startTime, displayedComponents: .hourAndMinute)
                                 .labelsHidden()
                         }
-                    }
-                    
-                    
-                    Spacer()
-                    
-                    if(isEndTime){
-                        HStack {
-                            Image(systemName: "clock.fill")
-                            
+                        Spacer()
+                        if isEndTime {
                             VStack {
                                 Text("End time")
                                     .font(.system(size: 8))
-                                
                                 DatePicker("end time", selection: $endTime, displayedComponents: .hourAndMinute)
                                     .labelsHidden()
-                                    
                             }
-                        }
-                    }else {
-                        HStack {
-                            Image(systemName: "pause.circle.fill")
-                                .font(.system(size: 20))
-                                .foregroundStyle(Color.red)
-                            
+                        } else {
                             VStack {
                                 Text("End time")
                                     .font(.system(size: 8))
-                                
                                 Text("Stop")
-                                    .foregroundStyle(Color.red)
-                                    
+                                    .foregroundColor(.red)
+                                    .onTapGesture {
+                                        isEndTime = true
+                                    }
                             }
                         }
-                        .onTapGesture {
-                            isEndTime = true
-                        }
-                        
-                        
+                        Spacer()
                     }
-                    
-                    
-                    
-                    Spacer()
                 }
+            }
+            .onAppear {
+                initializeState()
+            }
+            .navigationBarItems(trailing: Button(timesheet.id == KimaiTimesheet.new.id ? "Create" : "Save") {
+                var updatedTimesheet = timesheet
+                updatedTimesheet.project = selectedProject
+                updatedTimesheet.activity = selectedActivity
+                updatedTimesheet.begin = "\(startTime)"
+                updatedTimesheet.end = isEndTime ? "\(endTime)" : nil
+                updatedTimesheet.description = description
                 
-            }
-        }
-        
-        .onChange(of: selectedCustomer){
-            selectedProject = projectsFiltered.first?.id ?? 0
-        } 
-        
-        .onAppear {
-            
-            if  let project = projects.first(where: { $0.id == timesheet.project }),
-                let customer = customers.first(where: { $0.id == project.customer })
-            {
-                // use stored data
-                selectedCustomer = customer.id
-                selectedProject = project.id
-            } else {
-                // fallback to default data
-                selectedCustomer = customers.first?.id ?? 0
-                selectedProject = projectsFiltered.first?.id ?? 0
-            }
-            
-            if let activity = activitiesFiltered.first(where: { $0.id == timesheet.activity }) {
-                selectedActivity = activity.id
-            } else {
-                selectedActivity = activitiesFiltered.first?.id ?? 0
-            }
-            
-            description = timesheet.description ?? ""
-            startTime = getDate(timesheet.begin) ?? Date.now
-            endTime = getDate(timesheet.end ?? "") ?? Date.now
-            isEndTime = (timesheet.end != nil)
-        }
-        
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                let isCreate = timesheet.id == KimaiTimesheet.new.id
-                let label = isCreate ? "Create" : "Save"
-                Button(label) {
-                    var timesheet = timesheet
-                    timesheet.project = selectedProject
-                    timesheet.activity = selectedActivity
-                    timesheet.begin = "\(startTime)"
-                    timesheet.end = isEndTime ? "\(endTime)" : nil
-                    timesheet.description = description
-                    
-                    onSave(timesheet)
-                    
-                    timesheetView = nil
-                }
-            }
+                onSave(updatedTimesheet)
+                timesheetView = nil
+            })
         }
     }
     
-    func getDate(_ dateStr: String) -> Date? {
+    private func initializeState() {
+        if let project = projects.first(where: { $0.id == timesheet.project }),
+           let customer = customers.first(where: { $0.id == project.customer }) {
+            selectedCustomer = customer.id
+            selectedProject = project.id
+        } else {
+            selectedCustomer = customers.first?.id ?? 0
+            selectedProject = projectsFiltered.first?.id ?? 0
+        }
+        
+        if let activity = activitiesFiltered.first(where: { $0.id == timesheet.activity }) {
+            selectedActivity = activity.id
+        } else {
+            selectedActivity = activitiesFiltered.first?.id ?? 0
+        }
+        
+        description = timesheet.description ?? ""
+        startTime = getDate(from: timesheet.begin) ?? Date()
+        endTime = getDate(from: timesheet.end) ?? Date()
+        isEndTime = timesheet.end != nil
+    }
+    
+    private func getDate(from dateStr: String?) -> Date? {
+        guard let dateStr = dateStr else { return nil }
         let strategy = Date.ParseStrategy(
             format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))",
             timeZone: .current
         )
-        
         return try? Date(dateStr, strategy: strategy)
     }
 }
-

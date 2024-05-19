@@ -18,7 +18,7 @@ extension AppRoute {
         case .login:
             return "Login"
         case .management:
-            return "Management"
+            return "Projects"
         case .report:
             return "Report"
         case .settings:
@@ -29,7 +29,7 @@ extension AppRoute {
     var image: String {
         switch self {
         case .login: return "person"
-        case .management: return "house"
+        case .management: return "shippingbox.fill"
         case .report: return "chart.bar.xaxis.ascending"
         case .settings: return "gear"
         }

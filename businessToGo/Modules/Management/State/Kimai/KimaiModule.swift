@@ -23,6 +23,8 @@ struct KimaiModule {
     enum Action {
         case sync
         
+        case selectTeam(Int?)
+        
         case customers(RequestAction<KimaiCustomer>)
         case projects(RequestAction<KimaiProject>)
         case timesheets(RequestAction<KimaiTimesheet>)

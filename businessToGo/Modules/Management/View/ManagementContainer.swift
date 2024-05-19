@@ -4,7 +4,6 @@ import Redux
 struct ManagementContainer: View {
     @ObservedObject var store: StoreOf<ManagementModule>
     
-    @State var selectedTeam: Int = -1
     
     var body: some View {
         VStack {
@@ -79,7 +78,7 @@ extension ManagementContainer {
     
     @ViewBuilder func getHeader() -> some View {
         ManagementHeaderView(
-            selectedTeam: $selectedTeam,
+            selectedTeam: Binding(get: { store.state.kimai.selectedTeam } , set: { store.send(.kimai(.selectTeam($0))) }),
             route: store.state.routes.last,
             projects: store.state.kimai.projects,
             teams: store.state.kimai.teams,

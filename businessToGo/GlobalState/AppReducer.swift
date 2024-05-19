@@ -31,7 +31,7 @@ extension AppState {
             if(state.login.current == nil){
                 state.tab = .login
             } else {
-                state.tab = .management
+                state.tab = .report
             }
             return effect
         

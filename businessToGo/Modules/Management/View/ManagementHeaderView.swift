@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ManagementHeaderView: View {
-    @Binding var selectedTeam: Int
+    @Binding var selectedTeam: Int?
 
     let route: ManagementRoute?
     
@@ -19,10 +19,10 @@ struct ManagementHeaderView: View {
                 
                 Picker("", selection: $selectedTeam) {
                     Text("Alle Teams")
-                        .tag(-1)
+                        .tag(nil as Int?)
                     ForEach(teams, id: \.id) { team in
                         Text(team.name)
-                            .tag(team.id)
+                            .tag(team.id as Int?)
                     }
                 }
                 .pickerStyle(.menu)

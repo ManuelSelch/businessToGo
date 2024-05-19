@@ -28,7 +28,9 @@ extension ManagementRoute {
                 )
             )
         case .taiga(let route):
-            return AnyView( VStack {} )
+            return AnyView(
+                route.createView(store.lift(\.taiga, ManagementModule.Action.taiga, .init(taiga: store.dependencies.taiga, track: store.dependencies.track)))
+            )
         }
     }
 }

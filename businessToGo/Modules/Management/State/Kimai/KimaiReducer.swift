@@ -21,6 +21,9 @@ extension KimaiModule: Reducer {
                     just(.teams(.sync))
                 ]).eraseToAnyPublisher()
             
+            case .selectTeam(let team):
+                state.selectedTeam = team
+            
             case .customers(let action):
                 return RequestReducer.reduce(
                     action,
@@ -65,18 +68,20 @@ extension KimaiModule: Reducer {
                 .map { .activities($0) }
                 .eraseToAnyPublisher()
             
-        case .teams(let action):
-            return RequestReducer.reduce(
-                action,
-                env.kimai.teams,
-                env.track,
-                &state.teams,
-                &state.teamTracks
-            )
-            .map { .teams($0) }
-            .eraseToAnyPublisher()
+            case .teams(let action):
+                return RequestReducer.reduce(
+                    action,
+                    env.kimai.teams,
+                    env.track,
+                    &state.teams,
+                    &state.teamTracks
+                )
+                .map { .teams($0) }
+                .eraseToAnyPublisher()
 
         }
+        
+        return Empty().eraseToAnyPublisher()
     }
     
     

@@ -55,15 +55,6 @@
       }
     },
     {
-      "identity" : "redux",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Redux.git",
-      "state" : {
-        "revision" : "d2e47c020a1d25970ec06d1135004729c5644dde",
-        "version" : "1.0.9"
-      }
-    },
-    {
       "identity" : "rxswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",

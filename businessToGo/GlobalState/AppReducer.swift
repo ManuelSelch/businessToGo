@@ -36,7 +36,7 @@ extension AppState {
             return effect
         
         case .management(let action):
-            return ManagementState.reduce(&state.management, action, env.management)
+            return ManagementModule.reduce(&state.management, action, env.management)
                 .map { AppAction.management($0) }
                 .eraseToAnyPublisher()
         

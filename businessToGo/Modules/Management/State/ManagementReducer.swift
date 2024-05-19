@@ -1,7 +1,8 @@
 import Combine
+import Redux
 
-extension ManagementState {
-    static func reduce(_ state: inout ManagementState, _ action: ManagementAction, _ env: ManagementDependency) -> AnyPublisher<ManagementAction, Error>  {
+extension ManagementModule: Reducer {
+    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
         switch(action){
         case .route(let route):
             switch(route){
@@ -21,8 +22,8 @@ extension ManagementState {
             state.integrations = env.integrations.get()
             
             return Publishers.Merge(
-                env.just(.kimai(.sync)), 
-                env.just(.taiga(.sync))
+                just(.kimai(.sync)),
+                just(.taiga(.sync))
             ).eraseToAnyPublisher()
         
         
@@ -31,13 +32,13 @@ extension ManagementState {
             state.integrations = env.integrations.get()
             
         case .kimai(let action):
-            return KimaiState.reduce(&state.kimai, action, env)
+            return KimaiModule.reduce(&state.kimai, action, KimaiModule.Dependency(kimai: env.kimai, track: env.track))
                 .map { .kimai($0) }
                 .eraseToAnyPublisher()
             
         case .taiga(let action):
-            return TaigaState.reduce(&state.taiga, action, env)
-                .map { .taiga($0) }
+            return TaigaModule.reduce(&state.taiga, action, TaigaModule.Dependency(taiga: env.taiga, track: env.track))
+                .map { Action.taiga($0) }
                 .eraseToAnyPublisher()
             
         case .resetDatabase:

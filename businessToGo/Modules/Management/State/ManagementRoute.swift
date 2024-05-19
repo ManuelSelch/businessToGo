@@ -1,38 +1,21 @@
-import OfflineSync
-import SwiftUI
+import Foundation
 import Redux
-
-struct ManagementState: Equatable, Codable {
-    var routes: [ManagementRoute]
-    var sheet: ManagementRoute?
-    
-    var kimai: KimaiState
-    var taiga: TaigaState
-    var integrations: [Integration]
-
-    init(){
-        routes = []
-        kimai = KimaiState()
-        taiga = TaigaState()
-        integrations = []
-    }
-}
+import SwiftUI
 
 enum ManagementRoute: Equatable, Hashable, Codable, Identifiable {
     case kimai(KimaiRoute)
-    case taiga(TaigaScreen)
+    case taiga(TaigaRoute)
     
     var id: Self {self}
 }
 
 extension ManagementRoute {
-    func createView(_ store: Store<ManagementState, ManagementAction, ManagementDependency>) -> some View {
+    func createView(_ store: StoreOf<ManagementModule>) -> some View {
         switch self {
         case .kimai(let route):
             return AnyView(
-                KimaiContainer(
-                    store: store.lift(\.kimai, ManagementAction.kimai, store.dependencies),
-                    route: route,
+                route.createView(
+                    store: store.lift(\.kimai, ManagementModule.Action.kimai, .init(kimai: store.dependencies.kimai, track: store.dependencies.track)),
                     router: { store.send(.route($0)) },
                     onProjectClicked: { kimaiProject in
                         if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})

@@ -17,6 +17,6 @@ enum AppAction {
     case log(LogAction)
     
     case login(LoginAction)
-    case management(ManagementAction)
+    case management(ManagementModule.Action)
     case settings(SettingsAction)
 }

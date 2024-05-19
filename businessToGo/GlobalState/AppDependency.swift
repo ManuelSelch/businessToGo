@@ -9,7 +9,7 @@ import Login
 class AppDependency {    
     // MARK: - modules
     var log: Log.LogDependency = .init()
-    var management: ManagementDependency = .init()
+    var management: ManagementModule.Dependency = .init()
     var settings: SettingsDependency = .init()
     
     // MARK: - services
@@ -54,11 +54,4 @@ extension AppDependency {
             }
         }.eraseToAnyPublisher()
     }
-}
-
-class AppRouter: Codable {
-    var tab = AppRoute.login
-    
-    var management = ManagementRouter()
-    var settings = SettingsRouter()
 }

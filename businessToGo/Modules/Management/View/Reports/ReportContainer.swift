@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct ReportContainer: View {
-    @ObservedObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
+    @ObservedObject var store: StoreOf<ManagementModule>
     
     @State var selectedReportType: ReportType = .week
     @State var selectedDate: Date = Date.today

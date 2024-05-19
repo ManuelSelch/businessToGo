@@ -8,7 +8,7 @@ struct AppState: Codable {
     
     var log: LogState
     var login: LoginState
-    var management: ManagementState
+    var management: ManagementModule.State
     var settings: SettingsState
 }
 

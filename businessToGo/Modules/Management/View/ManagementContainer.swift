@@ -2,13 +2,12 @@ import SwiftUI
 import Redux
 
 struct ManagementContainer: View {
-    @ObservedObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
+    @ObservedObject var store: StoreOf<ManagementModule>
     
     @State var selectedTeam: Int = -1
     
     var body: some View {
         VStack {
-            
             getTimesheetPopup()
             
             NavigationStack(
@@ -17,15 +16,10 @@ struct ManagementContainer: View {
                     set: { store.send(.route(.set($0))) }
                 )
             ) {
-                getKimai(.customers)
+                ManagementRoute.kimai(.customers).createView(store)
                     .toolbar { ToolbarItem(placement: .topBarTrailing) { getHeader() } }
                     .navigationDestination(for: ManagementRoute.self) { route in
-                        VStack {
-                            switch route {
-                            case .kimai(let route): getKimai(route)
-                            case .taiga(let route): getTaiga(route)
-                            }
-                        }
+                        route.createView(store)
                         .toolbar { ToolbarItem(placement: .topBarTrailing) { getHeader() } }
                     }
                 
@@ -47,31 +41,6 @@ struct ManagementContainer: View {
 }
 
 extension ManagementContainer {
-    @ViewBuilder func getKimai(_ route: KimaiRoute) -> some View {
-        KimaiContainer(
-            store: store.lift(\.kimai, ManagementAction.kimai, store.dependencies),
-            route: route,
-            router: { store.send(.route($0)) },
-            onProjectClicked: { kimaiProject in
-                if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
-                {
-                    store.send(.route(.push(
-                        .taiga(.project(integration))
-                    )))
-                }
-            }
-        )
-    }
-    
-    @ViewBuilder func getTaiga(_ route: TaigaScreen) -> some View {
-        TaigaContainer(
-            store: store.lift(\.taiga, ManagementAction.taiga, store.dependencies),
-            route: route
-        )
-    }
-    
-
-    
     @ViewBuilder func getTimesheetPopup() -> some View {
         if let timesheet = store.state.kimai.timesheets.first(where: { $0.end == nil }) {
             if
@@ -117,17 +86,5 @@ extension ManagementContainer {
             router: { store.send(.route($0)) },
             onSync: { store.send(.sync) }
         )
-    }
-}
-
-extension ManagementContainer {
-    func saveTimesheet(_ timesheeet: KimaiTimesheet){
-        if(timesheeet.id == KimaiTimesheet.new.id){ // create
-            store.send(.kimai(.timesheets(.create(timesheeet))))
-        }else { // update
-            store.send(.kimai(.timesheets(.update(timesheeet))))
-            store.send(.route(.dismissSheet))
-        }
-        
     }
 }

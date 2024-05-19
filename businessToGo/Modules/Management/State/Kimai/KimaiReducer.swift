@@ -1,10 +1,11 @@
 import Foundation
 import Combine
 import Moya 
+import Redux
 
-extension KimaiState {
-    static func reduce(_ state: inout KimaiState, _ action: KimaiAction, _ env: ManagementDependency) -> AnyPublisher<KimaiAction, Error>  {
-        switch(action){                
+extension KimaiModule: Reducer {
+    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
+        switch(action){
             case .sync:
                 state.customers = env.kimai.customers.get()
                 state.projects = env.kimai.projects.get()
@@ -13,11 +14,11 @@ extension KimaiState {
                 state.teams = env.kimai.teams.get()
             
                 return Publishers.MergeMany([
-                    env.just(.customers(.sync)),
-                    env.just(.projects(.sync)),
-                    env.just(.timesheets(.sync)),
-                    env.just(.activities(.sync)),
-                    env.just(.teams(.sync))
+                    just(.customers(.sync)),
+                    just(.projects(.sync)),
+                    just(.timesheets(.sync)),
+                    just(.activities(.sync)),
+                    just(.teams(.sync))
                 ]).eraseToAnyPublisher()
             
             case .customers(let action):

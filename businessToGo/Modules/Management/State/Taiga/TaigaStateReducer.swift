@@ -1,8 +1,9 @@
 import Foundation
 import Combine
+import Redux
 
-extension TaigaState {
-    static func reduce(_ state: inout TaigaState, _ action: TaigaAction, _ env: ManagementDependency) -> AnyPublisher<TaigaAction, Error>  {
+extension TaigaModule: Reducer {
+    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
         switch(action){
         case .sync:
             state.projects = env.taiga.projects.get()
@@ -12,11 +13,11 @@ extension TaigaState {
             state.milestones = env.taiga.milestones.get()
             
             return Publishers.MergeMany([
-                env.just(.projects(.sync)),
-                env.just(.milestones(.sync)),
-                env.just(.statusList(.sync)),
-                env.just(.taskStories(.sync)),
-                env.just(.tasks(.sync))
+                just(.projects(.sync)),
+                just(.milestones(.sync)),
+                just(.statusList(.sync)),
+                just(.taskStories(.sync)),
+                just(.tasks(.sync))
             ]).eraseToAnyPublisher()
         
         case .projects(let action):

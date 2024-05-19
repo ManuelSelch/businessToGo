@@ -2,16 +2,23 @@ import SwiftUI
 import Redux
 
 struct SettingsContainer: View {
-    @EnvironmentObject var router: SettingsRouter
-    @EnvironmentObject var store: Store<AppState, AppAction, Environment>
+    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
     
     @State var projectView: KimaiProject?
 
     var body: some View {
-        NavigationStack(path: $router.routes){
+        NavigationStack(
+            path:  Binding(
+                get: { store.state.settings.routes },
+                set: { store.send(.settings(.route(.set($0)))) }
+            )
+        ){
             SettingsView(
-                navigate: navigate,
-                logout: { store.send(.login(.logout)) }
+                navigate: { store.send(.settings(.route(.push($0)))) },
+                logout: {
+                    store.send(.login(.logout))
+                    store.send(.route(.dismissSheet))
+                }
             )
                 .navigationDestination(for: SettingsRoute.self){ route in
                     switch(route){
@@ -21,7 +28,7 @@ struct SettingsContainer: View {
                             projects: store.state.management.kimai.projects,
                             taigaProjects: store.state.management.taiga.projects,
                             integrations: store.state.management.integrations,
-                            onConnect: connect
+                            onConnect: { store.send(.management(.connect($0, $1))) }
                         )
                     case .debug:
                         
@@ -34,8 +41,7 @@ struct SettingsContainer: View {
                             },
                             onReset: {
                                 store.send(.management(.resetDatabase))
-                                store.dependencies.router.tab = .management
-                                store.dependencies.router.management.routes = []
+                                store.send(.login(.logout))
                             }
                         )
                     }
@@ -56,13 +62,8 @@ struct SettingsContainer: View {
                 }
             )
         }
-    }
-    
-    func navigate(_ route: SettingsRoute){
-        router.navigate(route)
-    }
-    
-    func connect(_ kimai: Int, _ taiga: Int){
-        store.send(.management(.connect(kimai, taiga)))
+        
+        .edgesIgnoringSafeArea(.bottom)
+        .frame(maxWidth: .infinity)
     }
 }

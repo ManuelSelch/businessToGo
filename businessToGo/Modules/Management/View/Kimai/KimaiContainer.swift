@@ -3,58 +3,29 @@ import Redux
 import OfflineSync
 
 struct KimaiContainer: View {
-    @EnvironmentObject var router: ManagementRouter
-    @EnvironmentObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
-    
-    @Binding var selectedTeam: Int
-    @Binding var timesheetView: KimaiTimesheet?
-    
-    @State var customerView: KimaiCustomer?
-    @State var projectView: KimaiProject?
+    @ObservedObject var store: Store<KimaiState, KimaiAction, ManagementDependency>
     
     var route: KimaiRoute
+    var router: (RouteAction<ManagementRoute>) -> ()
     
-    var onProjectClicked: (_ kimaiProject: Int) -> ()
+    var onProjectClicked: (Int) -> ()
     
     var body: some View {
         VStack {
             switch route {
             case .customers:
                 getCustomersView()
+            case .customer(let customer):
+                getCustomerView(customer)
                 
-            case .customer(let id):
-                getProjectsView(id)
+            case .projects(for: let id):
+                getProjectsView(for: id)
+            case .project(let project):
+                getProjectView(project)
+                
+            case .timesheet(let timesheet):
+                getTimesheetView(timesheet)
             }
-        }
-        .sheet(item: $customerView){ customer in
-            KimaiCustomerSheet(
-                customer: customer,
-                teams: store.state.teams,
-                onSave: { customer in
-                    let isCreate = (customer.id == KimaiCustomer.new.id)
-                    if(isCreate){
-                        store.send(.customers(.create(customer)))
-                    }else {
-                        store.send(.customers(.update(customer)))
-                    }
-                    customerView = nil
-                }
-            )
-        }
-        .sheet(item: $projectView){ project in
-            KimaiProjectSheet(
-                project: project,
-                customers: store.state.customers,
-                onSave: { project in
-                    let isCreate = (project.id == KimaiProject.new.id)
-                    if(isCreate){
-                        store.send(.projects(.create(project)))
-                    }else {
-                        store.send(.projects(.update(project)))
-                    }
-                    projectView = nil
-                }
-            )
         }
     }
     
@@ -63,32 +34,70 @@ struct KimaiContainer: View {
 extension KimaiContainer {
     @ViewBuilder func getCustomersView() -> some View {
         KimaiCustomersView(
-            customers: store.state.customers.filter { 
-                if selectedTeam == -1 {
-                    return true
+            customers: store.state.customers.filter {
+                if let team = store.state.selectedTeam {
+                    return $0.teams.contains(team)
                 } else {
-                    return $0.teams.contains(selectedTeam)
+                    return true
                 }
             },
             changes: store.state.customerTracks,
-            onCustomerSelected: { customer in
-                router.navigate(.kimai(.customer(customer)))
-            },
-            onEdit: { customer in
-                customerView = customer
+            router: { router($0) }
+        )
+    }
+    
+    @ViewBuilder func getCustomerView(_ customer: KimaiCustomer) -> some View {
+        KimaiCustomerSheet(
+            customer: customer,
+            teams: store.state.teams,
+            onSave: {
+                if($0.id == KimaiCustomer.new.id){
+                    store.send(.customers(.create($0)))
+                } else {
+                    store.send(.customers(.update($0)))
+                }
             }
         )
     }
     
-    @ViewBuilder func getProjectsView(_ customer: Int) -> some View {
+    @ViewBuilder func getProjectsView(for customer: Int) -> some View {
         KimaiProjectsView(
             customer: customer,
             projects: store.state.projects.filter { $0.customer == customer },
             timesheets: store.state.timesheets,
             changes: store.state.projectTracks,
             projectClicked: onProjectClicked,
-            onEdit: { project in
-                projectView = project
+            onEdit: { router(.presentSheet(.kimai(.project($0)))) }
+        )
+    }
+    
+    @ViewBuilder func getProjectView(_ project: KimaiProject) -> some View {
+        KimaiProjectSheet(
+            project: project,
+            customers: store.state.customers,
+            onSave: {
+                if($0.id == KimaiProject.new.id){
+                    store.send(.projects(.create($0)))
+                } else {
+                    store.send(.projects(.update($0)))
+                }
+            }
+        )
+    }
+    
+    @ViewBuilder func getTimesheetView(_ timesheet: KimaiTimesheet) -> some View {
+        KimaiTimesheetSheet(
+            timesheet: timesheet,
+            customers: store.state.customers,
+            projects: store.state.projects,
+            activities: store.state.activities,
+            onSave: {
+                if($0.id == KimaiTimesheet.new.id){
+                    store.send(.timesheets(.create($0)))
+                } else {
+                    store.send(.timesheets(.update($0)))
+                }
+                router(.dismissSheet)
             }
         )
     }

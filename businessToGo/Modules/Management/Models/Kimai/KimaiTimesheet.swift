@@ -1,7 +1,7 @@
 import Foundation
 import OfflineSync
 
-struct KimaiTimesheet: TableProtocol {
+struct KimaiTimesheet: TableProtocol, Hashable {
     var activity: Int
     var project: Int
     var user: Int

@@ -14,6 +14,7 @@ struct ReportHeaderView: View {
                     isCalendarPicker = true
                 }){
                     Image(systemName: "calendar")
+                        .font(.system(size: 20))
                         .foregroundStyle(Color.theme)
                 }
                 

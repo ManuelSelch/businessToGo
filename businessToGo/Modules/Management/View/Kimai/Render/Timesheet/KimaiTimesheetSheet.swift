@@ -8,7 +8,6 @@ struct KimaiTimesheetSheet: View {
     
     let onSave: (_ timesheet: KimaiTimesheet) -> Void
     
-    @Binding var timesheetView: KimaiTimesheet?
     
     @State private var selectedCustomer: Int = 0
     @State private var selectedProject: Int = 0
@@ -28,22 +27,6 @@ struct KimaiTimesheetSheet: View {
             filteredActivities = filteredActivities.filter { $0.project == project.id }
         }
         return filteredActivities.sorted { $0.name < $1.name }
-    }
-    
-    init(
-        timesheet: KimaiTimesheet,
-        customers: [KimaiCustomer],
-        projects: [KimaiProject],
-        activities: [KimaiActivity],
-        onSave: @escaping (_: KimaiTimesheet) -> Void,
-        timesheetView: Binding<KimaiTimesheet?>
-    ) {
-        _timesheet = State(initialValue: timesheet)
-        self.customers = customers
-        self.projects = projects
-        self.activities = activities
-        self.onSave = onSave
-        self._timesheetView = timesheetView
     }
     
     var body: some View {
@@ -128,7 +111,6 @@ struct KimaiTimesheetSheet: View {
                 updatedTimesheet.description = description
                 
                 onSave(updatedTimesheet)
-                timesheetView = nil
             })
         }
     }

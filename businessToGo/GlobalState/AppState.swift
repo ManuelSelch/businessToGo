@@ -1,18 +1,24 @@
 import Foundation
 import Log
 
-struct AppState: Equatable, Codable {
-    var log: LogState
+
+struct AppState: Codable {
+    var tab: AppRoute
+    var sheet: AppRoute?
     
+    var log: LogState
     var login: LoginState
     var management: ManagementState
+    var settings: SettingsState
 }
 
 extension AppState {
     init(){
-        log = LogState()
+        tab = .login
         
-        login = LoginState()
-        management = ManagementState()
+        log = .init()
+        login = .init()
+        management = .init()
+        settings = .init()
     }
 }

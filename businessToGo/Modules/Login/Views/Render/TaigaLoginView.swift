@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct TaigaLoginView: View {
-    @EnvironmentObject private var store: Store<LoginState, LoginAction, Environment>
+    @ObservedObject var store: Store<LoginState, LoginAction, AppDependency>
     
     @State private var server: String = ""
     @State private var username: String = ""

@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct AccountsView: View {
-    @EnvironmentObject var store: Store<LoginState, LoginAction, Environment>
+    @ObservedObject var store: Store<LoginState, LoginAction, AppDependency>
     
     var body: some View {
         VStack {

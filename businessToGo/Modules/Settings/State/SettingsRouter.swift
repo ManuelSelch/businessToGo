@@ -1,8 +1,9 @@
 import Foundation
 import Redux
 
-class SettingsRouter: Router {
-    @Published var routes: [SettingsRoute] = []
+class SettingsRouter: Router, Codable {
+    var routes: [SettingsRoute] = []
+    var isSidebar = false
     
     var title: String {
         switch(routes.last){
@@ -13,7 +14,7 @@ class SettingsRouter: Router {
     }
 }
 
-enum SettingsRoute {
+enum SettingsRoute: Codable {
     case integrations
     case debug
 }

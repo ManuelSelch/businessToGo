@@ -2,13 +2,10 @@ import SwiftUI
 import Redux
 
 struct AccountView: View {
-    @EnvironmentObject var store: Store<LoginState, LoginAction, Environment>
+    @ObservedObject var store: Store<LoginState, LoginAction, AppDependency>
     let account: Account
     @State var name = ""
     
-    init(account: Account){
-        self.account = account
-    }
     
     var body: some View {
         VStack {

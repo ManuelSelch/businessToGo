@@ -2,11 +2,11 @@ import SwiftUI
 import Redux
 
 struct ReportContainer: View {
-    @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
+    @ObservedObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
+    
     @State var selectedReportType: ReportType = .week
     @State var selectedDate: Date = Date.today
     @State var isCalendarPicker = false
-    @State var timesheetView: KimaiTimesheet?
     
     var timesheets: [KimaiTimesheet] {
         let timesheets = store.state.kimai.timesheets
@@ -35,9 +35,6 @@ struct ReportContainer: View {
             YearMonthPickerView(selectedDate: $selectedDate)
                 .presentationDetents([.medium])
         }
-        .sheet(item: $timesheetView){ timesheet in
-            getTimesheeetSheet(timesheet)
-        }
         
     }
     
@@ -51,7 +48,7 @@ extension ReportContainer {
             selectedReportType: $selectedReportType,
             selectedDate: $selectedDate,
             isCalendarPicker: $isCalendarPicker,
-            onEdit: { timesheetView = $0 }
+            onEdit: { store.send(.route(.presentSheet(.kimai(.timesheet($0))))) }
         )
     }
     
@@ -62,7 +59,7 @@ extension ReportContainer {
             projects: store.state.kimai.projects,
             activities: store.state.kimai.activities,
             changes: store.state.kimai.timesheetTracks,
-            onEditClicked: { timesheetView = $0 },
+            onEditClicked: { store.send(.route(.presentSheet(.kimai(.timesheet($0))))) },
             onDeleteClicked: { store.send(.kimai(.timesheets(.delete($0)))) }
         )
     }
@@ -99,8 +96,7 @@ extension ReportContainer {
                 } else {
                     store.send(.kimai(.timesheets(.update(timesheet))))
                 }
-            },
-            timesheetView: $timesheetView
+            }
         )
     }
 }

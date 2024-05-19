@@ -5,19 +5,10 @@ import Log
 
 @main
 struct businessToGoApp: App {
-    var body: some Scene {
-        WindowGroup {
-            BusinessToGoView()
-                .scrollContentBackground(.hidden)
-        }
-    }
-}
-
-struct BusinessToGoView: View {
     @StateObject var store = Store(
         initialState: AppState(),
         reducer: AppState.reduce,
-        dependencies: Environment(),
+        dependencies: AppDependency(),
         middlewares: [
             { state, action, env in
                 switch(action){
@@ -34,51 +25,74 @@ struct BusinessToGoView: View {
         }
     )
     
-    @State var showSidebar = false
+    var body: some Scene {
+        WindowGroup {
+            BusinessToGoView(store: store)
+                .scrollContentBackground(.hidden)
+        }
+    }
+}
+
+struct BusinessToGoView: View {
+    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
     
     var body: some View {
         VStack(spacing: 0) {
             Header(
-                showSidebar: $showSidebar
+                store: store
             )
             
             ZStack {
-                AppTabView()
+                AppTabView(store: store)
                 
                 VStack {
                     Spacer()
                     LogView()
                         .environmentObject(store.lift(\.log, AppAction.log, store.dependencies.log))
                 }
-                
-                Sidebar(showSidebar: $showSidebar)
             }
             
         }
-        .environmentObject(store)
-        .environmentObject(store.dependencies.router)
+        .sheet(
+            item: Binding(
+                get: { store.state.sheet },
+                set: {
+                    if let route = $0 {
+                        store.send(.route(.presentSheet(route)))
+                    } else {
+                        store.send(.route(.dismissSheet))
+                    }
+                }
+            )
+        ){ route in
+            route.createView(store)
+        }
     }
 }
 
 struct AppTabView: View {
-    @EnvironmentObject var router: AppRouter
-    @EnvironmentObject var store: Store<AppState, AppAction, Environment>
+    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
     
     var body: some View {
-        if(router.tab == .login){
-            AppScreen.login.createView(store, router)
-        }else {
-            TabView(selection: $router.tab) {
+        switch(store.state.tab){
+        case .login:
+            AppRoute.login.createView(store)
+        default:
+            TabView(
+                selection: Binding(
+                    get: { store.state.tab },
+                    set: { store.send(.tab($0)) }
+                )
+            ) {
                 createTab(.management)
                 createTab(.report)
-                createTab(.kimaiSettings)
             }
         }
     }
     
     @ViewBuilder
-    func createTab(_ tab: AppScreen) -> some View {
-        tab.createView(store, router)
+    func createTab(_ tab: AppRoute) -> some View {
+        tab.createView(store)
             .tag(tab)
             .tabItem {tab.label }
     }

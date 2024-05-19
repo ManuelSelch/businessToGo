@@ -1,21 +1,15 @@
 import SwiftUI
+import Redux
 
 struct Header: View {
-    @EnvironmentObject var router: AppRouter
-    @Binding var showSidebar: Bool
+    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
     
     var body: some View {
         ZStack {
             HStack {
                 Spacer()
-                switch(router.tab){
-                case .management:
-                    Text(router.management.title)
-                case .kimaiSettings:
-                    Text(router.settings.title)
-                default:
-                    Text(router.tab.title)
-                }
+                
+                Text(store.state.tab.title)
                
                 Spacer()
             }
@@ -25,18 +19,11 @@ struct Header: View {
                 Spacer()
                 
                 Button(action: {
-                    self.showSidebar.toggle()
+                    store.send(.route(.presentSheet(.settings)))
                 }){
-                    if(showSidebar){
-                        Image(systemName: "xmark")
-                            .font(.system(size: 25))
-                            .foregroundColor(Color.white)
-                    } else{
-                        Image(systemName: "text.justify")
-                            .font(.system(size: 25))
-                            .foregroundColor(Color.white)
-                    }
-                    
+                    Image(systemName: "gear")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color.white)
                 }
             }
                 

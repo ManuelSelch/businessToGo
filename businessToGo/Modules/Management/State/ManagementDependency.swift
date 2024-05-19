@@ -42,8 +42,8 @@ class ManagementDependency: IService {
     }
 }
 
-class ManagementRouter: Router {
-    @Published var routes: [ManagementRoute] = []
+class ManagementRouter: Router, Codable {
+    var routes: [ManagementRoute] = []
     
     var title: String {
         switch(routes.last){
@@ -51,6 +51,9 @@ class ManagementRouter: Router {
             switch(kimai){
             case .customers: return "Kunden"
             case .customer(_): return "Kunde"
+            case .projects(for: _): return "Projekte"
+            case .project(_): return "Projekt"
+            case .timesheet(_): return "Timesheet"
             }
         case .taiga(let taiga):
             switch(taiga){

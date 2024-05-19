@@ -2,10 +2,8 @@ import SwiftUI
 import Redux
 
 struct ManagementContainer: View {
-    @EnvironmentObject var router: ManagementRouter
-    @EnvironmentObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
+    @ObservedObject var store: Store<ManagementState, ManagementAction, ManagementDependency>
     
-    @State var timesheetView: KimaiTimesheet?
     @State var selectedTeam: Int = -1
     
     var body: some View {
@@ -13,7 +11,12 @@ struct ManagementContainer: View {
             
             getTimesheetPopup()
             
-            NavigationStack(path: $router.routes) {
+            NavigationStack(
+                path: Binding(
+                    get: { store.state.routes },
+                    set: { store.send(.route(.set($0))) }
+                )
+            ) {
                 getKimai(.customers)
                     .toolbar { ToolbarItem(placement: .topBarTrailing) { getHeader() } }
                     .navigationDestination(for: ManagementRoute.self) { route in
@@ -28,8 +31,17 @@ struct ManagementContainer: View {
                 
             }
         }
-        .sheet(item: $timesheetView) { timesheet in
-            getTimesheetSheet(timesheet)
+        .sheet(item: Binding(
+            get: { store.state.sheet },
+            set: {
+                if let route = $0 {
+                    store.send(.route(.presentSheet(route)))
+                } else {
+                    store.send(.route(.dismissSheet))
+                }
+            }
+        )) { route in
+            route.createView(store)
         }
     }
 }
@@ -37,37 +49,28 @@ struct ManagementContainer: View {
 extension ManagementContainer {
     @ViewBuilder func getKimai(_ route: KimaiRoute) -> some View {
         KimaiContainer(
-            selectedTeam: $selectedTeam,
-            timesheetView: $timesheetView,
+            store: store.lift(\.kimai, ManagementAction.kimai, store.dependencies),
             route: route,
+            router: { store.send(.route($0)) },
             onProjectClicked: { kimaiProject in
                 if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
                 {
-                    router.navigate(.taiga(.project(integration)))
+                    store.send(.route(.push(
+                        .taiga(.project(integration))
+                    )))
                 }
             }
         )
-            .environmentObject(store.lift(\.kimai, ManagementAction.kimai, store.dependencies))
     }
     
     @ViewBuilder func getTaiga(_ route: TaigaScreen) -> some View {
-        TaigaContainer(route: route)
-            .environmentObject(store.lift(\.taiga, ManagementAction.taiga, store.dependencies))
+        TaigaContainer(
+            store: store.lift(\.taiga, ManagementAction.taiga, store.dependencies),
+            route: route
+        )
     }
     
-    @ViewBuilder func getTimesheetSheet(_ timesheet: KimaiTimesheet) -> some View {
-        KimaiTimesheetSheet(
-            timesheet: timesheet,
-            customers: store.state.kimai.customers,
-            projects: store.state.kimai.projects,
-            activities: store.state.kimai.activities,
-            
-            onSave: saveTimesheet,
-            timesheetView: $timesheetView
-        )
-        
-        
-    }
+
     
     @ViewBuilder func getTimesheetPopup() -> some View {
         if let timesheet = store.state.kimai.timesheets.first(where: { $0.end == nil }) {
@@ -107,11 +110,11 @@ extension ManagementContainer {
     
     @ViewBuilder func getHeader() -> some View {
         ManagementHeaderView(
-            timesheetView: $timesheetView,
             selectedTeam: $selectedTeam,
-            route: router.routes.last,
+            route: store.state.routes.last,
             projects: store.state.kimai.projects,
             teams: store.state.kimai.teams,
+            router: { store.send(.route($0)) },
             onSync: { store.send(.sync) }
         )
     }
@@ -123,7 +126,7 @@ extension ManagementContainer {
             store.send(.kimai(.timesheets(.create(timesheeet))))
         }else { // update
             store.send(.kimai(.timesheets(.update(timesheeet))))
-            timesheetView = nil
+            store.send(.route(.dismissSheet))
         }
         
     }

@@ -2,7 +2,7 @@ import Foundation
 import OfflineSync
 import SwiftUI
 
-struct KimaiCustomer: TableProtocol {
+struct KimaiCustomer: TableProtocol, Hashable {
     var id: Int
     var name: String
     var number: String?

@@ -6,13 +6,11 @@ import Log
 import Redux
 import Login
 
-class Environment {
-    // MARK: - global
-    var router: AppRouter = .init()
-    
+class AppDependency {    
     // MARK: - modules
     var log: Log.LogDependency = .init()
     var management: ManagementDependency = .init()
+    var settings: SettingsDependency = .init()
     
     // MARK: - services
     var keychain: KeychainService<Account> = .init("de.selch.businessToGo")
@@ -23,7 +21,7 @@ class Environment {
 
 
 // MARK: - helper methods
-extension Environment {
+extension AppDependency {
     func action(_ action: AppAction) -> AnyPublisher<AppAction, Error> {
         return Just(action)
             .setFailureType(to: Error.self)
@@ -58,8 +56,8 @@ extension Environment {
     }
 }
 
-class AppRouter: ObservableObject {
-    @Published var tab = AppScreen.login
+class AppRouter: Codable {
+    var tab = AppRoute.login
     
     var management = ManagementRouter()
     var settings = SettingsRouter()

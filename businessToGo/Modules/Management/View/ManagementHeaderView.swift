@@ -1,15 +1,14 @@
 import SwiftUI
 
 struct ManagementHeaderView: View {
-    @Binding var timesheetView: KimaiTimesheet?
     @Binding var selectedTeam: Int
 
-    
     let route: ManagementRoute?
     
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
     
+    let router: (RouteAction<ManagementRoute>) -> ()
     let onSync: () -> ()
 
     
@@ -43,17 +42,17 @@ struct ManagementHeaderView: View {
              
             Button(action: {
                 switch(route){
-                case .kimai(.customer(let customer)):
+                case .kimai(.projects(for: let customer)):
                     let project = projects.first { $0.customer ==  customer}
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = project?.id ?? 0
-                    timesheetView = timesheet
+                    router(.presentSheet(.kimai(.timesheet(timesheet))))
                 case .taiga(.project(let integration)):
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = integration.id
-                    timesheetView = timesheet
+                    router(.presentSheet(.kimai(.timesheet(timesheet))))
                 default:
-                    timesheetView = KimaiTimesheet.new
+                    router(.presentSheet(.kimai(.timesheet(KimaiTimesheet.new))))
                 }
                 
             }){

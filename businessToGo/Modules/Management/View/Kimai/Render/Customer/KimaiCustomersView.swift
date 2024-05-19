@@ -4,16 +4,13 @@ import OfflineSync
 struct KimaiCustomersView: View {
     let customers: [KimaiCustomer]
     let changes: [DatabaseChange]
-    let onCustomerSelected: (Int) -> Void
-    
+    let router: (RouteAction<ManagementRoute>) -> ()
     
     var customersFiltered: [KimaiCustomer] {
         var c = customers
         c.sort { $0.name < $1.name }
         return c
     }
-    
-    var onEdit: (KimaiCustomer) -> ()
     
     var body: some View {
         VStack {
@@ -25,11 +22,11 @@ struct KimaiCustomersView: View {
                 KimaiCustomerCard(
                     customer: customer, 
                     change: changes.first(where: { $0.recordID == customer.id }),
-                    onCustomerSelected: onCustomerSelected
+                    onCustomerSelected: { router(.push(.kimai(.projects(for: $0)))) }
                 )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {
-                            onEdit(customer)
+                            router(.presentSheet(.kimai(.customer(customer))))
                         } label: {
                             Text("Edit")
                                 .foregroundColor(.white)
@@ -40,7 +37,7 @@ struct KimaiCustomersView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        onEdit(KimaiCustomer.new)
+                        router(.presentSheet(.kimai(.customer(KimaiCustomer.new))))
                     }){
                         Image(systemName: "plus")
                             .font(.system(size: 20))
@@ -63,7 +60,6 @@ struct KimaiCustomersView: View {
     return KimaiCustomersView(
         customers: customers,
         changes: [],
-        onCustomerSelected: { _ in},
-        onEdit: { _ in}
+        router: { _ in}
     )
 }

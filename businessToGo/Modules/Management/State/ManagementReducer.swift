@@ -3,6 +3,20 @@ import Combine
 extension ManagementState {
     static func reduce(_ state: inout ManagementState, _ action: ManagementAction, _ env: ManagementDependency) -> AnyPublisher<ManagementAction, Error>  {
         switch(action){
+        case .route(let route):
+            switch(route){
+            case .push(let route):
+                state.routes.append(route)
+            case .pop:
+                state.routes.removeLast()
+            case .set(let routes):
+                state.routes = routes
+            case .presentSheet(let route):
+                state.sheet = route
+            case .dismissSheet:
+                state.sheet = nil
+            }
+            
         case .sync:
             state.integrations = env.integrations.get()
             

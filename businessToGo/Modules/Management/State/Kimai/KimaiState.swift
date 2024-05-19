@@ -1,12 +1,23 @@
 import Foundation
 import OfflineSync
+import Redux
+import SwiftUI
 
 enum KimaiRoute: Equatable, Hashable, Codable {
     case customers
-    case customer(Int)
+    case customer(KimaiCustomer)
+    
+    case projects(for: Int)
+    case project(KimaiProject)
+    
+    case timesheet(KimaiTimesheet)
 }
 
+
+
 struct KimaiState: Equatable, Codable {
+    var selectedTeam: Int?
+    
     var customers: [KimaiCustomer]
     var projects: [KimaiProject]
     var timesheets: [KimaiTimesheet]

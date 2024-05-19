@@ -3,7 +3,7 @@ import Combine
 import OfflineSync
 
 extension LoginState {
-    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: Environment) -> AnyPublisher<AppAction, Error>  {
+    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: AppDependency) -> AnyPublisher<AppAction, Error>  {
         switch(action){
             case .navigate(let scene):
                 state.scene = scene
@@ -12,9 +12,6 @@ extension LoginState {
                 state.scene = .accounts
                 state.current = nil
                 env.keychain.logout()
-                env.router.tab = .login
-                env.router.management.routes = []
-                env.router.settings.routes = []
             
             case .reset:
                 do {
@@ -52,14 +49,15 @@ extension LoginState {
                             .eraseToAnyPublisher()
                     case .accounts:
                         state.current = account
-                        env.router.tab = .management
+                        
                         env.management.changeDB("businessToGo_\(account.identifier)")
                         env.keychain.login(account)
-                        return Publishers.Merge(
-                            loginKimai(account, env), loginTaiga(account, env)
-                        )
-                        .map { .login($0) }
-                        .eraseToAnyPublisher()
+                        
+                    return Publishers.Merge(
+                        loginKimai(account, env), loginTaiga(account, env)
+                    )
+                    .map { .login($0) }
+                    .eraseToAnyPublisher()
                     
                 default: break
                 }
@@ -90,7 +88,7 @@ extension LoginState {
     }
     
     
-    static func loginKimai(_ account: Account, _ env: Environment) -> AnyPublisher<LoginAction, Error> {
+    static func loginKimai(_ account: Account, _ env: AppDependency) -> AnyPublisher<LoginAction, Error> {
         return Future<LoginAction, Error> { promise in
             Task {
                 do {
@@ -109,7 +107,7 @@ extension LoginState {
         }.eraseToAnyPublisher()
     }
     
-    static func loginTaiga(_ account: Account, _ env: Environment) -> AnyPublisher<LoginAction, Error> {
+    static func loginTaiga(_ account: Account, _ env: AppDependency) -> AnyPublisher<LoginAction, Error> {
         return Future<LoginAction, Error> { promise in
             Task {
                 do {

@@ -1,9 +1,10 @@
 import Foundation
 import Combine
 import OfflineSync
+import Redux
 
-extension LoginState {
-    public static func reduce(_ state: inout LoginState, _ action: LoginAction, _ env: AppDependency) -> AnyPublisher<AppAction, Error>  {
+extension LoginModule: Reducer {
+    public static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
         switch(action){
             case .navigate(let scene):
                 state.scene = scene
@@ -30,7 +31,7 @@ extension LoginState {
                     }
                     if(state.current == nil){
                         if let account = try env.keychain.getCurrentAccount(state.accounts) {
-                            return env.just(.login(.login(account)))
+                            return just(.login(account))
                         }
                     }
                 } catch {
@@ -41,12 +42,8 @@ extension LoginState {
                 switch(state.scene){
                     case .kimai:
                         return loginKimai(account, env) // -> saveAccount
-                            .map { .login($0) }
-                            .eraseToAnyPublisher()
                     case .taiga:
                         return loginTaiga(account, env) // -> saveAccount
-                            .map { .login($0) }
-                            .eraseToAnyPublisher()
                     case .accounts:
                         state.current = account
                         
@@ -56,7 +53,6 @@ extension LoginState {
                     return Publishers.Merge(
                         loginKimai(account, env), loginTaiga(account, env)
                     )
-                    .map { .login($0) }
                     .eraseToAnyPublisher()
                     
                 default: break
@@ -70,7 +66,8 @@ extension LoginState {
             case .saveAccount(let account):
                 state.scene = .account(account)
                 try? env.keychain.saveAccount(account)
-                return env.just(.management(.sync))
+                // return just(.management(.sync))
+                // todo: start sync
             
             case .status(let status):
                 state.loginStatus = status
@@ -88,8 +85,8 @@ extension LoginState {
     }
     
     
-    static func loginKimai(_ account: Account, _ env: AppDependency) -> AnyPublisher<LoginAction, Error> {
-        return Future<LoginAction, Error> { promise in
+    static func loginKimai(_ account: Account, _ env: Dependency) -> AnyPublisher<Action, Error> {
+        return Future<Action, Error> { promise in
             Task {
                 do {
                     guard let kimai = account.kimai else { promise(.failure(ServiceError.unknown("kimai account not found"))); return }
@@ -107,8 +104,8 @@ extension LoginState {
         }.eraseToAnyPublisher()
     }
     
-    static func loginTaiga(_ account: Account, _ env: AppDependency) -> AnyPublisher<LoginAction, Error> {
-        return Future<LoginAction, Error> { promise in
+    static func loginTaiga(_ account: Account, _ env: Dependency) -> AnyPublisher<Action, Error> {
+        return Future<Action, Error> { promise in
             Task {
                 do {
                     guard let taiga = account.taiga else { promise(.failure(ServiceError.unknown("taiga account not found"))); return }

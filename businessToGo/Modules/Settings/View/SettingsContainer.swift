@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct SettingsContainer: View {
-    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
+    @ObservedObject var store: StoreOf<AppModule>
     
     @State var projectView: KimaiProject?
 

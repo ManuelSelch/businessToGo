@@ -1,10 +1,11 @@
 import Foundation
 import Combine
 import Log
+import Redux
 
-extension AppState {
+extension AppModule: Reducer {
     
-    static func reduce(_ state: inout AppState, _ action: AppAction, _ env: AppDependency) -> AnyPublisher<AppAction, Error>  {
+    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
         switch action {
         case .route(let action):
             switch(action){
@@ -23,21 +24,25 @@ extension AppState {
             
         case .log(let action):
             return LogState.reduce(&state.log, action, env.log)
-                .map { AppAction.log($0) }
+                .map { .log($0) }
                 .eraseToAnyPublisher()
         
         case .login(let action):
-            let effect = LoginState.reduce(&state.login, action, env)
+            let effect = LoginModule.reduce(&state.login, action, LoginModule.Dependency(management: env.management, keychain: env.keychain))
+            
             if(state.login.current == nil){
                 state.tab = .login
             } else {
                 state.tab = .report
             }
+            
             return effect
+                .map { .login($0) }
+                .eraseToAnyPublisher()
         
         case .management(let action):
             return ManagementModule.reduce(&state.management, action, env.management)
-                .map { AppAction.management($0) }
+                .map { .management($0) }
                 .eraseToAnyPublisher()
         
         case .settings(let action):

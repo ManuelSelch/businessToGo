@@ -43,6 +43,7 @@ extension KimaiRoute {
                     } else {
                         store.send(.customers(.update($0)))
                     }
+                    router(.dismissSheet)
                 }
             )
             

@@ -1,4 +1,5 @@
 import Foundation
+import Redux
 
 struct ManagementModule {
     struct State: Equatable, Codable {

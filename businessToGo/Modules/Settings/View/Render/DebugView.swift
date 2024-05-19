@@ -4,7 +4,7 @@ import Redux
 struct DebugView: View {
     @State var isLog: Bool = false
     let current: Account?
-    let state: AppState
+    let state: AppModule.State
     
     var onUpdateLog: (Bool) -> ()
     var onReset: () -> ()

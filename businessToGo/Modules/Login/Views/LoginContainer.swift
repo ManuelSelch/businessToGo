@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct LoginContainer: View {
-    @ObservedObject var store: Store<LoginState, LoginAction, AppDependency>
+    @ObservedObject var store: StoreOf<LoginModule>
     
     var body: some View {
         switch(store.state.scene){

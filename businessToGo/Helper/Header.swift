@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct Header: View {
-    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
+    @ObservedObject var store: StoreOf<AppModule>
     
     var body: some View {
         ZStack {

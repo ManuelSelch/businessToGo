@@ -1,4 +1,5 @@
 import SwiftUI
+import Redux
 
 struct ManagementHeaderView: View {
     @Binding var selectedTeam: Int?

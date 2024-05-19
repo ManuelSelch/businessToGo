@@ -6,9 +6,9 @@ import Log
 @main
 struct businessToGoApp: App {
     @StateObject var store = Store(
-        initialState: AppState(),
-        reducer: AppState.reduce,
-        dependencies: AppDependency(),
+        initialState: AppModule.State(),
+        reducer: AppModule.reduce,
+        dependencies: AppModule.Dependency(),
         middlewares: [
             { state, action, env in
                 switch(action){
@@ -34,7 +34,7 @@ struct businessToGoApp: App {
 }
 
 struct BusinessToGoView: View {
-    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
+    @ObservedObject var store: StoreOf<AppModule>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -48,7 +48,7 @@ struct BusinessToGoView: View {
                 VStack {
                     Spacer()
                     LogView()
-                        .environmentObject(store.lift(\.log, AppAction.log, store.dependencies.log))
+                        .environmentObject(store.lift(\.log, AppModule.Action.log, store.dependencies.log))
                 }
             }
             
@@ -71,7 +71,7 @@ struct BusinessToGoView: View {
 }
 
 struct AppTabView: View {
-    @ObservedObject var store: Store<AppState, AppAction, AppDependency>
+    @ObservedObject var store: StoreOf<AppModule>
     
     var body: some View {
         switch(store.state.tab){

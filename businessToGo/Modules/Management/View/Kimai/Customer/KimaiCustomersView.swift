@@ -1,5 +1,6 @@
 import SwiftUI
 import OfflineSync
+import Redux
 
 struct KimaiCustomersView: View {
     let customers: [KimaiCustomer]

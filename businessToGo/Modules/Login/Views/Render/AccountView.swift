@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct AccountView: View {
-    @ObservedObject var store: Store<LoginState, LoginAction, AppDependency>
+    @ObservedObject var store: StoreOf<LoginModule>
     let account: Account
     @State var name = ""
     

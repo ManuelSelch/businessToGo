@@ -2,7 +2,7 @@ import SwiftUI
 import Redux
 
 struct KimaiLoginView: View {
-    @ObservedObject var store: Store<LoginState, LoginAction, AppDependency>
+    @ObservedObject var store: StoreOf<LoginModule>
     
     @State private var server: String = ""
     @State private var username: String = ""

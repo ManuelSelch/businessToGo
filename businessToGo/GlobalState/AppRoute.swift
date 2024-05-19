@@ -40,24 +40,24 @@ extension AppRoute {
         Label(title, systemImage: image)
     }
     
-    func createView(_ store: Store<AppState, AppAction, AppDependency>) -> some View {
+    func createView(_ store: StoreOf<AppModule>) -> some View {
         switch self {
         case .login:
             AnyView(
                 LoginContainer(
-                    store: store.lift(\.login, AppAction.login, store.dependencies)
+                    store: store.lift(\.login, AppModule.Action.login, LoginModule.Dependency(management: store.dependencies.management, keychain: store.dependencies.keychain))
                 )
             )
         case .management:
             AnyView(
                 ManagementContainer(
-                    store: store.lift(\.management, AppAction.management, store.dependencies.management)
+                    store: store.lift(\.management, AppModule.Action.management, store.dependencies.management)
                 )
             )
         case .report:
             AnyView(
                 ReportContainer(
-                    store: store.lift(\.management, AppAction.management, store.dependencies.management)
+                    store: store.lift(\.management, AppModule.Action.management, store.dependencies.management)
                 )
             )
         case .settings:

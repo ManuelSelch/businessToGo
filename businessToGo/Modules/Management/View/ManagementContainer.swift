@@ -34,7 +34,9 @@ struct ManagementContainer: View {
                 }
             }
         )) { route in
-            route.createView(store)
+            NavigationStack {
+                route.createView(store)
+            }
         }
     }
 }

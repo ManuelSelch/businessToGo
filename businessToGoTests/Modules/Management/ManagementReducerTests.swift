@@ -10,8 +10,5 @@ final class ManagementReducerTests: XCTestCase {
         store = .init(initialState: .init(), reducer: ManagementModule.reduce, dependencies: .mock)
     }
     
-    func testNavigate() throws {
-        
-        XCTAssertEqual(true, false)
-    }
+    
 }

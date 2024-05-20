@@ -7,19 +7,24 @@ struct ReportContainer: View {
     @State var selectedReportType: ReportType = .week
     @State var selectedDate: Date = Date.today
     @State var isCalendarPicker = false
+    @State var selectedProject: Int?
     
     var timesheets: [KimaiTimesheet] {
-        let timesheets = store.state.kimai.timesheets
+        var timesheets = store.state.kimai.timesheets
+        
+        if let project = selectedProject {
+            timesheets = timesheets.filter { $0.project == project }
+        }
         
         switch(selectedReportType){
         case .day:
-            return timesheets.filter({ $0.getBeginDate()?.isDay(of: selectedDate) ?? false })
+            return timesheets.filter{ $0.getBeginDate()?.isDay(of: selectedDate) ?? false }
         case .week:
-            return timesheets.filter({ $0.getBeginDate()?.isWeekOfYear(of: selectedDate) ?? false })
+            return timesheets.filter { $0.getBeginDate()?.isWeekOfYear(of: selectedDate) ?? false }
         case .month:
-            return timesheets.filter({$0.getBeginDate()?.isMonth(of: selectedDate) ?? false })
+            return timesheets.filter { $0.getBeginDate()?.isMonth(of: selectedDate) ?? false }
         case .year:
-            return timesheets.filter({$0.getBeginDate()?.isYear(of: selectedDate) ?? false })
+            return timesheets.filter { $0.getBeginDate()?.isYear(of: selectedDate) ?? false }
         }
     }
     
@@ -48,6 +53,10 @@ extension ReportContainer {
             selectedReportType: $selectedReportType,
             selectedDate: $selectedDate,
             isCalendarPicker: $isCalendarPicker,
+            
+            selectedProject: $selectedProject,
+            projects: store.state.kimai.projects,
+            
             onEdit: { store.send(.route(.presentSheet(.kimai(.timesheet($0))))) }
         )
     }

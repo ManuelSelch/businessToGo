@@ -4,6 +4,9 @@ struct ReportHeaderView: View {
     @Binding var selectedReportType: ReportType
     @Binding var selectedDate: Date
     @Binding var isCalendarPicker: Bool
+    @Binding var selectedProject: Int?
+    
+    var projects: [KimaiProject]
     
     var onEdit: (KimaiTimesheet) -> ()
     
@@ -43,6 +46,16 @@ struct ReportHeaderView: View {
             switch(selectedReportType){
             case .day: ReportHeaderWeeks(selectedDate: $selectedDate)
             default: EmptyView()
+            }
+            
+            Picker("Project", selection: $selectedProject){
+                Text("Alle Projekte")
+                    .tag(nil as Int?)
+                
+                ForEach(projects) { project in
+                    Text(project.name)
+                        .tag(project.id as Int?)
+                }
             }
             
             

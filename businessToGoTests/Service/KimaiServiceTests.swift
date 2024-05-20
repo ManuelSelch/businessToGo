@@ -4,14 +4,18 @@ import TestableCombinePublishers
 import OHHTTPStubs
 import OHHTTPStubsSwift
 import Moya
+import Redux
 
 @testable import businessToGo
 
 final class KimaiServiceTests: XCTestCase {
     
+    var store: StoreOf<ManagementModule>!
+    
     override func setUp() {
+        store = .init(initialState: .init(), reducer: ManagementModule.reduce, dependencies: .mock)
         stub(
-            condition: isHost("time.manuelselch.de")
+            condition: isHost("time.dev.manuelselch.de")
         ){ _ in
             return HTTPStubsResponse(
                 fileAtPath: OHPathForFile("kimaiCustomers.json", type(of: self))!,
@@ -22,33 +26,32 @@ final class KimaiServiceTests: XCTestCase {
         
     }
 
-    func testLogin() async {
-        env.kimai.login("username", "password")
-            .expect(true)
-            .expectSuccess()
-            .waitForExpectations(timeout: 3)
+    func testLogin() async throws {
+        let success = try await store.dependencies.kimai.login(AccountData("username", "password", "https://time.dev.manuelselch.de"))
+        XCTAssertEqual(true, success)
     }
     
-    func testGetRemoteCustomers() async {
-        env.kimai.customers.fetch()
-            .expect(checkCustomers)
-            .waitForExpectations(timeout: 3)
+    func testGetRemoteCustomers() async throws {
+        let request = try await store.dependencies.kimai.customers.fetch()
+
+        XCTAssertEqual("string", request.response[0].name)
+            
     }
     
     func testGetLocalCustomers() async {
-        let c = KimaiCustomer(id: 1, name: "LocalCustomer", number: "1")
-        env.kimai.customers.create(c)
+        let c = KimaiCustomer(id: 1, name: "LocalCustomer", number: "1", teams: [])
+        store.dependencies.kimai.customers.create(c)
         
-        var result = env.kimai.customers.get()
+        let result = store.dependencies.kimai.customers.get()
             
         XCTAssertEqual([c], result)
     }
     
     func testSyncCustomers() async {
         let remote = [
-            KimaiCustomer(id: 100, name: "Sync", number: "100")
+            KimaiCustomer(id: 100, name: "Sync", number: "100", teams: [])
         ]
-        let change = DatabaseChange(id: 0, type: .insert, recordID: 0, tableName: "", timestamp: "")
+        // let change = DatabaseChange(id: 0, type: .insert, recordID: 0, tableName: "", timestamp: "")
         
         /*
          env.kimai.customers.sync([])
@@ -58,9 +61,6 @@ final class KimaiServiceTests: XCTestCase {
          */
     }
     
-    func checkCustomers(_ customers: [KimaiCustomer]){
-        XCTAssertEqual("string", customers[0].name)
-    }
-
+  
 
 }

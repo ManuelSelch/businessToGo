@@ -126,7 +126,7 @@ extension KimaiRequest: Moya.TargetType {
             return [
                 "name": customer.name,
                 "number": customer.number as Any,
-                "color": customer.color as Any,
+                "color": customer.color ?? "" as Any,
             ]
             
         }

@@ -15,7 +15,7 @@ struct AppModule {
     }
     
     enum Action {
-        case route(RouteAction<AppRoute>)
+        case route(RouteModule<AppRoute>.Action)
         case tab(AppRoute)
         
         case log(LogAction)
@@ -28,12 +28,20 @@ struct AppModule {
 
     struct Dependency {
         // MARK: - modules
-        var log: Log.LogDependency = .init()
-        var management: ManagementModule.Dependency = .init()
-        var settings: SettingsDependency = .init()
+        var log: Log.LogDependency
+        var management: ManagementModule.Dependency
+        var settings: SettingsDependency
         
         // MARK: - services
-        var keychain: KeychainService<Account> = .init("de.selch.businessToGo")
+        var keychain: KeychainService<Account>
+        
+        static let live = Dependency(
+            log: .init(), management: .live, settings: .init(), keychain: .init("de.selch.businessToGo")
+        )
+        
+        static let mock = Dependency(
+            log: .init(), management: .mock, settings: .init(), keychain: .init("de.selch.businessToGo")
+        )
     }
 
 

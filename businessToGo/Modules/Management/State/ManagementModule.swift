@@ -3,23 +3,15 @@ import Redux
 
 struct ManagementModule {
     struct State: Equatable, Codable {
-        var routes: [ManagementRoute]
-        var sheet: ManagementRoute?
+        var router: RouteModule<ManagementRoute>.State = .init()
         
-        var kimai: KimaiModule.State
-        var taiga: TaigaModule.State
-        var integrations: [Integration]
-        
-        init(){
-            routes = []
-            kimai = .init()
-            taiga = .init()
-            integrations = []
-        }
+        var kimai: KimaiModule.State = .init()
+        var taiga: TaigaModule.State = .init()
+        var integrations: [Integration] = []
     }
     
     enum Action {
-        case route(RouteAction<ManagementRoute>)
+        case route(RouteModule<ManagementRoute>.Action)
         case sync
         case connect(_ kimaiProject: Int, _ taigaProject: Int)
         

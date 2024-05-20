@@ -4,19 +4,10 @@ import Redux
 extension ManagementModule: Reducer {
     static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
         switch(action){
-        case .route(let route):
-            switch(route){
-            case .push(let route):
-                state.routes.append(route)
-            case .pop:
-                state.routes.removeLast()
-            case .set(let routes):
-                state.routes = routes
-            case .presentSheet(let route):
-                state.sheet = route
-            case .dismissSheet:
-                state.sheet = nil
-            }
+        case .route(let action):
+            return RouteModule.reduce(&state.router, action, .init())
+                .map { .route($0) }
+                .eraseToAnyPublisher()
             
         case .sync:
             state.integrations = env.integrations.get()

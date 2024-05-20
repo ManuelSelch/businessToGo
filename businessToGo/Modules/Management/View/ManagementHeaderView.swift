@@ -9,7 +9,7 @@ struct ManagementHeaderView: View {
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
     
-    let router: (RouteAction<ManagementRoute>) -> ()
+    let router: (RouteModule<ManagementRoute>.Action) -> ()
     let onSync: () -> ()
 
     

@@ -4,38 +4,18 @@ import Moya
 import SwiftUI
 import Redux
 import OfflineSync
+import SQLite
 
 
-class TaigaService: IService {
-    private var tables: TaigaTable
-    private var provider: MoyaProvider<TaigaRequest>
-    
+struct TaigaService: IService {
     var projects: RequestService<TaigaProject, TaigaRequest>
     var taskStories: RequestService<TaigaTaskStory, TaigaRequest>
     var taskStoryStatus: RequestService<TaigaTaskStoryStatus, TaigaRequest>
     var milestones: RequestService<TaigaMilestone, TaigaRequest>
     var tasks: RequestService<TaigaTask, TaigaRequest>
     
-    
-    init(_ db: IDatabase, _ track: TrackTable){
-        tables = TaigaTable(db, track)
-        provider = MoyaProvider<TaigaRequest>()
-        
-        projects = RequestService(tables.projects, provider, .simple(.getProjects))
-        taskStories = RequestService(
-            tables.taskStories, provider,
-            .simple(.getTaskStories),
-            nil,
-            TaigaRequest.updateTaskStory,
-            nil
-        )
-        taskStoryStatus = RequestService(tables.taskStatus, provider, .simple(.getStatusList))
-        milestones = RequestService(tables.milestones, provider, .simple(.getMilestones))
-        tasks = RequestService(tables.tasks, provider, .simple(.getTasks))
-    }
-    
-   
-
+    var provider: MoyaProvider<TaigaRequest>
+    var setAuth: (String) -> ()
     
     func login(_ account: AccountData) async throws -> TaigaUserAuthDetail {
         if let url = URL(string: account.server + "/api/v1") {
@@ -45,23 +25,6 @@ class TaigaService: IService {
         }
         
         return try await request(provider, .checkLogin(account.username, account.password))
-    }
-    
-    func setToken(_ token: String){
-        let authPlugin = AccessTokenPlugin { _ in token }
-        provider = MoyaProvider<TaigaRequest>(plugins: [authPlugin])
-        
-        projects = RequestService(tables.projects, provider, .simple(.getProjects))
-        taskStories = RequestService(
-            tables.taskStories, provider,
-            .simple(.getTaskStories),
-            nil,
-            TaigaRequest.updateTaskStory,
-            nil
-        )
-        taskStoryStatus = RequestService(tables.taskStatus, provider, .simple(.getStatusList))
-        milestones = RequestService(tables.milestones, provider, .simple(.getMilestones))
-        tasks = RequestService(tables.tasks, provider, .simple(.getTasks))
     }
     
     func updateTaskStory(_ taskStory: TaigaTaskStory) async throws -> TaigaTaskStory {
@@ -109,5 +72,51 @@ class TaigaService: IService {
         taskStoryStatus.clear()
         milestones.clear()
         tasks.clear()
+    }
+}
+
+
+extension TaigaService {
+    static func live(_ db: Connection?, _ track: TrackTable) -> Self {
+        var provider = MoyaProvider<TaigaRequest>()
+        let tables = TaigaTable(db, track)
+        
+        return Self(
+            projects: RequestService(
+                tables.projects,
+                {provider},
+                .simple(.getProjects)
+            ),
+            taskStories: RequestService(
+                tables.taskStories,
+                {provider},
+                .simple(.getTaskStories),
+                nil,
+                TaigaRequest.updateTaskStory,
+                nil
+            ),
+            taskStoryStatus: RequestService(
+                tables.taskStatus,
+                {provider},
+                .simple(.getStatusList)
+            ),
+            milestones: RequestService(
+                tables.milestones,
+                {provider},
+                .simple(.getMilestones)
+            ),
+            tasks: RequestService(
+                tables.tasks,
+                {provider},
+                .simple(.getTasks)
+            ),
+            
+            provider: provider,
+            
+            setAuth: { token in
+                let authPlugin = AccessTokenPlugin { _ in token }
+                provider = MoyaProvider<TaigaRequest>(plugins: [authPlugin])
+            }
+        )
     }
 }

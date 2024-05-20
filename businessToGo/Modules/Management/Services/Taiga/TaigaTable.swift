@@ -3,8 +3,6 @@ import SQLite
 import OfflineSync
 
 struct TaigaTable {
-    private var db: IDatabase
-    
     var projects: DatabaseTable<TaigaProject>
     var taskStories: DatabaseTable<TaigaTaskStory>
     var milestones: DatabaseTable<TaigaMilestone>
@@ -13,13 +11,11 @@ struct TaigaTable {
 }
 
 extension TaigaTable {
-    init(_ db: IDatabase, _ track: TrackTable) {
-        self.db = db
-        
-        projects = DatabaseTable(db.connection, "taiga_projects")
-        taskStories = DatabaseTable(db.connection, "taiga_taskStories", track)
-        milestones = DatabaseTable(db.connection, "taiga_milestones")
-        tasks = DatabaseTable(db.connection, "taiga_tasks")
-        taskStatus = DatabaseTable(db.connection, "taiga_taskStatus")
+    init(_ db: Connection?, _ track: TrackTable) {
+        projects = DatabaseTable.live(db, "taiga_projects", nil)
+        taskStories = DatabaseTable.live(db, "taiga_taskStories", track)
+        milestones = DatabaseTable.live(db, "taiga_milestones", nil)
+        tasks = DatabaseTable.live(db, "taiga_tasks", nil)
+        taskStatus = DatabaseTable.live(db, "taiga_taskStatus", nil)
     }
 }

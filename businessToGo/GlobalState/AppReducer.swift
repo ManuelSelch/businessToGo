@@ -30,15 +30,18 @@ extension AppModule: Reducer {
         case .login(let action):
             let effect = LoginModule.reduce(&state.login, action, LoginModule.Dependency(management: env.management, keychain: env.keychain))
             
+            var syncEffect = Empty<Action, Error>().eraseToAnyPublisher()
+            
             if(state.login.current == nil){
                 state.tab = .login
             } else {
-                state.tab = .report
+                state.tab = .management
+                syncEffect = just(.management(.sync))
             }
-            
-            return effect
-                .map { .login($0) }
-                .eraseToAnyPublisher()
+            return Publishers.Merge(
+                effect.map { .login($0) },
+                syncEffect
+            ).eraseToAnyPublisher()
         
         case .management(let action):
             return ManagementModule.reduce(&state.management, action, env.management)

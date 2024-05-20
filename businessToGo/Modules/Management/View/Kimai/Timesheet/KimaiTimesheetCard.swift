@@ -72,7 +72,7 @@ struct KimaiTimesheetCard: View {
             }
         }
         .padding(5)
-        .background(Color.darkGray)
+        .background(Color.themeGray)
         .foregroundStyle(Color.contrast)
     }
     

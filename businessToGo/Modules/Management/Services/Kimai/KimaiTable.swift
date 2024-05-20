@@ -1,10 +1,9 @@
 import Foundation
 import SQLite
 import OfflineSync
+import SQLite
 
 struct KimaiTable {
-    private var db: IDatabase
-    
     var customers: DatabaseTable<KimaiCustomer>
     var projects: DatabaseTable<KimaiProject>
     var timesheets: DatabaseTable<KimaiTimesheet>
@@ -15,14 +14,15 @@ struct KimaiTable {
 }
 
 extension KimaiTable {
-    init(_ db: IDatabase, _ track: TrackTable) {
-        self.db = db
-        self.track = track
+    static func live(_ db: Connection?, _ track: TrackTable) -> Self {
         
-        customers = DatabaseTable(db.connection, "kimai_customers", track)
-        projects = DatabaseTable(db.connection, "kimai_projects", track)
-        timesheets = DatabaseTable(db.connection, "kimai_timesheets", track)
-        activities = DatabaseTable(db.connection, "kimai_activities", track)
-        teams = DatabaseTable(db.connection, "kimai_teams", track)
+        return Self(
+            customers: DatabaseTable.live(db, "kimai_customers", track),
+            projects: DatabaseTable.live(db, "kimai_projects", track),
+            timesheets: DatabaseTable.live(db, "kimai_timesheets", track),
+            activities: DatabaseTable.live(db, "kimai_activities", track),
+            teams: DatabaseTable.live(db, "kimai_teams", track),
+            track: track
+        )
     }
 }

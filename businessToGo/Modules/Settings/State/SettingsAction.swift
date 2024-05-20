@@ -2,5 +2,5 @@ import Foundation
 import Redux
 
 enum SettingsAction {
-    case route(RouteAction<SettingsRoute>)
+    case route(RouteModule<SettingsRoute>.Action)
 }

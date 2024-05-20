@@ -3,83 +3,24 @@ import Combine
 import Moya
 import CoreData
 import OfflineSync
+import SQLite
 
 // MARK: - admin middleware
-class KimaiService {
-    private var db: IDatabase
-    private var tables: KimaiTable
-    private var provider = MoyaProvider<KimaiRequest>()
-    
+struct KimaiService {
     var customers: RequestService<KimaiCustomer, KimaiRequest>
     var projects: RequestService<KimaiProject, KimaiRequest>
     var timesheets: RequestService<KimaiTimesheet, KimaiRequest>
     var activities: RequestService<KimaiActivity, KimaiRequest>
     var teams: RequestService<KimaiTeam, KimaiRequest>
     
-    init(_ db: IDatabase, _ track: TrackTable) {
-        self.db = db
-        
-        tables = KimaiTable(db, track)
-        
-        customers = RequestService(
-            tables.customers, provider, .simple(.getCustomers),
-            KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
-        )
-        
-        projects = RequestService<KimaiProject, KimaiRequest>(
-            tables.projects, provider, .simple(.getProjects),
-            KimaiRequest.insertProject, KimaiRequest.updateProject
-        )
-        
-        timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
-            tables.timesheets, provider, .page(KimaiRequest.getTimesheets),
-            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
-        )
-        
-        activities = RequestService<KimaiActivity, KimaiRequest>(
-            tables.activities, provider, .simple(.getActivities)
-        )
-        
-        teams = RequestService<KimaiTeam, KimaiRequest>(
-            tables.teams, provider, .simple(.getTeams)
-        )
-    }
-    
-    func initRequests(){
-        customers = RequestService(
-            tables.customers, provider, .simple(.getCustomers),
-            KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
-        )
-        
-        projects = RequestService<KimaiProject, KimaiRequest>(
-            tables.projects, provider, .simple(.getProjects),
-            KimaiRequest.insertProject, KimaiRequest.updateProject
-        )
-        
-        timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
-            tables.timesheets, provider, .page(KimaiRequest.getTimesheets),
-            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
-        )
-        
-        activities = RequestService<KimaiActivity, KimaiRequest>(
-            tables.activities, provider, .simple(.getActivities)
-        )
-        
-        teams = RequestService<KimaiTeam, KimaiRequest>(
-            tables.teams, provider, .simple(.getTeams)
-        )
-    }
+    var setAuth: (AccountData) -> ()
     
     func login(_ account: AccountData) async throws -> Bool {
-        let authPlugin = KimaiAuthPlugin(account.username, account.password)
-        self.provider = MoyaProvider<KimaiRequest>(plugins: [authPlugin])
         if let url = URL(string: account.server+"/api") {
             KimaiRequest.server = url
         }else {
             throw ServiceError.urlDecodeFailed
         }
-        
-        initRequests()
         
         return true // todo: check auth
     }
@@ -92,7 +33,7 @@ class KimaiService {
     }
 }
 
-class KimaiAuthPlugin: PluginType {
+struct KimaiAuthPlugin: PluginType {
     let user: String
     let token: String
     
@@ -111,5 +52,43 @@ class KimaiAuthPlugin: PluginType {
         request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
         
         return request
+    }
+}
+
+extension KimaiService {
+    static func live(_ db: Connection?, _ track: TrackTable) -> Self {
+        var provider = MoyaProvider<KimaiRequest>()
+        let tables = KimaiTable.live(db, track)
+        
+        return Self (
+            
+            customers: RequestService(
+                tables.customers, {provider}, .simple(.getCustomers),
+                KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
+            ),
+            
+            projects: RequestService<KimaiProject, KimaiRequest>(
+                tables.projects, {provider}, .simple(.getProjects),
+                KimaiRequest.insertProject, KimaiRequest.updateProject
+            ),
+            
+            timesheets: RequestService<KimaiTimesheet, KimaiRequest>(
+                tables.timesheets, {provider}, .page(KimaiRequest.getTimesheets),
+                KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
+            ),
+            
+            activities: RequestService<KimaiActivity, KimaiRequest>(
+                tables.activities, {provider}, .simple(.getActivities)
+            ),
+            
+            teams: RequestService<KimaiTeam, KimaiRequest>(
+                tables.teams, {provider}, .simple(.getTeams)
+            ),
+            
+            setAuth: { account in
+                let authPlugin = KimaiAuthPlugin(account.username, account.password)
+                provider = MoyaProvider<KimaiRequest>(plugins: [authPlugin])
+            }
+        )
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import OfflineSync
 
-struct Integration: TableProtocol, Equatable, Hashable {
+struct Integration: TableProtocol, Hashable {
     var id: Int // kimaiProjectId
     var taigaProjectId: Int
     

@@ -8,7 +8,7 @@ struct businessToGoApp: App {
     @StateObject var store = Store(
         initialState: AppModule.State(),
         reducer: AppModule.reduce,
-        dependencies: AppModule.Dependency(),
+        dependencies: .live,
         middlewares: [
             { state, action, env in
                 switch(action){

@@ -17,7 +17,7 @@ extension KimaiRoute {
 
     @ViewBuilder func createView(
         store: StoreOf<KimaiModule>,
-        router: @escaping (RouteAction<ManagementRoute>) -> (),
+        router: @escaping (RouteModule<ManagementRoute>.Action) -> (),
         onProjectClicked: @escaping (Int) -> ()
     ) -> some View {
         switch self {

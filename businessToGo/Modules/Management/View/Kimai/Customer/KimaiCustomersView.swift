@@ -5,7 +5,7 @@ import Redux
 struct KimaiCustomersView: View {
     let customers: [KimaiCustomer]
     let changes: [DatabaseChange]
-    let router: (RouteAction<ManagementRoute>) -> ()
+    let router: (RouteModule<ManagementRoute>.Action) -> ()
     
     var customersFiltered: [KimaiCustomer] {
         var c = customers

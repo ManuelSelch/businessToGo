@@ -15,6 +15,7 @@ extension LoginModule: Reducer {
                 env.keychain.logout()
             
             case .reset:
+            
                 do {
                     try env.keychain.removeAccounts()
                     state.accounts = []
@@ -46,8 +47,7 @@ extension LoginModule: Reducer {
                         return loginTaiga(account, env) // -> saveAccount
                     case .accounts:
                         state.current = account
-                        
-                        env.management.changeDB("businessToGo_\(account.identifier)")
+                        env.management.switchDB("businessToGo_\(account.identifier)")
                         env.keychain.login(account)
                         
                     return Publishers.Merge(
@@ -66,8 +66,6 @@ extension LoginModule: Reducer {
             case .saveAccount(let account):
                 state.scene = .account(account)
                 try? env.keychain.saveAccount(account)
-                // return just(.management(.sync))
-                // todo: start sync
             
             case .status(let status):
                 state.loginStatus = status
@@ -91,8 +89,8 @@ extension LoginModule: Reducer {
                 do {
                     guard let kimai = account.kimai else { promise(.failure(ServiceError.unknown("kimai account not found"))); return }
                     let success = try await env.management.kimai.login(kimai)
-                    
                     if(success){
+                        env.management.kimai.setAuth(kimai)
                         promise(.success(.saveAccount(account)))
                     }else {
                         promise(.failure(ServiceError.unknown("kimai login failed")))
@@ -110,7 +108,7 @@ extension LoginModule: Reducer {
                 do {
                     guard let taiga = account.taiga else { promise(.failure(ServiceError.unknown("taiga account not found"))); return }
                     let user = try await env.management.taiga.login(taiga)
-                    env.management.taiga.setToken(user.auth_token)
+                    env.management.taiga.setAuth(user.auth_token)
                     
                     promise(.success(.saveAccount(account)))
                 } catch {

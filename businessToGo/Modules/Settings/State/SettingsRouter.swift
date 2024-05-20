@@ -1,7 +1,7 @@
 import Foundation
 import Redux
 
-class SettingsRouter: Router, Codable {
+class SettingsRouter: Codable {
     var routes: [SettingsRoute] = []
     var isSidebar = false
     

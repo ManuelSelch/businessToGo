@@ -11,7 +11,7 @@ struct ManagementContainer: View {
             
             NavigationStack(
                 path: Binding(
-                    get: { store.state.routes },
+                    get: { store.state.router.routes },
                     set: { store.send(.route(.set($0))) }
                 )
             ) {
@@ -25,7 +25,7 @@ struct ManagementContainer: View {
             }
         }
         .sheet(item: Binding(
-            get: { store.state.sheet },
+            get: { store.state.router.sheet },
             set: {
                 if let route = $0 {
                     store.send(.route(.presentSheet(route)))
@@ -81,7 +81,7 @@ extension ManagementContainer {
     @ViewBuilder func getHeader() -> some View {
         ManagementHeaderView(
             selectedTeam: Binding(get: { store.state.kimai.selectedTeam } , set: { store.send(.kimai(.selectTeam($0))) }),
-            route: store.state.routes.last,
+            route: store.state.router.routes.last,
             projects: store.state.kimai.projects,
             teams: store.state.kimai.teams,
             router: { store.send(.route($0)) },

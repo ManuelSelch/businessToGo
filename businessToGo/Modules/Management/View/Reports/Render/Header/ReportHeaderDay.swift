@@ -30,7 +30,9 @@ struct ReportHeaderDay: View {
     
     var body: some View {
         Button(action: {
-            selected = day.date
+            withAnimation(.easeInOut) {
+                selected = day.date
+            }
         }) {
             VStack {
                 Text("\(day.date.getDay() ?? 1)")

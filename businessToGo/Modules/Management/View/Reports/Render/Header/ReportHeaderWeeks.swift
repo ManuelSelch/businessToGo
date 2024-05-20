@@ -33,10 +33,12 @@ struct ReportHeaderWeeks: View {
                 .onChange(of: scrolledID){
                     if let newID = scrolledID
                     {
-                        if(newID > lastID){
-                            selectedDate = selectedDate.addDays(+7)
-                        }else if(newID < lastID){
-                            selectedDate = selectedDate.addDays(-7)
+                        withAnimation(.easeInOut) {
+                            if(newID > lastID){
+                                selectedDate = selectedDate.addDays(+7)
+                            }else if(newID < lastID){
+                                selectedDate = selectedDate.addDays(-7)
+                            }
                         }
                         lastID = newID
                     }

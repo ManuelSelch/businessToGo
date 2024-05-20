@@ -27,7 +27,6 @@ struct ReportHeaderView: View {
                         
                     }
                 }
-                .frame(height: 20)
                 .pickerStyle(.segmented)
                 .labelsHidden()
                 .background(Color.themeGray)

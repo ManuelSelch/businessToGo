@@ -153,6 +153,7 @@
 		841083BB2BFAAB3E00332A6A /* TaigaProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectView.swift; sourceTree = "<group>"; };
 		841083C42BFB5BF500332A6A /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		841083C92BFBC54100332A6A /* LoginReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReducerTests.swift; sourceTree = "<group>"; };
+		841083CB2BFBDCE700332A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		841C30152BF25221007367A8 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		841D9E662BC95BDC002990C7 /* TaigaProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectsView.swift; sourceTree = "<group>"; };
 		841D9E732BC99251002990C7 /* TaigaKanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaKanbanView.swift; sourceTree = "<group>"; };
@@ -631,6 +632,7 @@
 		84C5A2942BC40EEC00C25A0C /* businessToGo */ = {
 			isa = PBXGroup;
 			children = (
+				841083CB2BFBDCE700332A6A /* Info.plist */,
 				847E45942BEAD5D50013955A /* Helper */,
 				84C5A2C32BC40F7400C25A0C /* Models */,
 				84C5A2C22BC40F6300C25A0C /* Modules */,
@@ -1216,6 +1218,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = businessToGo/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -1257,6 +1260,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = businessToGo/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

@@ -19,19 +19,28 @@ extension ManagementModule {
 
 extension ManagementModule.Dependency {
     static var live: Self {
-        var db = Database.live("businessToGo")
+        var db = Database.mock
         let track = TrackTable(db.connection())
+        
+        var kimai = KimaiService.live(db.connection(), track)
+        var taiga = TaigaService.live(db.connection(), track)
+        var integrations = IntegrationService(db.connection())
         
         return Self(
             track: track,
-            kimai: .live(db.connection(), track),
-            taiga: .live(db.connection(), track),
-            integrations: IntegrationService(db.connection()),
+            kimai: kimai,
+            taiga: taiga,
+            integrations: integrations,
             reset: {
                 db.reset()
             },
             switchDB: { name in
+                print("switch db to: \(name)")
                 db = .live(name)
+                
+                kimai = KimaiService.live(db.connection(), track)
+                taiga = TaigaService.live(db.connection(), track)
+                integrations = IntegrationService(db.connection())
             }
         )
     }

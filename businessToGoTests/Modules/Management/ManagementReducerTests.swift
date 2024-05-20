@@ -11,6 +11,7 @@ final class ManagementReducerTests: XCTestCase {
     }
     
     func testNavigate() throws {
+        
         XCTAssertEqual(true, false)
     }
 }

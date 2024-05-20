@@ -8,7 +8,6 @@ import Moya
 @testable import businessToGo
 
 final class KimaiServiceTests: XCTestCase {
-    let env = Environment()
     
     override func setUp() {
         stub(

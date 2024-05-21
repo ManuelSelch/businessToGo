@@ -78,7 +78,7 @@ extension TaigaModule: Reducer {
             
         
             
-        case .setImage(let id, let img):
+        case .setImage(_, _):
             // state.projectImages[id] = img
             break // todo: add projectImage
 

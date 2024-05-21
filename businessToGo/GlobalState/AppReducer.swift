@@ -23,7 +23,7 @@ extension AppModule: Reducer {
             state.tab = tab
             
         case .log(let action):
-            return LogState.reduce(&state.log, action, env.log)
+            return LogModule.reduce(&state.log, action, env.log)
                 .map { .log($0) }
                 .eraseToAnyPublisher()
         
@@ -54,7 +54,7 @@ extension AppModule: Reducer {
                 .eraseToAnyPublisher()
         
         case .intro(let action):
-            var effect = IntroModule.reduce(&state.intro, action, .init())
+            let effect = IntroModule.reduce(&state.intro, action, .init())
             
             if(state.intro.isVisible){
                 state.sheet = .intro

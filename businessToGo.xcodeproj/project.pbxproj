@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,10 @@
 		841083CA2BFBC54100332A6A /* LoginReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083C92BFBC54100332A6A /* LoginReducerTests.swift */; };
 		841840532BFCE77200EC9FDF /* MyChart in Frameworks */ = {isa = PBXBuildFile; productRef = 841840522BFCE77200EC9FDF /* MyChart */; };
 		841840552BFCF79D00EC9FDF /* KimaiUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840542BFCF79D00EC9FDF /* KimaiUser.swift */; };
+		841840582BFD01D300EC9FDF /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 841840572BFD01D300EC9FDF /* Log */; };
+		8418405B2BFD020100EC9FDF /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8418405A2BFD020100EC9FDF /* Redux */; };
+		8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */ = {isa = PBXBuildFile; productRef = 8418405D2BFD024E00EC9FDF /* MyChart */; };
+		841840612BFD02E500EC9FDF /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 841840602BFD02E500EC9FDF /* OfflineSync */; };
 		841C30162BF25221007367A8 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C30152BF25221007367A8 /* CustomColorPicker.swift */; };
 		841D9E672BC95BDC002990C7 /* TaigaProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E662BC95BDC002990C7 /* TaigaProjectsView.swift */; };
 		841D9E742BC99251002990C7 /* TaigaKanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E732BC99251002990C7 /* TaigaKanbanView.swift */; };
@@ -67,7 +71,6 @@
 		8445971F2BFC37A6001CEC6C /* IntroModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8445971E2BFC37A6001CEC6C /* IntroModule.swift */; };
 		844597212BFCB6F1001CEC6C /* KimaiProjectDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844597202BFCB6F1001CEC6C /* KimaiProjectDetailsView.swift */; };
 		844597232BFCCC71001CEC6C /* MyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844597222BFCCC71001CEC6C /* MyFormatter.swift */; };
-		845240262BC4802A00A894EE /* LogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845240252BC4802A00A894EE /* LogService.swift */; };
 		8452402E2BC48AF600A894EE /* KimaiCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452402D2BC48AF600A894EE /* KimaiCustomer.swift */; };
 		845240302BC48B2300A894EE /* KimaiTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452402F2BC48B2300A894EE /* KimaiTeam.swift */; };
 		845503E62BCEB5F400BCA93B /* kimaiCustomers.json in Resources */ = {isa = PBXBuildFile; fileRef = 845503E52BCEB5F400BCA93B /* kimaiCustomers.json */; };
@@ -210,7 +213,6 @@
 		8445971E2BFC37A6001CEC6C /* IntroModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroModule.swift; sourceTree = "<group>"; };
 		844597202BFCB6F1001CEC6C /* KimaiProjectDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiProjectDetailsView.swift; sourceTree = "<group>"; };
 		844597222BFCCC71001CEC6C /* MyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFormatter.swift; sourceTree = "<group>"; };
-		845240252BC4802A00A894EE /* LogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogService.swift; sourceTree = "<group>"; };
 		8452402D2BC48AF600A894EE /* KimaiCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomer.swift; sourceTree = "<group>"; };
 		8452402F2BC48B2300A894EE /* KimaiTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTeam.swift; sourceTree = "<group>"; };
 		845503E52BCEB5F400BCA93B /* kimaiCustomers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = kimaiCustomers.json; sourceTree = "<group>"; };
@@ -279,12 +281,16 @@
 				84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */,
 				841840532BFCE77200EC9FDF /* MyChart in Frameworks */,
 				849BF1492BEE6A3B008F8B6A /* Login in Frameworks */,
+				841840612BFD02E500EC9FDF /* OfflineSync in Frameworks */,
+				841840582BFD01D300EC9FDF /* Log in Frameworks */,
 				84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */,
 				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
 				84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */,
 				841083B82BFA9D5600332A6A /* Redux in Frameworks */,
+				8418405B2BFD020100EC9FDF /* Redux in Frameworks */,
 				84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */,
 				84F5AE912BF74CA6007EE279 /* Moya in Frameworks */,
+				8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,7 +721,6 @@
 				847E45942BEAD5D50013955A /* Helper */,
 				84C5A2C32BC40F7400C25A0C /* Models */,
 				84C5A2C22BC40F6300C25A0C /* Modules */,
-				84C5A2C12BC40F5B00C25A0C /* Services */,
 				84C5A2C02BC40F4A00C25A0C /* GlobalState */,
 				84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */,
 				84C5A2992BC40EEE00C25A0C /* Assets.xcassets */,
@@ -761,14 +766,6 @@
 				841083B22BFA9C0C00332A6A /* RequestAction.swift */,
 			);
 			path = GlobalState;
-			sourceTree = "<group>";
-		};
-		84C5A2C12BC40F5B00C25A0C /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				845240252BC4802A00A894EE /* LogService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		84C5A2C22BC40F6300C25A0C /* Modules */ = {
@@ -906,6 +903,10 @@
 				84F5AEB22BF8B7E4007EE279 /* SwipeActions */,
 				841083B72BFA9D5600332A6A /* Redux */,
 				841840522BFCE77200EC9FDF /* MyChart */,
+				841840572BFD01D300EC9FDF /* Log */,
+				8418405A2BFD020100EC9FDF /* Redux */,
+				8418405D2BFD024E00EC9FDF /* MyChart */,
+				841840602BFD02E500EC9FDF /* OfflineSync */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -989,12 +990,12 @@
 				8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 				849BF1472BEE6A3B008F8B6A /* XCRemoteSwiftPackageReference "Login" */,
-				84CD11F52BF410E8006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */,
-				84CD11FB2BF413D6006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
 				845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */,
 				84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */,
-				841083B62BFA9D5600332A6A /* XCLocalSwiftPackageReference "../SwiftPackages/Redux" */,
-				841840512BFCE77200EC9FDF /* XCLocalSwiftPackageReference "../SwiftPackages/Chart" */,
+				841840562BFD01D300EC9FDF /* XCRemoteSwiftPackageReference "Log" */,
+				841840592BFD020100EC9FDF /* XCRemoteSwiftPackageReference "Redux" */,
+				8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */,
+				8418405F2BFD02E500EC9FDF /* XCRemoteSwiftPackageReference "OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1111,7 +1112,6 @@
 				84266D242BD683AA0020B386 /* RequestReducer.swift in Sources */,
 				84266D2A2BD6AAD90020B386 /* KimaiProjectCard.swift in Sources */,
 				841083C52BFB5BF500332A6A /* UserDefaultWrapper.swift in Sources */,
-				845240262BC4802A00A894EE /* LogService.swift in Sources */,
 				84D96FD92BC511DD00114438 /* DatabaseError.swift in Sources */,
 				844597212BFCB6F1001CEC6C /* KimaiProjectDetailsView.swift in Sources */,
 				841083B12BFA95A700332A6A /* KimaiRoute.swift in Sources */,
@@ -1512,26 +1512,39 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		841083B62BFA9D5600332A6A /* XCLocalSwiftPackageReference "../SwiftPackages/Redux" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../SwiftPackages/Redux;
-		};
-		841840512BFCE77200EC9FDF /* XCLocalSwiftPackageReference "../SwiftPackages/Chart" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../SwiftPackages/Chart;
-		};
-		84CD11F52BF410E8006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../SwiftPackages/Log;
-		};
-		84CD11FB2BF413D6006AE4C7 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../SwiftPackages/OfflineSync;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		841840562BFD01D300EC9FDF /* XCRemoteSwiftPackageReference "Log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/Log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+		841840592BFD020100EC9FDF /* XCRemoteSwiftPackageReference "Redux" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/Redux.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+		8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/Chart.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+		8418405F2BFD02E500EC9FDF /* XCRemoteSwiftPackageReference "OfflineSync" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ManuelSelch/OfflineSync.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.9;
+			};
+		};
 		845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/albertbori/TestableCombinePublishers.git";
@@ -1569,7 +1582,7 @@
 			repositoryURL = "https://github.com/ManuelSelch/Login.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.6;
+				minimumVersion = 1.0.7;
 			};
 		};
 		84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
@@ -1590,6 +1603,26 @@
 		841840522BFCE77200EC9FDF /* MyChart */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MyChart;
+		};
+		841840572BFD01D300EC9FDF /* Log */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841840562BFD01D300EC9FDF /* XCRemoteSwiftPackageReference "Log" */;
+			productName = Log;
+		};
+		8418405A2BFD020100EC9FDF /* Redux */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 841840592BFD020100EC9FDF /* XCRemoteSwiftPackageReference "Redux" */;
+			productName = Redux;
+		};
+		8418405D2BFD024E00EC9FDF /* MyChart */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */;
+			productName = MyChart;
+		};
+		841840602BFD02E500EC9FDF /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8418405F2BFD02E500EC9FDF /* XCRemoteSwiftPackageReference "OfflineSync" */;
+			productName = OfflineSync;
 		};
 		8467DEB82BDEA8690077E331 /* Redux */ = {
 			isa = XCSwiftPackageProductDependency;

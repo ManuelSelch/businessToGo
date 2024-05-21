@@ -12,13 +12,15 @@ extension KimaiModule: Reducer {
                 state.timesheets = env.kimai.timesheets.get()
                 state.activities = env.kimai.activities.get()
                 state.teams = env.kimai.teams.get()
+                state.users = env.kimai.users.get()
             
                 return Publishers.MergeMany([
                     just(.customers(.sync)),
                     just(.projects(.sync)),
                     just(.timesheets(.sync)),
                     just(.activities(.sync)),
-                    just(.teams(.sync))
+                    just(.teams(.sync)),
+                    just(.users(.sync))
                 ]).eraseToAnyPublisher()
             
             case .selectTeam(let team):
@@ -77,6 +79,17 @@ extension KimaiModule: Reducer {
                     &state.teamTracks
                 )
                 .map { .teams($0) }
+                .eraseToAnyPublisher()
+            
+            case .users(let action):
+                return RequestReducer.reduce(
+                    action,
+                    env.kimai.users,
+                    env.track,
+                    &state.users,
+                    &state.userTracks
+                )
+                .map { .users($0) }
                 .eraseToAnyPublisher()
 
         }

@@ -16,8 +16,8 @@ struct ManagementHeaderView: View {
     var body: some View {
         HStack {
             
-            if(route == nil) {
-                
+            switch(route){
+            case nil:
                 Picker("", selection: $selectedTeam) {
                     Text("Alle Teams")
                         .tag(nil as Int?)
@@ -30,15 +30,22 @@ struct ManagementHeaderView: View {
                 .frame(width: 200)
                 .clipped()
                 
+            case .taiga(.project(let integration)):
+                Button(action: {
+                    router(.push(.kimai(.projectDetails(integration.id))))
+                }){
+                    Image(systemName: "chart.bar.xaxis.ascending")
+                }
+            default: EmptyView()
             }
+            
+            
             
             
             Button(action: {
                 onSync()
             }){
                 Image(systemName: "arrow.triangle.2.circlepath")
-                    .font(.system(size: 15))
-                    .foregroundColor(Color.theme)
             }
              
             Button(action: {
@@ -58,10 +65,10 @@ struct ManagementHeaderView: View {
                 
             }){
                 Image(systemName: "play.fill")
-                    .font(.system(size: 15))
-                    .foregroundColor(Color.theme)
             }
             
         }
+        .font(.system(size: 15))
+        .foregroundColor(Color.theme)
     }
 }

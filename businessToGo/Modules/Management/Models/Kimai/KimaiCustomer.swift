@@ -48,6 +48,7 @@ extension KimaiCustomer {
     }
     
     static let new = KimaiCustomer()
+    static let sample = KimaiCustomer(id: 0, name: "Customer 1", teams: [])
 }
 
 

@@ -8,6 +8,7 @@ enum KimaiRoute: Equatable, Hashable, Codable {
     
     case projects(for: Int)
     case project(KimaiProject)
+    case projectDetails(Int)
     
     case timesheet(KimaiTimesheet)
 }
@@ -69,6 +70,19 @@ extension KimaiRoute {
                     }
                 }
             )
+        
+        case .projectDetails(let id):
+            if let project = store.state.projects.first(where: { $0.id == id }) {
+                KimaiProjectDetailsView(
+                    project: project,
+                    customer: store.state.customers.first { $0.id == project.customer },
+                    activities: store.state.activities,
+                    timesheets: store.state.timesheets,
+                    users: store.state.users
+                )
+            } else {
+                Text("project not found")
+            }
             
         case .timesheet(let timesheet):
             KimaiTimesheetSheet(

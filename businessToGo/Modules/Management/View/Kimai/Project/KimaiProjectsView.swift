@@ -19,7 +19,7 @@ struct KimaiProjectsView: View {
 
     var body: some View {
         let projectTimes = calculateProjectTimes()
-        ChartView(projectTimes, projectClicked)
+        ChartPieView(projectTimes)
             .background(Color.background)
         
         List {

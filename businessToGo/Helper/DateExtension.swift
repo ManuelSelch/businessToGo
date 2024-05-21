@@ -45,7 +45,10 @@ extension Date {
     
     func monthName() -> String {
         return Calendar.current.shortMonthSymbols[month()-1]
-        // return DateFormatter().shortMonthSymbols[month()-1]
+    }
+    
+    static func monthName(of month: Int) -> String {
+        return Calendar.current.shortMonthSymbols[month-1]
     }
     
     func year() -> Int {

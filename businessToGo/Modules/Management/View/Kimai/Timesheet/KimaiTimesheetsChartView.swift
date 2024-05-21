@@ -9,7 +9,10 @@ struct KimaiTimesheetsChartView: View {
 
     var body: some View {
         let activityTimes = calculateTimesheets()
-        ChartView(activityTimes, projectClicked)
+        VStack {
+            ChartPieView(activityTimes)
+            ChartListView(activityTimes, projectClicked)
+        }
             .background(Color.background)
     }
     

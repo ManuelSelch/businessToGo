@@ -9,6 +9,7 @@ class KimaiTable {
     var timesheets: DatabaseTable<KimaiTimesheet>
     var activities: DatabaseTable<KimaiActivity>
     var teams: DatabaseTable<KimaiTeam>
+    var users: DatabaseTable<KimaiUser>
     
     init(_ db: Connection?, _ track: TrackTable){
         customers = DatabaseTable(db, "kimai_customers", track)
@@ -16,5 +17,6 @@ class KimaiTable {
         timesheets = DatabaseTable(db, "kimai_timesheets", track)
         activities = DatabaseTable(db, "kimai_activities", track)
         teams = DatabaseTable(db, "kimai_teams", track)
+        users = DatabaseTable(db, "kimai_users", track)
     }
 }

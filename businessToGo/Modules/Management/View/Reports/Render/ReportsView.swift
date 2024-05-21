@@ -1,6 +1,7 @@
 import SwiftUI
 import OfflineSync
 import Redux
+import MyChart
 
 struct ReportsView: View {
     
@@ -82,15 +83,15 @@ extension ReportsView {
         
         switch(selectedReportType){
         case .week:
-            WeekReportView(days: [
-                DayReport(name: "Mo", time: getTotalTime(for: timesheets, weekday: 2)),
-                DayReport(name: "Di", time: getTotalTime(for: timesheets, weekday: 3)),
-                DayReport(name: "Mi", time: getTotalTime(for: timesheets, weekday: 4)),
-                DayReport(name: "Do", time: getTotalTime(for: timesheets, weekday: 5)),
-                DayReport(name: "Fr", time: getTotalTime(for: timesheets, weekday: 6)),
-                DayReport(name: "Sa", time: getTotalTime(for: timesheets, weekday: 7)),
-                DayReport(name: "So", time: getTotalTime(for: timesheets, weekday: 1))
-            ])
+            ChartBarView([
+                .init(id: 0, name: "Mo", value: getTotalTime(for: timesheets, weekday: 2)),
+                .init(id: 1, name: "Di", value: getTotalTime(for: timesheets, weekday: 3)),
+                .init(id: 2, name: "Mi", value: getTotalTime(for: timesheets, weekday: 4)),
+                .init(id: 3, name: "Do", value: getTotalTime(for: timesheets, weekday: 5)),
+                .init(id: 4, name: "Fr", value: getTotalTime(for: timesheets, weekday: 6)),
+                .init(id: 5, name: "Sa", value: getTotalTime(for: timesheets, weekday: 7)),
+                .init(id: 6, name: "So", value: getTotalTime(for: timesheets, weekday: 1))
+            ], Color.theme)
         default: EmptyView()
         }
     }
@@ -98,15 +99,8 @@ extension ReportsView {
 
 extension ReportsView {
     func getTotalTime(for timesheets: [KimaiTimesheet], weekday: Int) -> TimeInterval {
-        var time: TimeInterval = 0
-        for timesheet in timesheetsFiltered {
-            if let timesheetDay = timesheet.getBeginDate()?.getWeekday() {
-                if(timesheetDay == weekday){
-                    time += timesheet.calculateDuration() ?? 0
-                }
-                
-            }
-        }
-        return time
+        let timesheets = timesheets.filter { $0.getBeginDate()?.getWeekday() == weekday }
+        
+        return KimaiTimesheet.totalHours(of: timesheets) / 3600
     }
 }

@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "chart",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Chart.git",
-      "state" : {
-        "revision" : "d375995519e8b83824cda55fdce80aa8a23c12d3",
-        "version" : "1.0.2"
-      }
-    },
-    {
       "identity" : "login",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Login.git",

@@ -20,6 +20,9 @@ struct KimaiTimesheet: TableProtocol, Hashable {
 extension KimaiTimesheet {
     
     static let new = KimaiTimesheet()
+    static let samples: [KimaiTimesheet] = [
+        .new, .new, .new
+    ]
     
     init(){
         activity = 0
@@ -83,4 +86,41 @@ extension KimaiTimesheet {
     }
 }
 
+extension KimaiTimesheet {
+    static func totalHours(of timesheets: [KimaiTimesheet]) -> TimeInterval
+    {
+        var hours: TimeInterval = 0
+        for timesheet in timesheets {
+            hours += timesheet.calculateDuration() ?? 0
+        }
+        return hours
+    }
+    
+    static func totalRate(of timesheets: [KimaiTimesheet]) -> Double
+    {
+        var rate: Double = 0
+        for timesheet in timesheets {
+            rate += timesheet.rate
+        }
+        return rate
+    }
+    
+    static func lastEntryDate(of timesheets: [KimaiTimesheet]) -> Date? {
+        var date: Date? = nil
+        
+        for timesheet in timesheets {
+            if let currentDate = date,
+               let timesheetDate = timesheet.getBeginDate()
+            {
+                if(timesheetDate > currentDate){
+                    date = timesheetDate
+                }
+            } else {
+                date = timesheet.getBeginDate()
+            }
+        }
+        
+        return date
+    }
+}
 

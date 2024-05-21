@@ -15,6 +15,7 @@ class KimaiService {
     var timesheets: RequestService<KimaiTimesheet, KimaiRequest>!
     var activities: RequestService<KimaiActivity, KimaiRequest>!
     var teams: RequestService<KimaiTeam, KimaiRequest>!
+    var users: RequestService<KimaiUser, KimaiRequest>!
     
     func setAuth(_ account: AccountData) {
         let authPlugin = KimaiAuthPlugin(account.username, account.password)
@@ -47,27 +48,31 @@ class KimaiService {
     }
     
     func initRequests(){
-        customers = RequestService(
+        customers = .init(
             tables.customers, provider, .simple(.getCustomers),
             KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
         )
         
-        projects = RequestService<KimaiProject, KimaiRequest>(
+        projects = .init(
             tables.projects, provider, .simple(.getProjects),
             KimaiRequest.insertProject, KimaiRequest.updateProject
         )
         
-        timesheets = RequestService<KimaiTimesheet, KimaiRequest>(
+        timesheets = .init(
             tables.timesheets, provider, .page(KimaiRequest.getTimesheets),
             KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
         )
         
-        activities = RequestService<KimaiActivity, KimaiRequest>(
+        activities = .init(
             tables.activities, provider, .simple(.getActivities)
         )
         
-        teams = RequestService<KimaiTeam, KimaiRequest>(
+        teams = .init(
             tables.teams, provider, .simple(.getTeams)
+        )
+        
+        users = .init(
+            tables.users, provider, .simple(.getUsers)
         )
     }
 }

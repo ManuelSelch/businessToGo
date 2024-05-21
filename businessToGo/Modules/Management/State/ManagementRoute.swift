@@ -20,8 +20,14 @@ extension ManagementRoute {
                     onProjectClicked: { kimaiProject in
                         if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
                         {
+                            // show taiga project details
                             store.send(.route(.push(
                                 .taiga(.project(integration))
+                            )))
+                        } else {
+                            // fallback to kimai project details
+                            store.send(.route(.push(
+                                .kimai(.projectDetails(kimaiProject))
                             )))
                         }
                     }

@@ -84,13 +84,13 @@ extension ReportsView {
         switch(selectedReportType){
         case .week:
             ChartBarView([
-                .init(id: 0, name: "Mo", value: getTotalTime(for: timesheets, weekday: 2)),
-                .init(id: 1, name: "Di", value: getTotalTime(for: timesheets, weekday: 3)),
-                .init(id: 2, name: "Mi", value: getTotalTime(for: timesheets, weekday: 4)),
-                .init(id: 3, name: "Do", value: getTotalTime(for: timesheets, weekday: 5)),
-                .init(id: 4, name: "Fr", value: getTotalTime(for: timesheets, weekday: 6)),
-                .init(id: 5, name: "Sa", value: getTotalTime(for: timesheets, weekday: 7)),
-                .init(id: 6, name: "So", value: getTotalTime(for: timesheets, weekday: 1))
+                .init(id: 0, name: "Mo", value: getTotalTime(for: timesheetsFiltered, weekday: 2)),
+                .init(id: 1, name: "Di", value: getTotalTime(for: timesheetsFiltered, weekday: 3)),
+                .init(id: 2, name: "Mi", value: getTotalTime(for: timesheetsFiltered, weekday: 4)),
+                .init(id: 3, name: "Do", value: getTotalTime(for: timesheetsFiltered, weekday: 5)),
+                .init(id: 4, name: "Fr", value: getTotalTime(for: timesheetsFiltered, weekday: 6)),
+                .init(id: 5, name: "Sa", value: getTotalTime(for: timesheetsFiltered, weekday: 7)),
+                .init(id: 6, name: "So", value: getTotalTime(for: timesheetsFiltered, weekday: 1))
             ], Color.theme)
         default: EmptyView()
         }

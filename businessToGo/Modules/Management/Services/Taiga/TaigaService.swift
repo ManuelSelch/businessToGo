@@ -7,15 +7,20 @@ import OfflineSync
 import SQLite
 
 
-struct TaigaService: IService {
+class TaigaService: IService {
+    var provider = MoyaProvider<TaigaRequest>()
+    
     var projects: RequestService<TaigaProject, TaigaRequest>
     var taskStories: RequestService<TaigaTaskStory, TaigaRequest>
     var taskStoryStatus: RequestService<TaigaTaskStoryStatus, TaigaRequest>
     var milestones: RequestService<TaigaMilestone, TaigaRequest>
     var tasks: RequestService<TaigaTask, TaigaRequest>
     
-    var provider: MoyaProvider<TaigaRequest>
-    var setAuth: (String) -> ()
+    
+    func setAuth(_ token: String) {
+        let authPlugin = AccessTokenPlugin { _ in token }
+        provider = MoyaProvider<TaigaRequest>(plugins: [authPlugin])
+    }
     
     func login(_ account: AccountData) async throws -> TaigaUserAuthDetail {
         if let url = URL(string: account.server + "/api/v1") {
@@ -73,50 +78,39 @@ struct TaigaService: IService {
         milestones.clear()
         tasks.clear()
     }
-}
-
-
-extension TaigaService {
-    static func live(_ db: Connection?, _ track: TrackTable) -> Self {
-        var provider = MoyaProvider<TaigaRequest>()
+    
+    init(_ db: Connection?, _ track: TrackTable) {
         let tables = TaigaTable(db, track)
         
-        return Self(
-            projects: RequestService(
-                tables.projects,
-                {provider},
-                .simple(.getProjects)
-            ),
-            taskStories: RequestService(
-                tables.taskStories,
-                {provider},
-                .simple(.getTaskStories),
-                nil,
-                TaigaRequest.updateTaskStory,
-                nil
-            ),
-            taskStoryStatus: RequestService(
-                tables.taskStatus,
-                {provider},
-                .simple(.getStatusList)
-            ),
-            milestones: RequestService(
-                tables.milestones,
-                {provider},
-                .simple(.getMilestones)
-            ),
-            tasks: RequestService(
-                tables.tasks,
-                {provider},
-                .simple(.getTasks)
-            ),
-            
-            provider: provider,
-            
-            setAuth: { token in
-                let authPlugin = AccessTokenPlugin { _ in token }
-                provider = MoyaProvider<TaigaRequest>(plugins: [authPlugin])
-            }
+        projects = RequestService(
+            tables.projects,
+            provider,
+            .simple(.getProjects)
+        )
+        taskStories = RequestService(
+            tables.taskStories,
+            provider,
+            .simple(.getTaskStories),
+            nil,
+            TaigaRequest.updateTaskStory,
+            nil
+        )
+        taskStoryStatus = RequestService(
+            tables.taskStatus,
+            provider,
+            .simple(.getStatusList)
+        )
+        milestones = RequestService(
+            tables.milestones,
+            provider,
+            .simple(.getMilestones)
+        )
+        tasks = RequestService(
+            tables.tasks,
+            provider,
+            .simple(.getTasks)
         )
     }
 }
+
+

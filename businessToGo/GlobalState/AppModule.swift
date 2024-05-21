@@ -11,7 +11,8 @@ struct AppModule {
         var log: LogState = .init()
         var login: LoginModule.State = .init()
         var management: ManagementModule.State = .init()
-        var settings: SettingsState = .init()
+        var settings: SettingsModule.State = .init()
+        var intro: IntroModule.State = .init()
     }
     
     enum Action {
@@ -21,16 +22,19 @@ struct AppModule {
         case log(LogAction)
         case login(LoginModule.Action)
         case management(ManagementModule.Action)
-        case settings(SettingsAction)
+        case settings(SettingsModule.Action)
+        case intro(IntroModule.Action)
     }
     
     
 
     struct Dependency {
+        var test: String = "a"
+        
         // MARK: - modules
         var log: Log.LogDependency
         var management: ManagementModule.Dependency
-        var settings: SettingsDependency
+        var settings: SettingsModule.Dependency
         
         // MARK: - services
         var keychain: KeychainService<Account>
@@ -42,6 +46,10 @@ struct AppModule {
         static let mock = Dependency(
             log: .init(), management: .mock, settings: .init(), keychain: .init("de.selch.businessToGo")
         )
+        
+        mutating func changeTest(){
+            test = "b"
+        }
     }
 
 

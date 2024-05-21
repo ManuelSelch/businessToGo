@@ -7,6 +7,7 @@ enum AppRoute: Hashable, Identifiable, CaseIterable, Codable, Equatable {
     case management
     case report
     case settings
+    case intro
     
     var id: AppRoute { self }
 }
@@ -23,6 +24,8 @@ extension AppRoute {
             return "Report"
         case .settings:
             return "Settings"
+        case .intro:
+            return "Wilkommen"
         }
     }
     
@@ -32,6 +35,7 @@ extension AppRoute {
         case .management: return "shippingbox.fill"
         case .report: return "chart.bar.xaxis.ascending"
         case .settings: return "gear"
+        case .intro: return "home"
         }
     }
     
@@ -63,6 +67,13 @@ extension AppRoute {
         case .settings:
             AnyView(
                 SettingsContainer(store: store)
+            )
+            
+        case .intro:
+            AnyView(
+                IntroContainer(
+                    store: store.lift(\.intro, AppModule.Action.intro, .init())
+                )
             )
         }
     }

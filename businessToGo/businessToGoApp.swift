@@ -67,6 +67,9 @@ struct BusinessToGoView: View {
         ){ route in
             route.createView(store)
         }
+        .onAppear {
+            store.send(.intro(.load))
+        }
     }
 }
 

@@ -47,7 +47,7 @@ extension LoginModule: Reducer {
                         return loginTaiga(account, env) // -> saveAccount
                     case .accounts:
                         state.current = account
-                        env.management.switchDB("businessToGo_\(account.identifier)")
+                        env.management.switchDB("businessToGo_\(account.identifier).sqlite")
                         env.keychain.login(account)
                         
                     return Publishers.Merge(

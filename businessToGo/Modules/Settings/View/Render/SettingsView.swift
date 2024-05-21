@@ -1,36 +1,26 @@
 import SwiftUI
+import Redux
 
 struct SettingsView: View {
     
+    var router: (RouteModule<AppRoute>.Action) -> ()
     var navigate: (SettingsRoute) -> ()
     var logout: () -> ()
     
     var body: some View {
         VStack {
             List {
-                Button(action: {
-                    navigate(.integrations)
-                }){
-                    Text("Integrations")
-                }
+                Button("Integrations", action: { navigate(.integrations) })
+                Button("Debug", action: { navigate(.debug) })
+               
                 
-                Button(action: {
-                    navigate(.debug)
-                }){
-                    Text("Debug")
-                }
+                Button("Intro", action: { router(.presentSheet(.intro)) })
+                
+                Button("Logout", action: logout)
+                    .tint(Color.red)
                 
             }
             .tint(Color.theme)
-            
-            Spacer()
-            
-            Button(action: {
-                logout()
-            }){
-                Text("Logout")
-                    .tint(Color.red)
-            }
         }
     }
 }

@@ -32,14 +32,11 @@ struct UserDefaultWrapper<T: Codable> {
 }
 
 struct UserDefault {
-    @UserDefaultWrapper(key: "account", defaultValue: nil)
-    static var account: Account?
+    @UserDefaultWrapper(key: "debug", defaultValue: false)
+    static var isDebug: Bool
     
-    @UserDefaultWrapper(key: "taigaToken", defaultValue: nil)
-    static var taigaToken: String?
-    
-    @UserDefaultWrapper(key: "db", defaultValue: nil)
-    static var db: String?
+    @UserDefaultWrapper(key: "isIntro", defaultValue: true)
+    static var isIntro: Bool
 }
 
 

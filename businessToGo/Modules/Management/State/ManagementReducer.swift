@@ -32,6 +32,11 @@ extension ManagementModule: Reducer {
                 .map { Action.taiga($0) }
                 .eraseToAnyPublisher()
             
+        case .report(let action):
+            return ReportModule.reduce(&state.report, action, .init())
+                .map { .report($0) }
+                .eraseToAnyPublisher()
+            
         case .resetDatabase:
             env.reset()
             state = .init()

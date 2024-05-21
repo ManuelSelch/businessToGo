@@ -1,25 +1,14 @@
-
 import Foundation
 import Combine
+import Redux
 
-extension SettingsState {
-    static func reduce(_ state: inout SettingsState, _ action: SettingsAction, _ env: SettingsDependency) -> AnyPublisher<SettingsAction, Error> {
+extension SettingsModule: Reducer {
+    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error> {
         switch(action){
         case .route(let action):
-            switch(action){
-            case .push(let route):
-                state.routes.append(route)
-            case .pop:
-                state.routes.removeLast()
-            case .set(let routes):
-                state.routes = routes
-                
-            case .presentSheet(let route):
-                state.sheet = route
-            case .dismissSheet:
-                state.sheet = nil
-            }
+            return RouteModule.reduce(&state.router, action, .init())
+                .map { .route($0) }
+                .eraseToAnyPublisher()
         }
-        return Empty().eraseToAnyPublisher()
     }
 }

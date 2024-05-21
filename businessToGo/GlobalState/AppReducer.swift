@@ -35,7 +35,7 @@ extension AppModule: Reducer {
             if(state.login.current == nil){
                 state.tab = .login
             } else {
-                state.tab = .management
+                state.tab = .report
                 syncEffect = just(.management(.sync))
             }
             return Publishers.Merge(
@@ -49,8 +49,21 @@ extension AppModule: Reducer {
                 .eraseToAnyPublisher()
         
         case .settings(let action):
-            return SettingsState.reduce(&state.settings, action, env.settings)
+            return SettingsModule.reduce(&state.settings, action, env.settings)
                 .map { .settings($0) }
+                .eraseToAnyPublisher()
+        
+        case .intro(let action):
+            var effect = IntroModule.reduce(&state.intro, action, .init())
+            
+            if(state.intro.isVisible){
+                state.sheet = .intro
+            } else {
+                state.sheet = nil
+            }
+            
+            return effect
+                .map { .intro($0) }
                 .eraseToAnyPublisher()
         }
         

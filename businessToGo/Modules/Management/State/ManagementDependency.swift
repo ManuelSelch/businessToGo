@@ -3,63 +3,43 @@ import Redux
 import OfflineSync
 
 extension ManagementModule {
-    struct Dependency {
+    class Dependency {
+        private var db: Database
+        
         var track: TrackTable
         
-        var kimai: KimaiService
-        var taiga: TaigaService
-        var integrations: IIntegrationService
+        var kimai: KimaiService!
+        var taiga: TaigaService!
+        var integrations: IntegrationService!
         
-        var reset: () -> ()
-        var switchDB: (String) -> ()
+        func reset() {
+            db.reset()
+        }
+        
+        func switchDB(_ name: String) {
+            print("switch db to: \(name)")
+            db = db.switchDB(name)
+            initServices()
+        }
+        
+        init(_ db: Database){
+            self.db = db
+            self.track = TrackTable(db.connection)
+            initServices()
+            
+        }
+        
+        private func initServices(){
+            kimai = KimaiService(db.connection, track)
+            taiga = TaigaService(db.connection, track)
+            integrations = IntegrationService(db.connection)
+        }
     }
     
     
 }
 
 extension ManagementModule.Dependency {
-    static var live: Self {
-        var db = Database.mock
-        let track = TrackTable(db.connection())
-        
-        var kimai = KimaiService.live(db.connection(), track)
-        var taiga = TaigaService.live(db.connection(), track)
-        var integrations = IntegrationService(db.connection())
-        
-        return Self(
-            track: track,
-            kimai: kimai,
-            taiga: taiga,
-            integrations: integrations,
-            reset: {
-                db.reset()
-            },
-            switchDB: { name in
-                print("switch db to: \(name)")
-                db = .live(name)
-                
-                kimai = KimaiService.live(db.connection(), track)
-                taiga = TaigaService.live(db.connection(), track)
-                integrations = IntegrationService(db.connection())
-            }
-        )
-    }
-    
-    static var mock: Self {
-        var db = Database.mock
-        let track = TrackTable(db.connection())
-        
-        return Self(
-            track: track,
-            kimai: .live(db.connection(), track),
-            taiga: .live(db.connection(), track),
-            integrations: IntegrationService(db.connection()),
-            reset: {
-                db.reset()
-            },
-            switchDB: { name in
-                db = .mock
-            }
-        )
-    }
+    static let live = ManagementModule.Dependency(.none)
+    static let mock = ManagementModule.Dependency(.mock)
 }

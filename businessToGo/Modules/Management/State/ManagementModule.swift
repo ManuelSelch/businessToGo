@@ -8,6 +8,8 @@ struct ManagementModule {
         var kimai: KimaiModule.State = .init()
         var taiga: TaigaModule.State = .init()
         var integrations: [Integration] = []
+        
+        var report: ReportModule.State = .init()
     }
     
     enum Action {
@@ -17,6 +19,7 @@ struct ManagementModule {
         
         case kimai(KimaiModule.Action)
         case taiga(TaigaModule.Action)
+        case report(ReportModule.Action)
         
         case resetDatabase
     }

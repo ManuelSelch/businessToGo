@@ -64,6 +64,24 @@
       }
     },
     {
+      "identity" : "pulse",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Pulse.git",
+      "state" : {
+        "revision" : "2e5e5f86c31970dc72613e480a1ba0b06bab81a2",
+        "version" : "4.2.1"
+      }
+    },
+    {
+      "identity" : "pulseloghandler",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/PulseLogHandler.git",
+      "state" : {
+        "revision" : "7280e980b71a1267099e7751a900fd1e67b7f4bb",
+        "version" : "4.0.1"
+      }
+    },
+    {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
@@ -172,6 +190,15 @@
       }
     },
     {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "e97a6fcb1ab07462881ac165fdbb37f067e205d5",
+        "version" : "1.5.4"
+      }
+    },
+    {
       "identity" : "swift-perception",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-perception",
@@ -205,6 +232,15 @@
       "state" : {
         "revision" : "39c6d7f686746881adb3d44638ec330acbeb4f37",
         "version" : "0.3.3"
+      }
+    },
+    {
+      "identity" : "tca-swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/darrarski/tca-swift-log.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "51107c6137cb7a5dd05723117b6815915feeefd2"
       }
     },
     {

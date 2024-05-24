@@ -1,6 +1,7 @@
 import Foundation
 import ComposableArchitecture
 import SwiftUI
+import PulseUI
 
 enum SettingsRoute: Codable, Hashable, Identifiable {
     case settings
@@ -32,6 +33,8 @@ extension SettingsRoute {
                 onConnect: { store.send(.management(.connect($0, $1))) }
             )
         case .debug:
+            ConsoleView(store: .shared)
+            /*
             DebugView(
                 current: store.login.current,
                 state: store.state,
@@ -42,6 +45,7 @@ extension SettingsRoute {
                     // store.send(.route(.dismissSheet))
                 }
             )
+             */
         }
     }
 }

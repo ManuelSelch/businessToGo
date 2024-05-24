@@ -21,7 +21,7 @@ struct KimaiCustomersView: View {
                 KimaiCustomerCard(
                     customer: customer, 
                     change: store.customers.changes.first(where: { $0.recordID == customer.id }),
-                    onCustomerSelected: { _ in } // router(.push(.kimai(.projects(for: $0))))
+                    customerTapped: { store.send(.customerTapped(customer.id)) } 
                 )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {

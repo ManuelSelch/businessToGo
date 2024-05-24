@@ -4,7 +4,7 @@ import OfflineSync
 struct KimaiProjectCard: View {
     let kimaiProject: KimaiProject
     var change: DatabaseChange?
-    let onOpenProject: (Int) -> Void
+    let projectTapped: () -> Void
     
     var body: some View {
         HStack {
@@ -19,7 +19,7 @@ struct KimaiProjectCard: View {
             }
             
             Button(action: {
-                onOpenProject(kimaiProject.id)
+                projectTapped()
             }){
                 Text(kimaiProject.name)
                     .foregroundColor(Color.theme)

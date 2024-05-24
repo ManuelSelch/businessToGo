@@ -17,14 +17,12 @@ struct KimaiCustomerFeature: Reducer {
         case dismiss
     }
     
-    var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            switch(action){
-            case .saveTapped:
-                return .send(.delegate(.dismiss))
-            case .delegate:
-                return .none
-            }
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
+        switch(action){
+        case .saveTapped:
+            return .send(.delegate(.dismiss))
+        case .delegate:
+            return .none
         }
     }
 }

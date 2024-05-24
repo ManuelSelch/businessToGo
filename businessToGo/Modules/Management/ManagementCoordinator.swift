@@ -29,7 +29,7 @@ struct ManagementCoordinator {
             self._integrations = Shared([])
             
             self.routes = [
-                .cover(.kimai(.customers(.init(customers: $kimai.customers))))
+                .cover(.kimai(.customers(.init(customers: $kimai.customers))), embedInNavigationView: true)
             ]
         }
     }
@@ -61,7 +61,9 @@ struct ManagementCoordinator {
             case let .router(.routeAction(_, .kimai(.customers(.delegate(delegate))))):
                 switch(delegate) {
                 case let .showProject(of: customer):
-                   
+                    state.routes.push(
+                        .kimai(.projects(.init(customer: customer, timesheets: state.$kimai.timesheets.records, projects: state.$kimai.projects)))
+                    )
                     return .none
                 case let .editCustomer(customer):
                     state.routes.presentSheet(

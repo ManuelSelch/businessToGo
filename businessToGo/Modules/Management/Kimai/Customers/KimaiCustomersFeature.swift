@@ -20,17 +20,15 @@ struct KimaiCustomersFeature {
         case editCustomer(KimaiCustomer)
     }
     
-    var body: some ReducerOf<Self> {
-        Reduce { state, action in
-            switch(action){
-            case let .customerTapped(id):
-                return .send(.delegate(.showProject(of: id)))
-            case let .customerEditTapped(customer):
-                return .send(.delegate(.editCustomer(customer)))
-                
-            case .delegate:
-                return .none
-            }
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
+        switch(action){
+        case let .customerTapped(id):
+            return .send(.delegate(.showProject(of: id)))
+        case let .customerEditTapped(customer):
+            return .send(.delegate(.editCustomer(customer)))
+            
+        case .delegate:
+            return .none
         }
     }
 }

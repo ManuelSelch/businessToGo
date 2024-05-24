@@ -1,13 +1,23 @@
 import SwiftUI
 import Combine
 import ComposableArchitecture
-import Log
+import Logging
+import PulseUI
+import SwiftUI
+import TCASwiftLog
+import PulseLogHandler
 
 @main
 struct businessToGoApp: App {
-    let store = Store(initialState: AppModule.State()){
-        AppModule()
-            ._printChanges()
+    let store: StoreOf<AppModule>
+    
+    init() {
+        LoggingSystem.bootstrap(PersistentLogHandler.init)
+        
+        store = Store(initialState: AppModule.State()){
+            AppModule()
+                ._printChanges(.swiftLog(label: "tca"))
+        }
     }
     
     

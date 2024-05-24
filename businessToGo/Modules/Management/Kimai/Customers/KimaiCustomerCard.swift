@@ -4,7 +4,7 @@ import OfflineSync
 struct KimaiCustomerCard: View {
     var customer: KimaiCustomer
     var change: DatabaseChange?
-    var onCustomerSelected: (Int) -> ()
+    var customerTapped: () -> ()
     
     var body: some View {
         HStack {
@@ -19,7 +19,7 @@ struct KimaiCustomerCard: View {
             }
             
             Button(action: {
-                onCustomerSelected(customer.id)
+                customerTapped()
             }){
                 Text(customer.name)
                     .foregroundColor(Color.theme)
@@ -32,6 +32,6 @@ struct KimaiCustomerCard: View {
     let customer = KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500", teams: [])
     return KimaiCustomerCard(
         customer: customer,
-        onCustomerSelected: { _ in}
+        customerTapped: { }
     )
 }

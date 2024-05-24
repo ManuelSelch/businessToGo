@@ -6,6 +6,8 @@ enum KimaiCoordinator {
     case customers(KimaiCustomersFeature)
     case customer(KimaiCustomerFeature)
     
+    case projects(KimaiProjectsFeature)
+    
     init() {
         self = .customers(.init())
     }

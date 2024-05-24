@@ -83,12 +83,17 @@
 		8467510D2C00E8B10028921A /* KimaiCustomersFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467510C2C00E8B10028921A /* KimaiCustomersFeature.swift */; };
 		8467510F2C00E96A0028921A /* KimaiCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467510E2C00E96A0028921A /* KimaiCoordinator.swift */; };
 		846751112C00EA240028921A /* KimaiCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751102C00EA240028921A /* KimaiCoordinatorView.swift */; };
+		846751142C00FB480028921A /* KimaiProjectsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751132C00FB480028921A /* KimaiProjectsFeature.swift */; };
 		8467DEB92BDEA8690077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEB82BDEA8690077E331 /* Redux */; };
 		8467DEC22BDECA300077E331 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC12BDECA300077E331 /* SQLite */; };
 		8467DEC52BDECB500077E331 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC42BDECB500077E331 /* OHHTTPStubs */; };
 		8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
 		8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED72BDEECFC0077E331 /* OfflineSync */; };
+		8472A3D12C010835006726A1 /* TCASwiftLog in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D02C010835006726A1 /* TCASwiftLog */; };
+		8472A3D42C010B99006726A1 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D32C010B99006726A1 /* PulseUI */; };
+		8472A3D62C010E3C006726A1 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D52C010E3C006726A1 /* Pulse */; };
+		8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D82C01161A006726A1 /* PulseLogHandler */; };
 		847334B62BDCF50C00129D26 /* ManagementModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B52BDCF50C00129D26 /* ManagementModule.swift */; };
 		847334B82BDCF6F700129D26 /* ManagementContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B72BDCF6F700129D26 /* ManagementContainer.swift */; };
 		848100292BC491EA00EE2660 /* KimaiTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848100282BC491EA00EE2660 /* KimaiTable.swift */; };
@@ -231,6 +236,7 @@
 		8467510C2C00E8B10028921A /* KimaiCustomersFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomersFeature.swift; sourceTree = "<group>"; };
 		8467510E2C00E96A0028921A /* KimaiCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCoordinator.swift; sourceTree = "<group>"; };
 		846751102C00EA240028921A /* KimaiCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCoordinatorView.swift; sourceTree = "<group>"; };
+		846751132C00FB480028921A /* KimaiProjectsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiProjectsFeature.swift; sourceTree = "<group>"; };
 		847334B52BDCF50C00129D26 /* ManagementModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementModule.swift; sourceTree = "<group>"; };
 		847334B72BDCF6F700129D26 /* ManagementContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementContainer.swift; sourceTree = "<group>"; };
 		848100282BC491EA00EE2660 /* KimaiTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTable.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8472A3D62C010E3C006726A1 /* Pulse in Frameworks */,
 				84FDEE012BFFF08B0071C8FA /* TCACoordinators in Frameworks */,
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
 				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
@@ -298,8 +305,11 @@
 				841083B82BFA9D5600332A6A /* Redux in Frameworks */,
 				8418405B2BFD020100EC9FDF /* Redux in Frameworks */,
 				84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */,
+				8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */,
 				84F5AE912BF74CA6007EE279 /* Moya in Frameworks */,
 				8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */,
+				8472A3D42C010B99006726A1 /* PulseUI in Frameworks */,
+				8472A3D12C010835006726A1 /* TCASwiftLog in Frameworks */,
 				84CD981A2BFF8FAA000B4A4C /* OfflineSync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,7 +604,7 @@
 			children = (
 				8467510E2C00E96A0028921A /* KimaiCoordinator.swift */,
 				846751102C00EA240028921A /* KimaiCoordinatorView.swift */,
-				846751122C00F7350028921A /* Project */,
+				846751122C00F7350028921A /* Projects */,
 				8467510B2C00E8A70028921A /* Customers */,
 				8467510A2C00E8760028921A /* Customer */,
 			);
@@ -620,11 +630,13 @@
 			path = Customers;
 			sourceTree = "<group>";
 		};
-		846751122C00F7350028921A /* Project */ = {
+		846751122C00F7350028921A /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				846751132C00FB480028921A /* KimaiProjectsFeature.swift */,
+				849BF1652BF12897008F8B6A /* KimaiProjectsView.swift */,
 			);
-			path = Project;
+			path = Projects;
 			sourceTree = "<group>";
 		};
 		8467DEDC2BDEF3A80077E331 /* Settings */ = {
@@ -871,7 +883,6 @@
 		84CFD5AE2BD7D97F00691400 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				849BF1652BF12897008F8B6A /* KimaiProjectsView.swift */,
 				84266D292BD6AAD90020B386 /* KimaiProjectCard.swift */,
 				849BF16B2BF13FC6008F8B6A /* KimaiProjectSheet.swift */,
 				844597202BFCB6F1001CEC6C /* KimaiProjectDetailsView.swift */,
@@ -978,6 +989,10 @@
 				84CD98192BFF8FAA000B4A4C /* OfflineSync */,
 				84FDEDFD2BFFDD1C0071C8FA /* Login */,
 				84FDEE002BFFF08B0071C8FA /* TCACoordinators */,
+				8472A3D02C010835006726A1 /* TCASwiftLog */,
+				8472A3D32C010B99006726A1 /* PulseUI */,
+				8472A3D52C010E3C006726A1 /* Pulse */,
+				8472A3D82C01161A006726A1 /* PulseLogHandler */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -1069,6 +1084,9 @@
 				84CD98182BFF8FAA000B4A4C /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
 				84FDEDFC2BFFDD1C0071C8FA /* XCLocalSwiftPackageReference "../SwiftPackages/Login" */,
 				84FDEDFF2BFFF08B0071C8FA /* XCRemoteSwiftPackageReference "TCACoordinators" */,
+				8472A3CF2C010835006726A1 /* XCRemoteSwiftPackageReference "tca-swift-log" */,
+				8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */,
+				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1113,6 +1131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846751142C00FB480028921A /* KimaiProjectsFeature.swift in Sources */,
 				84F5AE9C2BF77F6A007EE279 /* ReportHeaderWeek.swift in Sources */,
 				8445970D2BFC2AFA001CEC6C /* ReportFilterView.swift in Sources */,
 				842F35A22BC93ABE00A29448 /* TaigaProject.swift in Sources */,
@@ -1656,6 +1675,30 @@
 				minimumVersion = 9.1.0;
 			};
 		};
+		8472A3CF2C010835006726A1 /* XCRemoteSwiftPackageReference "tca-swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/darrarski/tca-swift-log.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Pulse.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.1;
+			};
+		};
+		8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/PulseLogHandler.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 		84CD98152BFF6933000B4A4C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
@@ -1732,6 +1775,26 @@
 		8467DED72BDEECFC0077E331 /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OfflineSync;
+		};
+		8472A3D02C010835006726A1 /* TCASwiftLog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8472A3CF2C010835006726A1 /* XCRemoteSwiftPackageReference "tca-swift-log" */;
+			productName = TCASwiftLog;
+		};
+		8472A3D32C010B99006726A1 /* PulseUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = PulseUI;
+		};
+		8472A3D52C010E3C006726A1 /* Pulse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */;
+			productName = Pulse;
+		};
+		8472A3D82C01161A006726A1 /* PulseLogHandler */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */;
+			productName = PulseLogHandler;
 		};
 		8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */ = {
 			isa = XCSwiftPackageProductDependency;

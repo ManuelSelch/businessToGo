@@ -14,6 +14,11 @@ struct KimaiCoordinatorView: View {
             if let store = store.scope(state: \.customer, action: \.customer) {
                 KimaiCustomerSheet(store: store)
             }
+            
+        case .projects:
+            if let store = store.scope(state: \.projects, action: \.projects) {
+                KimaiProjectsView(store: store)
+            }
         }
     }
 }

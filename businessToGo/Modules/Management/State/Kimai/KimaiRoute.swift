@@ -56,6 +56,7 @@ extension KimaiRoute {
             EmptyView()
             
         case .projects(for: let id):
+            /*
             KimaiProjectsView(
                 customer: id,
                 projects: store.projects.records.filter { $0.customer == id },
@@ -64,6 +65,8 @@ extension KimaiRoute {
                 projectClicked: onProjectClicked,
                 onEdit: { router(.presentSheet(.kimai(.project($0)))) }
             )
+             */
+            EmptyView()
             
         case .project(let project):
             KimaiProjectSheet(

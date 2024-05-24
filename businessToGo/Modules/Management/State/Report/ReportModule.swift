@@ -1,9 +1,10 @@
 import Foundation
 import Combine
 import Redux
+import ComposableArchitecture
 
-struct ReportModule: Reducer {
-    
+@Reducer
+struct ReportModule {
     struct State: Equatable, Codable {
         var router: RouteModule<ReportRoute>.State = .init()
         
@@ -18,16 +19,14 @@ struct ReportModule: Reducer {
         case selectProject(Int?)
     }
     
-    struct Dependency {
-        
-    }
-    
-    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error> {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch(action){
         case .route(let action):
-            return RouteModule.reduce(&state.router, action, .init())
-                .map { .route($0) }
-                .eraseToAnyPublisher()
+            return .publisher {
+                return RouteModule.reduce(&state.router, action, .init())
+                    .map { .route($0) }
+                    .catch { _ in Empty() }
+            }
       
         
         case .selectDate(let date):
@@ -37,6 +36,6 @@ struct ReportModule: Reducer {
             state.selectedProject = project
         }
         
-        return Empty().eraseToAnyPublisher()
+        return .none
     }
 }

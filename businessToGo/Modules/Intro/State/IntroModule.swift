@@ -1,29 +1,43 @@
 import Foundation
-import Redux
 import Combine
+import ComposableArchitecture
 
-struct IntroModule: Reducer {
+@Reducer
+struct IntroModule {
+    @ObservableState
     struct State: Codable, Equatable {
         var pages: [IntroPage] = [
             .init(name: "Willkommen", description: "Die App wurde nun neu strukturiert in 'Projekte' und 'Reports'", image: "reports", tag: 0),
             .init(name: "Reports", description: "Im 'Reports' Tab lassen sich die Stunden nach Projekt sowie nach Datum filtern. Wechsle von der Wochenansicht in die Tagesansicht um durch die einzelnen Tage zu scrollen", image: "days", tag: 1),
             .init(name: "Projekte", description: "Im 'Projekte' Tab siehtst du alle Projekte und kannst diese nach Team und Kunde filtern. Aktiviere noch die Projektmanagement-Integration in den Einstellungen um weitere Tools wie das Kanban Board zu nutzen", image: "projects", tag: 2)
         ]
-        var isVisible = false
     }
     
     enum Action {
         case load
+        case delegate(Delegate)
     }
-    struct Dependency {}
     
-    static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
+    enum Delegate {
+        case showIntro
+    }
+    
+    func reduce(into state: inout State, action: Action) -> ComposableArchitecture.Effect<Action> {
         switch(action){
         case .load:
-            state.isVisible = UserDefault.isIntro
+            let show = UserDefault.isIntro
             UserDefault.isIntro = false
+            
+            if(show) {
+                return .send(.delegate(.showIntro))
+            } else {
+                return .none
+            }
+            
+        case .delegate:
+            return .none
         }
-        return Empty().eraseToAnyPublisher()
+        
     }
     
 }

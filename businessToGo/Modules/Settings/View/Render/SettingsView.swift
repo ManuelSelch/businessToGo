@@ -3,7 +3,7 @@ import Redux
 
 struct SettingsView: View {
     
-    var router: (RouteModule<AppRoute>.Action) -> ()
+    // var router: (RouteModule<AppRoute>.Action) -> ()
     var navigate: (SettingsRoute) -> ()
     var logout: () -> ()
     
@@ -14,7 +14,7 @@ struct SettingsView: View {
                 Button("Debug", action: { navigate(.debug) })
                
                 
-                Button("Intro", action: { router(.presentSheet(.intro)) })
+                // Button("Intro", action: { router(.presentSheet(.intro)) }) // todo: navigate
                 
                 Button("Logout", action: logout)
                     .tint(Color.red)

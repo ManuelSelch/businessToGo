@@ -1,10 +1,10 @@
 import Foundation
 import Combine
 import OfflineSync
-import Redux
+import ComposableArchitecture
 
-extension LoginModule: Reducer {
-    public static func reduce(_ state: inout State, _ action: Action, _ env: Dependency) -> AnyPublisher<Action, Error>  {
+extension LoginModule {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch(action){
             case .navigate(let scene):
                 state.scene = scene
@@ -12,48 +12,39 @@ extension LoginModule: Reducer {
             case .logout:
                 state.scene = .accounts
                 state.current = nil
-                env.keychain.logout()
+                keychain.logout()
+                return .send(.delegate(.showLogin))
             
             case .reset:
-            
-                do {
-                    try env.keychain.removeAccounts()
-                    state.accounts = []
-                } catch {
-                    return Fail(error: error).eraseToAnyPublisher()
-                }
+                try? keychain.removeAccounts()
+                state.accounts = []
             
             case .loadAccounts:
-                do {
-                    state.accounts = try env.keychain.getAccounts()
-                    if(state.accounts.isEmpty){
-                        state.accounts.append(Account.demo)
-                        try env.keychain.saveAccount(Account.demo)
+                state.accounts = (try? keychain.getAccounts()) ?? []
+                if(state.accounts.isEmpty){
+                    state.accounts.append(Account.demo)
+                    try? keychain.saveAccount(Account.demo)
+                }
+                if(state.current == nil){
+                    if let account = try? keychain.getCurrentAccount(state.accounts) {
+                        return .send(Action.login(account))
                     }
-                    if(state.current == nil){
-                        if let account = try env.keychain.getCurrentAccount(state.accounts) {
-                            return just(.login(account))
-                        }
-                    }
-                } catch {
-                    return Fail(error: error).eraseToAnyPublisher()
                 }
             
             case .login(let account):
                 switch(state.scene){
                     case .kimai:
-                        return loginKimai(account, env) // -> saveAccount
+                        return loginKimai(account) // -> saveAccount
                     case .taiga:
-                        return loginTaiga(account, env) // -> saveAccount
+                        return loginTaiga(account) // -> saveAccount
                     case .accounts:
                         state.current = account
-                        env.management.switchDB("businessToGo_\(account.identifier).sqlite")
-                        env.keychain.login(account)
+                        database.switchDB("businessToGo_\(account.identifier).sqlite")
+                        keychain.login(account)
                         
-                    return Publishers.Merge(
-                        loginKimai(account, env), loginTaiga(account, env)
-                    )
-                    .eraseToAnyPublisher()
+                        return .merge([
+                            loginKimai(account), loginTaiga(account), .send(.delegate(.showHome))
+                        ])
                     
                 default: break
                 }
@@ -65,57 +56,44 @@ extension LoginModule: Reducer {
             
             case .saveAccount(let account):
                 state.scene = .account(account)
-                try? env.keychain.saveAccount(account)
+                try? keychain.saveAccount(account)
             
             case .status(let status):
                 state.loginStatus = status
             
             case .deleteAccount(let account):
-                do {
-                    try env.keychain.removeAccount(account)
-                    state.accounts.removeAll(where: { $0.identifier == account.identifier })
-                } catch {
-                    return Fail(error: error).eraseToAnyPublisher()
-                }
+                try? keychain.removeAccount(account)
+                state.accounts.removeAll(where: { $0.identifier == account.identifier })
+            
+            case .delegate:
+                return .none
         }
         
-        return Empty().eraseToAnyPublisher()
+        return .none
     }
     
     
-    static func loginKimai(_ account: Account, _ env: Dependency) -> AnyPublisher<Action, Error> {
-        return Future<Action, Error> { promise in
-            Task {
-                do {
-                    guard let kimai = account.kimai else { promise(.failure(ServiceError.unknown("kimai account not found"))); return }
-                    let success = try await env.management.kimai.login(kimai)
-                    if(success){
-                        env.management.kimai.setAuth(kimai)
-                        promise(.success(.saveAccount(account)))
-                    }else {
-                        promise(.failure(ServiceError.unknown("kimai login failed")))
-                    }
-                } catch {
-                    promise(.failure(error))
+    func loginKimai(_ account: Account) -> Effect<Action> {
+        return .run { send in
+            guard let kimai = account.kimai else { return }
+            if let success = try? await self.kimai.login(kimai) {
+                if(success){
+                    self.kimai.setAuth(kimai)
+                    await send(.saveAccount(account))
+                    await send(.delegate(.syncKimai))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
     }
     
-    static func loginTaiga(_ account: Account, _ env: Dependency) -> AnyPublisher<Action, Error> {
-        return Future<Action, Error> { promise in
-            Task {
-                do {
-                    guard let taiga = account.taiga else { promise(.failure(ServiceError.unknown("taiga account not found"))); return }
-                    let user = try await env.management.taiga.login(taiga)
-                    env.management.taiga.setAuth(user.auth_token)
-                    
-                    promise(.success(.saveAccount(account)))
-                } catch {
-                    return promise(.failure(error))
-                }
+    func loginTaiga(_ account: Account) -> Effect<Action> {
+        return .run { send in
+            guard let taiga = account.taiga else { return }
+            if let user = try? await self.taiga.login(taiga) {
+                self.taiga.setAuth(user.auth_token)
+                await send(.saveAccount(account))
+                await send(.delegate(.syncTaiga))
             }
-        
-        }.eraseToAnyPublisher()
+        }
     }
 }

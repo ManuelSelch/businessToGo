@@ -1,8 +1,8 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct AccountsView: View {
-    @ObservedObject var store: StoreOf<LoginModule>
+    let store: StoreOf<LoginModule>
     
     var body: some View {
         VStack {

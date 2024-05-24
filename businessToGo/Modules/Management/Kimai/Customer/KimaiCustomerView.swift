@@ -1,12 +1,11 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct KimaiCustomerSheet: View {
-    var customer: KimaiCustomer
-    var teams: [KimaiTeam]
-    var onSave: (KimaiCustomer) -> ()
+    let store: StoreOf<KimaiCustomerFeature>
     
     var selectedTeams: [KimaiTeam] {
-        return teams.filter { customer.teams.contains($0.id) }
+        return store.teams.filter { store.customer.teams.contains($0.id) }
     }
     
     @State var name = ""
@@ -49,12 +48,12 @@ struct KimaiCustomerSheet: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing){
                 Button(action: {
-                    var customer = customer
+                    var customer = store.customer
                     customer.name = name
                     customer.color = color
-                    onSave(customer)
+                    store.send(.saveTapped)
                 }){
-                    let isCreate = (customer.id == KimaiCustomer.new.id)
+                    let isCreate = (store.customer.id == KimaiCustomer.new.id)
                     let label = isCreate ? "Create" : "Save"
                     Text(label)
                         .foregroundStyle(Color.theme)
@@ -63,8 +62,8 @@ struct KimaiCustomerSheet: View {
         }
         
         .onAppear {
-            name = customer.name
-            color = customer.color
+            name = store.customer.name
+            color = store.customer.color
         }
         
     }

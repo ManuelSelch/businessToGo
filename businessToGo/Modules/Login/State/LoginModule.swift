@@ -1,5 +1,6 @@
 import Foundation
 import Login
+import ComposableArchitecture
 
 enum LoginStatus: Equatable, Codable {
     case show
@@ -16,7 +17,14 @@ enum LoginScreen: Equatable, Codable {
 }
 
 
+@Reducer
 struct LoginModule {
+    @Dependency(\.kimai) var kimai
+    @Dependency(\.taiga) var taiga
+    @Dependency(\.keychain) var keychain
+    @Dependency(\.database) var database
+    
+    @ObservableState
     struct State: Equatable, Codable {
         var scene: LoginScreen = .accounts
         
@@ -39,11 +47,24 @@ struct LoginModule {
         case login(Account)
         case status(LoginStatus)
         
+        case delegate(Delegate)
+        
     }
     
-    struct Dependency {
-        var management: ManagementModule.Dependency
-        var keychain: KeychainService<Account>
+    enum Delegate {
+        case showLogin
+        case showHome
+        
+        case syncKimai
+        case syncTaiga
     }
 
+
+}
+
+extension DependencyValues {
+    var keychain: KeychainService<Account> {
+        get { self[KeychainService<Account>.self] }
+        set { self[KeychainService<Account>.self] = newValue }
+    }
 }

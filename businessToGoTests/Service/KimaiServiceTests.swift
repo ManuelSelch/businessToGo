@@ -4,7 +4,9 @@ import TestableCombinePublishers
 import OHHTTPStubs
 import OHHTTPStubsSwift
 import Moya
+
 import Redux
+import OfflineSync
 
 @testable import businessToGo
 
@@ -13,7 +15,12 @@ final class KimaiServiceTests: XCTestCase {
     var store: StoreOf<ManagementModule>!
     
     override func setUp() {
-        store = .init(initialState: .init(), reducer: ManagementModule.reduce, dependencies: .mock)
+        store = .init(
+            initialState: .init(),
+            reducer: ManagementModule.reduce,
+            dependencies: .mock
+        )
+        
         stub(
             condition: isHost("time.dev.manuelselch.de")
         ){ _ in
@@ -27,7 +34,9 @@ final class KimaiServiceTests: XCTestCase {
     }
 
     func testLogin() async throws {
-        let success = try await store.dependencies.kimai.login(AccountData("username", "password", "https://time.dev.manuelselch.de"))
+        let success = try await store.dependencies.kimai.login(
+            AccountData("username", "password", "https://time.dev.manuelselch.de")
+        )
         XCTAssertEqual(true, success)
     }
     
@@ -46,21 +55,5 @@ final class KimaiServiceTests: XCTestCase {
             
         XCTAssertEqual([c], result)
     }
-    
-    func testSyncCustomers() async {
-        let remote = [
-            KimaiCustomer(id: 100, name: "Sync", number: "100", teams: [])
-        ]
-        // let change = DatabaseChange(id: 0, type: .insert, recordID: 0, tableName: "", timestamp: "")
-        
-        /*
-         env.kimai.customers.sync([])
-            .collect()
-            .expect(t)
-            .waitForExpectations(timeout: 3)
-         */
-    }
-    
-  
 
 }

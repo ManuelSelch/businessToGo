@@ -1,14 +1,12 @@
 import SwiftUI
 import OfflineSync
-import Redux
+import ComposableArchitecture
 
 struct KimaiCustomersView: View {
-    let customers: [KimaiCustomer]
-    let changes: [DatabaseChange]
-    let router: (RouteModule<ManagementRoute>.Action) -> ()
+    let store: StoreOf<KimaiCustomersFeature>
     
     var customersFiltered: [KimaiCustomer] {
-        var c = customers
+        var c = store.customers.records
         c.sort { $0.name < $1.name }
         return c
     }
@@ -22,12 +20,12 @@ struct KimaiCustomersView: View {
             List(customersFiltered, id: \.id) { customer in
                 KimaiCustomerCard(
                     customer: customer, 
-                    change: changes.first(where: { $0.recordID == customer.id }),
-                    onCustomerSelected: { router(.push(.kimai(.projects(for: $0)))) }
+                    change: store.customers.changes.first(where: { $0.recordID == customer.id }),
+                    onCustomerSelected: { _ in } // router(.push(.kimai(.projects(for: $0))))
                 )
                     .swipeActions(edge: .trailing) {
                         Button(role: .cancel) {
-                            router(.presentSheet(.kimai(.customer(customer))))
+                            store.send(.customerEditTapped(customer))
                         } label: {
                             Text("Edit")
                                 .foregroundColor(.white)
@@ -38,7 +36,7 @@ struct KimaiCustomersView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        router(.presentSheet(.kimai(.customer(KimaiCustomer.new))))
+                        store.send(.customerEditTapped(KimaiCustomer.new))
                     }){
                         Image(systemName: "plus")
                             .font(.system(size: 20))
@@ -50,17 +48,4 @@ struct KimaiCustomersView: View {
         }
         .background(Color.background)
     }
-}
-
-
-#Preview {
-    let customers = [
-        KimaiCustomer(id: 0, name: "Customer 1", color: "ffa500", teams: []),
-        KimaiCustomer(id: 1, name: "Customer 2", color: "008080", teams: [])
-    ]
-    return KimaiCustomersView(
-        customers: customers,
-        changes: [],
-        router: { _ in}
-    )
 }

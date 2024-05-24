@@ -1,8 +1,8 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct AccountView: View {
-    @ObservedObject var store: StoreOf<LoginModule>
+    let store: StoreOf<LoginModule>
     let account: Account
     @State var name = ""
     

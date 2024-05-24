@@ -9,11 +9,11 @@ class TaigaTable {
     var tasks: DatabaseTable<TaigaTask>
     var taskStatus: DatabaseTable<TaigaTaskStoryStatus> 
     
-    init(_ db: Connection?, _ track: TrackTable) {
-        projects = DatabaseTable(db, "taiga_projects", nil)
-        taskStories = DatabaseTable(db, "taiga_taskStories", track)
-        milestones = DatabaseTable(db, "taiga_milestones", nil)
-        tasks = DatabaseTable(db, "taiga_tasks", nil)
-        taskStatus = DatabaseTable(db, "taiga_taskStatus", nil)
+    init() {
+        projects = DatabaseTable("taiga_projects")
+        taskStories = DatabaseTable("taiga_taskStories")
+        milestones = DatabaseTable("taiga_milestones")
+        tasks = DatabaseTable("taiga_tasks")
+        taskStatus = DatabaseTable("taiga_taskStatus")
     }
 }

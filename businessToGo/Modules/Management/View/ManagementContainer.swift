@@ -1,8 +1,8 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct ManagementContainer: View {
-    @ObservedObject var store: StoreOf<ManagementModule>
+    let store: StoreOf<ManagementModule>
     
     
     var body: some View {
@@ -43,11 +43,11 @@ struct ManagementContainer: View {
 
 extension ManagementContainer {
     @ViewBuilder func getTimesheetPopup() -> some View {
-        if let timesheet = store.state.kimai.timesheets.first(where: { $0.end == nil }) {
+        if let timesheet = store.kimai.timesheets.records.first(where: { $0.end == nil }) {
             if
-                let project = store.state.kimai.projects.first(where: { $0.id == timesheet.project }),
-                let customer = store.state.kimai.customers.first(where: { $0.id == project.customer }),
-                let activity = store.state.kimai.activities.first(where: { $0.id == timesheet.activity })
+                let project = store.kimai.projects.records.first(where: { $0.id == timesheet.project }),
+                let customer = store.kimai.customers.records.first(where: { $0.id == project.customer }),
+                let activity = store.kimai.activities.records.first(where: { $0.id == timesheet.activity })
             {
                 KimaiTimesheetPopup(
                     timesheet: timesheet,
@@ -82,8 +82,8 @@ extension ManagementContainer {
         ManagementHeaderView(
             selectedTeam: Binding(get: { store.state.kimai.selectedTeam } , set: { store.send(.kimai(.selectTeam($0))) }),
             route: store.state.router.routes.last,
-            projects: store.state.kimai.projects,
-            teams: store.state.kimai.teams,
+            projects: store.kimai.projects.records,
+            teams: store.kimai.teams.records,
             router: { store.send(.route($0)) },
             onSync: { store.send(.sync) }
         )

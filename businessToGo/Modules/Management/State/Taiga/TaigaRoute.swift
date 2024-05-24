@@ -1,5 +1,5 @@
 import Foundation
-import Redux
+import ComposableArchitecture
 import SwiftUI
 
 enum TaigaProjectMenu: String, Equatable, CaseIterable {
@@ -18,13 +18,13 @@ extension TaigaRoute {
         switch(self){
             
         case .project(let integration):
-            if let project = store.state.projects.first(where: {$0.id == integration.taigaProjectId}) {
+            if let project = store.projects.records.first(where: {$0.id == integration.taigaProjectId}) {
                TaigaProjectView(
                 project: project,
-                taskStoryStatus: store.state.taskStoryStatus.filter { $0.project == integration.taigaProjectId },
-                taskStories: store.state.taskStories,
-                tasks: store.state.tasks,
-                milestones: store.state.milestones.filter { $0.project == integration.taigaProjectId },
+                taskStoryStatus: store.taskStoryStatus.records.filter { $0.project == integration.taigaProjectId },
+                taskStories: store.taskStories.records,
+                tasks: store.tasks.records,
+                milestones: store.milestones.records.filter { $0.project == integration.taigaProjectId },
                 updateTaskStory: { store.send(.taskStories(.update($0))) }
                )
             }

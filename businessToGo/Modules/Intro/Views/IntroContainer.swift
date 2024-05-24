@@ -1,8 +1,8 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct IntroContainer: View {
-    @ObservedObject var store: StoreOf<IntroModule>
+    let store: StoreOf<IntroModule>
     
     var body: some View {
         IntroPagesView(pages: store.state.pages)

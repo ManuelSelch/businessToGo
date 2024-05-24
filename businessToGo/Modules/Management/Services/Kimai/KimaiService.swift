@@ -4,11 +4,12 @@ import Moya
 import CoreData
 import OfflineSync
 import SQLite
+import ComposableArchitecture
 
 // MARK: - admin middleware
-class KimaiService {
+class KimaiService: DependencyKey {
     var provider = MoyaProvider<KimaiRequest>()
-    var tables: KimaiTable
+    var tables: KimaiTable!
     
     var customers: RequestService<KimaiCustomer, KimaiRequest>!
     var projects: RequestService<KimaiProject, KimaiRequest>!
@@ -40,8 +41,8 @@ class KimaiService {
         activities.clear()
     }
     
-    init(_ db: Connection?, _ track: TrackTable) {
-        let tables = KimaiTable(db, track)
+    init() {
+        let tables = KimaiTable()
         self.tables = tables
         initRequests()
       
@@ -98,3 +99,18 @@ struct KimaiAuthPlugin: PluginType {
         return request
     }
 }
+
+
+extension KimaiService {
+    static var liveValue: KimaiService {
+        .init()
+    }
+}
+
+extension DependencyValues {
+    var kimai: KimaiService {
+        get { self[KimaiService.self] }
+        set { self[KimaiService.self] = newValue }
+    }
+}
+

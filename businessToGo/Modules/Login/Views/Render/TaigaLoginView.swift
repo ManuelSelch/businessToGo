@@ -1,8 +1,8 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct TaigaLoginView: View {
-    @ObservedObject var store: StoreOf<LoginModule>
+    var store: StoreOf<LoginModule>
     
     @State private var server: String = ""
     @State private var username: String = ""

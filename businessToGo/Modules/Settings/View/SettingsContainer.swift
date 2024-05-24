@@ -1,15 +1,15 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct SettingsContainer: View {
-    @ObservedObject var store: StoreOf<AppModule>
+    let store: StoreOf<AppModule>
     
     @State var projectView: KimaiProject?
 
     var body: some View {
         NavigationStack(
             path:  Binding(
-                get: { store.state.settings.router.routes },
+                get: { store.settings.router.routes },
                 set: { store.send(.settings(.route(.set($0)))) }
             )
         ){

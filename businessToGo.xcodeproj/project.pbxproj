@@ -3,15 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		841083A92BFA725300332A6A /* SettingsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083A82BFA725300332A6A /* SettingsModule.swift */; };
-		841083AD2BFA7CCF00332A6A /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083AC2BFA7CCF00332A6A /* SettingsReducer.swift */; };
 		841083AF2BFA953E00332A6A /* ManagementRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083AE2BFA953E00332A6A /* ManagementRoute.swift */; };
 		841083B12BFA95A700332A6A /* KimaiRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083B02BFA95A700332A6A /* KimaiRoute.swift */; };
-		841083B32BFA9C0C00332A6A /* RequestAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083B22BFA9C0C00332A6A /* RequestAction.swift */; };
+		841083B32BFA9C0C00332A6A /* RequestModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083B22BFA9C0C00332A6A /* RequestModule.swift */; };
 		841083B82BFA9D5600332A6A /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 841083B72BFA9D5600332A6A /* Redux */; };
 		841083BA2BFAA7AC00332A6A /* TaigaRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083B92BFAA7AC00332A6A /* TaigaRoute.swift */; };
 		841083BC2BFAAB3E00332A6A /* TaigaProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841083BB2BFAAB3E00332A6A /* TaigaProjectView.swift */; };
@@ -22,14 +21,15 @@
 		841840582BFD01D300EC9FDF /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 841840572BFD01D300EC9FDF /* Log */; };
 		8418405B2BFD020100EC9FDF /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8418405A2BFD020100EC9FDF /* Redux */; };
 		8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */ = {isa = PBXBuildFile; productRef = 8418405D2BFD024E00EC9FDF /* MyChart */; };
-		841840612BFD02E500EC9FDF /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 841840602BFD02E500EC9FDF /* OfflineSync */; };
+		841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840652BFD414F00EC9FDF /* AppContainer.swift */; };
+		841840692BFD41CC00EC9FDF /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840682BFD41CC00EC9FDF /* AppTabView.swift */; };
+		8418406B2BFEB1CE00EC9FDF /* ReportReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418406A2BFEB1CE00EC9FDF /* ReportReducerTests.swift */; };
 		841C30162BF25221007367A8 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C30152BF25221007367A8 /* CustomColorPicker.swift */; };
 		841D9E672BC95BDC002990C7 /* TaigaProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E662BC95BDC002990C7 /* TaigaProjectsView.swift */; };
 		841D9E742BC99251002990C7 /* TaigaKanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E732BC99251002990C7 /* TaigaKanbanView.swift */; };
 		841D9E7F2BC9A77C002990C7 /* TaigaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E7E2BC9A77C002990C7 /* TaigaService.swift */; };
 		841D9E832BC9E503002990C7 /* KimaiProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E822BC9E503002990C7 /* KimaiProject.swift */; };
 		841D9E892BC9F3E6002990C7 /* TaigaTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D9E882BC9F3E6002990C7 /* TaigaTable.swift */; };
-		84220F902BDC58FF00059F63 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84220F8F2BDC58FF00059F63 /* AppRoute.swift */; };
 		8422903E2BCD4E0C001C884B /* KimaiTimesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422903D2BCD4E0C001C884B /* KimaiTimesheet.swift */; };
 		842290402BCD518A001C884B /* KimaiTimesheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422903F2BCD518A001C884B /* KimaiTimesheetsView.swift */; };
 		8424BB462BCA6C8600929F13 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424BB452BCA6C8600929F13 /* AccountsView.swift */; };
@@ -55,9 +55,7 @@
 		84458AE32BC41A720041E40F /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE22BC41A720041E40F /* AppModule.swift */; };
 		84458AE72BC41AC20041E40F /* KimaiModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE62BC41AC20041E40F /* KimaiModule.swift */; };
 		84458AE92BC41B4C0041E40F /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE82BC41B4C0041E40F /* ServiceError.swift */; };
-		84458AEE2BC41CA40041E40F /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AED2BC41CA40041E40F /* AppReducer.swift */; };
 		84458AF72BC41EB80041E40F /* KimaiCustomersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AF62BC41EB80041E40F /* KimaiCustomersView.swift */; };
-		84458AF92BC41F5B0041E40F /* KimaiReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AF82BC41F5B0041E40F /* KimaiReducer.swift */; };
 		844597052BFC0901001CEC6C /* ReportRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844597042BFC0901001CEC6C /* ReportRoute.swift */; };
 		844597072BFC0940001CEC6C /* ReportModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844597062BFC0940001CEC6C /* ReportModule.swift */; };
 		844597092BFC179D001CEC6C /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844597082BFC179D001CEC6C /* ReportsView.swift */; };
@@ -78,26 +76,30 @@
 		8464257D2BCE410700BDD86E /* ManagementHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464257C2BCE410700BDD86E /* ManagementHeaderView.swift */; };
 		8464257F2BCE43B900BDD86E /* TaigaProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8464257E2BCE43B900BDD86E /* TaigaProjectCardView.swift */; };
 		846425812BCE455100BDD86E /* TaigaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846425802BCE455100BDD86E /* TaigaHeaderView.swift */; };
+		846751022C00B9F70028921A /* AppRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751012C00B9F70028921A /* AppRouteView.swift */; };
+		846751042C00C0DA0028921A /* ManagementCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751032C00C0DA0028921A /* ManagementCoordinatorView.swift */; };
+		846751062C00C0F90028921A /* ManagementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751052C00C0F90028921A /* ManagementCoordinator.swift */; };
+		846751082C00E8270028921A /* KimaiCustomerFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751072C00E8270028921A /* KimaiCustomerFeature.swift */; };
+		8467510D2C00E8B10028921A /* KimaiCustomersFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467510C2C00E8B10028921A /* KimaiCustomersFeature.swift */; };
+		8467510F2C00E96A0028921A /* KimaiCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467510E2C00E96A0028921A /* KimaiCoordinator.swift */; };
+		846751112C00EA240028921A /* KimaiCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751102C00EA240028921A /* KimaiCoordinatorView.swift */; };
 		8467DEB92BDEA8690077E331 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEB82BDEA8690077E331 /* Redux */; };
 		8467DEC22BDECA300077E331 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC12BDECA300077E331 /* SQLite */; };
 		8467DEC52BDECB500077E331 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC42BDECB500077E331 /* OHHTTPStubs */; };
 		8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
 		8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED72BDEECFC0077E331 /* OfflineSync */; };
-		847334AC2BDCF02400129D26 /* ManagementDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334AB2BDCF02400129D26 /* ManagementDependency.swift */; };
 		847334B62BDCF50C00129D26 /* ManagementModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B52BDCF50C00129D26 /* ManagementModule.swift */; };
 		847334B82BDCF6F700129D26 /* ManagementContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334B72BDCF6F700129D26 /* ManagementContainer.swift */; };
-		847334BC2BDCFB8700129D26 /* ManagementReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847334BB2BDCFB8700129D26 /* ManagementReducer.swift */; };
 		848100292BC491EA00EE2660 /* KimaiTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848100282BC491EA00EE2660 /* KimaiTable.swift */; };
 		8486FBCB2BCEB0390052DF18 /* TestableCombinePublishers in Frameworks */ = {isa = PBXBuildFile; productRef = 8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */; };
-		849BF1492BEE6A3B008F8B6A /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 849BF1482BEE6A3B008F8B6A /* Login */; };
 		849BF14B2BEE7CBC008F8B6A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF14A2BEE7CBC008F8B6A /* AccountView.swift */; };
 		849BF1522BEF71CA008F8B6A /* SettingsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1512BEF71CA008F8B6A /* SettingsContainer.swift */; };
 		849BF15B2BEF73B4008F8B6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF15A2BEF73B4008F8B6A /* SettingsView.swift */; };
 		849BF15D2BEF77E5008F8B6A /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF15C2BEF77E5008F8B6A /* DebugView.swift */; };
 		849BF1642BF12333008F8B6A /* KimaiTimesheetPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1632BF12333008F8B6A /* KimaiTimesheetPopup.swift */; };
 		849BF1662BF12897008F8B6A /* KimaiProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1652BF12897008F8B6A /* KimaiProjectsView.swift */; };
-		849BF16A2BF1346B008F8B6A /* KimaiCustomerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1692BF1346B008F8B6A /* KimaiCustomerSheet.swift */; };
+		849BF16A2BF1346B008F8B6A /* KimaiCustomerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1692BF1346B008F8B6A /* KimaiCustomerView.swift */; };
 		849BF16C2BF13FC6008F8B6A /* KimaiProjectSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF16B2BF13FC6008F8B6A /* KimaiProjectSheet.swift */; };
 		849BF1702BF171EE008F8B6A /* KimaiCustomerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF16F2BF171EE008F8B6A /* KimaiCustomerCard.swift */; };
 		84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */; };
@@ -109,10 +111,11 @@
 		84CD11F72BF410E8006AE4C7 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F62BF410E8006AE4C7 /* Log */; };
 		84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F92BF41393006AE4C7 /* OfflineSync */; };
 		84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11FC2BF413D6006AE4C7 /* OfflineSync */; };
+		84CD98172BFF6933000B4A4C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD98162BFF6933000B4A4C /* ComposableArchitecture */; };
+		84CD981A2BFF8FAA000B4A4C /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD98192BFF8FAA000B4A4C /* OfflineSync */; };
 		84CF31432BDF68A60064BDD1 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CF31422BDF68A60064BDD1 /* UIImage.swift */; };
 		84CFD5AA2BD7D93200691400 /* IntegrationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5A92BD7D93200691400 /* IntegrationsView.swift */; };
 		84CFD5AC2BD7D94F00691400 /* IntegrationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5AB2BD7D94F00691400 /* IntegrationCard.swift */; };
-		84CFD5B22BD7F7D100691400 /* TaigaStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFD5B12BD7F7D100691400 /* TaigaStateReducer.swift */; };
 		84D96FD92BC511DD00114438 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D96FD82BC511DD00114438 /* DatabaseError.swift */; };
 		84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84E6DCA52BF400A00051E148 /* OfflineSync */; };
 		84F5AE912BF74CA6007EE279 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 84F5AE902BF74CA6007EE279 /* Moya */; };
@@ -134,6 +137,8 @@
 		84FC58402BC9450700594E14 /* TaigaUserAuthDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC583F2BC9450700594E14 /* TaigaUserAuthDetails.swift */; };
 		84FC58472BC9483D00594E14 /* TaigaModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58462BC9483D00594E14 /* TaigaModule.swift */; };
 		84FC58582BC9559200594E14 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* Header.swift */; };
+		84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84FDEDFD2BFFDD1C0071C8FA /* Login */; };
+		84FDEE012BFFF08B0071C8FA /* TCACoordinators in Frameworks */ = {isa = PBXBuildFile; productRef = 84FDEE002BFFF08B0071C8FA /* TCACoordinators */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,23 +160,24 @@
 
 /* Begin PBXFileReference section */
 		841083A82BFA725300332A6A /* SettingsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModule.swift; sourceTree = "<group>"; };
-		841083AC2BFA7CCF00332A6A /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		841083AE2BFA953E00332A6A /* ManagementRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementRoute.swift; sourceTree = "<group>"; };
 		841083B02BFA95A700332A6A /* KimaiRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiRoute.swift; sourceTree = "<group>"; };
-		841083B22BFA9C0C00332A6A /* RequestAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAction.swift; sourceTree = "<group>"; };
+		841083B22BFA9C0C00332A6A /* RequestModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModule.swift; sourceTree = "<group>"; };
 		841083B92BFAA7AC00332A6A /* TaigaRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaRoute.swift; sourceTree = "<group>"; };
 		841083BB2BFAAB3E00332A6A /* TaigaProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectView.swift; sourceTree = "<group>"; };
 		841083C42BFB5BF500332A6A /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		841083C92BFBC54100332A6A /* LoginReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginReducerTests.swift; sourceTree = "<group>"; };
 		841083CB2BFBDCE700332A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		841840542BFCF79D00EC9FDF /* KimaiUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiUser.swift; sourceTree = "<group>"; };
+		841840652BFD414F00EC9FDF /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		841840682BFD41CC00EC9FDF /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
+		8418406A2BFEB1CE00EC9FDF /* ReportReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReducerTests.swift; sourceTree = "<group>"; };
 		841C30152BF25221007367A8 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		841D9E662BC95BDC002990C7 /* TaigaProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectsView.swift; sourceTree = "<group>"; };
 		841D9E732BC99251002990C7 /* TaigaKanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaKanbanView.swift; sourceTree = "<group>"; };
 		841D9E7E2BC9A77C002990C7 /* TaigaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaService.swift; sourceTree = "<group>"; };
 		841D9E822BC9E503002990C7 /* KimaiProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiProject.swift; sourceTree = "<group>"; };
 		841D9E882BC9F3E6002990C7 /* TaigaTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaTable.swift; sourceTree = "<group>"; };
-		84220F8F2BDC58FF00059F63 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		8422903D2BCD4E0C001C884B /* KimaiTimesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTimesheet.swift; sourceTree = "<group>"; };
 		8422903F2BCD518A001C884B /* KimaiTimesheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTimesheetsView.swift; sourceTree = "<group>"; };
 		8424BB452BCA6C8600929F13 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
@@ -197,9 +203,7 @@
 		84458AE22BC41A720041E40F /* AppModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
 		84458AE62BC41AC20041E40F /* KimaiModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiModule.swift; sourceTree = "<group>"; };
 		84458AE82BC41B4C0041E40F /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
-		84458AED2BC41CA40041E40F /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		84458AF62BC41EB80041E40F /* KimaiCustomersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomersView.swift; sourceTree = "<group>"; };
-		84458AF82BC41F5B0041E40F /* KimaiReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiReducer.swift; sourceTree = "<group>"; };
 		844597042BFC0901001CEC6C /* ReportRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRoute.swift; sourceTree = "<group>"; };
 		844597062BFC0940001CEC6C /* ReportModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModule.swift; sourceTree = "<group>"; };
 		844597082BFC179D001CEC6C /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
@@ -220,10 +224,15 @@
 		8464257C2BCE410700BDD86E /* ManagementHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementHeaderView.swift; sourceTree = "<group>"; };
 		8464257E2BCE43B900BDD86E /* TaigaProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaProjectCardView.swift; sourceTree = "<group>"; };
 		846425802BCE455100BDD86E /* TaigaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaigaHeaderView.swift; sourceTree = "<group>"; };
-		847334AB2BDCF02400129D26 /* ManagementDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementDependency.swift; sourceTree = "<group>"; };
+		846751012C00B9F70028921A /* AppRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteView.swift; sourceTree = "<group>"; };
+		846751032C00C0DA0028921A /* ManagementCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinatorView.swift; sourceTree = "<group>"; };
+		846751052C00C0F90028921A /* ManagementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementCoordinator.swift; sourceTree = "<group>"; };
+		846751072C00E8270028921A /* KimaiCustomerFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomerFeature.swift; sourceTree = "<group>"; };
+		8467510C2C00E8B10028921A /* KimaiCustomersFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomersFeature.swift; sourceTree = "<group>"; };
+		8467510E2C00E96A0028921A /* KimaiCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCoordinator.swift; sourceTree = "<group>"; };
+		846751102C00EA240028921A /* KimaiCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCoordinatorView.swift; sourceTree = "<group>"; };
 		847334B52BDCF50C00129D26 /* ManagementModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementModule.swift; sourceTree = "<group>"; };
 		847334B72BDCF6F700129D26 /* ManagementContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementContainer.swift; sourceTree = "<group>"; };
-		847334BB2BDCFB8700129D26 /* ManagementReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementReducer.swift; sourceTree = "<group>"; };
 		848100282BC491EA00EE2660 /* KimaiTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTable.swift; sourceTree = "<group>"; };
 		849BF14A2BEE7CBC008F8B6A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		849BF1512BEF71CA008F8B6A /* SettingsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainer.swift; sourceTree = "<group>"; };
@@ -231,7 +240,7 @@
 		849BF15C2BEF77E5008F8B6A /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		849BF1632BF12333008F8B6A /* KimaiTimesheetPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiTimesheetPopup.swift; sourceTree = "<group>"; };
 		849BF1652BF12897008F8B6A /* KimaiProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiProjectsView.swift; sourceTree = "<group>"; };
-		849BF1692BF1346B008F8B6A /* KimaiCustomerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomerSheet.swift; sourceTree = "<group>"; };
+		849BF1692BF1346B008F8B6A /* KimaiCustomerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomerView.swift; sourceTree = "<group>"; };
 		849BF16B2BF13FC6008F8B6A /* KimaiProjectSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiProjectSheet.swift; sourceTree = "<group>"; };
 		849BF16F2BF171EE008F8B6A /* KimaiCustomerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiCustomerCard.swift; sourceTree = "<group>"; };
 		84C5A2922BC40EEC00C25A0C /* businessToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = businessToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,7 +256,6 @@
 		84CF31422BDF68A60064BDD1 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		84CFD5A92BD7D93200691400 /* IntegrationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationsView.swift; sourceTree = "<group>"; };
 		84CFD5AB2BD7D94F00691400 /* IntegrationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationCard.swift; sourceTree = "<group>"; };
-		84CFD5B12BD7F7D100691400 /* TaigaStateReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaigaStateReducer.swift; sourceTree = "<group>"; };
 		84D7E98E2BD9294D00DE59DA /* Redux */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Redux; sourceTree = "<group>"; };
 		84D96FD82BC511DD00114438 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		84F5AE922BF7528B007EE279 /* JSONViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONViewer.swift; sourceTree = "<group>"; };
@@ -274,14 +282,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FDEE012BFFF08B0071C8FA /* TCACoordinators in Frameworks */,
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
 				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
+				84CD98172BFF6933000B4A4C /* ComposableArchitecture in Frameworks */,
 				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
 				8467DEB92BDEA8690077E331 /* Redux in Frameworks */,
 				84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */,
+				84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */,
 				841840532BFCE77200EC9FDF /* MyChart in Frameworks */,
-				849BF1492BEE6A3B008F8B6A /* Login in Frameworks */,
-				841840612BFD02E500EC9FDF /* OfflineSync in Frameworks */,
 				841840582BFD01D300EC9FDF /* Log in Frameworks */,
 				84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */,
 				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
@@ -291,6 +300,7 @@
 				84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */,
 				84F5AE912BF74CA6007EE279 /* Moya in Frameworks */,
 				8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */,
+				84CD981A2BFF8FAA000B4A4C /* OfflineSync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +340,41 @@
 				841083C92BFBC54100332A6A /* LoginReducerTests.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		841840622BFD40BD00EC9FDF /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				841083B22BFA9C0C00332A6A /* RequestModule.swift */,
+				84266D232BD683AA0020B386 /* RequestReducer.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		841840632BFD412300EC9FDF /* State */ = {
+			isa = PBXGroup;
+			children = (
+				84458AE22BC41A720041E40F /* AppModule.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		841840642BFD412E00EC9FDF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				841840652BFD414F00EC9FDF /* AppContainer.swift */,
+				846751012C00B9F70028921A /* AppRouteView.swift */,
+				841840672BFD41C200EC9FDF /* Render */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		841840672BFD41C200EC9FDF /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				841840682BFD41CC00EC9FDF /* AppTabView.swift */,
+			);
+			path = Render;
 			sourceTree = "<group>";
 		};
 		8424BB422BCA6C3800929F13 /* Login */ = {
@@ -389,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				84266D212BD678400020B386 /* ManagementReducerTests.swift */,
+				8418406A2BFEB1CE00EC9FDF /* ReportReducerTests.swift */,
 			);
 			path = Management;
 			sourceTree = "<group>";
@@ -426,7 +472,6 @@
 				8428341E2BD85EC200F47FC5 /* Chart */,
 				84CFD5AF2BD7D98A00691400 /* Timesheet */,
 				84CFD5AE2BD7D97F00691400 /* Project */,
-				84CFD5AD2BD7D97400691400 /* Customer */,
 			);
 			path = Kimai;
 			sourceTree = "<group>";
@@ -436,8 +481,6 @@
 			children = (
 				847334B52BDCF50C00129D26 /* ManagementModule.swift */,
 				841083AE2BFA953E00332A6A /* ManagementRoute.swift */,
-				847334BB2BDCFB8700129D26 /* ManagementReducer.swift */,
-				847334AB2BDCF02400129D26 /* ManagementDependency.swift */,
 				844597032BFC08F2001CEC6C /* Report */,
 				847334B32BDCF4E500129D26 /* Kimai */,
 				847334B42BDCF4E900129D26 /* Taiga */,
@@ -546,6 +589,44 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		846751092C00E8680028921A /* Kimai */ = {
+			isa = PBXGroup;
+			children = (
+				8467510E2C00E96A0028921A /* KimaiCoordinator.swift */,
+				846751102C00EA240028921A /* KimaiCoordinatorView.swift */,
+				846751122C00F7350028921A /* Project */,
+				8467510B2C00E8A70028921A /* Customers */,
+				8467510A2C00E8760028921A /* Customer */,
+			);
+			path = Kimai;
+			sourceTree = "<group>";
+		};
+		8467510A2C00E8760028921A /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				849BF1692BF1346B008F8B6A /* KimaiCustomerView.swift */,
+				846751072C00E8270028921A /* KimaiCustomerFeature.swift */,
+			);
+			path = Customer;
+			sourceTree = "<group>";
+		};
+		8467510B2C00E8A70028921A /* Customers */ = {
+			isa = PBXGroup;
+			children = (
+				8467510C2C00E8B10028921A /* KimaiCustomersFeature.swift */,
+				84458AF62BC41EB80041E40F /* KimaiCustomersView.swift */,
+				849BF16F2BF171EE008F8B6A /* KimaiCustomerCard.swift */,
+			);
+			path = Customers;
+			sourceTree = "<group>";
+		};
+		846751122C00F7350028921A /* Project */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
 		8467DEDC2BDEF3A80077E331 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -558,6 +639,9 @@
 		847334AF2BDCF44800129D26 /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				846751052C00C0F90028921A /* ManagementCoordinator.swift */,
+				846751032C00C0DA0028921A /* ManagementCoordinatorView.swift */,
+				846751092C00E8680028921A /* Kimai */,
 				847E45922BEAD5420013955A /* Services */,
 				84458AEA2BC41B9B0041E40F /* Models */,
 				84458AE52BC41AB50041E40F /* State */,
@@ -596,7 +680,6 @@
 			children = (
 				84458AE62BC41AC20041E40F /* KimaiModule.swift */,
 				841083B02BFA95A700332A6A /* KimaiRoute.swift */,
-				84458AF82BC41F5B0041E40F /* KimaiReducer.swift */,
 			);
 			path = Kimai;
 			sourceTree = "<group>";
@@ -606,7 +689,6 @@
 			children = (
 				84FC58462BC9483D00594E14 /* TaigaModule.swift */,
 				841083B92BFAA7AC00332A6A /* TaigaRoute.swift */,
-				84CFD5B12BD7F7D100691400 /* TaigaStateReducer.swift */,
 			);
 			path = Taiga;
 			sourceTree = "<group>";
@@ -669,7 +751,6 @@
 			isa = PBXGroup;
 			children = (
 				841083A82BFA725300332A6A /* SettingsModule.swift */,
-				841083AC2BFA7CCF00332A6A /* SettingsReducer.swift */,
 				8445970A2BFC2654001CEC6C /* SettingsRoute.swift */,
 			);
 			path = State;
@@ -721,7 +802,7 @@
 				847E45942BEAD5D50013955A /* Helper */,
 				84C5A2C32BC40F7400C25A0C /* Models */,
 				84C5A2C22BC40F6300C25A0C /* Modules */,
-				84C5A2C02BC40F4A00C25A0C /* GlobalState */,
+				84C5A2C02BC40F4A00C25A0C /* App */,
 				84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */,
 				84C5A2992BC40EEE00C25A0C /* Assets.xcassets */,
 				84C5A29B2BC40EEE00C25A0C /* businessToGo.entitlements */,
@@ -756,21 +837,19 @@
 			path = businessToGoUITests;
 			sourceTree = "<group>";
 		};
-		84C5A2C02BC40F4A00C25A0C /* GlobalState */ = {
+		84C5A2C02BC40F4A00C25A0C /* App */ = {
 			isa = PBXGroup;
 			children = (
-				84458AE22BC41A720041E40F /* AppModule.swift */,
-				84220F8F2BDC58FF00059F63 /* AppRoute.swift */,
-				84458AED2BC41CA40041E40F /* AppReducer.swift */,
-				84266D232BD683AA0020B386 /* RequestReducer.swift */,
-				841083B22BFA9C0C00332A6A /* RequestAction.swift */,
+				841840632BFD412300EC9FDF /* State */,
+				841840642BFD412E00EC9FDF /* Views */,
 			);
-			path = GlobalState;
+			path = App;
 			sourceTree = "<group>";
 		};
 		84C5A2C22BC40F6300C25A0C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				841840622BFD40BD00EC9FDF /* Request */,
 				844597112BFC328D001CEC6C /* Intro */,
 				8424BB422BCA6C3800929F13 /* Login */,
 				847334AF2BDCF44800129D26 /* Management */,
@@ -787,16 +866,6 @@
 				8424BB752BCAC17C00929F13 /* Integration.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		84CFD5AD2BD7D97400691400 /* Customer */ = {
-			isa = PBXGroup;
-			children = (
-				84458AF62BC41EB80041E40F /* KimaiCustomersView.swift */,
-				849BF16F2BF171EE008F8B6A /* KimaiCustomerCard.swift */,
-				849BF1692BF1346B008F8B6A /* KimaiCustomerSheet.swift */,
-			);
-			path = Customer;
 			sourceTree = "<group>";
 		};
 		84CFD5AE2BD7D97F00691400 /* Project */ = {
@@ -894,7 +963,6 @@
 				8467DEC12BDECA300077E331 /* SQLite */,
 				8467DED12BDEDC4B0077E331 /* Log */,
 				8467DED72BDEECFC0077E331 /* OfflineSync */,
-				849BF1482BEE6A3B008F8B6A /* Login */,
 				84E6DCA52BF400A00051E148 /* OfflineSync */,
 				84CD11F62BF410E8006AE4C7 /* Log */,
 				84CD11F92BF41393006AE4C7 /* OfflineSync */,
@@ -906,7 +974,10 @@
 				841840572BFD01D300EC9FDF /* Log */,
 				8418405A2BFD020100EC9FDF /* Redux */,
 				8418405D2BFD024E00EC9FDF /* MyChart */,
-				841840602BFD02E500EC9FDF /* OfflineSync */,
+				84CD98162BFF6933000B4A4C /* ComposableArchitecture */,
+				84CD98192BFF8FAA000B4A4C /* OfflineSync */,
+				84FDEDFD2BFFDD1C0071C8FA /* Login */,
+				84FDEE002BFFF08B0071C8FA /* TCACoordinators */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -989,13 +1060,15 @@
 				845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */,
 				8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
-				849BF1472BEE6A3B008F8B6A /* XCRemoteSwiftPackageReference "Login" */,
 				845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */,
 				84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */,
 				841840562BFD01D300EC9FDF /* XCRemoteSwiftPackageReference "Log" */,
 				841840592BFD020100EC9FDF /* XCRemoteSwiftPackageReference "Redux" */,
 				8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */,
-				8418405F2BFD02E500EC9FDF /* XCRemoteSwiftPackageReference "OfflineSync" */,
+				84CD98152BFF6933000B4A4C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				84CD98182BFF8FAA000B4A4C /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
+				84FDEDFC2BFFDD1C0071C8FA /* XCLocalSwiftPackageReference "../SwiftPackages/Login" */,
+				84FDEDFF2BFFF08B0071C8FA /* XCRemoteSwiftPackageReference "TCACoordinators" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1046,6 +1119,7 @@
 				849BF1702BF171EE008F8B6A /* KimaiCustomerCard.swift in Sources */,
 				84FC58582BC9559200594E14 /* Header.swift in Sources */,
 				84F5AEAC2BF7859D007EE279 /* DateExtension.swift in Sources */,
+				846751082C00E8270028921A /* KimaiCustomerFeature.swift in Sources */,
 				842F35A42BC93F3900A29448 /* TaigaTaskStory.swift in Sources */,
 				84CFD5AA2BD7D93200691400 /* IntegrationsView.swift in Sources */,
 				841083BC2BFAAB3E00332A6A /* TaigaProjectView.swift in Sources */,
@@ -1057,29 +1131,29 @@
 				84CFD5AC2BD7D94F00691400 /* IntegrationCard.swift in Sources */,
 				8424BB8F2BCBB15300929F13 /* KimaiTimesheetSheet.swift in Sources */,
 				84FC583C2BC944DF00594E14 /* TaigaMilestone.swift in Sources */,
+				841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */,
 				844597072BFC0940001CEC6C /* ReportModule.swift in Sources */,
+				846751062C00C0F90028921A /* ManagementCoordinator.swift in Sources */,
 				84F5AEA42BF783B7007EE279 /* WeekDay.swift in Sources */,
 				841D9E832BC9E503002990C7 /* KimaiProject.swift in Sources */,
+				846751022C00B9F70028921A /* AppRouteView.swift in Sources */,
 				84458ADB2BC415880041E40F /* KimaiRequest.swift in Sources */,
 				8424BB762BCAC17C00929F13 /* Integration.swift in Sources */,
-				847334AC2BDCF02400129D26 /* ManagementDependency.swift in Sources */,
 				8445971F2BFC37A6001CEC6C /* IntroModule.swift in Sources */,
 				841D9E892BC9F3E6002990C7 /* TaigaTable.swift in Sources */,
 				8464257F2BCE43B900BDD86E /* TaigaProjectCardView.swift in Sources */,
 				849BF16C2BF13FC6008F8B6A /* KimaiProjectSheet.swift in Sources */,
 				845503EB2BCF312B00BCA93B /* KimaiActivity.swift in Sources */,
 				849BF15B2BEF73B4008F8B6A /* SettingsView.swift in Sources */,
-				84458AEE2BC41CA40041E40F /* AppReducer.swift in Sources */,
 				84F5AE9A2BF77F17007EE279 /* ReportHeaderWeeks.swift in Sources */,
 				844597092BFC179D001CEC6C /* ReportsView.swift in Sources */,
 				841083BA2BFAA7AC00332A6A /* TaigaRoute.swift in Sources */,
 				841D9E672BC95BDC002990C7 /* TaigaProjectsView.swift in Sources */,
 				841083AF2BFA953E00332A6A /* ManagementRoute.swift in Sources */,
 				8445971D2BFC376A001CEC6C /* IntroContainer.swift in Sources */,
-				849BF16A2BF1346B008F8B6A /* KimaiCustomerSheet.swift in Sources */,
+				849BF16A2BF1346B008F8B6A /* KimaiCustomerView.swift in Sources */,
 				84FC583E2BC944F200594E14 /* TaigaTask.swift in Sources */,
 				84F5AE9E2BF77FB3007EE279 /* ReportHeaderDay.swift in Sources */,
-				847334BC2BDCFB8700129D26 /* ManagementReducer.swift in Sources */,
 				8424BB4E2BCA73A300929F13 /* KimaiLoginView.swift in Sources */,
 				8445971A2BFC343E001CEC6C /* IntroPagesView.swift in Sources */,
 				8424BB462BCA6C8600929F13 /* AccountsView.swift in Sources */,
@@ -1087,19 +1161,19 @@
 				84458AE32BC41A720041E40F /* AppModule.swift in Sources */,
 				84F5AEA12BF780CA007EE279 /* ReportSummaryView.swift in Sources */,
 				84458AE12BC419E80041E40F /* KimaiService.swift in Sources */,
-				84458AF92BC41F5B0041E40F /* KimaiReducer.swift in Sources */,
 				844597182BFC338F001CEC6C /* IntroPageView.swift in Sources */,
 				849BF14B2BEE7CBC008F8B6A /* AccountView.swift in Sources */,
 				84FC58402BC9450700594E14 /* TaigaUserAuthDetails.swift in Sources */,
 				849BF15D2BEF77E5008F8B6A /* DebugView.swift in Sources */,
 				84FC58382BC9448C00594E14 /* TaigaBacklogView.swift in Sources */,
-				84220F902BDC58FF00059F63 /* AppRoute.swift in Sources */,
 				847334B62BDCF50C00129D26 /* ManagementModule.swift in Sources */,
 				8452402E2BC48AF600A894EE /* KimaiCustomer.swift in Sources */,
 				849BF1662BF12897008F8B6A /* KimaiProjectsView.swift in Sources */,
+				846751042C00C0DA0028921A /* ManagementCoordinatorView.swift in Sources */,
 				84CF31432BDF68A60064BDD1 /* UIImage.swift in Sources */,
 				842F359E2BC939EA00A29448 /* TaigaRequest.swift in Sources */,
 				841D9E742BC99251002990C7 /* TaigaKanbanView.swift in Sources */,
+				8467510F2C00E96A0028921A /* KimaiCoordinator.swift in Sources */,
 				8424BB482BCA6C9600929F13 /* LoginModule.swift in Sources */,
 				8445970B2BFC2654001CEC6C /* SettingsRoute.swift in Sources */,
 				844597052BFC0901001CEC6C /* ReportRoute.swift in Sources */,
@@ -1112,25 +1186,26 @@
 				84266D242BD683AA0020B386 /* RequestReducer.swift in Sources */,
 				84266D2A2BD6AAD90020B386 /* KimaiProjectCard.swift in Sources */,
 				841083C52BFB5BF500332A6A /* UserDefaultWrapper.swift in Sources */,
+				841840692BFD41CC00EC9FDF /* AppTabView.swift in Sources */,
 				84D96FD92BC511DD00114438 /* DatabaseError.swift in Sources */,
 				844597212BFCB6F1001CEC6C /* KimaiProjectDetailsView.swift in Sources */,
 				841083B12BFA95A700332A6A /* KimaiRoute.swift in Sources */,
 				841840552BFCF79D00EC9FDF /* KimaiUser.swift in Sources */,
+				846751112C00EA240028921A /* KimaiCoordinatorView.swift in Sources */,
 				84F5AEB02BF8A799007EE279 /* YearMonthPicker.swift in Sources */,
 				841083A92BFA725300332A6A /* SettingsModule.swift in Sources */,
 				844597152BFC32B0001CEC6C /* IntroPage.swift in Sources */,
+				8467510D2C00E8B10028921A /* KimaiCustomersFeature.swift in Sources */,
 				8424BB502BCA757E00929F13 /* LoginReducer.swift in Sources */,
 				849BF1642BF12333008F8B6A /* KimaiTimesheetPopup.swift in Sources */,
 				8424BB592BCAB1BB00929F13 /* Account.swift in Sources */,
-				84CFD5B22BD7F7D100691400 /* TaigaStateReducer.swift in Sources */,
 				84458AF72BC41EB80041E40F /* KimaiCustomersView.swift in Sources */,
 				849BF1522BEF71CA008F8B6A /* SettingsContainer.swift in Sources */,
 				845240302BC48B2300A894EE /* KimaiTeam.swift in Sources */,
 				842290402BCD518A001C884B /* KimaiTimesheetsView.swift in Sources */,
-				841083AD2BFA7CCF00332A6A /* SettingsReducer.swift in Sources */,
 				8424BB912BCBB9AB00929F13 /* KimaiTimesheetsChartView.swift in Sources */,
 				84F5AE952BF77E8B007EE279 /* ReportContainer.swift in Sources */,
-				841083B32BFA9C0C00332A6A /* RequestAction.swift in Sources */,
+				841083B32BFA9C0C00332A6A /* RequestModule.swift in Sources */,
 				84458AE92BC41B4C0041E40F /* ServiceError.swift in Sources */,
 				8424BB542BCA91F900929F13 /* TaigaLoginView.swift in Sources */,
 				844597232BFCCC71001CEC6C /* MyFormatter.swift in Sources */,
@@ -1146,6 +1221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8418406B2BFEB1CE00EC9FDF /* ReportReducerTests.swift in Sources */,
 				841083CA2BFBC54100332A6A /* LoginReducerTests.swift in Sources */,
 				84266D222BD678400020B386 /* ManagementReducerTests.swift in Sources */,
 				84C5A2A82BC40EEE00C25A0C /* KimaiServiceTests.swift in Sources */,
@@ -1512,6 +1588,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		84CD98182BFF8FAA000B4A4C /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/OfflineSync;
+		};
+		84FDEDFC2BFFDD1C0071C8FA /* XCLocalSwiftPackageReference "../SwiftPackages/Login" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/Login;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		841840562BFD01D300EC9FDF /* XCRemoteSwiftPackageReference "Log" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1535,14 +1622,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.3;
-			};
-		};
-		8418405F2BFD02E500EC9FDF /* XCRemoteSwiftPackageReference "OfflineSync" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/OfflineSync.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.9;
 			};
 		};
 		845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */ = {
@@ -1577,12 +1656,12 @@
 				minimumVersion = 9.1.0;
 			};
 		};
-		849BF1472BEE6A3B008F8B6A /* XCRemoteSwiftPackageReference "Login" */ = {
+		84CD98152BFF6933000B4A4C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/Login.git";
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.7;
+				minimumVersion = 1.10.4;
 			};
 		};
 		84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
@@ -1591,6 +1670,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.3.3;
+			};
+		};
+		84FDEDFF2BFFF08B0071C8FA /* XCRemoteSwiftPackageReference "TCACoordinators" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/TCACoordinators.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1618,11 +1705,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */;
 			productName = MyChart;
-		};
-		841840602BFD02E500EC9FDF /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8418405F2BFD02E500EC9FDF /* XCRemoteSwiftPackageReference "OfflineSync" */;
-			productName = OfflineSync;
 		};
 		8467DEB82BDEA8690077E331 /* Redux */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1655,11 +1737,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TestableCombinePublishers;
 		};
-		849BF1482BEE6A3B008F8B6A /* Login */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 849BF1472BEE6A3B008F8B6A /* XCRemoteSwiftPackageReference "Login" */;
-			productName = Login;
-		};
 		84CD11F62BF410E8006AE4C7 /* Log */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Log;
@@ -1669,6 +1746,15 @@
 			productName = OfflineSync;
 		};
 		84CD11FC2BF413D6006AE4C7 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
+		};
+		84CD98162BFF6933000B4A4C /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84CD98152BFF6933000B4A4C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		84CD98192BFF8FAA000B4A4C /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OfflineSync;
 		};
@@ -1685,6 +1771,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */;
 			productName = SwipeActions;
+		};
+		84FDEDFD2BFFDD1C0071C8FA /* Login */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Login;
+		};
+		84FDEE002BFFF08B0071C8FA /* TCACoordinators */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84FDEDFF2BFFF08B0071C8FA /* XCRemoteSwiftPackageReference "TCACoordinators" */;
+			productName = TCACoordinators;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

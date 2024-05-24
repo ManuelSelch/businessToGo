@@ -1,15 +1,16 @@
 import SwiftUI
-import Redux
 
 struct Header: View {
-    @ObservedObject var store: StoreOf<AppModule>
+    
+    let title: String
+    var settingsTapped: () -> ()
     
     var body: some View {
         ZStack {
             HStack {
                 Spacer()
                 
-                Text(store.state.tab.title)
+                Text(title)
                
                 Spacer()
             }
@@ -19,7 +20,7 @@ struct Header: View {
                 Spacer()
                 
                 Button(action: {
-                    store.send(.route(.presentSheet(.settings)))
+                    settingsTapped()
                 }){
                     Image(systemName: "gear")
                         .font(.system(size: 20))

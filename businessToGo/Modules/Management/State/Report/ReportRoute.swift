@@ -1,6 +1,6 @@
 import Foundation
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 enum ReportRoute: Codable, Equatable, Hashable, Identifiable {
     case reports
@@ -19,10 +19,10 @@ extension ReportRoute {
         switch self {
         case .reports:
             ReportsView(
-                timesheets: store.state.kimai.timesheets,
-                projects: store.state.kimai.projects,
-                activities: store.state.kimai.activities,
-                timesheetTracks: store.state.kimai.timesheetTracks,
+                timesheets: store.state.kimai.timesheets.records,
+                projects: store.state.kimai.projects.records,
+                activities: store.state.kimai.activities.records,
+                timesheetTracks: store.state.kimai.timesheets.changes,
                 
                 selectedProject: Binding(get: { store.state.report.selectedProject }, set: { store.send(.report(.selectProject($0))) }),
                 selectedDate: Binding(get: { store.state.report.selectedDate }, set: { store.send(.report(.selectDate($0))) }),
@@ -33,9 +33,9 @@ extension ReportRoute {
         case .timesheet(let timesheet):
             KimaiTimesheetSheet(
                 timesheet: timesheet,
-                customers: store.state.kimai.customers,
-                projects: store.state.kimai.projects,
-                activities: store.state.kimai.activities,
+                customers: store.state.kimai.customers.records,
+                projects: store.state.kimai.projects.records,
+                activities: store.state.kimai.activities.records,
                 onSave: {
                     if($0.id == KimaiTimesheet.new.id){
                         store.send(.kimai(.timesheets(.create($0))))
@@ -51,16 +51,16 @@ extension ReportRoute {
         
         case .filter:
             ReportFilterView(
-                customers: store.state.kimai.customers,
-                projects: store.state.kimai.projects,
+                customers: store.state.kimai.customers.records,
+                projects: store.state.kimai.projects.records,
                 selectedProject: Binding(get: { store.state.report.selectedProject }, set: { store.send(.report(.selectProject($0))) }),
                 router: { store.send(.report(.route($0))) }
             )
             
         case .filterProjects:
             ReportFilterProjectsView(
-                customers: store.state.kimai.customers,
-                projects: store.state.kimai.projects,
+                customers: store.state.kimai.customers.records,
+                projects: store.state.kimai.projects.records,
                 selectedProject: Binding(get: { store.state.report.selectedProject }, set: { store.send(.report(.selectProject($0))) }),
                 router: { store.send(.report(.route($0))) }
             )

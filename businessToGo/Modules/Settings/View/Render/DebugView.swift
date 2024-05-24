@@ -41,7 +41,12 @@ struct DebugView: View {
           
             
             Section("State") {
-                if let data = try? JSONEncoder().encode(state),
+                if let data = try? JSONEncoder().encode(state.management.kimai),
+                   let json = String(data: data, encoding: .utf8) {
+                    DebugJsonView(json)
+                }
+                
+                if let data = try? JSONEncoder().encode(state.management.taiga),
                    let json = String(data: data, encoding: .utf8) {
                     DebugJsonView(json)
                 }

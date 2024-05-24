@@ -5,16 +5,16 @@ import SwiftUI
 import Redux
 import OfflineSync
 import SQLite
+import ComposableArchitecture
 
-
-class TaigaService: IService {
+class TaigaService: IService, DependencyKey {    
     var provider = MoyaProvider<TaigaRequest>()
     
-    var projects: RequestService<TaigaProject, TaigaRequest>
-    var taskStories: RequestService<TaigaTaskStory, TaigaRequest>
-    var taskStoryStatus: RequestService<TaigaTaskStoryStatus, TaigaRequest>
-    var milestones: RequestService<TaigaMilestone, TaigaRequest>
-    var tasks: RequestService<TaigaTask, TaigaRequest>
+    var projects: RequestService<TaigaProject, TaigaRequest>!
+    var taskStories: RequestService<TaigaTaskStory, TaigaRequest>!
+    var taskStoryStatus: RequestService<TaigaTaskStoryStatus, TaigaRequest>!
+    var milestones: RequestService<TaigaMilestone, TaigaRequest>!
+    var tasks: RequestService<TaigaTask, TaigaRequest>!
     
     
     func setAuth(_ token: String) {
@@ -79,8 +79,8 @@ class TaigaService: IService {
         tasks.clear()
     }
     
-    init(_ db: Connection?, _ track: TrackTable) {
-        let tables = TaigaTable(db, track)
+    init() {
+        let tables = TaigaTable()
         
         projects = RequestService(
             tables.projects,
@@ -113,4 +113,15 @@ class TaigaService: IService {
     }
 }
 
+extension TaigaService {
+    static var liveValue: TaigaService {
+        .init()
+    }
+}
 
+extension DependencyValues {
+    var taiga: TaigaService {
+        get { self[TaigaService.self] }
+        set { self[TaigaService.self] = newValue }
+    }
+}

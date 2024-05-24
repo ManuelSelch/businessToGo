@@ -1,5 +1,5 @@
 import Foundation
-import Redux
+import ComposableArchitecture
 import SwiftUI
 
 enum SettingsRoute: Codable, Hashable, Identifiable {
@@ -15,31 +15,31 @@ extension SettingsRoute {
         switch self {
         case .settings:
             SettingsView(
-                router: { store.send(.route($0)) },
+                // router: { store.send(.route($0)) },
                 navigate: { store.send(.settings(.route(.push($0)))) },
                 logout: {
                     store.send(.login(.logout))
-                    store.send(.route(.dismissSheet))
+                    // store.send(.route(.dismissSheet))
                 }
             )
             
         case .integrations:
             IntegrationsView(
-                customers: store.state.management.kimai.customers,
-                projects: store.state.management.kimai.projects,
-                taigaProjects: store.state.management.taiga.projects,
-                integrations: store.state.management.integrations,
+                customers: store.management.kimai.customers.records,
+                projects: store.management.kimai.projects.records,
+                taigaProjects: store.management.taiga.projects.records,
+                integrations: store.management.integrations,
                 onConnect: { store.send(.management(.connect($0, $1))) }
             )
         case .debug:
             DebugView(
-                current: store.state.login.current,
+                current: store.login.current,
                 state: store.state,
                 onUpdateLog: { store.send(.log(.setLog($0))) },
                 onReset: {
                     store.send(.management(.resetDatabase))
                     store.send(.login(.logout))
-                    store.send(.route(.dismissSheet))
+                    // store.send(.route(.dismissSheet))
                 }
             )
         }

@@ -1,11 +1,11 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct ReportContainer: View {
-    @ObservedObject var store: StoreOf<ManagementModule>
+    let store: StoreOf<ManagementModule>
     
     var body: some View {
-        NavigationStack(path: Binding(get: { store.state.report.router.routes }, set: { store.send(.report(.route(.set($0)))) })) {
+        NavigationStack(path: Binding(get: { store.report.router.routes }, set: { store.send(.report(.route(.set($0)))) })) {
             ReportRoute.reports.createView(store)
                 .navigationDestination(for: ReportRoute.self) { route in
                     route.createView(store)
@@ -14,7 +14,7 @@ struct ReportContainer: View {
         }
         .transition(.slide)
         .sheet(item: Binding(
-            get: { store.state.report.router.sheet },
+            get: { store.report.router.sheet },
             set: {
                 if let route = $0 {
                     store.send(.report(.route(.presentSheet(route))))

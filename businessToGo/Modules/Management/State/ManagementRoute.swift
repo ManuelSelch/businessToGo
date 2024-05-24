@@ -1,6 +1,6 @@
 import Foundation
-import Redux
 import SwiftUI
+import ComposableArchitecture
 
 enum ManagementRoute: Equatable, Hashable, Codable, Identifiable {
     case kimai(KimaiRoute)
@@ -15,10 +15,10 @@ extension ManagementRoute {
         case .kimai(let route):
             return AnyView(
                 route.createView(
-                    store: store.lift(\.kimai, ManagementModule.Action.kimai, .init(kimai: store.dependencies.kimai, track: store.dependencies.track)),
+                    store: store.scope(state: \.kimai, action: \.kimai),
                     router: { store.send(.route($0)) },
                     onProjectClicked: { kimaiProject in
-                        if let integration = store.state.integrations.first(where: {$0.id == kimaiProject})
+                        if let integration = store.integrations.first(where: {$0.id == kimaiProject})
                         {
                             // show taiga project details
                             store.send(.route(.push(
@@ -35,7 +35,7 @@ extension ManagementRoute {
             )
         case .taiga(let route):
             return AnyView(
-                route.createView(store.lift(\.taiga, ManagementModule.Action.taiga, .init(taiga: store.dependencies.taiga, track: store.dependencies.track)))
+                route.createView(store.scope(state: \.taiga, action: \.taiga))
             )
         }
     }

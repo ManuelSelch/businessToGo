@@ -31,6 +31,8 @@ extension ReportRoute {
                 onDelete: { store.send(.kimai(.timesheets(.delete($0)))) }
             )
         case .timesheet(let timesheet):
+            VStack {}
+            /* TODO: timesheet sheet view
             KimaiTimesheetSheet(
                 timesheet: timesheet,
                 customers: store.state.kimai.customers.records,
@@ -44,6 +46,7 @@ extension ReportRoute {
                     }
                 }
             )
+             */
         case .calendar:
             YearMonthPickerView(
                 selectedDate: Binding(get: { store.state.report.selectedDate }, set: { store.send(.report(.selectDate($0))) })

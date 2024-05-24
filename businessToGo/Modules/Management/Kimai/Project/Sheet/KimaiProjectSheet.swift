@@ -1,9 +1,8 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct KimaiProjectSheet: View {
-    var project: KimaiProject
-    var customers: [KimaiCustomer]
-    var onSave: (KimaiProject) -> ()
+    let store: StoreOf<KimaiProjectSheetFeature>
     
     @State var name = ""
     @State var selectedCustomer: Int = 0
@@ -19,7 +18,7 @@ struct KimaiProjectSheet: View {
                     .padding()
                 
                 Picker("Kunde", selection: $selectedCustomer) {
-                    ForEach(customers, id: \.id) {
+                    ForEach(store.customers, id: \.id) {
                         Text($0.name)
                     }
                 }
@@ -35,13 +34,13 @@ struct KimaiProjectSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     Button(action: {
-                        var project = project
+                        var project = store.project
                         project.name = name
                         project.customer = selectedCustomer
                         project.color = color
-                        onSave(project)
+                        store.send(.saveTapped(project))
                     }){
-                        let isCreate = project.id == KimaiProject.new.id
+                        let isCreate = store.project.id == KimaiProject.new.id
                         let label = isCreate ? "Create": "Save"
                         Text(label)
                     }
@@ -49,9 +48,9 @@ struct KimaiProjectSheet: View {
             }
         }
         .onAppear {
-            name = project.name
-            selectedCustomer = customers.first { $0.id == project.customer }?.id ?? 0
-            color = project.color
+            name = store.project.name
+            selectedCustomer = store.customers.first { $0.id == store.project.customer }?.id ?? 0
+            color = store.project.color
         }
     }
 }

@@ -1,13 +1,8 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct KimaiTimesheetSheet: View {
-    @State var timesheet: KimaiTimesheet
-    var customers: [KimaiCustomer]
-    var projects: [KimaiProject]
-    var activities: [KimaiActivity]
-    
-    let onSave: (_ timesheet: KimaiTimesheet) -> Void
-    
+    let store: StoreOf<KimaiTimesheetSheetFeature>
     
     @State private var selectedCustomer: Int = 0
     @State private var selectedProject: Int = 0
@@ -18,12 +13,12 @@ struct KimaiTimesheetSheet: View {
     @State private var isEndTime: Bool = false
     
     var projectsFiltered: [KimaiProject] {
-        projects.filter { $0.customer == selectedCustomer }
+        store.projects.filter { $0.customer == selectedCustomer }
     }
     
     var activitiesFiltered: [KimaiActivity] {
-        var filteredActivities = activities
-        if let project = projects.first(where: { $0.id == selectedProject }), !project.globalActivities {
+        var filteredActivities = store.activities
+        if let project = store.projects.first(where: { $0.id == selectedProject }), !project.globalActivities {
             filteredActivities = filteredActivities.filter { $0.project == project.id }
         }
         return filteredActivities.sorted { $0.name < $1.name }
@@ -34,7 +29,7 @@ struct KimaiTimesheetSheet: View {
             Form {
                 Section(header: Text("Branch Info")) {
                     Picker("Kunde", selection: $selectedCustomer) {
-                        ForEach(customers, id: \.id) {
+                        ForEach(store.customers, id: \.id) {
                             Text($0.name)
                         }
                     }
@@ -102,39 +97,39 @@ struct KimaiTimesheetSheet: View {
             .onAppear {
                 initializeState()
             }
-            .navigationBarItems(trailing: Button(timesheet.id == KimaiTimesheet.new.id ? "Create" : "Save") {
-                var updatedTimesheet = timesheet
+            .navigationBarItems(trailing: Button(store.timesheet.id == KimaiTimesheet.new.id ? "Create" : "Save") {
+                var updatedTimesheet = store.timesheet
                 updatedTimesheet.project = selectedProject
                 updatedTimesheet.activity = selectedActivity
                 updatedTimesheet.begin = "\(startTime)"
                 updatedTimesheet.end = isEndTime ? "\(endTime)" : nil
                 updatedTimesheet.description = description
                 
-                onSave(updatedTimesheet)
+                store.send(.saveTapped(updatedTimesheet))
             })
         }
     }
     
     private func initializeState() {
-        if let project = projects.first(where: { $0.id == timesheet.project }),
-           let customer = customers.first(where: { $0.id == project.customer }) {
+        if let project = store.projects.first(where: { $0.id == store.timesheet.project }),
+           let customer = store.customers.first(where: { $0.id == project.customer }) {
             selectedCustomer = customer.id
             selectedProject = project.id
         } else {
-            selectedCustomer = customers.first?.id ?? 0
+            selectedCustomer = store.customers.first?.id ?? 0
             selectedProject = projectsFiltered.first?.id ?? 0
         }
         
-        if let activity = activitiesFiltered.first(where: { $0.id == timesheet.activity }) {
+        if let activity = activitiesFiltered.first(where: { $0.id == store.timesheet.activity }) {
             selectedActivity = activity.id
         } else {
             selectedActivity = activitiesFiltered.first?.id ?? 0
         }
         
-        description = timesheet.description ?? ""
-        startTime = getDate(from: timesheet.begin) ?? Date()
-        endTime = getDate(from: timesheet.end) ?? Date()
-        isEndTime = timesheet.end != nil
+        description = store.timesheet.description ?? ""
+        startTime = getDate(from: store.timesheet.begin) ?? Date()
+        endTime = getDate(from: store.timesheet.end) ?? Date()
+        isEndTime = store.timesheet.end != nil
     }
     
     private func getDate(from dateStr: String?) -> Date? {

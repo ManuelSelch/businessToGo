@@ -67,7 +67,9 @@ extension ReportsView {
     
     @ViewBuilder
     func getTimesheets() -> some View {
-        KimaiTimesheetsView(
+        VStack {}
+        /* TODO: list timesheets view
+        KimaiTimesheetsListView(
             timesheets: timesheetsFiltered,
             projects: projects,
             activities: activities,
@@ -75,6 +77,7 @@ extension ReportsView {
             onEditClicked: { router(.presentSheet(.timesheet($0))) },
             onDeleteClicked: onDelete
         )
+         */
     }
     
     @ViewBuilder

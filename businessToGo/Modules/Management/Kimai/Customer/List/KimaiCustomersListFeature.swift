@@ -2,7 +2,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct KimaiCustomersFeature {    
+struct KimaiCustomersListFeature {    
     @ObservableState
     struct State: Equatable {
         @Shared var customers: RequestModule<KimaiCustomer, KimaiRequest>.State

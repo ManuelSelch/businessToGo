@@ -2,8 +2,8 @@ import SwiftUI
 import OfflineSync
 import ComposableArchitecture
 
-struct KimaiCustomersView: View {
-    let store: StoreOf<KimaiCustomersFeature>
+struct KimaiCustomersListView: View {
+    let store: StoreOf<KimaiCustomersListFeature>
     
     var customersFiltered: [KimaiCustomer] {
         var c = store.customers.records

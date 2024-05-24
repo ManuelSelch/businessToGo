@@ -2,7 +2,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct KimaiProjectsFeature {
+struct KimaiProjectsListFeature {
     @ObservableState
     struct State: Equatable {
         var customer: Int

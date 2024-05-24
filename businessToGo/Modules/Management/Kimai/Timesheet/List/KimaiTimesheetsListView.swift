@@ -1,19 +1,13 @@
 import SwiftUI
 import OfflineSync
 import SwipeActions
+import ComposableArchitecture
 
-struct KimaiTimesheetsView: View {
-    let timesheets: [KimaiTimesheet]
-    let projects: [KimaiProject]
-    let activities: [KimaiActivity]
-    let changes: [DatabaseChange]
-    
-    let onEditClicked: (KimaiTimesheet) -> Void
-    let onDeleteClicked: (KimaiTimesheet) -> Void
-    
+struct KimaiTimesheetsListView: View {
+    let store: StoreOf<KimaiTimesheetsListFeature>
     
     var timesheetsByDate: Dictionary<Date, [KimaiTimesheet]> {
-        var timesheets = timesheets
+        var timesheets = store.timesheets.records
         timesheets.sort(by: { $0.begin > $1.begin })
         return Dictionary(grouping: timesheets, by: {
             Calendar.current.date(
@@ -45,34 +39,13 @@ struct KimaiTimesheetsView: View {
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
-                        project: projects.first { $0.id == timesheet.project }, 
-                        change: changes.first { $0.recordID == timesheet.id },
-                        activity: activities.first{ $0.id == timesheet.activity }
+                        project: store.projects.first { $0.id == timesheet.project },
+                        change: store.timesheets.changes.first { $0.recordID == timesheet.id },
+                        activity: store.activities.first{ $0.id == timesheet.activity }
                     )
-                    /*
-                    .addFullSwipeAction(menu: .slided) {
-                                  Trailing {
-                                      
-                                      
-                                      Button {
-                                          
-                                      } label: {
-                                          Image(systemName: "trash")
-                                              .foregroundColor(.white)
-                                      }
-                                      .contentShape(Rectangle())
-                                      .frame(width: 60)
-                                      .frame(maxHeight: .infinity)
-                                      .background(Color.red) // <=== Look here
-                                  }
-                    } action: {
-                                  
-                    }
-                     */
-                    
                     .addSwipeAction(edge: .trailing) {
                         Button {
-                            onDeleteClicked(timesheet)
+                            store.send(.deleteTapped(timesheet))
                         } label: {
                             Text("Delete")
                                 .foregroundColor(.white)
@@ -82,7 +55,7 @@ struct KimaiTimesheetsView: View {
                         .background(.red)
                         
                         Button {
-                            onEditClicked(timesheet)
+                            store.send(.editTapped(timesheet))
                         } label: {
                             Text("Edit")
                                 .foregroundColor(.white)

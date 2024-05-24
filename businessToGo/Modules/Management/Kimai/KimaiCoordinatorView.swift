@@ -6,18 +6,37 @@ struct KimaiCoordinatorView: View {
     
     var body: some View {
         switch(store.state){
-        case .customers:
-            if let store = store.scope(state: \.customers, action: \.customers) {
-                KimaiCustomersView(store: store)
+        case .customersList:
+            if let store = store.scope(state: \.customersList, action: \.customersList) {
+                KimaiCustomersListView(store: store)
             }
-        case .customer:
-            if let store = store.scope(state: \.customer, action: \.customer) {
+        case .customerSheet:
+            if let store = store.scope(state: \.customerSheet, action: \.customerSheet) {
                 KimaiCustomerSheet(store: store)
             }
             
-        case .projects:
-            if let store = store.scope(state: \.projects, action: \.projects) {
-                KimaiProjectsView(store: store)
+            
+        case .projectsList:
+            if let store = store.scope(state: \.projectsList, action: \.projectsList) {
+                KimaiProjectsListView(store: store)
+            }
+        case .projectSheet:
+            if let store = store.scope(state: \.projectSheet, action: \.projectSheet) {
+                KimaiProjectSheet(store: store)
+            }
+        case .projectDetail:
+            if let store = store.scope(state: \.projectDetail, action: \.projectDetail) {
+                KimaiProjectDetailsView(store: store)
+            }
+        
+            
+        case .timesheetsList:
+            if let store = store.scope(state: \.timesheetsList, action: \.timesheetsList) {
+                KimaiTimesheetsListView(store: store)
+            }
+        case .timesheetSheet:
+            if let store = store.scope(state: \.timesheetSheet, action: \.timesheetSheet) {
+                KimaiTimesheetSheet(store: store)
             }
         }
     }

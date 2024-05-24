@@ -29,7 +29,7 @@ struct ManagementCoordinator {
             self._integrations = Shared([])
             
             self.routes = [
-                .cover(.kimai(.customers(.init(customers: $kimai.customers))), embedInNavigationView: true)
+                .cover(.kimai(.customersList(.init(customers: $kimai.customers))), embedInNavigationView: true)
             ]
         }
     }
@@ -58,29 +58,90 @@ struct ManagementCoordinator {
         Reduce { state, action in
             switch(action){
             
-            case let .router(.routeAction(_, .kimai(.customers(.delegate(delegate))))):
+            // MARK: - Kimai Customers List
+            case let .router(.routeAction(_, .kimai(.customersList(.delegate(delegate))))):
                 switch(delegate) {
                 case let .showProject(of: customer):
                     state.routes.push(
-                        .kimai(.projects(.init(customer: customer, timesheets: state.$kimai.timesheets.records, projects: state.$kimai.projects)))
+                        .kimai(.projectsList(.init(
+                            customer: customer,
+                            timesheets: state.$kimai.timesheets.records,
+                            projects: state.$kimai.projects
+                        )))
                     )
                     return .none
                 case let .editCustomer(customer):
                     state.routes.presentSheet(
-                        .kimai(.customer(.init(customer: customer, teams: state.$kimai.teams.records)))
+                        .kimai(.customerSheet(.init(customer: customer, teams: state.$kimai.teams.records)))
                     )
                     return .none
                 }
-            
-            case let .router(.routeAction(_, .kimai(.customer(.delegate(delegate))))):
+                
+            // MARK: - Kimai Customer Sheet
+            case let .router(.routeAction(_, .kimai(.customerSheet(.delegate(delegate))))):
                 switch(delegate) {
                 case .dismiss:
                     state.routes.goBack()
                     return .none
+                case let .update(customer):
+                    return .send(.kimai(.customers(.update(customer))))
+                case let .create(customer):
+                    return .send(.kimai(.customers(.create(customer))))
                 }
                 
-            
+            // MARK: - Kimai Projects List
+            case let .router(.routeAction(_, .kimai(.projectsList(.delegate(delegate))))):
+                switch(delegate){
+                case let .showProject(id):
+                    if let project = state.kimai.projects.records.first(where: { $0.id == id }) {
+                        state.routes.push(
+                            .kimai(.projectDetail(.init(
+                                project: project,
+                                activities: state.$kimai.activities.records,
+                                timesheets: state.$kimai.timesheets.records,
+                                users: state.$kimai.users.records
+                            )))
+                        )
+                    }
+                    return .none
+                case let .editProject(project):
+                    state.routes.presentSheet(
+                        .kimai(.projectSheet(.init(
+                            project: project,
+                            customers: state.$kimai.customers.records
+                        )))
+                    )
+                    return .none
+                }
                 
+            // MARK: - Kimai Project Sheet
+            case let .router(.routeAction(_, .kimai(.projectSheet(.delegate(delegate))))):
+                switch(delegate) {
+                case .dismiss:
+                    state.routes.goBack()
+                    return .none
+                case let .create(project):
+                    return .send(.kimai(.projects(.create(project))))
+                case let .update(project):
+                    return .send(.kimai(.projects(.update(project))))
+                }
+            
+            // MARK: - Kimai Timesheets List
+            case let .router(.routeAction(_, .kimai(.timesheetsList(.delegate(delegate))))):
+                switch(delegate){
+                case let .delete(timesheet):
+                    return .send(.kimai(.timesheets(.delete(timesheet))))
+                case let .edit(timesheet):
+                    state.routes.presentSheet(
+                        .kimai(.timesheetSheet(.init(
+                            timesheet: timesheet,
+                            customers: state.$kimai.customers.records,
+                            projects: state.$kimai.projects.records,
+                            activities: state.$kimai.activities.records
+                        )))
+                    )
+                    return .none
+                }
             
                 
             case .sync:

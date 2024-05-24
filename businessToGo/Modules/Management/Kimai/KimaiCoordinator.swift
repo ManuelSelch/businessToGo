@@ -3,13 +3,18 @@ import ComposableArchitecture
 
 @Reducer(state: .equatable)
 enum KimaiCoordinator {
-    case customers(KimaiCustomersFeature)
-    case customer(KimaiCustomerFeature)
+    case customersList(KimaiCustomersListFeature)
+    case customerSheet(KimaiCustomerSheetFeature)
     
-    case projects(KimaiProjectsFeature)
+    case projectsList(KimaiProjectsListFeature)
+    case projectSheet(KimaiProjectSheetFeature)
+    case projectDetail(KimaiProjectDetailFeature)
+    
+    case timesheetsList(KimaiTimesheetsListFeature)
+    case timesheetSheet(KimaiTimesheetSheetFeature)
     
     init() {
-        self = .customers(.init())
+        self = .customersList(.init())
     }
 }
 

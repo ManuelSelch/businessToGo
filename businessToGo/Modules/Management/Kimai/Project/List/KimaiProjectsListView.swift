@@ -3,11 +3,11 @@ import MyChart
 import OfflineSync
 import ComposableArchitecture
 
-struct KimaiProjectsView: View {
-    let store: StoreOf<KimaiProjectsFeature>
+struct KimaiProjectsListView: View {
+    let store: StoreOf<KimaiProjectsListFeature>
     
     var projectsFiltered: [KimaiProject] {
-        var c = store.projects.records
+        var c = store.projects.records.filter { $0.customer == store.customer }
         c.sort { $0.name < $1.name }
         return c
     }
@@ -18,8 +18,10 @@ struct KimaiProjectsView: View {
 
     var body: some View {
         VStack {
-            ChartPieView(projectTimes)
-                .background(Color.background)
+            if(projectsFiltered.count > 1) {
+                ChartPieView(projectTimes)
+                    .background(Color.background)
+            }
             
             List {
                 ForEach(projectsFiltered) { project in
@@ -60,11 +62,11 @@ struct KimaiProjectsView: View {
     
 }
 
-extension KimaiProjectsView {
+extension KimaiProjectsListView {
     func calculateProjectTimes() -> [ChartItem] {
         var projectTimes: [ChartItem] = []
         
-        for project in store.projects.records {
+        for project in projectsFiltered {
             projectTimes.append(ChartItem(id: project.id, name: project.name, value: 0))
         }
         

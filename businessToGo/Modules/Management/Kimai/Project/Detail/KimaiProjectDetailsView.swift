@@ -1,20 +1,18 @@
 import SwiftUI
 import MyChart
+import ComposableArchitecture
 
 struct KimaiProjectDetailsView: View {
+    let store: StoreOf<KimaiProjectDetailFeature>
+    
     enum ChartSelection: String, CaseIterable {
         case time = "Arbeitszeit"
         case user = "Benutzer"
         case activity = "Tätigkeit"
     }
-    var project: KimaiProject
-    var customer: KimaiCustomer?
-    var activities: [KimaiActivity]
-    var timesheets: [KimaiTimesheet]
-    var users: [KimaiUser]
-    
+
     var timesheetsFiltered: [KimaiTimesheet] {
-        return timesheets.filter { $0.project == project.id }
+        return store.timesheets.filter { $0.project == store.project.id }
     }
     
     
@@ -34,8 +32,8 @@ struct KimaiProjectDetailsView: View {
     var body: some View {
         List {
             Section("General") {
-                ListItem(customer?.name ?? "--", label: "Kunde")
-                ListItem(project.name, label: "Projekt")
+                ListItem(store.customer?.name ?? "--", label: "Kunde")
+                ListItem(store.project.name, label: "Projekt")
                 ListItem(MyFormatter.duration(totalHours), label: "Arbeitszeit Gesamt")
                 ListItem(MyFormatter.rate(totalRate), label: "Umsatz Gesamt")
                 if let date = lastEntry {
@@ -110,7 +108,7 @@ extension KimaiProjectDetailsView {
             items.append(
                 .init(
                     id: user,
-                    name: self.users.first{ $0.id == user }?.username ?? "--",
+                    name: store.users.first{ $0.id == user }?.username ?? "--",
                     value: KimaiTimesheet.totalHours(of: timesheetsFiltered.filter { $0.user == user }) / 3600
                 )
             )
@@ -134,7 +132,7 @@ extension KimaiProjectDetailsView {
             items.append(
                 .init(
                     id: activity,
-                    name: self.activities.first { $0.id == activity }?.name ?? "--",
+                    name: store.activities.first { $0.id == activity }?.name ?? "--",
                     value: KimaiTimesheet.totalHours(of: self.timesheetsFiltered.filter { $0.activity == activity }) / 3600
                 )
             )
@@ -143,14 +141,4 @@ extension KimaiProjectDetailsView {
         return items
     }
     
-}
-
-#Preview {
-    KimaiProjectDetailsView(
-        project: .sample, 
-        customer: .sample,
-        activities: [],
-        timesheets: KimaiTimesheet.samples,
-        users: KimaiUser.samples
-    )
 }

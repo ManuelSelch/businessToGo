@@ -9,45 +9,57 @@ final class LoginReducerTests: XCTestCase {
     override func setUp() {
         store = .init(initialState: .init()) {
             LoginModule()
+        } withDependencies: {
+            $0.keychain = .mock
         }
     }
 
    
-    func testNavigate() {
-        XCTAssertEqual(store.state.scene, .accounts)
+    func testNavigate() async {
+        await store.send(.navigate(.account(.demo))) {
+            $0.scene = .account(.demo)
+        }
+    }
+    
+    func testLogin() async throws {
+        await store.send(.login(.demo)) {
+            $0.current = .demo
+        }
+    }
+    
+    func testLogout() async throws {
+        await store.send(.login(.demo)) {
+            $0.current = .demo
+        }
+        await store.receive(/LoginModule.Action.delegate(.showHome))
+        await store.receive(\.saveAccount) {
+            $0.scene = .account(.demo)
+        }
+        await store.receive(/LoginModule.Action.delegate(.syncKimai))
         
-        store.send(.navigate(.account(.demo)))
-        XCTAssertEqual(store.state.scene, .account(.demo))
+        await store.send(.logout) {
+            $0.current = nil
+            $0.scene = .accounts
+        }
     }
     
-    func testLogin() throws {
-        store.send(.login(.demo))
-        // load from keychain -> account should still be correct
-        store.send(.loadAccounts)
-        XCTAssertEqual(store.state.current, .demo)
-    }
-    
-    func testLogout() throws {
-        store.send(.login(.demo))
-        store.send(.logout)
-        // load from keychain -> user should still be logged out
-        store.send(.loadAccounts)
-        XCTAssertEqual(store.state.scene, .accounts)
-        XCTAssertEqual(store.state.current, nil)
-    }
-    
-    func testSaveLoadReset() {
-        XCTAssertEqual(store.state.accounts, [])
-        
+    func testSaveLoadReset() async {
         let account = Account(id: 1, name: "MyAccount")
-        store.send(.saveAccount(account))
-        store.send(.loadAccounts)
-        XCTAssertEqual(store.state.accounts, [account])
+        await store.send(.saveAccount(account)) {
+            $0.scene = .account(account)
+        }
         
-        store.send(.reset)
-        XCTAssertEqual(store.state.accounts, [])
-        store.send(.loadAccounts)
-        XCTAssertEqual(store.state.accounts, [.demo])
+        await store.send(.loadAccounts) {
+            $0.accounts = [account]
+        }
+        
+        await store.send(.reset) {
+            $0.accounts = []
+        }
+        
+        await store.send(.loadAccounts) {
+            $0.accounts = [.demo]
+        }
     }
     
     

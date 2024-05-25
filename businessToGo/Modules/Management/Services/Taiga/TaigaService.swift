@@ -7,8 +7,15 @@ import OfflineSync
 import SQLite
 import ComposableArchitecture
 
-class TaigaService: IService, DependencyKey {    
+class TaigaService: IService, DependencyKey {
+    enum Mode {
+        case live
+        case mock
+    }
+    
     var provider = MoyaProvider<TaigaRequest>()
+    var tables: TaigaTable
+    var mode: Mode
     
     var projects: RequestService<TaigaProject, TaigaRequest>!
     var taskStories: RequestService<TaigaTaskStory, TaigaRequest>!
@@ -20,6 +27,7 @@ class TaigaService: IService, DependencyKey {
     func setAuth(_ token: String) {
         let authPlugin = AccessTokenPlugin { _ in token }
         provider = MoyaProvider<TaigaRequest>(plugins: [authPlugin])
+        initRequests()
     }
     
     func login(_ account: AccountData) async throws -> TaigaUserAuthDetail {
@@ -79,43 +87,72 @@ class TaigaService: IService, DependencyKey {
         tasks.clear()
     }
     
-    init() {
-        let tables = TaigaTable()
+    init(_ mode: Mode) {
+        self.tables = TaigaTable()
+        self.mode = mode
         
-        projects = RequestService(
-            tables.projects,
-            provider,
-            .simple(.getProjects)
-        )
-        taskStories = RequestService(
-            tables.taskStories,
-            provider,
-            .simple(.getTaskStories),
-            nil,
-            TaigaRequest.updateTaskStory,
-            nil
-        )
-        taskStoryStatus = RequestService(
-            tables.taskStatus,
-            provider,
-            .simple(.getStatusList)
-        )
-        milestones = RequestService(
-            tables.milestones,
-            provider,
-            .simple(.getMilestones)
-        )
-        tasks = RequestService(
-            tables.tasks,
-            provider,
-            .simple(.getTasks)
-        )
+        initRequests()
+    }
+    
+    private func initRequests(){
+        switch(mode){
+        case .live:
+            projects = .live(
+                table: tables.projects,
+                provider: provider,
+                fetchMethod: .simple(.getProjects),
+                insertMethod: nil,
+                updateMethod: nil,
+                deleteMethod: nil
+            )
+            taskStories = .live(
+                table: tables.taskStories,
+                provider: provider,
+                fetchMethod: .simple(.getTaskStories),
+                insertMethod: nil,
+                updateMethod: TaigaRequest.updateTaskStory,
+                deleteMethod: nil
+            )
+            taskStoryStatus = .live(
+                table: tables.taskStatus,
+                provider: provider,
+                fetchMethod: .simple(.getStatusList),
+                insertMethod: nil,
+                updateMethod: nil,
+                deleteMethod: nil
+            )
+            milestones = .live(
+                table: tables.milestones,
+                provider: provider,
+                fetchMethod: .simple(.getMilestones),
+                insertMethod: nil,
+                updateMethod: nil,
+                deleteMethod: nil
+            )
+            tasks = .live(
+                table: tables.tasks,
+                provider: provider,
+                fetchMethod: .simple(.getTasks),
+                insertMethod: nil,
+                updateMethod: nil,
+                deleteMethod: nil
+            )
+        case .mock:
+            projects = .mock(table: tables.projects)
+            taskStories = .mock(table: tables.taskStories)
+            milestones = .mock(table: tables.milestones)
+            tasks = .mock(table: tables.tasks)
+        }
     }
 }
 
 extension TaigaService {
     static var liveValue: TaigaService {
-        .init()
+        .init(.live)
+    }
+    
+    static var testValue: TaigaService {
+        .init(.mock)
     }
 }
 

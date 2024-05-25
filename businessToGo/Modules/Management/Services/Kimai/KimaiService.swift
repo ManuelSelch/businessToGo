@@ -8,8 +8,14 @@ import ComposableArchitecture
 
 // MARK: - admin middleware
 class KimaiService: DependencyKey {
+    enum Mode {
+        case live
+        case mock
+    }
+    
     var provider = MoyaProvider<KimaiRequest>()
     var tables: KimaiTable!
+    var mode: Mode
     
     var customers: RequestService<KimaiCustomer, KimaiRequest>!
     var projects: RequestService<KimaiProject, KimaiRequest>!
@@ -41,40 +47,68 @@ class KimaiService: DependencyKey {
         activities.clear()
     }
     
-    init() {
-        let tables = KimaiTable()
-        self.tables = tables
+    init(_ mode: Mode) {
+        self.tables = KimaiTable()
+        self.mode = mode
         initRequests()
-      
+        
     }
     
     func initRequests(){
-        customers = .init(
-            tables.customers, provider, .simple(.getCustomers),
-            KimaiRequest.insertCustomer, KimaiRequest.updateCustomer
-        )
-        
-        projects = .init(
-            tables.projects, provider, .simple(.getProjects),
-            KimaiRequest.insertProject, KimaiRequest.updateProject
-        )
-        
-        timesheets = .init(
-            tables.timesheets, provider, .page(KimaiRequest.getTimesheets),
-            KimaiRequest.insertTimesheet, KimaiRequest.updateTimesheet, KimaiRequest.deleteTimesheet
-        )
-        
-        activities = .init(
-            tables.activities, provider, .simple(.getActivities)
-        )
-        
-        teams = .init(
-            tables.teams, provider, .simple(.getTeams)
-        )
-        
-        users = .init(
-            tables.users, provider, .simple(.getUsers)
-        )
+        switch(mode){
+        case .live:
+            customers = .live(
+                table: tables.customers,
+                provider: provider,
+                fetchMethod: .simple(.getCustomers),
+                insertMethod: KimaiRequest.insertCustomer,
+                updateMethod: KimaiRequest.updateCustomer,
+                deleteMethod: nil
+            )
+            
+            projects = .live(
+                table: tables.projects,
+                provider: provider,
+                fetchMethod: .simple(.getProjects),
+                insertMethod: KimaiRequest.insertProject,
+                updateMethod: KimaiRequest.updateProject,
+                deleteMethod: nil
+            )
+            
+            timesheets = .live(
+                table: tables.timesheets,
+                provider: provider,
+                fetchMethod: .page(KimaiRequest.getTimesheets),
+                insertMethod: KimaiRequest.insertTimesheet,
+                updateMethod: KimaiRequest.updateTimesheet,
+                deleteMethod: KimaiRequest.deleteTimesheet
+            )
+            
+            activities = .live(
+                table: tables.activities,
+                provider: provider,
+                fetchMethod: .simple(.getActivities)
+            )
+            
+            teams = .live(
+                table: tables.teams,
+                provider: provider,
+                fetchMethod: .simple(.getTeams)
+            )
+            
+            users = .live(
+                table: tables.users,
+                provider: provider,
+                fetchMethod: .simple(.getUsers)
+            )
+        case .mock:
+            customers = .mock(table: tables.customers)
+            projects = .mock(table: tables.projects)
+            timesheets = .mock(table: tables.timesheets)
+            activities = .mock(table: tables.activities)
+            teams = .mock(table: tables.teams)
+            users = .mock(table: tables.users)
+        }
     }
 }
 
@@ -103,7 +137,11 @@ struct KimaiAuthPlugin: PluginType {
 
 extension KimaiService {
     static var liveValue: KimaiService {
-        .init()
+        .init(.live)
+    }
+    
+    static var testValue: KimaiService {
+        .init(.mock)
     }
 }
 

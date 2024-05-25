@@ -1,28 +1,28 @@
 import XCTest
-import Redux
+import ComposableArchitecture
 
 @testable import businessToGo
 
 final class ReportReducerTests: XCTestCase {
-    var store: StoreOf<ReportModule>!
+    var store: TestStoreOf<ReportModule>!
     
     override func setUp() {
-        store = .init(
-            initialState: .init(),
-            reducer: ReportModule.reduce,
-            dependencies: .init()
-        )
+        store = .init(initialState: .init()) {
+            ReportModule()
+        }
     }
     
-    func testSelectDate() {
+    func testSelectDate() async {
         let date = Date.today.addDays(5)
-        store.send(.selectDate(date))
-        XCTAssertEqual(store.state.selectedDate, date)
+        await store.send(.selectDate(date)) {
+            $0.selectedDate = date
+        }
     }
     
-    func testSelectProject() {
+    func testSelectProject() async {
         let project = 5
-        store.send(.selectProject(5))
-        XCTAssertEqual(store.state.selectedProject, project)
+        await store.send(.selectProject(5)) {
+            $0.selectedProject = project
+        }
     }
 }

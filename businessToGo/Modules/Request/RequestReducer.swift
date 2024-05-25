@@ -14,13 +14,13 @@ extension RequestModule {
                     let local = service.get()
                     await send(.set(local))
                     
-                    let fetch = try await service.fetch(1)
+                    let fetch = try await service.fetch()
                     var remoteRecords = fetch.response
                     var current = Int(fetch.headers["X-Page"] as? String ?? "0") ?? 0
                     let max = Int(fetch.headers["X-Total-Pages"] as? String ?? "0") ?? 0
                     while(current < max){
                         current += 1
-                        let fetchPage = try await service.fetch(current)
+                        let fetchPage = try await service.fetch(page: current)
                         remoteRecords.append(contentsOf: fetchPage.response)
                     }
                     

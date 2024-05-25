@@ -1,23 +1,22 @@
 import XCTest
-import Redux
+import ComposableArchitecture
 
 @testable import businessToGo
 
 final class ManagementReducerTests: XCTestCase {
-    var store: StoreOf<ManagementModule>!
+    var store: TestStoreOf<ManagementModule>!
     
     override func setUp() {
-        store = .init(
-            initialState: .init(),
-            reducer: ManagementModule.reduce,
-            dependencies: .mock
-        )
+        store = .init(initialState: .init()) {
+            ManagementModule()
+        }
     }
     
     
-    func testConnectIntegrations() {
-        store.send(.connect(2, 3))
-        XCTAssertEqual(store.state.integrations, [.init(2, 3)])
+    func testConnectIntegrations() async {
+        await store.send(.connect(2, 3)) {
+            $0.integrations =  [.init(2, 3)]
+        }
     }
     
 }

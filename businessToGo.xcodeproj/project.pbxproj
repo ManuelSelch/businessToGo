@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -107,8 +107,10 @@
 		84977F712C021527003E83BA /* DebugFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F702C021527003E83BA /* DebugFeature.swift */; };
 		84977F752C022055003E83BA /* LogFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F742C022055003E83BA /* LogFeature.swift */; };
 		84977F772C022061003E83BA /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F762C022061003E83BA /* LogView.swift */; };
-		84977F7A2C02233B003E83BA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F792C02233B003E83BA /* Login */; };
-		84977F7D2C022350003E83BA /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F7C2C022350003E83BA /* OfflineSync */; };
+		84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F7E2C029428003E83BA /* AppLauncher.swift */; };
+		84977F822C029939003E83BA /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F812C029939003E83BA /* OfflineSync */; };
+		84977F852C0299CE003E83BA /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F842C0299CE003E83BA /* OfflineSync */; };
+		84977F882C0299E8003E83BA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F872C0299E8003E83BA /* Login */; };
 		849BF14B2BEE7CBC008F8B6A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF14A2BEE7CBC008F8B6A /* AccountView.swift */; };
 		849BF1522BEF71CA008F8B6A /* SettingsCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1512BEF71CA008F8B6A /* SettingsCoordinatorView.swift */; };
 		849BF15B2BEF73B4008F8B6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF15A2BEF73B4008F8B6A /* SettingsView.swift */; };
@@ -262,6 +264,7 @@
 		84977F702C021527003E83BA /* DebugFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugFeature.swift; sourceTree = "<group>"; };
 		84977F742C022055003E83BA /* LogFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFeature.swift; sourceTree = "<group>"; };
 		84977F762C022061003E83BA /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		84977F7E2C029428003E83BA /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		849BF14A2BEE7CBC008F8B6A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		849BF1512BEF71CA008F8B6A /* SettingsCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorView.swift; sourceTree = "<group>"; };
 		849BF15A2BEF73B4008F8B6A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -312,14 +315,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84977F7D2C022350003E83BA /* OfflineSync in Frameworks */,
+				84977F822C029939003E83BA /* OfflineSync in Frameworks */,
 				8472A3D62C010E3C006726A1 /* Pulse in Frameworks */,
 				84FDEE012BFFF08B0071C8FA /* TCACoordinators in Frameworks */,
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
 				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
 				84CD98172BFF6933000B4A4C /* ComposableArchitecture in Frameworks */,
 				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
-				84977F7A2C02233B003E83BA /* Login in Frameworks */,
 				8467DEB92BDEA8690077E331 /* Redux in Frameworks */,
 				84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */,
 				84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */,
@@ -329,8 +331,10 @@
 				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
 				84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */,
 				841083B82BFA9D5600332A6A /* Redux in Frameworks */,
+				84977F882C0299E8003E83BA /* Login in Frameworks */,
 				8418405B2BFD020100EC9FDF /* Redux in Frameworks */,
 				84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */,
+				84977F852C0299CE003E83BA /* OfflineSync in Frameworks */,
 				8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */,
 				84F5AE912BF74CA6007EE279 /* Moya in Frameworks */,
 				8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */,
@@ -932,6 +936,7 @@
 				84C5A2C22BC40F6300C25A0C /* Modules */,
 				84C5A2C02BC40F4A00C25A0C /* App */,
 				84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */,
+				84977F7E2C029428003E83BA /* AppLauncher.swift */,
 				84C5A2992BC40EEE00C25A0C /* Assets.xcassets */,
 				84C5A29B2BC40EEE00C25A0C /* businessToGo.entitlements */,
 				84C5A29C2BC40EEE00C25A0C /* Preview Content */,
@@ -1102,8 +1107,9 @@
 				8472A3D32C010B99006726A1 /* PulseUI */,
 				8472A3D52C010E3C006726A1 /* Pulse */,
 				8472A3D82C01161A006726A1 /* PulseLogHandler */,
-				84977F792C02233B003E83BA /* Login */,
-				84977F7C2C022350003E83BA /* OfflineSync */,
+				84977F812C029939003E83BA /* OfflineSync */,
+				84977F842C0299CE003E83BA /* OfflineSync */,
+				84977F872C0299E8003E83BA /* Login */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -1196,8 +1202,8 @@
 				8472A3CF2C010835006726A1 /* XCRemoteSwiftPackageReference "tca-swift-log" */,
 				8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */,
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
-				84977F782C02233B003E83BA /* XCRemoteSwiftPackageReference "Login" */,
-				84977F7B2C022350003E83BA /* XCRemoteSwiftPackageReference "OfflineSync" */,
+				84977F832C0299CE003E83BA /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
+				84977F862C0299E7003E83BA /* XCLocalSwiftPackageReference "../SwiftPackages/Login" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1271,6 +1277,7 @@
 				8424BB762BCAC17C00929F13 /* Integration.swift in Sources */,
 				8445971F2BFC37A6001CEC6C /* IntroModule.swift in Sources */,
 				841D9E892BC9F3E6002990C7 /* TaigaTable.swift in Sources */,
+				84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */,
 				8464257F2BCE43B900BDD86E /* TaigaProjectCardView.swift in Sources */,
 				849BF16C2BF13FC6008F8B6A /* KimaiProjectSheet.swift in Sources */,
 				843CB0DF2C0157CE003E3D37 /* ReportsFeature.swift in Sources */,
@@ -1729,6 +1736,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		84977F832C0299CE003E83BA /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/OfflineSync;
+		};
+		84977F862C0299E7003E83BA /* XCLocalSwiftPackageReference "../SwiftPackages/Login" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/Login;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		841840562BFD01D300EC9FDF /* XCRemoteSwiftPackageReference "Log" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1808,22 +1826,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.1;
-			};
-		};
-		84977F782C02233B003E83BA /* XCRemoteSwiftPackageReference "Login" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/Login.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
-		84977F7B2C022350003E83BA /* XCRemoteSwiftPackageReference "OfflineSync" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/OfflineSync.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
 			};
 		};
 		84CD98152BFF6933000B4A4C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
@@ -1927,15 +1929,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TestableCombinePublishers;
 		};
-		84977F792C02233B003E83BA /* Login */ = {
+		84977F812C029939003E83BA /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84977F782C02233B003E83BA /* XCRemoteSwiftPackageReference "Login" */;
-			productName = Login;
-		};
-		84977F7C2C022350003E83BA /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84977F7B2C022350003E83BA /* XCRemoteSwiftPackageReference "OfflineSync" */;
 			productName = OfflineSync;
+		};
+		84977F842C0299CE003E83BA /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
+		};
+		84977F872C0299E8003E83BA /* Login */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Login;
 		};
 		84CD11F62BF410E8006AE4C7 /* Log */ = {
 			isa = XCSwiftPackageProductDependency;

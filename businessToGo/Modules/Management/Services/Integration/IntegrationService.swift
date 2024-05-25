@@ -28,6 +28,10 @@ extension IntegrationService {
     static var liveValue: IntegrationService {
         .init()
     }
+    
+    static var testValue: IntegrationService {
+        .init()
+    }
 }
 
 

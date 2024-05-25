@@ -46,30 +46,12 @@
       }
     },
     {
-      "identity" : "login",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Login.git",
-      "state" : {
-        "revision" : "1f8a85267c68b1892fde2a15ad049ff1d3c000ad",
-        "version" : "1.1.0"
-      }
-    },
-    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya.git",
       "state" : {
         "revision" : "c263811c1f3dbf002be9bd83107f7cdc38992b26",
         "version" : "15.0.3"
-      }
-    },
-    {
-      "identity" : "offlinesync",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/OfflineSync.git",
-      "state" : {
-        "revision" : "fab74394cda56cbda31b258be8f3cedea2955515",
-        "version" : "1.2.0"
       }
     },
     {

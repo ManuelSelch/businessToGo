@@ -7,7 +7,6 @@ import SwiftUI
 import TCASwiftLog
 import PulseLogHandler
 
-@main
 struct businessToGoApp: App {
     let store: StoreOf<AppModule>
     

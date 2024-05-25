@@ -7,6 +7,7 @@ struct ManagementCoordinatorView: View {
     
     var body: some View {
         VStack {
+            // TODO: add header
             // ManagementHeaderView(projects: <#T##[KimaiProject]#>, teams: <#T##[KimaiTeam]#>, router: <#T##(RouteModule<ManagementRoute>.Action) -> Void#>, onSync: <#T##() -> Void#>)
             TCARouter(store.scope(state: \.routes, action: \.router)) { screen in
                 switch(screen.case) {

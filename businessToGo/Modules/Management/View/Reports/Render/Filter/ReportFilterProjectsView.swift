@@ -8,8 +8,6 @@ struct ReportFilterProjectsView: View {
     
     @Binding var selectedProject: Int?
     
-    var router: (RouteModule<ReportRoute>.Action) -> ()
-    
     var body: some View {
         List {
             HStack {
@@ -64,7 +62,6 @@ struct ReportFilterProjectsView: View {
             .init(id: 4, customer: 1, name: "P2", globalActivities: false, visible: true),
             .init(id: 5, customer: 1, name: "P2", globalActivities: false, visible: true)
         ],
-        selectedProject: .constant(4),
-        router: { _ in }
+        selectedProject: .constant(4)
     )
 }

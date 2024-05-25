@@ -8,7 +8,8 @@ struct ReportFilterView: View {
     
     @Binding var selectedProject: Int?
     
-    var router: (RouteModule<ReportRoute>.Action) -> ()
+    var filterTapped: () -> ()
+   
     
     var body: some View {
         List {
@@ -17,7 +18,7 @@ struct ReportFilterView: View {
                 Spacer()
                 
                 Button(action: {
-                    router(.push(.filterProjects))
+                    filterTapped()
                 }){
                     HStack {
                         if let project = projects.first(where: { $0.id == selectedProject }) {
@@ -37,6 +38,3 @@ struct ReportFilterView: View {
     }
 }
 
-#Preview {
-    ReportFilterView(customers: [], projects: [], selectedProject: .constant(nil), router: { _ in })
-}

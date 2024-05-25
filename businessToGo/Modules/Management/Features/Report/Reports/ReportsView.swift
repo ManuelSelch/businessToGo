@@ -1,40 +1,29 @@
 import SwiftUI
 import OfflineSync
-import Redux
 import MyChart
+import ComposableArchitecture
 
 struct ReportsView: View {
-    
-    var timesheets: [KimaiTimesheet]
-    var projects: [KimaiProject]
-    var activities: [KimaiActivity]
-    var timesheetTracks: [DatabaseChange]
-    
-    @Binding var selectedProject: Int?
-    @Binding var selectedDate: Date
-    
-    var router: (RouteModule<ReportRoute>.Action) -> ()
-    
-    var onDelete: (KimaiTimesheet) -> ()
+    @Bindable var store: StoreOf<ReportsFeature>
     
     @State var selectedReportType: ReportType = .week
     
     var timesheetsFiltered: [KimaiTimesheet] {
-        var timesheets = timesheets
+        var timesheets = store.timesheets.records
         
-        if let project = selectedProject {
+        if let project = store.selectedProject {
             timesheets = timesheets.filter { $0.project == project }
         }
         
         switch(selectedReportType){
         case .day:
-            return timesheets.filter{ $0.getBeginDate()?.isDay(of: selectedDate) ?? false }
+            return timesheets.filter{ $0.getBeginDate()?.isDay(of: store.selectedDate) ?? false }
         case .week:
-            return timesheets.filter { $0.getBeginDate()?.isWeekOfYear(of: selectedDate) ?? false }
+            return timesheets.filter { $0.getBeginDate()?.isWeekOfYear(of: store.selectedDate) ?? false }
         case .month:
-            return timesheets.filter { $0.getBeginDate()?.isMonth(of: selectedDate) ?? false }
+            return timesheets.filter { $0.getBeginDate()?.isMonth(of: store.selectedDate) ?? false }
         case .year:
-            return timesheets.filter { $0.getBeginDate()?.isYear(of: selectedDate) ?? false }
+            return timesheets.filter { $0.getBeginDate()?.isYear(of: store.selectedDate) ?? false }
         }
     }
     
@@ -56,28 +45,26 @@ extension ReportsView {
     func getHeader() -> some View {
         ReportHeaderView(
             selectedReportType: $selectedReportType,
-            selectedDate: $selectedDate,
-            selectedProject: $selectedProject,
-            projects: projects,
+            selectedDate: $store.selectedDate.sending(\.dateSelected),
+            selectedProject: $store.selectedProject.sending(\.projectSelected),
+            projects: store.projects,
             
-            router: { router($0) }
+            calendarTapped: { store.send(.calendarTapped) },
+            filterTapped: { store.send(.filterTapped) },
+            playTapped: { store.send(.playTapped) }
+            
         )
     }
     
     
     @ViewBuilder
     func getTimesheets() -> some View {
-        VStack {}
-        /* TODO: list timesheets view
-        KimaiTimesheetsListView(
+        ReportTimesheetsView(
             timesheets: timesheetsFiltered,
-            projects: projects,
-            activities: activities,
-            changes: timesheetTracks,
-            onEditClicked: { router(.presentSheet(.timesheet($0))) },
-            onDeleteClicked: onDelete
+            timesheetChanges: store.timesheets.changes,
+            projects: store.projects,
+            activities: store.activities
         )
-         */
     }
     
     @ViewBuilder

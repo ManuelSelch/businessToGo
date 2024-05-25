@@ -8,20 +8,22 @@ struct ReportHeaderView: View {
     
     var projects: [KimaiProject]
     
-    var router: (RouteModule<ReportRoute>.Action) -> ()
+    var calendarTapped: () -> ()
+    var filterTapped: () -> ()
+    var playTapped: () -> ()
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
                 Button(action: {
-                    router(.presentSheet(.calendar))
+                    calendarTapped()
                 }){
                     Image(systemName: "calendar")
                         
                 }
                 
                 Button(action: {
-                    router(.push(.filterProjects))
+                    filterTapped()
                 }) {
                     Image(systemName: "line.3.horizontal.decrease.circle")
                 }
@@ -39,7 +41,7 @@ struct ReportHeaderView: View {
                 .accentColor(Color.contrast)
                 
                 Button(action: {
-                    router(.presentSheet(.timesheet(KimaiTimesheet.new)))
+                    playTapped()
                 }){
                     Image(systemName: "play.fill")
                         .font(.system(size: 20))

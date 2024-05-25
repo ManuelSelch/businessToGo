@@ -26,9 +26,13 @@ struct KimaiTimesheetsListView: View {
             ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
                 
                 HStack {
-                    Text(formatDate(date))
+                    Text(MyFormatter.date(date))
                     Spacer()
-                    Text(getTotalTime(for: timesheetsByDate[date] ?? []))
+                    Text(
+                        MyFormatter.duration(
+                            KimaiTimesheet.totalHours(of: timesheetsByDate[date] ?? [])
+                        )
+                    )
                 }
                 .font(.system(size: 15))
                 .textCase(.uppercase)
@@ -72,34 +76,6 @@ struct KimaiTimesheetsListView: View {
         }
         // .padding()
     }
-    
-    func formatDate(_ date: Date) -> String {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date.now)
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: today)
-        let entryDay = calendar.startOfDay(for: date)
-        
-        if entryDay == today {
-            return "Heute"
-        } else if entryDay == yesterday {
-            return "Gestern"
-        }else {
-            return date.formatted(date: .complete, time: .omitted)
-        }
-    }
-    
-    func getTotalTime(for timesheets: [KimaiTimesheet]) -> String {
-        var time: TimeInterval = 0
-        for timesheet in timesheets {
-            time += timesheet.calculateDuration() ?? 0
-        }
-        
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        return formatter.string(from: time) ?? "--"
-    }
-    
-   
   
     
 }

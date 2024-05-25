@@ -11,8 +11,11 @@ extension AppRoute {
         case .management:
             ManagementCoordinatorView(store: store.scope(state: \.management, action: \.management))
         case .report:
-            // ReportContainer(store: store.scope(state: \.management, action: \.management))
-            Text("Report View ;-)")
+            ReportCoordinatorView(
+                store: store
+                    .scope(state: \.management, action: \.management)
+                    .scope(state: \.report, action: \.report)
+            )
         case .settings:
             SettingsContainer(store: store)
         

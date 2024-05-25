@@ -23,10 +23,18 @@ struct ManagementCoordinator {
         @Shared var taiga: TaigaModule.State
         @Shared var integrations: [Integration]
         
+        var report: ReportCoordinator.State!
+        
         init(){
             self._kimai = Shared(.init())
             self._taiga = Shared(.init())
             self._integrations = Shared([])
+            
+            self.report = .init(
+                timesheets: $kimai.timesheets,
+                projects: $kimai.projects.records,
+                activities: $kimai.activities.records
+            )
             
             self.routes = [
                 .cover(.kimai(.customersList(.init(customers: $kimai.customers))), embedInNavigationView: true)
@@ -42,7 +50,7 @@ struct ManagementCoordinator {
         
         case kimai(KimaiModule.Action)
         case taiga(TaigaModule.Action)
-        case report(ReportModule.Action)
+        case report(ReportCoordinator.Action)
         
         case resetDatabase
     }
@@ -53,6 +61,10 @@ struct ManagementCoordinator {
         }
         Scope(state: \.taiga, action: \.taiga) {
             TaigaModule()
+        }
+        
+        Scope(state: \.report, action: \.report) {
+            ReportCoordinator()
         }
         
         Reduce { state, action in

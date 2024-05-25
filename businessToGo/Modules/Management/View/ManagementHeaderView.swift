@@ -4,13 +4,14 @@ import Redux
 struct ManagementHeaderView: View {
     @Binding var selectedTeam: Int?
 
-    let route: ManagementRoute?
+    let route: ManagementScreen.State?
     
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
-    
-    let router: (RouteModule<ManagementRoute>.Action) -> ()
-    let onSync: () -> ()
+
+    let syncTapped: () -> ()
+    let projectTapped: (Integration) -> ()
+    let playTapped: (KimaiTimesheet) -> ()
 
     
     var body: some View {
@@ -29,13 +30,17 @@ struct ManagementHeaderView: View {
                 .pickerStyle(.menu)
                 .frame(width: 200)
                 .clipped()
-                
+            
+            // todo: check taiga route
+                /*
             case .taiga(.project(let integration)):
                 Button(action: {
-                    router(.push(.kimai(.projectDetails(integration.id))))
+                    projectTapped(integration)
                 }){
                     Image(systemName: "chart.bar.xaxis.ascending")
                 }
+                 */
+                
             default: EmptyView()
             }
             
@@ -43,24 +48,27 @@ struct ManagementHeaderView: View {
             
             
             Button(action: {
-                onSync()
+                syncTapped()
             }){
                 Image(systemName: "arrow.triangle.2.circlepath")
             }
              
             Button(action: {
                 switch(route){
-                case .kimai(.projects(for: let customer)):
-                    let project = projects.first { $0.customer ==  customer}
+                case let .kimai(.projectsList(state)):
+                    let project = projects.first { $0.customer == state.customer}
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = project?.id ?? 0
-                    router(.presentSheet(.kimai(.timesheet(timesheet))))
+                    playTapped(timesheet)
+                // TODO: check taiga route
+                /*
                 case .taiga(.project(let integration)):
                     var timesheet = KimaiTimesheet.new
                     timesheet.project = integration.id
-                    router(.presentSheet(.kimai(.timesheet(timesheet))))
+                    playTapped(timesheet)
+                 */
                 default:
-                    router(.presentSheet(.kimai(.timesheet(KimaiTimesheet.new))))
+                    playTapped(KimaiTimesheet.new)
                 }
                 
             }){

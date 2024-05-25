@@ -47,6 +47,7 @@ struct ManagementCoordinator {
         
         case sync
         case connect(_ kimaiProject: Int, _ taigaProject: Int)
+        case playTapped(KimaiTimesheet)
         
         case kimai(KimaiModule.Action)
         case taiga(TaigaModule.Action)
@@ -154,6 +155,18 @@ struct ManagementCoordinator {
                     )
                     return .none
                 }
+                
+            // MARK: - Kimai Timesheet Sheet
+            case let .router(.routeAction(_, .kimai(.timesheetSheet(.delegate(delegate))))):
+                switch(delegate) {
+                case let .create(timesheet):
+                    return .send(.kimai(.timesheets(.create(timesheet))))
+                case let .update(timesheet):
+                    return .send(.kimai(.timesheets(.update(timesheet))))
+                case .dismiss:
+                    state.routes.goBack()
+                    return .none
+                }
             
                 
             case .sync:
@@ -169,6 +182,17 @@ struct ManagementCoordinator {
             case .connect(let kimaiProject, let taigaProject):
                 integrations.setIntegration(kimaiProject, taigaProject)
                 state.integrations = integrations.get()
+                return .none
+            
+            case let .playTapped(timesheet):
+                state.routes.presentSheet(
+                    .kimai(.timesheetSheet(.init(
+                        timesheet: timesheet,
+                        customers: state.$kimai.customers.records,
+                        projects: state.$kimai.projects.records,
+                        activities: state.$kimai.activities.records
+                    )))
+                )
                 return .none
                 
                 

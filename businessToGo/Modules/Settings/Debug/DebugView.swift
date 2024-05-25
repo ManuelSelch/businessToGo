@@ -1,27 +1,18 @@
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct DebugView: View {
-    @State var isLog: Bool = false
-    let current: Account?
-    let state: AppModule.State
+    let store: StoreOf<DebugFeature>
     
-    var onUpdateLog: (Bool) -> ()
-    var onReset: () -> ()
+    @State var isLog: Bool = false
     
     
     var body: some View {
         List {
             Section("General") {
-                Toggle(isOn: $isLog) {
-                    Text("Log")
-                }
-                .onChange(of: isLog){
-                    onUpdateLog(isLog)
-                }
                 
                 Button(action: {
-                    onReset()
+                    store.send(.resetTapped)
                 }){
                     Text("Reset Database")
                         .foregroundStyle(Color.red)
@@ -29,24 +20,24 @@ struct DebugView: View {
             }
             
             Section("Account"){
-                Text(current?.name ?? "--")
+                Text(store.current?.name ?? "--")
                     .bold()
                     .foregroundStyle(Color.theme)
-                Text("Kimai: " + (current?.kimai?.username ?? "--"))
+                Text("Kimai: " + (store.current?.kimai?.username ?? "--"))
                     .font(.footnote)
-                Text("Taiga: " + (current?.taiga?.username ?? "--"))
+                Text("Taiga: " + (store.current?.taiga?.username ?? "--"))
                     .font(.footnote)
             }
             
           
             
             Section("State") {
-                if let data = try? JSONEncoder().encode(state.management.kimai),
+                if let data = try? JSONEncoder().encode(store.kimai),
                    let json = String(data: data, encoding: .utf8) {
                     DebugJsonView(json)
                 }
                 
-                if let data = try? JSONEncoder().encode(state.management.taiga),
+                if let data = try? JSONEncoder().encode(store.taiga),
                    let json = String(data: data, encoding: .utf8) {
                     DebugJsonView(json)
                 }

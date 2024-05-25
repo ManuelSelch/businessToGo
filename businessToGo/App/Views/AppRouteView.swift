@@ -17,7 +17,7 @@ extension AppRoute {
                     .scope(state: \.report, action: \.report)
             )
         case .settings:
-            SettingsContainer(store: store)
+            SettingsCoordinatorView(store: store.scope(state: \.settings, action: \.settings))
         
         }
     }

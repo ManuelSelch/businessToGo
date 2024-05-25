@@ -25,13 +25,17 @@ struct LoginModule {
     @Dependency(\.database) var database
     
     @ObservableState
-    struct State: Equatable, Codable {
+    struct State: Equatable {
         var scene: LoginScreen = .accounts
         
         var accounts: [Account] = []
-        var current: Account?
+        @Shared var current: Account?
         
         var loginStatus: LoginStatus = .show
+        
+        init() {
+            self._current = Shared(nil)
+        }
     }
     
     enum Action {

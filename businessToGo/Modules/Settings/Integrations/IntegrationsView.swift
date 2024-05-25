@@ -1,21 +1,17 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct IntegrationsView: View {
-    let customers: [KimaiCustomer]
-    let projects: [KimaiProject]
-    let taigaProjects: [TaigaProject]
-    let integrations: [Integration]
-    
-    let onConnect: (_ kimai: Int, _ taiga: Int) -> Void
+    let store: StoreOf<IntegrationsFeature>
     
     var customersFiltered: [KimaiCustomer] {
-        var customers = customers
+        var customers = store.customers
         customers.sort { $0.name < $1.name }
         return customers
     }
     
     var projectsFiltered: [KimaiProject] {
-        var projects = projects // .filter { $0.customer == selectedCustomer }
+        var projects = store.projects // .filter { $0.customer == selectedCustomer }
         
         projects.sort { $0.name < $1.name }
         return projects
@@ -37,9 +33,9 @@ struct IntegrationsView: View {
                 ForEach(projectsFiltered, id:\.id){ project in
                     IntegrationCard(
                         kimaiProject: project,
-                        taigaProjects: taigaProjects,
-                        integration: integrations.first { $0.id == project.id },
-                        onConnect: onConnect
+                        taigaProjects: store.taigaProjects,
+                        integration: store.integrations.first { $0.id == project.id },
+                        onConnect: { kimai, taiga in store.send(.onConnect(kimai, taiga)) }
                     )
                 }
             }

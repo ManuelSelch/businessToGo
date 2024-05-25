@@ -79,13 +79,6 @@ extension ManagementContainer {
     }
     
     @ViewBuilder func getHeader() -> some View {
-        ManagementHeaderView(
-            selectedTeam: Binding(get: { store.state.kimai.selectedTeam } , set: { store.send(.kimai(.selectTeam($0))) }),
-            route: store.state.router.routes.last,
-            projects: store.kimai.projects.records,
-            teams: store.kimai.teams.records,
-            router: { store.send(.route($0)) },
-            onSync: { store.send(.sync) }
-        )
+        EmptyView()
     }
 }

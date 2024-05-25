@@ -21,7 +21,7 @@ struct KimaiModule {
     }
     
     enum Action {
-        case selectTeam(Int?)
+        case teamSelected(Int?)
         
         case sync
         
@@ -67,7 +67,7 @@ struct KimaiModule {
                 ])
                
             
-            case .selectTeam(let team):
+            case .teamSelected(let team):
                 state.selectedTeam = team
                 return .none
                 

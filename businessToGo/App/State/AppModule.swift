@@ -6,7 +6,7 @@ import Login
 import Combine
 import TCACoordinators
 
-enum AppRoute: Identifiable, Codable {
+enum AppRoute: Identifiable, Codable, Equatable {
     case login
     
     case management
@@ -33,9 +33,14 @@ struct AppModule {
         var log: LogModule.State = .init()
         var login: LoginModule.State = .init()
         var management: ManagementCoordinator.State = .init()
-        var settings: SettingsModule.State = .init()
         var intro: IntroModule.State = .init()
         
+        var settings: SettingsCoordinator.State!
+        
+        
+        init() {
+            settings = .init(current: login.$current, kimai: management.$kimai, taiga: management.$taiga, integrations: management.$integrations)
+        }
     }
     
     enum Action {
@@ -45,7 +50,7 @@ struct AppModule {
         case log(LogModule.Action)
         case login(LoginModule.Action)
         case management(ManagementCoordinator.Action)
-        case settings(SettingsModule.Action)
+        case settings(SettingsCoordinator.Action)
         case intro(IntroModule.Action)
     }
     
@@ -77,7 +82,7 @@ struct AppModule {
         }
         
         Scope(state: \State.settings, action: /Action.settings) {
-            SettingsModule()
+            SettingsCoordinator()
         }
         
         Scope(state: \State.management, action: /Action.management) {
@@ -103,8 +108,8 @@ struct AppModule {
                         .catch { _ in Empty() }
                 }
             
-            case let .login(.delegate(action)):
-                switch(action){
+            case let .login(.delegate(delegate)):
+                switch(delegate){
                 case .showLogin:
                     state.tab = .login
                     return .none
@@ -120,6 +125,16 @@ struct AppModule {
             case .intro(.delegate(.showIntro)):
                 state.sheet = .intro
                 return .none
+            
+            case let .settings(.delegate(delegate)) :
+                switch(delegate) {
+                case .showIntro:
+                    state.sheet = .intro
+                    return .none
+                case .logout:
+                    return .send(.login(.logout))
+                }
+            
                 
             case .login, .management, .settings, .intro:
                 return .none

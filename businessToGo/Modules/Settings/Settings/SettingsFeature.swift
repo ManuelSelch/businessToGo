@@ -11,6 +11,8 @@ struct SettingsFeature {
         case debugTapped
         case integrationsTapped
         case introTapped
+        case logTapped
+        
         case logoutTapped
         
         case delegate(Delegate)
@@ -20,6 +22,7 @@ struct SettingsFeature {
         case showDebug
         case showIntegrations
         case showIntro
+        case showLog
         
         case logout
     }
@@ -32,6 +35,8 @@ struct SettingsFeature {
             return .send(.delegate(.showIntegrations))
         case .introTapped:
             return .send(.delegate(.showIntro))
+        case .logTapped:
+            return .send(.delegate(.showLog))
         case .logoutTapped:
             return .send(.delegate(.logout))
             

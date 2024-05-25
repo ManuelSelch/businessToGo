@@ -10,11 +10,13 @@ enum SettingsRoute {
     case settings(SettingsFeature)
     case integrations(IntegrationsFeature)
     case debug(DebugFeature)
-    case log
+    case log(LogFeature)
 }
 
 @Reducer
 struct SettingsCoordinator {
+    @Dependency(\.database) var database
+    
     struct State: Equatable {
         @Shared var current: Account?
         @Shared var kimai: KimaiModule.State
@@ -34,6 +36,7 @@ struct SettingsCoordinator {
     enum Delegate {
         case showIntro
         case logout
+        case dismiss
     }
     
     var body: some ReducerOf<Self> {
@@ -61,11 +64,29 @@ struct SettingsCoordinator {
                         )
                     )
                     return .none
+                case .showLog:
+                    state.routes.push(
+                        .log(.init())
+                    )
+                    return .none
                 case .showIntro:
                     return .send(.delegate(.showIntro))
                 case .logout:
-                    return .send(.delegate(.logout))
+                    return .run { send in
+                        await send(.delegate(.logout))
+                        await send(.delegate(.dismiss))
+                    }
                 }
+            case let .router(.routeAction(_, action: .debug(.delegate(delegate)))):
+                switch(delegate){
+                case .reset:
+                    database.reset()
+                    return .run { send in
+                        await send(.delegate(.logout))
+                        await send(.delegate(.dismiss))
+                    }
+                }
+                
             case .router, .delegate:
                 return .none
             }

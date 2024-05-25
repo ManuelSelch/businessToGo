@@ -3,7 +3,6 @@ import ComposableArchitecture
 
 @Reducer
 struct DebugFeature {
-    @Dependency(\.database) var database
     
     @ObservableState
     struct State: Equatable {
@@ -16,14 +15,19 @@ struct DebugFeature {
     
     enum Action {
         case resetTapped
+        case delegate(Delegate)
     }
     
+    enum Delegate {
+        case reset
+    }
 
     
     func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch(action){
         case .resetTapped:
-            database.reset()
+            return .send(.delegate(.reset))
+        case .delegate:
             return .none
         }
     }

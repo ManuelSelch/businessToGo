@@ -16,8 +16,8 @@ struct SettingsCoordinatorView: View {
                 IntegrationsView(store: store)
             case let .debug(store):
                 DebugView(store: store)
-            case .log:
-                EmptyView()
+            case let .log(store):
+                LogView(store: store)
             }
         }
     }

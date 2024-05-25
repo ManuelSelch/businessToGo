@@ -1,17 +1,15 @@
 import XCTest
-import Redux
+import ComposableArchitecture
 
 @testable import businessToGo
 
 final class LoginReducerTests: XCTestCase {
-    var store: StoreOf<LoginModule>!
+    var store: TestStoreOf<LoginModule>!
     
     override func setUp() {
-        store = .init(
-            initialState: .init(),
-            reducer: LoginModule.reduce,
-            dependencies: .mock
-        )
+        store = .init(initialState: .init()) {
+            LoginModule()
+        }
     }
 
    

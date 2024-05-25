@@ -105,6 +105,8 @@
 		84977F6B2C021202003E83BA /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F6A2C021202003E83BA /* SettingsFeature.swift */; };
 		84977F6E2C021326003E83BA /* IntegrationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F6D2C021326003E83BA /* IntegrationsFeature.swift */; };
 		84977F712C021527003E83BA /* DebugFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F702C021527003E83BA /* DebugFeature.swift */; };
+		84977F752C022055003E83BA /* LogFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F742C022055003E83BA /* LogFeature.swift */; };
+		84977F772C022061003E83BA /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F762C022061003E83BA /* LogView.swift */; };
 		849BF14B2BEE7CBC008F8B6A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF14A2BEE7CBC008F8B6A /* AccountView.swift */; };
 		849BF1522BEF71CA008F8B6A /* SettingsCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF1512BEF71CA008F8B6A /* SettingsCoordinatorView.swift */; };
 		849BF15B2BEF73B4008F8B6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849BF15A2BEF73B4008F8B6A /* SettingsView.swift */; };
@@ -256,6 +258,8 @@
 		84977F6A2C021202003E83BA /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
 		84977F6D2C021326003E83BA /* IntegrationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationsFeature.swift; sourceTree = "<group>"; };
 		84977F702C021527003E83BA /* DebugFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugFeature.swift; sourceTree = "<group>"; };
+		84977F742C022055003E83BA /* LogFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFeature.swift; sourceTree = "<group>"; };
+		84977F762C022061003E83BA /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		849BF14A2BEE7CBC008F8B6A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		849BF1512BEF71CA008F8B6A /* SettingsCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorView.swift; sourceTree = "<group>"; };
 		849BF15A2BEF73B4008F8B6A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -750,6 +754,7 @@
 				841083A82BFA725300332A6A /* SettingsCoordinator.swift */,
 				849BF1512BEF71CA008F8B6A /* SettingsCoordinatorView.swift */,
 				84977F692C0211F6003E83BA /* Settings */,
+				84977F732C022046003E83BA /* Log */,
 				84977F6F2C021512003E83BA /* Debug */,
 				84977F6C2C021319003E83BA /* Integrations */,
 			);
@@ -863,6 +868,15 @@
 				849BF15C2BEF77E5008F8B6A /* DebugView.swift */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		84977F732C022046003E83BA /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				84977F742C022055003E83BA /* LogFeature.swift */,
+				84977F762C022061003E83BA /* LogView.swift */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 		849BF14C2BEE94DB008F8B6A /* Render */ = {
@@ -1279,6 +1293,7 @@
 				84FC58402BC9450700594E14 /* TaigaUserAuthDetails.swift in Sources */,
 				849BF15D2BEF77E5008F8B6A /* DebugView.swift in Sources */,
 				84FC58382BC9448C00594E14 /* TaigaBacklogView.swift in Sources */,
+				84977F752C022055003E83BA /* LogFeature.swift in Sources */,
 				847334B62BDCF50C00129D26 /* ManagementModule.swift in Sources */,
 				8452402E2BC48AF600A894EE /* KimaiCustomer.swift in Sources */,
 				849BF1662BF12897008F8B6A /* KimaiProjectsListView.swift in Sources */,
@@ -1332,6 +1347,7 @@
 				846425812BCE455100BDD86E /* TaigaHeaderView.swift in Sources */,
 				847334B82BDCF6F700129D26 /* ManagementContainer.swift in Sources */,
 				84F5AEA82BF783F4007EE279 /* ReportType.swift in Sources */,
+				84977F772C022061003E83BA /* LogView.swift in Sources */,
 				84977F6B2C021202003E83BA /* SettingsFeature.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

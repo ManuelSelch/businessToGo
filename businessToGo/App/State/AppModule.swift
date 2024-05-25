@@ -133,6 +133,9 @@ struct AppModule {
                     return .none
                 case .logout:
                     return .send(.login(.logout))
+                case .dismiss:
+                    state.sheet = nil
+                    return .none
                 }
             
                 

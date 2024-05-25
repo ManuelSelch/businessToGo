@@ -21,7 +21,9 @@ struct SettingsCoordinator {
         @Shared var taiga: TaigaModule.State
         @Shared var integrations: [Integration]
         
-        var routes: [Route<SettingsRoute.State>] = []
+        var routes: [Route<SettingsRoute.State>] = [
+            .cover(.settings(.init()), embedInNavigationView: true)
+        ]
     }
     
     enum Action {

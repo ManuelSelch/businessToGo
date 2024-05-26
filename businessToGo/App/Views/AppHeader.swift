@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Header: View {
+struct AppHeader: View {
     
     let title: String
     var settingsTapped: () -> ()

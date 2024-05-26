@@ -3,7 +3,7 @@ import OfflineSync
 import ComposableArchitecture
 
 struct KimaiCustomersListView: View {
-    let store: StoreOf<KimaiCustomersListFeature>
+    @Bindable var store: StoreOf<KimaiCustomersListFeature>
     
     var customersFiltered: [KimaiCustomer] {
         var c = store.customers.records
@@ -47,5 +47,6 @@ struct KimaiCustomersListView: View {
             
         }
         .background(Color.background)
+        .alert($store.scope(state: \.alert, action: \.alert))
     }
 }

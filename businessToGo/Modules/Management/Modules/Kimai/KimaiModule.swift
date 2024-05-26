@@ -4,6 +4,7 @@ import SwiftUI
 import ComposableArchitecture
 
 @Reducer
+/// kimai backend storage
 struct KimaiModule {
     @Dependency(\.track) var track
     @Dependency(\.kimai) var kimai

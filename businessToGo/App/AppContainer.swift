@@ -8,7 +8,7 @@ struct AppContainer: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Header(
+            AppHeader(
                 title: "Hello World",
                 settingsTapped: { store.send(.sheetSelected(.settings)) }
             )

@@ -15,5 +15,5 @@ extension KimaiUser {
     
     
     static let new = KimaiUser()
-    static let samples: [KimaiUser] = [.new, .new]
+    static let sample = Self(id: 1, username: "Sample User")
 }

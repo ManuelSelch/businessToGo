@@ -20,9 +20,18 @@ struct KimaiTimesheet: TableProtocol, Hashable {
 extension KimaiTimesheet {
     
     static let new = KimaiTimesheet()
-    static let samples: [KimaiTimesheet] = [
-        .new, .new, .new
-    ]
+    
+    static let sample = Self(
+        activity: 1,
+        project: 1,
+        user: 1,
+        tags: ["Tag"],
+        id: 1,
+        begin: "",
+        rate: 35,
+        exported: false,
+        billable: true
+    )
     
     init(){
         activity = 0

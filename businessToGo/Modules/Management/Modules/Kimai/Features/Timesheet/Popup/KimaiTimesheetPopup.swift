@@ -1,13 +1,8 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct KimaiTimesheetPopup: View {
-    var timesheet: KimaiTimesheet
-    var customer: KimaiCustomer
-    var project: KimaiProject
-    var activity: KimaiActivity
-    
-    var onShow: () -> ()
-    var onStop: () -> ()
+    @Bindable var store: StoreOf<KimaiTimesheetPopupFeature>
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var durationStr = ""
@@ -17,42 +12,57 @@ struct KimaiTimesheetPopup: View {
             Spacer()
             
             Button(action: {
-                onShow()
+                store.send(.timesheetTapped)
             }){
                 VStack(alignment: .leading) {
                     Text(durationStr)
                         .bold()
                     
-                    Text(customer.name)
+                    Text(store.customer.name)
                 }
                 
                 VStack(alignment: .leading) {
                     
-                    Text(project.name)
+                    Text(store.project.name)
                         .bold()
-                    Text(activity.name)
+                    Text(store.activity.name)
                     
                 }
             }
-            .foregroundStyle(Color.black)
+            .foregroundStyle(Color.contrast)
             
             Spacer()
             
             Button(action: {
-                onStop()
+                store.send(.stopTapped)
             }){
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 20))
                     .foregroundStyle(Color.red)
             }
             
+            Spacer()
+            
            
         }
         .padding()
         .onReceive(timer, perform: { _ in
-            durationStr = timesheet.getDuration()
+            durationStr = store.timesheet.getDuration()
         })
         
     }
+}
+
+#Preview {
+    KimaiTimesheetPopup(
+        store: .init(initialState: .init(
+            timesheet: .sample,
+            customer: .sample,
+            project: .sample,
+            activity: .sample
+        )) {
+            KimaiTimesheetPopupFeature()
+        }
+    )
 }
 

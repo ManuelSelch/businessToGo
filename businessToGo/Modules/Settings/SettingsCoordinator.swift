@@ -24,7 +24,7 @@ struct SettingsCoordinator {
         @Shared var integrations: [Integration]
         
         var routes: [Route<SettingsRoute.State>] = [
-            .cover(.settings(.init()), embedInNavigationView: true)
+            .root(.settings(.init()), embedInNavigationView: true)
         ]
     }
     

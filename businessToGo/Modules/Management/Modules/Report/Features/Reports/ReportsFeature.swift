@@ -5,8 +5,8 @@ import ComposableArchitecture
 struct ReportsFeature {
     @ObservableState
     struct State: Equatable {
-        var selectedProject: Int?
         @Shared var selectedDate: Date
+        @Shared var selectedProject: Int?
         
         @Shared var timesheets: RequestModule<KimaiTimesheet, KimaiRequest>.State
         @Shared(.inMemory("projects")) var projects: [KimaiProject] = []
@@ -14,12 +14,14 @@ struct ReportsFeature {
         
         init(
             selectedDate: Shared<Date>,
+            selectedProject: Shared<Int?>,
             timesheets: Shared<RequestModule<KimaiTimesheet, KimaiRequest>.State>,
             projects: Shared<[KimaiProject]>,
             activities: Shared<[KimaiActivity]>
         
         ) {
             self._selectedDate = selectedDate
+            self._selectedProject = selectedProject
             
             self._timesheets = timesheets
             self._projects = projects

@@ -18,3 +18,13 @@ enum KimaiCoordinator {
     }
 }
 
+struct KimaiCoordinator02 {
+    struct State {
+        @Shared var kimai: KimaiModule.State
+        @Shared var taiga: TaigaModule.State
+    }
+    
+    enum Action {
+        case test
+    }
+}

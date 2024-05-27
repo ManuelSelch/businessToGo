@@ -1,66 +1,60 @@
 import SwiftUI
+import ComposableArchitecture
 
 struct TaigaProjectView: View {
-    @State var selectedProjectMenu = TaigaProjectMenu.kanban
-    
-    let project: TaigaProject
-    
-    let taskStoryStatus: [TaigaTaskStoryStatus]
-    let taskStories: [TaigaTaskStory]
-    let tasks: [TaigaTask]
-    let milestones: [TaigaMilestone]
-    
-    let updateTaskStory: (TaigaTaskStory) -> ()
-    
-    var menus: [TaigaProjectMenu] {
-        var menus: [TaigaProjectMenu] = []
-        
-        if(project.is_backlog_activated){
-            menus.append(.backlog)
-        }
-        
-        menus.append(.kanban)
-        
-        return menus
-    }
-    
-    
+    @Bindable var store: StoreOf<TaigaProjectFeature>
     
     var body: some View {
         VStack {
-            Picker("Project Menu", selection: $selectedProjectMenu) {
-                ForEach(menus, id: \.self) { value in
-                    Text(value.localizedName)
-                        .tag(value)
+            Picker("Project Menu", selection: $store.selectedMenu.sending(\.menuSelected)) {
+                ForEach(store.menus, id: \.self) { menu in
+                    Text(menu.localizedName)
+                        .tag(menu)
                 }
             }
             .pickerStyle(.segmented)
             .padding()
             
-            switch(selectedProjectMenu){
+            switch(store.selectedMenu){
             case .kanban:
                 TaigaKanbanView(
-                    project: project,
-                    statusList: taskStoryStatus,
-                    storyList: taskStories,
-                    tasks: tasks,
+                    project: store.project,
+                    statusList: store.taskStoryStatus,
+                    storyList: store.taskStories,
+                    tasks: store.tasks,
                     
                     onSetStatus: { taskStory, status in
                         var taskStory = taskStory
                         taskStory.status = status.id
-                        updateTaskStory(taskStory)
+                        store.send(.taskStoryUpdated(taskStory))
                     }
                 )
             case .backlog:
                 TaigaBacklogView(
-                    project: project,
-                    milestones: milestones
+                    project: store.project,
+                    milestones: store.milestones
                 )
             }
         }
-        .onAppear{
-            selectedProjectMenu = menus.first ?? .kanban
-        }
     }
     
+}
+
+
+#Preview {
+    TaigaProjectView(
+        store: .init(
+            initialState: .init(
+                project: .sample,
+                integration: Integration(1, 1),
+                taskStoryStatus: Shared([TaigaTaskStoryStatus.sample]),
+                taskStories: Shared([TaigaTaskStory.sample]),
+                tasks: Shared([TaigaTask.sample]),
+                milestones: Shared([TaigaMilestone.sample])
+            )
+        )
+        {
+            TaigaProjectFeature()
+        }
+    )
 }

@@ -9,7 +9,9 @@ struct TaigaProject: TableProtocol, Codable, Identifiable, Equatable, Hashable {
     var description: String
     var total_story_points: Double?
     var total_milestones: Int?
-    
+}
+
+extension TaigaProject {
     init() {
         id = 0
         is_backlog_activated = false
@@ -19,6 +21,14 @@ struct TaigaProject: TableProtocol, Codable, Identifiable, Equatable, Hashable {
         total_story_points = 0
         total_milestones = 0
     }
+    
+    static let sample = Self(
+        id: 1,
+        is_backlog_activated: true,
+        name: "Sample Project",
+        description: "Sample Project Description"
+    )
+    
 }
 
 struct TaigaOwner: Codable, Equatable {

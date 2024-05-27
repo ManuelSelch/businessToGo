@@ -9,7 +9,9 @@ struct TaigaMilestone: TableProtocol, Identifiable, Decodable, Equatable {
     var name: String
     var project: Int
     var total_points: Double?
-    
+}
+
+extension TaigaMilestone {
     init(){
         id = 0
         closed = false
@@ -18,4 +20,11 @@ struct TaigaMilestone: TableProtocol, Identifiable, Decodable, Equatable {
         project = 0
         total_points = 0
     }
+    
+    static let sample = Self(
+        id: 1,
+        closed: false,
+        name: "Sample Milestone",
+        project: 1
+    )
 }

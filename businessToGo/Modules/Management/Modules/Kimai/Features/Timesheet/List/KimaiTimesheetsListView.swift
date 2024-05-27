@@ -1,13 +1,14 @@
 import SwiftUI
 import OfflineSync
-import SwipeActions
 import ComposableArchitecture
 
 struct KimaiTimesheetsListView: View {
     let store: StoreOf<KimaiTimesheetsListFeature>
     
     var timesheetsByDate: Dictionary<Date, [KimaiTimesheet]> {
-        var timesheets = store.timesheets.records
+        var timesheets = store.timesheets.records.filter {
+            $0.project == store.project.id
+        }
         timesheets.sort(by: { $0.begin > $1.begin })
         return Dictionary(grouping: timesheets, by: {
             Calendar.current.date(
@@ -22,7 +23,7 @@ struct KimaiTimesheetsListView: View {
      
     
     var body: some View {
-        LazyVStack(alignment: .leading) {
+        List {
             ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
                 
                 HStack {
@@ -43,19 +44,18 @@ struct KimaiTimesheetsListView: View {
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
-                        project: store.projects.first { $0.id == timesheet.project },
+                        project: store.project,
                         change: store.timesheets.changes.first { $0.recordID == timesheet.id },
                         activity: store.activities.first{ $0.id == timesheet.activity }
                     )
-                    .addSwipeAction(edge: .trailing) {
-                        Button {
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
                             store.send(.deleteTapped(timesheet))
                         } label: {
                             Text("Delete")
                                 .foregroundColor(.white)
                         }
                         .padding()
-                        .frame(maxHeight: .infinity)
                         .background(.red)
                         
                         Button {
@@ -78,4 +78,17 @@ struct KimaiTimesheetsListView: View {
     }
   
     
+}
+
+
+#Preview {
+    KimaiTimesheetsListView(
+        store: .init(initialState: .init(
+            project: .sample,
+            timesheets: Shared(RequestModule.State(records: [KimaiTimesheet.sample])),
+            activities: Shared([KimaiActivity.sample])
+        )) {
+            KimaiTimesheetsListFeature()
+        }
+    )
 }

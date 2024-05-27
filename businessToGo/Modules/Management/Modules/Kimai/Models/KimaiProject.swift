@@ -22,5 +22,11 @@ extension KimaiProject {
     }
     
     static let new = KimaiProject()
-    static let sample = KimaiProject(id: 0, customer: 0, name: "Projekt 1", globalActivities: false, visible: true)
+    static let sample = KimaiProject(
+        id: 1,
+        customer: 1,
+        name: "Projekt 1",
+        globalActivities: false,
+        visible: true
+    )
 }

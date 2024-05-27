@@ -71,8 +71,6 @@ struct KimaiTimesheetCard: View {
                     .italic()
             }
         }
-        .padding(5)
-        .background(Color.themeGray)
         .foregroundStyle(Color.contrast)
     }
     

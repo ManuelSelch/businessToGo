@@ -1,14 +1,9 @@
 
 import SwiftUI
-import Redux
+import ComposableArchitecture
 
 struct ReportFilterView: View {
-    var customers: [KimaiCustomer]
-    var projects: [KimaiProject]
-    
-    @Binding var selectedProject: Int?
-    
-    var filterTapped: () -> ()
+    let store: StoreOf<ReportFilterFeature>
    
     
     var body: some View {
@@ -18,10 +13,10 @@ struct ReportFilterView: View {
                 Spacer()
                 
                 Button(action: {
-                    filterTapped()
+                    store.send(.filterProjectsTapped)
                 }){
                     HStack {
-                        if let project = projects.first(where: { $0.id == selectedProject }) {
+                        if let project = store.projects.first(where: { $0.id == store.selectedProject }) {
                             Text(project.name)
                         } else {
                             Text("Alle Projekte")

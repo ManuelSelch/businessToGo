@@ -1,18 +1,15 @@
-//
-//  TaigaCoordinatorView.swift
-//  businessToGo
-//
-//  Created by Admin  on 26.05.24.
-//
-
 import SwiftUI
+import ComposableArchitecture
 
 struct TaigaCoordinatorView: View {
+    let store: StoreOf<TaigaCoordinator>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        switch(store.state) {
+        case .project:
+            if let store = store.scope(state: \.project, action: \.project) {
+                TaigaProjectView(store: store)
+            }
+        }
     }
-}
-
-#Preview {
-    TaigaCoordinatorView()
 }

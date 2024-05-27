@@ -6,8 +6,9 @@ import OfflineSync
 struct KimaiTimesheetsListFeature {
     @ObservableState
     struct State: Equatable {
+        var project: KimaiProject
+        
         @Shared var timesheets: RequestModule<KimaiTimesheet, KimaiRequest>.State
-        @Shared var projects: [KimaiProject]
         @Shared var activities: [KimaiActivity]
     }
     

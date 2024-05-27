@@ -12,6 +12,10 @@ struct ReportCoordinatorView: View {
                 ReportsView(store: store)
             case let .calendar(store):
                 ReportCalendarView(store: store)
+            case let .filter(store):
+                ReportFilterView(store: store)
+            case let .filterProjects(store):
+                ReportFilterProjectsView(store: store)
             }
         }
         

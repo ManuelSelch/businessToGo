@@ -12,7 +12,7 @@ struct KimaiProjectDetailsView: View {
     }
 
     var timesheetsFiltered: [KimaiTimesheet] {
-        return store.timesheets.filter { $0.project == store.project.id }
+        return store.timesheets.records.filter { $0.project == store.project.id }
     }
     
     
@@ -27,41 +27,65 @@ struct KimaiProjectDetailsView: View {
         KimaiTimesheet.lastEntryDate(of: timesheetsFiltered)
     }
     
+    enum Menu {
+        case summary
+        case sessions
+    }
+    
+    @State var selectedMenu: Menu = .summary
+    
     @State var selectedChart: ChartSelection = .time
     
     var body: some View {
-        List {
-            Section("General") {
-                ListItem(store.customer?.name ?? "--", label: "Kunde")
-                ListItem(store.project.name, label: "Projekt")
-                ListItem(MyFormatter.duration(totalHours), label: "Arbeitszeit Gesamt")
-                ListItem(MyFormatter.rate(totalRate), label: "Umsatz Gesamt")
-                if let date = lastEntry {
-                    ListItem(MyFormatter.date(date), label: "Letzer Eintrag")
-                }
-            }
-            
-            Picker("Charts", selection: $selectedChart){
-                ForEach(ChartSelection.allCases, id: \.self){ chart in
-                    Text(chart.rawValue)
-                        .tag(chart)
-                }
+        VStack {
+            Picker("Menu", selection: $selectedMenu){
+                Text("Übersicht")
+                    .tag(Menu.summary)
+                Text("Sessions")
+                    .tag(Menu.sessions)
             }
             .pickerStyle(.segmented)
+            .padding()
             
-            
-            VStack {
-                switch(selectedChart){
-                case .time:
-                    ChartBarView(hoursByMonth(), Color.theme)
-                case .user:
-                    ChartPieView(hoursByUser())
-                case .activity:
-                    ChartPieView(hoursByActivity())
+            switch(selectedMenu){
+            case .summary:
+                List {
+                    Section("General") {
+                        ListItem(store.customer?.name ?? "--", label: "Kunde")
+                        ListItem(store.project.name, label: "Projekt")
+                        ListItem(MyFormatter.duration(totalHours), label: "Arbeitszeit Gesamt")
+                        ListItem(MyFormatter.rate(totalRate), label: "Umsatz Gesamt")
+                        if let date = lastEntry {
+                            ListItem(MyFormatter.date(date), label: "Letzer Eintrag")
+                        }
+                    }
+                    
+                    Picker("Charts", selection: $selectedChart){
+                        ForEach(ChartSelection.allCases, id: \.self){ chart in
+                            Text(chart.rawValue)
+                                .tag(chart)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    
+                    VStack {
+                        switch(selectedChart){
+                        case .time:
+                            ChartBarView(hoursByMonth(), Color.theme)
+                        case .user:
+                            ChartPieView(hoursByUser())
+                        case .activity:
+                            ChartPieView(hoursByActivity())
+                        }
+                    }
+                    .id(selectedChart)
+                    
+                    
                 }
+            case .sessions:
+                KimaiTimesheetsListView(store: store.scope(state: \.timesheetsFeature, action: \.timesheetsFeature))
             }
-            .id(selectedChart)
-            
             
         }
     }
@@ -142,3 +166,4 @@ extension KimaiProjectDetailsView {
     }
     
 }
+

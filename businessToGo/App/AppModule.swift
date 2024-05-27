@@ -46,6 +46,7 @@ struct AppModule {
     enum Action {
         case tabSelected(AppRoute)
         case sheetSelected(AppRoute?)
+        case settingsTapped
         
         case log(LogModule.Action)
         case login(LoginModule.Action)
@@ -72,7 +73,7 @@ struct AppModule {
     }
 
  
-    var body: some ReducerOf<Self> {
+    var body: some ReducerOf<AppModule> {
         Scope(state: \State.intro, action: /Action.intro) {
             IntroModule()
         }
@@ -90,7 +91,6 @@ struct AppModule {
         }
         
         Reduce { state, action in
-            
             switch action {
                 
             case .tabSelected(let tab):
@@ -99,6 +99,11 @@ struct AppModule {
             
             case .sheetSelected(let sheet):
                 state.sheet = sheet
+                return .none
+            
+            case .settingsTapped:
+                state.settings.routes.goBackToRoot()
+                state.sheet = .settings
                 return .none
                 
             case .log(let action):

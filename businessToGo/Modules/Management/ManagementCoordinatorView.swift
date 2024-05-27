@@ -11,7 +11,12 @@ struct ManagementCoordinatorView: View {
                 switch(screen.case) {
                 case let .kimai(store):
                     KimaiCoordinatorView(store: store)
+                case let .taiga(store):
+                    TaigaCoordinatorView(store: store)
                     
+                }
+                if let store = store.scope(state: \.timesheetPopup, action: \.timesheetPopup) {
+                    KimaiTimesheetPopup(store: store)
                 }
             }
             .toolbar {

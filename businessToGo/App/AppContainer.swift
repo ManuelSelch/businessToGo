@@ -9,8 +9,8 @@ struct AppContainer: View {
     var body: some View {
         VStack(spacing: 0) {
             AppHeader(
-                title: "Hello World",
-                settingsTapped: { store.send(.sheetSelected(.settings)) }
+                title: "Hello World 02",
+                settingsTapped: { store.send(.settingsTapped) }
             )
             
             if(store.tab == .login) {

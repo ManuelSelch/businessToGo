@@ -20,4 +20,11 @@ extension KimaiActivity {
     }
     
     static let new = KimaiActivity()
+    
+    static let sample = Self(
+        id: 1,
+        name: "Sample Activity",
+        visible: true,
+        billable: true
+    )
 }

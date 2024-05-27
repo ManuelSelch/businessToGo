@@ -31,15 +31,14 @@ struct ManagementHeaderView: View {
                 .frame(width: 200)
                 .clipped()
             
-            // todo: check taiga route
-                /*
-            case .taiga(.project(let integration)):
+         
+            case let .taiga(.project(state)):
                 Button(action: {
-                    projectTapped(integration)
+                    projectTapped(state.integration)
                 }){
                     Image(systemName: "chart.bar.xaxis.ascending")
                 }
-                 */
+                 
                 
             default: EmptyView()
             }

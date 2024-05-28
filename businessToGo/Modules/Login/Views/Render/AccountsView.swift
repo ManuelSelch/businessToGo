@@ -8,7 +8,7 @@ struct AccountsView: View {
         VStack {
             HStack {
                 Button(action: {
-                    store.send(.createAccount)
+                    store.send(.createAccountTapped)
                 }){
                     Image(systemName: "plus")
                         .padding()
@@ -17,61 +17,65 @@ struct AccountsView: View {
                 Spacer()
             }
             List {
-                ForEach(store.state.accounts, id: \.identifier){ account in
-                   
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(account.name)
-                                .bold()
-                                .foregroundStyle(Color.theme)
+                if(store.accounts.count == 0){
+                    AccountsAssistantView(
+                        assistantTapped: { store.send(.assistantTapped) }
+                    )
+                } else {
+                    ForEach(store.accounts, id: \.identifier){ account in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(account.name)
+                                    .bold()
+                                    .foregroundStyle(Color.theme)
+                                
+                                if let kimai = account.kimai {
+                                    Text("Kimai: \(kimai.server)")
+                                        .font(.footnote)
+                                    
+                                    Text(kimai.username)
+                                        .font(.footnote)
+                                }
+                                Text("")
+                                if let taiga = account.taiga {
+                                    Text("Taiga: \(taiga.server)")
+                                        .font(.footnote)
+                                    
+                                    Text(taiga.username)
+                                        .font(.footnote)
+                                }
+                            }
+                            Spacer()
+                            Button(action: {
+                                store.send(.loginTapped(account))
+                            }){
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 20))
+                                    .padding()
+                                    .tint(.theme)
+                                
+                            }
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .cancel) {
+                                store.send(.deleteTapped(account))
+                            } label: {
+                                Text("Delete")
+                                    .foregroundColor(.white)
+                            }
+                            .tint(.red)
                             
-                            if let kimai = account.kimai {
-                                Text("Kimai: \(kimai.server)")
-                                    .font(.footnote)
-                                
-                                Text(kimai.username)
-                                    .font(.footnote)
+                            Button(role: .cancel) {
+                                store.send(.navigate(.account(account)))
+                            } label: {
+                                Text("Edit")
+                                    .foregroundColor(.white)
                             }
-                            Text("")
-                            if let taiga = account.taiga {
-                                Text("Taiga: \(taiga.server)")
-                                    .font(.footnote)
-                                
-                                Text(taiga.username)
-                                    .font(.footnote)
-                            }
+                            .tint(.gray)
                         }
-                        Spacer()
-                        Button(action: {
-                            store.send(.login(account))
-                        }){
-                            Image(systemName: "arrow.right")
-                                .font(.system(size: 20))
-                                .padding()
-                                .tint(.theme)
-                                
-                        }
-                    }
-                    .buttonStyle(BorderlessButtonStyle())
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .cancel) {
-                            store.send(.deleteAccount(account))
-                        } label: {
-                            Text("Delete")
-                                .foregroundColor(.white)
-                        }
-                        .tint(.red)
-                        
-                        Button(role: .cancel) {
-                            store.send(.navigate(.account(account)))
-                        } label: {
-                            Text("Edit")
-                                .foregroundColor(.white)
-                        }
-                        .tint(.gray)
                     }
                 }
-                
             }
             
             Spacer()
@@ -84,7 +88,7 @@ struct AccountsView: View {
             }
         }
         .onAppear {
-            store.send(.loadAccounts)
+            store.send(.onAppear)
         }
         
     }

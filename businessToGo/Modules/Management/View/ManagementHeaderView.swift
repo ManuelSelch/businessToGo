@@ -18,7 +18,7 @@ struct ManagementHeaderView: View {
         HStack {
             
             switch(route){
-            case nil:
+            case .kimai(.customersList(_)):
                 Picker("", selection: $selectedTeam) {
                     Text("Alle Teams")
                         .tag(nil as Int?)
@@ -43,36 +43,38 @@ struct ManagementHeaderView: View {
             default: EmptyView()
             }
             
-            
-            
-            
-            Button(action: {
-                syncTapped()
-            }){
-                Image(systemName: "arrow.triangle.2.circlepath")
-            }
-             
-            Button(action: {
-                switch(route){
-                case let .kimai(.projectsList(state)):
-                    let project = projects.first { $0.customer == state.customer}
-                    var timesheet = KimaiTimesheet.new
-                    timesheet.project = project?.id ?? 0
-                    playTapped(timesheet)
-                // TODO: check taiga route
-                /*
-                case .taiga(.project(let integration)):
-                    var timesheet = KimaiTimesheet.new
-                    timesheet.project = integration.id
-                    playTapped(timesheet)
-                 */
-                default:
-                    playTapped(KimaiTimesheet.new)
+            switch(route) {
+            case .assistant: EmptyView()
+            default:
+                Button(action: {
+                    syncTapped()
+                }){
+                    Image(systemName: "arrow.triangle.2.circlepath")
                 }
                 
-            }){
-                Image(systemName: "play.fill")
+                Button(action: {
+                    switch(route){
+                    case let .kimai(.projectsList(state)):
+                        let project = projects.first { $0.customer == state.customer}
+                        var timesheet = KimaiTimesheet.new
+                        timesheet.project = project?.id ?? 0
+                        playTapped(timesheet)
+                        // TODO: check taiga route
+                        /*
+                         case .taiga(.project(let integration)):
+                         var timesheet = KimaiTimesheet.new
+                         timesheet.project = integration.id
+                         playTapped(timesheet)
+                         */
+                    default:
+                        playTapped(KimaiTimesheet.new)
+                    }
+                    
+                }){
+                    Image(systemName: "play.fill")
+                }
             }
+      
             
         }
         .font(.system(size: 15))

@@ -4,7 +4,6 @@ import ComposableArchitecture
 
 struct ReportFilterView: View {
     let store: StoreOf<ReportFilterFeature>
-   
     
     var body: some View {
         List {
@@ -27,9 +26,8 @@ struct ReportFilterView: View {
                 }
                 .foregroundStyle(Color.theme)
                 
-            
+                
             }
         }
     }
 }
-

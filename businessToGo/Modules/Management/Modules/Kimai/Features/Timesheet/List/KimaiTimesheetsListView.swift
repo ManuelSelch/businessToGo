@@ -3,12 +3,17 @@ import OfflineSync
 import ComposableArchitecture
 
 struct KimaiTimesheetsListView: View {
-    let store: StoreOf<KimaiTimesheetsListFeature>
+    let projects: [KimaiProject]
+    
+    let timesheets: [KimaiTimesheet]
+    let timesheetChanges: [DatabaseChange]
+    let activities: [KimaiActivity]
+    
+    let deleteTapped: (KimaiTimesheet) -> ()
+    let editTapped: (KimaiTimesheet) -> ()
     
     var timesheetsByDate: Dictionary<Date, [KimaiTimesheet]> {
-        var timesheets = store.timesheets.records.filter {
-            $0.project == store.project.id
-        }
+        var timesheets = timesheets
         timesheets.sort(by: { $0.begin > $1.begin })
         return Dictionary(grouping: timesheets, by: {
             Calendar.current.date(
@@ -44,13 +49,13 @@ struct KimaiTimesheetsListView: View {
                 ForEach(timesheetEntries){ timesheet in
                     KimaiTimesheetCard(
                         timesheet: timesheet,
-                        project: store.project,
-                        change: store.timesheets.changes.first { $0.recordID == timesheet.id },
-                        activity: store.activities.first{ $0.id == timesheet.activity }
+                        project: projects.first { $0.id == timesheet.project },
+                        change: timesheetChanges.first { $0.recordID == timesheet.id },
+                        activity: activities.first{ $0.id == timesheet.activity }
                     )
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {
-                            store.send(.deleteTapped(timesheet))
+                            deleteTapped(timesheet)
                         } label: {
                             Text("Delete")
                                 .foregroundColor(.white)
@@ -59,7 +64,7 @@ struct KimaiTimesheetsListView: View {
                         .background(.red)
                         
                         Button {
-                            store.send(.editTapped(timesheet))
+                            editTapped(timesheet)
                         } label: {
                             Text("Edit")
                                 .foregroundColor(.white)
@@ -78,17 +83,4 @@ struct KimaiTimesheetsListView: View {
     }
   
     
-}
-
-
-#Preview {
-    KimaiTimesheetsListView(
-        store: .init(initialState: .init(
-            project: .sample,
-            timesheets: Shared(RequestModule.State(records: [KimaiTimesheet.sample])),
-            activities: Shared([KimaiActivity.sample])
-        )) {
-            KimaiTimesheetsListFeature()
-        }
-    )
 }

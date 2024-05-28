@@ -49,7 +49,7 @@ struct KimaiProjectSheet: View {
         }
         .onAppear {
             name = store.project.name
-            selectedCustomer = store.customers.first { $0.id == store.project.customer }?.id ?? 0
+            selectedCustomer = store.customers.first { $0.id == store.project.customer }?.id ?? store.customers.first?.id ?? 0
             color = store.project.color
         }
     }

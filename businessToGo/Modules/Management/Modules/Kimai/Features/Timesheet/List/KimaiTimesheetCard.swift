@@ -17,21 +17,21 @@ struct KimaiTimesheetCard: View {
     var body: some View {
         HStack {
             VStack {
-                if let end = getDate(timesheet.end ?? "") {
-                    Text(end.formatted(date: .omitted, time: .shortened))
-                        .font(.system(size: 12))
-                    
-                    if let begin = getDate(timesheet.begin) {
-                        Image(systemName: "ellipsis")
-                            .foregroundStyle(Color.contrast)
-                            .font(.system(size: 12))
-                            .frame(width: 30, height: 10)
-                            .rotationEffect(.degrees(90))
-                        
-                        Text(begin.formatted(date: .omitted, time: .shortened))
-                            .font(.system(size: 12))
-                    }
-                }
+                let end = getDate(timesheet.end ?? "")?.formatted(date: .omitted, time: .shortened) ?? "--:--"
+                Text(end)
+                    .font(.system(size: 12))
+                
+                Image(systemName: "ellipsis")
+                    .foregroundStyle(Color.contrast)
+                    .font(.system(size: 12))
+                    .frame(width: 30, height: 10)
+                    .rotationEffect(.degrees(90))
+                
+                let begin = getDate(timesheet.begin)?.formatted(date: .omitted, time: .shortened) ?? "--:--"
+                Text(begin)
+                    .font(.system(size: 12))
+                
+                
             }
             
             Rectangle()

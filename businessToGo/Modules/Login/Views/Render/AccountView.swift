@@ -11,7 +11,7 @@ struct AccountView: View {
         VStack {
             HStack {
                 Button(action : {
-                    store.send(.navigate(.accounts))
+                    store.send(.backTapped)
                 }){
                     Image(systemName: "arrow.left")
                         .padding()
@@ -59,9 +59,7 @@ struct AccountView: View {
             self.name = account.name
         }
         .onChange(of: name){
-            var account = account
-            account.name = name
-            store.send(.saveAccount(account))
+            store.send(.nameChanged(name))
         }
     }
     

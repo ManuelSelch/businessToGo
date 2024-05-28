@@ -2,13 +2,6 @@ import Foundation
 import Login
 import ComposableArchitecture
 
-enum LoginStatus: Equatable, Codable {
-    case show
-    case loading
-    case error(String)
-    case success
-}
-
 enum LoginScreen: Equatable, Codable {
     case accounts
     case account(Account)
@@ -31,25 +24,28 @@ struct LoginModule {
         var accounts: [Account] = []
         @Shared var current: Account?
         
-        var loginStatus: LoginStatus = .show
         
         init() {
             self._current = Shared(nil)
         }
     }
     
-    enum Action {
-        case navigate(LoginScreen)
+    enum Action {        
+        case onAppear
         
-        case loadAccounts
-        case createAccount
-        case saveAccount(Account)
-        case deleteAccount(Account)
-        case reset
+        case createAccountTapped
+        case deleteTapped(Account)
+        case editTapped(Account)
+        case resetTapped
+        
+        case nameChanged(String)
         
         case logout
-        case login(Account)
-        case status(LoginStatus)
+        case loginTapped(Account)
+        
+        case backTapped
+        
+        case assistantTapped
         
         case delegate(Delegate)
         
@@ -58,6 +54,7 @@ struct LoginModule {
     enum Delegate {
         case showLogin
         case showHome
+        case showAssistant
         
         case syncKimai
         case syncTaiga

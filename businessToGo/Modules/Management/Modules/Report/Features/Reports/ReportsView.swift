@@ -31,10 +31,9 @@ struct ReportsView: View {
     var body: some View {
         VStack(spacing: 0){
             getHeader()
-            ScrollView {
-                getReportChart()
-                getTimesheets()
-            }
+            getReportChart()
+                .frame(maxHeight: 100)
+            getTimesheets()
         }
     }
 }
@@ -59,11 +58,13 @@ extension ReportsView {
     
     @ViewBuilder
     func getTimesheets() -> some View {
-        ReportTimesheetsView(
+        KimaiTimesheetsListView(
+            projects: store.projects,
             timesheets: timesheetsFiltered,
             timesheetChanges: store.timesheets.changes,
-            projects: store.projects,
-            activities: store.activities
+            activities: store.activities,
+            deleteTapped: { store.send(.deleteTapped($0)) },
+            editTapped: { _ in } // TODO: handle edit tapped event
         )
     }
     

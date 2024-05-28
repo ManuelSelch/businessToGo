@@ -84,7 +84,14 @@ struct KimaiProjectDetailsView: View {
                     
                 }
             case .sessions:
-                KimaiTimesheetsListView(store: store.scope(state: \.timesheetsFeature, action: \.timesheetsFeature))
+                KimaiTimesheetsListView(
+                    projects: [store.project],
+                    timesheets: store.timesheets.records.filter { $0.project == store.project.id },
+                    timesheetChanges: store.timesheets.changes,
+                    activities: store.activities,
+                    deleteTapped: { store.send(.deleteTapped($0)) },
+                    editTapped: { store.send(.editTapped($0)) }
+                )
             }
             
         }

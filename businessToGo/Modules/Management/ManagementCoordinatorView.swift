@@ -13,6 +13,8 @@ struct ManagementCoordinatorView: View {
                     KimaiCoordinatorView(store: store)
                 case let .taiga(store):
                     TaigaCoordinatorView(store: store)
+                case let .assistant(store):
+                    SetupAssistantView(store: store)
                     
                 }
                 if let store = store.scope(state: \.timesheetPopup, action: \.timesheetPopup) {

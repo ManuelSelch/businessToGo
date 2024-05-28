@@ -9,8 +9,8 @@ struct ReportsFeature {
         @Shared var selectedProject: Int?
         
         @Shared var timesheets: RequestModule<KimaiTimesheet, KimaiRequest>.State
-        @Shared(.inMemory("projects")) var projects: [KimaiProject] = []
-        @Shared(.inMemory("activities")) var activities: [KimaiActivity] = []
+        @Shared var projects: [KimaiProject]
+        @Shared var activities: [KimaiActivity]
         
         init(
             selectedDate: Shared<Date>,

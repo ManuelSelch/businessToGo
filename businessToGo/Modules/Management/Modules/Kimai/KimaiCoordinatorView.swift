@@ -32,7 +32,7 @@ struct KimaiCoordinatorView: View {
             
         case .timesheetsList:
             if let store = store.scope(state: \.timesheetsList, action: \.timesheetsList) {
-                KimaiTimesheetsListView(store: store)
+                KimaiTimesheetsListContainer(store: store)
             }
         case .timesheetSheet:
             if let store = store.scope(state: \.timesheetSheet, action: \.timesheetSheet) {

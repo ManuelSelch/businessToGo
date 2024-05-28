@@ -27,16 +27,6 @@ struct AccountData: Codable, Hashable {
 extension Account {
     static let demo = Account(
         id: 0,
-        name: "DEMO",
-        kimai: AccountData(
-            "manuel@selch.de",
-            "1Ter6esai#Qabc",
-            "https://time.dev.manuelselch.de"
-        ),
-        taiga: AccountData(
-            "user@user.de", 
-            "user",
-            "https://project.manuelselch.de"
-        )
+        name: "DEMO"
     )
 }

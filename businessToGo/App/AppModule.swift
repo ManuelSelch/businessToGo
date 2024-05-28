@@ -4,7 +4,6 @@ import Redux
 import ComposableArchitecture
 import Login
 import Combine
-import TCACoordinators
 
 enum AppRoute: Identifiable, Codable, Equatable {
     case login
@@ -91,63 +90,78 @@ struct AppModule {
         }
         
         Reduce { state, action in
-            switch action {
-                
-            case .tabSelected(let tab):
-                state.tab = tab
-                return .none
+            return reduceSelf(&state, action)
+        }
+    }
+    
+    func reduceSelf(_ state: inout State, _ action: Action) -> Effect<Action> {
+        switch action {
             
-            case .sheetSelected(let sheet):
-                state.sheet = sheet
-                return .none
+        case .tabSelected(let tab):
+            state.tab = tab
+            return .none
+        
+        case .sheetSelected(let sheet):
+            state.sheet = sheet
+            return .none
+        
+        case .settingsTapped:
+            state.settings.routes.goBackToRoot()
+            state.sheet = .settings
+            return .none
             
-            case .settingsTapped:
-                state.settings.routes.goBackToRoot()
-                state.sheet = .settings
+        case .log(let action):
+            return Effect.publisher {
+                LogModule.reduce(&state.log, action, env.log)
+                    .map { .log($0) }
+                    .catch { _ in Empty() }
+            }
+        
+        case let .login(.delegate(delegate)):
+            switch(delegate){
+            case .showLogin:
+                state.tab = .login
                 return .none
-                
-            case .log(let action):
-                return Effect.publisher {
-                    LogModule.reduce(&state.log, action, env.log)
-                        .map { .log($0) }
-                        .catch { _ in Empty() }
-                }
+            case .showHome:
+                state.tab = .report
+                return .none
+            case .showAssistant:
+                state.management.routes.presentCover(
+                    .assistant(.init(
+                        customers: state.management.$kimai.customers.records.count,
+                        projects: state.management.$kimai.projects.records.count,
+                        activities: state.management.$kimai.activities.records.count,
+                        timesheets: state.management.$kimai.timesheets.records.count
+                    )), embedInNavigationView: true
+                )
+                state.tab = .management
+                return .none
+            case .syncKimai:
+                return .send(.management(.kimai(.sync)))
+            case .syncTaiga:
+                return .send(.management(.taiga(.sync)))
+            }
             
-            case let .login(.delegate(delegate)):
-                switch(delegate){
-                case .showLogin:
-                    state.tab = .login
-                    return .none
-                case .showHome:
-                    state.tab = .report
-                    return .none
-                case .syncKimai:
-                    return .send(.management(.kimai(.sync)))
-                case .syncTaiga:
-                    return .send(.management(.taiga(.sync)))
-                }
-                
-            case .intro(.delegate(.showIntro)):
+        case .intro(.delegate(.showIntro)):
+            state.sheet = .intro
+            return .none
+        
+        case let .settings(.delegate(delegate)) :
+            switch(delegate) {
+            case .showIntro:
                 state.sheet = .intro
                 return .none
-            
-            case let .settings(.delegate(delegate)) :
-                switch(delegate) {
-                case .showIntro:
-                    state.sheet = .intro
-                    return .none
-                case .logout:
-                    return .send(.login(.logout))
-                case .dismiss:
-                    state.sheet = nil
-                    return .none
-                }
-            
-                
-            case .login, .management, .settings, .intro:
+            case .logout:
+                return .send(.login(.logout))
+            case .dismiss:
+                state.sheet = nil
                 return .none
-                
             }
+        
+            
+        case .login, .management, .settings, .intro:
+            return .none
+            
         }
     }
     

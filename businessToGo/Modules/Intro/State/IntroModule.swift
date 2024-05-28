@@ -7,9 +7,30 @@ struct IntroModule {
     @ObservableState
     struct State: Codable, Equatable {
         var pages: [IntroPage] = [
-            .init(name: "Willkommen", description: "Die App wurde nun neu strukturiert in 'Projekte' und 'Reports'", image: "reports", tag: 0),
-            .init(name: "Reports", description: "Im 'Reports' Tab lassen sich die Stunden nach Projekt sowie nach Datum filtern. Wechsle von der Wochenansicht in die Tagesansicht um durch die einzelnen Tage zu scrollen", image: "days", tag: 1),
-            .init(name: "Projekte", description: "Im 'Projekte' Tab siehtst du alle Projekte und kannst diese nach Team und Kunde filtern. Aktiviere noch die Projektmanagement-Integration in den Einstellungen um weitere Tools wie das Kanban Board zu nutzen", image: "projects", tag: 2)
+            .init(
+                name: "Willkommen",
+                description: "Erleben Sie ein effektives Zeit- und Projektmanagement in einer einzigen App",
+                image: "reports",
+                tag: 0
+            ),
+            .init(
+                name: "Timemanagement",
+                description: "Planen und erfassen Sie Ihre Zeiten für unterschiedliche Kunden, Projekte, Aufgaben und Mitarbeiter",
+                image: "reports",
+                tag: 1
+            ),
+            .init(
+                name: "Projektmanagement",
+                description: "Organisieren und verwalten Sie Ihre Projekte und Aufgaben über Agiles Projektmanagement oder Kanban-Boards",
+                image: "projects",
+                tag: 2
+            ),
+            .init(
+                name: "Berichte",
+                description: "Filtern Sie Stunden nach Projekt, Tätigkeit, Benutzer oder Datum",
+                image: "days",
+                tag: 3
+            ),
         ]
     }
     

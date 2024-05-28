@@ -5,9 +5,11 @@ import TCACoordinators
 
 
 @Reducer(state: .equatable)
-enum ManagementScreen {    
+enum ManagementScreen {        
     case kimai(KimaiCoordinator)
     case taiga(TaigaCoordinator)
+    
+    case assistant(SetupAssistantFeature)
 }
 
 @Reducer
@@ -41,7 +43,7 @@ struct ManagementCoordinator {
             )
             
             self.routes = [
-                .cover(.kimai(.customersList(.init(customers: $kimai.customers))), embedInNavigationView: true)
+                .root(.kimai(.customersList(.init(customers: $kimai.customers))), embedInNavigationView: true)
             ]
         }
     }
@@ -202,6 +204,43 @@ struct ManagementCoordinator {
                 return .none
             }
             
+        // MARK: - Setup Assistant
+        case let .router(.routeAction(_, .assistant(.delegate(delegate)))):
+            switch(delegate) {
+            case .createCustomer:
+                state.routes.presentSheet(
+                    .kimai(.customerSheet(.init(
+                        customer: KimaiCustomer.new,
+                        teams: state.$kimai.teams.records
+                    )))
+                )
+                return .none
+            case .createProject:
+                state.routes.presentSheet(
+                    .kimai(.projectSheet(.init(
+                        project: KimaiProject.new,
+                        customers: state.$kimai.customers.records
+                    )))
+                )
+                return .none
+            case .createActivity: // TODO: activity sheet
+                
+                return .none
+            case .createTimesheet:
+                state.routes.presentSheet(
+                    .kimai(.timesheetSheet(.init(
+                        timesheet: KimaiTimesheet.new,
+                        customers: state.$kimai.customers.records,
+                        projects: state.$kimai.projects.records,
+                        activities: state.$kimai.activities.records
+                    )))
+                )
+                return .none
+            
+            case .showHome:
+                state.routes.goBackToRoot()
+                return .none
+            }
         
         case let .timesheetPopup(.delegate(delegate)):
             switch(delegate) {

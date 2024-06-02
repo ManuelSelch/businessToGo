@@ -30,8 +30,13 @@ extension ManagementFeature {
         case .sync:
             state.integrations = integrations.get()
             return .merge([
-                .send(.kimai(.sync)),
-                .send(.taiga(.sync))
+                KimaiFeature().sync()
+                    .map { .kimai($0) }
+                    .eraseToAnyPublisher(),
+                
+                TaigaFeature().sync()
+                    .map { .taiga($0) }
+                    .eraseToAnyPublisher()
             ])
         
         case .connect(let kimaiProject, let taigaProject):

@@ -81,9 +81,9 @@ struct AppFeature: Reducer {
                 state.tab = .management
                 return .none
             case .syncKimai:
-                return .send(.management(.kimai(.sync)))
+                return .send(.management(.sync))
             case .syncTaiga:
-                return .send(.management(.taiga(.sync)))
+                return .send(.management(.sync))
             }
             
         case .intro(.delegate(.showIntro)):

@@ -5,6 +5,14 @@ import Combine
 extension ReportFeature {
     func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
         switch(action) {
+            
+        case .onAppear:
+            state.timesheets = kimai.timesheets.get()
+            state.timesheetChanges = track.getChanges(kimai.timesheets.getName()) ?? []
+            state.projects = kimai.projects.get()
+            state.activities = kimai.activities.get()
+            state.customers = kimai.customers.get()
+            
         case let .dateSelected(date):
             state.selectedDate = date
         case let .projectSelected(project):

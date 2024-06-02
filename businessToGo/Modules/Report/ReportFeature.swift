@@ -4,6 +4,7 @@ import OfflineSync
 
 struct ReportFeature: Reducer {
     @Dependency(\.kimai) var kimai
+    @Dependency(\.track) var track
     
     struct State: Equatable, Codable {
         var selectedDate: Date = Date.today
@@ -21,6 +22,8 @@ struct ReportFeature: Reducer {
     
     enum Action: Codable {
         case router(RouterFeature<Route>.Action)
+        
+        case onAppear
         
         case dateSelected(Date)
         case projectSelected(Int?)

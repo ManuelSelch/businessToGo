@@ -2,7 +2,8 @@ import SwiftUI
 
 struct DebugView: View {
     let account: Account?
-    @Binding var isDebug: Bool
+    @Binding var isLocalLog: Bool
+    @Binding var isRemoteLog: Bool
     
     let resetTapped: () -> ()
     let logTapped: () -> ()
@@ -18,8 +19,9 @@ struct DebugView: View {
                         .foregroundStyle(Color.red)
                 }
                 
-                Toggle("Remote Debug", isOn: $isDebug)
-                if(isDebug) {
+                Toggle("Remote Log", isOn: $isRemoteLog)
+                Toggle("Local Log", isOn: $isLocalLog)
+                if(isLocalLog) {
                     Button("Logs", action: { logTapped() })
                         .foregroundStyle(Color.theme)
                 }

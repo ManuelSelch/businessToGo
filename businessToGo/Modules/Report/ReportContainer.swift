@@ -22,6 +22,9 @@ struct ReportContainer: View {
                         playTapped: { store.send(.reports(.playTapped)) },
                         deleteTapped: { store.send(.reports(.deleteTapped($0))) }
                     )
+                    .onAppear {
+                        store.send(.onAppear)
+                    }
                 case .calendar:
                     ReportCalendarView(
                         months: store.state.months,

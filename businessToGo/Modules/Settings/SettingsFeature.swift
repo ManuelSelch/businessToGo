@@ -12,7 +12,9 @@ struct SettingsFeature: Reducer {
     
     struct State: Equatable, Codable {
         var account: Account?
-        var isDebug: Bool = UserDefault.isDebug
+        var isLocalLog: Bool = UserDefault.isLocalLog
+        var isRemoteLog: Bool = UserDefault.isRemoteLog
+        
         
         var customers: [KimaiCustomer] = []
         var projects: [KimaiProject] = []
@@ -24,9 +26,11 @@ struct SettingsFeature: Reducer {
     
     enum Action: Codable {
         case onConnect(_ kimai: Int, _ taiga: Int)
-        case resetTapped
-        case isDebugChanged(Bool)
         
+        case onLocalLogChanged(Bool)
+        case onRemoteLogChanged(Bool)
+        
+        case resetTapped
         case settings(SettingsAction)
         
         case router(RouterFeature<Route>.Action)
@@ -94,9 +98,14 @@ struct SettingsFeature: Reducer {
                 .send(.delegate(.dismiss))
             ])
             
-        case let .isDebugChanged(isDebug):
-            state.isDebug = isDebug
-            UserDefault.isDebug = isDebug
+        case let .onLocalLogChanged(isLocalLog):
+            state.isLocalLog = isLocalLog
+            UserDefault.isLocalLog = isLocalLog
+            return .none
+            
+        case let .onRemoteLogChanged(isRemoteLog):
+            state.isRemoteLog = isRemoteLog
+            UserDefault.isRemoteLog = isRemoteLog
             return .none
             
         case let .onConnect(kimai, taiga):

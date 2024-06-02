@@ -21,8 +21,6 @@ struct TaigaFeature: Reducer {
     }
     
     enum Action: Codable {
-        case sync
-        
         case projects(RequestFeature<TaigaProject, TaigaRequest>.Action)
         case milestones(RequestFeature<TaigaMilestone, TaigaRequest>.Action)
         case statusList(RequestFeature<TaigaTaskStoryStatus, TaigaRequest>.Action)
@@ -48,17 +46,32 @@ struct TaigaFeature: Reducer {
         case project(Integration)
     }
     
+    func sync() -> AnyPublisher<Action, Error> {
+        return .merge([
+            RequestFeature(service: taiga.projects).sync()
+                .map { .projects($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: taiga.milestones).sync()
+                .map { .milestones($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: taiga.taskStoryStatus).sync()
+                .map { .statusList($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: taiga.taskStories).sync()
+                .map { .taskStories($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: taiga.tasks).sync()
+                .map { .tasks($0) }
+                .eraseToAnyPublisher()
+        ])
+    }
+    
     func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
         switch(action) {
-        case .sync:
-            return .merge([
-                .send(.projects(.sync)),
-                .send(.milestones(.sync)),
-                .send(.statusList(.sync)),
-                .send(.taskStories(.sync)),
-                .send(.tasks(.sync))
-            ])
-            
         case let .project(action):
             switch(action) {
             case let .menuSelected(menu):

@@ -29,7 +29,8 @@ struct SettingsContainer: View {
                 case .debug:
                     DebugView(
                         account: store.state.account,
-                        isDebug: store.binding(for: \.isDebug, action: SettingsFeature.Action.isDebugChanged),
+                        isLocalLog: store.binding(for: \.isLocalLog, action: SettingsFeature.Action.onLocalLogChanged),
+                        isRemoteLog: store.binding(for: \.isRemoteLog, action: SettingsFeature.Action.onRemoteLogChanged),
                         resetTapped: { store.send(.resetTapped) },
                         logTapped: { store.send(.settings(.logTapped)) }
                     )

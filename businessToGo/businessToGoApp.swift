@@ -10,8 +10,8 @@ struct businessToGoApp: App {
     let store: StoreOf<AppFeature>
     
     init() {
-        //DependencyValues[\.keychain] = .mock
-        //DependencyValues[\.database] = .mock
+        // log network requests
+        URLSessionProxyDelegate.enableAutomaticRegistration()
         
         store = Store(
             initialState: .init(),

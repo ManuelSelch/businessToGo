@@ -14,8 +14,6 @@ struct RequestFeature<Model: TableProtocol, Target: TargetType> {
     }
     
     enum Action: Codable {
-        /// sync by remote data
-        case sync
         /// set synced records
         case set([Model])
         

@@ -32,8 +32,11 @@ struct UserDefaultWrapper<T: Codable> {
 }
 
 struct UserDefault {
-    @UserDefaultWrapper(key: "debug", defaultValue: false)
-    static var isDebug: Bool
+    @UserDefaultWrapper(key: "isLocalLog", defaultValue: false)
+    static var isLocalLog: Bool
+    
+    @UserDefaultWrapper(key: "isRemoteLog", defaultValue: false)
+    static var isRemoteLog: Bool
     
     @UserDefaultWrapper(key: "isIntro", defaultValue: true)
     static var isIntro: Bool

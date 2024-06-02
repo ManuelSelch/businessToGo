@@ -46,8 +46,6 @@ struct KimaiFeature: Reducer {
         case customerEditTapped(KimaiCustomer)
         case customerSaveTapped(KimaiCustomer)
         
-        case sync
-        
         case customers(RequestFeature<KimaiCustomer, KimaiRequest>.Action)
         case projects(RequestFeature<KimaiProject, KimaiRequest>.Action)
         case timesheets(RequestFeature<KimaiTimesheet, KimaiRequest>.Action)
@@ -110,6 +108,34 @@ struct KimaiFeature: Reducer {
         case saveTapped(KimaiTimesheet)
     }
     
+    func sync() -> AnyPublisher<Action, Error> {
+        return .merge([
+            RequestFeature(service: kimai.customers).sync()
+                .map { .customers($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: kimai.projects).sync()
+                .map { .projects($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: kimai.timesheets).sync()
+                .map { .timesheets($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: kimai.activities).sync()
+                .map { .activities($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: kimai.teams).sync()
+                .map { .teams($0) }
+                .eraseToAnyPublisher(),
+            
+            RequestFeature(service: kimai.users).sync()
+                .map { .users($0) }
+                .eraseToAnyPublisher()
+        ])
+    }
+    
     func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
         switch(action){
         case let .customerTapped(id):
@@ -128,49 +154,38 @@ struct KimaiFeature: Reducer {
                     .send(.delegate(.dismiss))
                 ])
             }
-            
-            
-        case .sync:
-            return .merge([
-                .send(.customers(.sync)),
-                .send(.projects(.sync)),
-                .send(.timesheets(.sync)),
-                .send(.activities(.sync)),
-                .send(.teams(.sync)),
-                .send(.users(.sync))
-            ])
            
         case .teamSelected(let team):
             state.selectedTeam = team
             return .none
             
         case let .customers(action):
-            return RequestFeature<KimaiCustomer, KimaiRequest>(service: kimai.customers).reduce(into: &state.customers, action: action)
+            return RequestFeature(service: kimai.customers).reduce(into: &state.customers, action: action)
                 .map { .customers($0) }
                 .eraseToAnyPublisher()
             
         case let .projects(action):
-            return RequestFeature<KimaiProject, KimaiRequest>(service: kimai.projects).reduce(into: &state.projects, action: action)
+            return RequestFeature(service: kimai.projects).reduce(into: &state.projects, action: action)
                 .map { .projects($0) }
                 .eraseToAnyPublisher()
             
         case let .timesheets(action):
-            return RequestFeature<KimaiTimesheet, KimaiRequest>(service: kimai.timesheets).reduce(into: &state.timesheets, action: action)
+            return RequestFeature(service: kimai.timesheets).reduce(into: &state.timesheets, action: action)
                 .map { .timesheets($0) }
                 .eraseToAnyPublisher()
             
         case let .activities(action):
-            return RequestFeature<KimaiActivity, KimaiRequest>(service: kimai.activities).reduce(into: &state.activities, action: action)
+            return RequestFeature(service: kimai.activities).reduce(into: &state.activities, action: action)
                 .map { .activities($0) }
                 .eraseToAnyPublisher()
             
         case let .teams(action):
-            return RequestFeature<KimaiTeam, KimaiRequest>(service: kimai.teams).reduce(into: &state.teams, action: action)
+            return RequestFeature(service: kimai.teams).reduce(into: &state.teams, action: action)
                 .map { .teams($0) }
                 .eraseToAnyPublisher()
             
         case let .users(action):
-            return RequestFeature<KimaiUser, KimaiRequest>(service: kimai.users).reduce(into: &state.users, action: action)
+            return RequestFeature(service: kimai.users).reduce(into: &state.users, action: action)
                 .map { .users($0) }
                 .eraseToAnyPublisher()
             

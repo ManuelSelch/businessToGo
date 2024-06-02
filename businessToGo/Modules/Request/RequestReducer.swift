@@ -1,18 +1,15 @@
 import Combine
 import OfflineSync
-import ComposableArchitecture
+import Redux
 
-extension RequestModule {
-    
-    
-    
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
+extension RequestFeature {
+    func reduce(into state: inout State, action: Action) -> AnyPublisher<Action, Error> {
         switch(action){
         case .sync:
             return .run { send in
                 do {
                     let local = service.get()
-                    await send(.set(local))
+                    send(.success(.set(local)))
                     
                     let fetch = try await service.fetch()
                     var remoteRecords = fetch.response
@@ -25,7 +22,7 @@ extension RequestModule {
                     }
                     
                     let records = try await service.sync(remoteRecords)
-                    await send(.set(records))
+                    send(.success(.set(records)))
                 } catch {
                     
                 }

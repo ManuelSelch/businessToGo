@@ -1,8 +1,8 @@
 import SwiftUI
-import ComposableArchitecture
+import Redux
 
 struct AppTabView: View {
-    let store: StoreOf<AppModule>
+    let store: StoreOf<AppFeature>
     
     var body: some View {
         Text("TabView")

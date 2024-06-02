@@ -1,10 +1,9 @@
 import SwiftUI
-import ComposableArchitecture
 import Log
-import TCACoordinators
+import Redux
 
 struct AppContainer: View {
-    @Bindable var store: StoreOf<AppModule>
+    @ObservedObject var store: StoreOf<AppFeature>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -13,13 +12,14 @@ struct AppContainer: View {
                 settingsTapped: { store.send(.settingsTapped) }
             )
             
-            if(store.tab == .login) {
+            if(store.state.tab == .login) {
                 LoginContainer(
-                    store: store.scope(state: \.login, action: \.login)
+                    store: store.lift(\.login, AppFeature.Action.login)
                 )
             } else {
-                
-                TabView(selection: $store.tab.sending(\.tabSelected)){
+                TabView(selection:
+                    store.binding(for: \.tab, action: AppFeature.Action.tabSelected)
+                ){
                     AppRoute.management.view(store)
                         .tabItem { Label("Projekte", systemImage: "shippingbox.fill") }
                         .tag(AppRoute.management)
@@ -31,9 +31,12 @@ struct AppContainer: View {
             }
             
         }
-        .sheet(item: $store.sheet.sending(\.sheetSelected)) { route in
+        
+        
+        .sheet(item: store.binding(for: \.sheet, action: AppFeature.Action.sheetSelected)) { route in
             route.view(store)
         }
+         
         
         .onAppear {
             store.send(.intro(.load))

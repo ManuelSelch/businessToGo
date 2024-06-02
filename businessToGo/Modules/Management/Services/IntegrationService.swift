@@ -1,9 +1,8 @@
 import Redux
 import OfflineSync
 import SQLite
-import ComposableArchitecture
 
-class IntegrationService: IService, DependencyKey {
+class IntegrationService {
     var integrations: DatabaseTable<Integration>!
     
     init(){
@@ -24,20 +23,18 @@ class IntegrationService: IService, DependencyKey {
     }
 }
 
-extension IntegrationService {
-    static var liveValue: IntegrationService {
-        .init()
-    }
-    
-    static var testValue: IntegrationService {
-        .init()
-    }
+private struct IntegrationServiceKey: DependencyKey {
+    static var liveValue = IntegrationService()
+    static var mockValue = IntegrationService()
 }
 
 
 extension DependencyValues {
     var integrations: IntegrationService {
-        get { self[IntegrationService.self] }
-        set { self[IntegrationService.self] = newValue }
+        get { Self[IntegrationServiceKey.self] }
+        set { Self[IntegrationServiceKey.self] = newValue }
     }
 }
+
+
+

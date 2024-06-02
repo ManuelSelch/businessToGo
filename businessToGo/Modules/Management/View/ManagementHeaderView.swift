@@ -4,7 +4,7 @@ import Redux
 struct ManagementHeaderView: View {
     @Binding var selectedTeam: Int?
 
-    let route: ManagementScreen.State?
+    let route: ManagementFeature.Route
     
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
@@ -18,7 +18,7 @@ struct ManagementHeaderView: View {
         HStack {
             
             switch(route){
-            case .kimai(.customersList(_)):
+            case .kimai(.customersList):
                 Picker("", selection: $selectedTeam) {
                     Text("Alle Teams")
                         .tag(nil as Int?)
@@ -32,9 +32,9 @@ struct ManagementHeaderView: View {
                 .clipped()
             
          
-            case let .taiga(.project(state)):
+            case let .taiga(.project(integration)):
                 Button(action: {
-                    projectTapped(state.integration)
+                    projectTapped(integration)
                 }){
                     Image(systemName: "chart.bar.xaxis.ascending")
                 }
@@ -54,8 +54,8 @@ struct ManagementHeaderView: View {
                 
                 Button(action: {
                     switch(route){
-                    case let .kimai(.projectsList(state)):
-                        let project = projects.first { $0.customer == state.customer}
+                    case let .kimai(.projectsList(customer)):
+                        let project = projects.first { $0.customer == customer}
                         var timesheet = KimaiTimesheet.new
                         timesheet.project = project?.id ?? 0
                         playTapped(timesheet)

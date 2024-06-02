@@ -22,7 +22,7 @@ struct AppHeader: View {
                 Button(action: {
                     settingsTapped()
                 }){
-                    Image(systemName: "gear")
+                    Image(systemName: "gearshape")
                         .font(.system(size: 20))
                         .foregroundColor(Color.white)
                 }

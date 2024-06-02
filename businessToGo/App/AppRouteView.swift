@@ -1,23 +1,19 @@
 import SwiftUI
-import ComposableArchitecture
+import Redux
 
 extension AppRoute {
-    @ViewBuilder func view(_ store: StoreOf<AppModule>) -> some View {
+    @ViewBuilder func view(_ store: StoreOf<AppFeature>) -> some View {
         switch self {
         case .intro:
-            IntroContainer(store: store.scope(state: \.intro, action: \.intro))
+            IntroContainer(store: store.lift(\.intro, AppFeature.Action.intro))
         case .login:
-            LoginContainer(store: store.scope(state: \.login, action: \.login))
+            LoginContainer(store: store.lift(\.login, AppFeature.Action.login))
         case .management:
-            ManagementCoordinatorView(store: store.scope(state: \.management, action: \.management))
+            ManagementContainer(store: store.lift(\.management, AppFeature.Action.management))
         case .report:
-            ReportCoordinatorView(
-                store: store
-                    .scope(state: \.management, action: \.management)
-                    .scope(state: \.report, action: \.report)
-            )
+            ReportContainer(store: store.lift(\.report, AppFeature.Action.report))
         case .settings:
-            SettingsCoordinatorView(store: store.scope(state: \.settings, action: \.settings))
+            SettingsContainer(store: store.lift(\.settings, AppFeature.Action.settings))
         
         }
     }

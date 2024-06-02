@@ -52,7 +52,7 @@ struct ManagementContainer: View {
                         route: store.state.router.currentRoute,
                         projects: store.state.kimai.projects.records,
                         teams: store.state.kimai.teams.records,
-                        syncTapped: {}, // TODO: dispatch sync action
+                        syncTapped: { store.send(.sync) }, 
                         projectTapped: { _ in },
                         playTapped: { store.send(.playTapped($0)) }
                     )

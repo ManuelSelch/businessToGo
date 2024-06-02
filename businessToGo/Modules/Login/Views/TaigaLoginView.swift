@@ -13,6 +13,8 @@ struct TaigaLoginView: View {
     
     public var body: some View {
         VStack {
+            Spacer()
+            
             ZStack {
                 Text("Taiga Login")
                     .font(.title)
@@ -57,7 +59,7 @@ struct TaigaLoginView: View {
             }
             
             
-            
+            Spacer()
         }
         .padding()
         .onAppear {

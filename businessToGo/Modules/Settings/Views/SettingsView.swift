@@ -4,7 +4,6 @@ struct SettingsView: View {
     
     let integrationsTapped: () -> ()
     let debugTapped: () -> ()
-    let logTapped: () -> ()
     let introTapped: () -> ()
     let logoutTapped: () -> ()
     
@@ -13,7 +12,6 @@ struct SettingsView: View {
             List {
                 Button("Integrations", action: { integrationsTapped() })
                 Button("Debug", action: { debugTapped() })
-                Button("Log", action: { logTapped() })
                 Button("Intro", action: { introTapped() })
                 
                 Button("Logout", action: { logoutTapped() })

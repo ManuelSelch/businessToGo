@@ -14,23 +14,24 @@ struct SettingsContainer: View {
                     SettingsView(
                         integrationsTapped: { store.send(.settings(.integrationsTapped)) },
                         debugTapped: { store.send(.settings(.debugTapped)) },
-                        logTapped: { store.send(.settings(.logTapped)) },
                         introTapped: { store.send(.settings(.introTapped)) },
                         logoutTapped: { store.send(.settings(.logoutTapped)) }
                     )
                 case .integrations:
-                    IntegrationsView( // TODO: pass kimai & taiga parameters
-                        customers: [],
-                        projects: [],
-                        taigaProjects: [],
-                        integrations: [],
+                    IntegrationsView( 
+                        customers: store.state.customers,
+                        projects: store.state.projects,
+                        taigaProjects: store.state.taigaProjects,
+                        integrations: store.state.integrations,
                         
                         onConnect: { store.send(.onConnect($0, $1)) }
                     )
                 case .debug:
                     DebugView(
                         account: store.state.account,
-                        resetTapped: { store.send(.resetTapped) }
+                        isDebug: store.binding(for: \.isDebug, action: SettingsFeature.Action.isDebugChanged),
+                        resetTapped: { store.send(.resetTapped) },
+                        logTapped: { store.send(.settings(.logTapped)) }
                     )
                 case .log:
                     LogView()

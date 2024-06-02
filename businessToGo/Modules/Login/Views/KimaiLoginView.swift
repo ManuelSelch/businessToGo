@@ -12,61 +12,54 @@ struct KimaiLoginView: View {
     @State private var password: String = ""
     
     public var body: some View {
-        HStack {
+        VStack {
             Spacer()
             
-            VStack {
-                Spacer()
+            ZStack {
+                Text("Kimai Login")
+                    .font(.title)
                 
-                ZStack {
-                    Text("Kimai Login")
-                        .font(.title)
-                    
-                    HStack {
-                        Button(action : {
-                            backTapped()
-                        }){
-                            Image(systemName: "arrow.left")
-                                .font(.system(size: 25))
-                                .foregroundColor(Color.blackWhite)
-                        }
-                        Spacer()
+                HStack {
+                    Button(action : {
+                        backTapped()
+                    }){
+                        Image(systemName: "arrow.left")
+                            .font(.system(size: 25))
+                            .foregroundColor(Color.blackWhite)
                     }
-                    
+                    Spacer()
                 }
-            
-                TextField("Server", text: $server)
-                    .keyboardType(.URL)
-                    .textContentType(.URL)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                TextField("Username", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                Button(action: {
-                    var account = account
-                    account.kimai = AccountData(username, password, server)
-                    loginTapped(account)
-                }) {
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                }
-                
-                Spacer()
                 
             }
-            .padding()
+        
+            TextField("Server", text: $server)
+                .keyboardType(.URL)
+                .textContentType(.URL)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            TextField("Username", text: $username)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            SecureField("Password", text: $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            Button(action: {
+                var account = account
+                account.kimai = AccountData(username, password, server)
+                loginTapped(account)
+            }) {
+                Text("Login")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(8)
+            }
             
             Spacer()
+            
         }
         .padding()
         .onAppear {

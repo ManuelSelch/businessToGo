@@ -1,13 +1,11 @@
 import SwiftUI
 
 struct DebugView: View {
-    
     let account: Account?
+    @Binding var isDebug: Bool
     
     let resetTapped: () -> ()
-    
-    @State var isLog: Bool = false
-    
+    let logTapped: () -> ()
     
     var body: some View {
         List {
@@ -18,6 +16,12 @@ struct DebugView: View {
                 }){
                     Text("Reset Database")
                         .foregroundStyle(Color.red)
+                }
+                
+                Toggle("Remote Debug", isOn: $isDebug)
+                if(isDebug) {
+                    Button("Logs", action: { logTapped() })
+                        .foregroundStyle(Color.theme)
                 }
             }
             

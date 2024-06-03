@@ -1,8 +1,14 @@
 import Foundation
 import Log
 import Redux
-import Login
 import Combine
+
+import Login
+import Intro
+import Report
+import Management
+import Settings
+
 
 enum AppRoute: Identifiable, Codable, Equatable {
     case login
@@ -19,11 +25,11 @@ enum AppRoute: Identifiable, Codable, Equatable {
 
 struct AppFeature: Reducer {
     
-    struct State: Codable {
+    struct State: Codable, Equatable {
         var tab: AppRoute = .login
         var sheet: AppRoute?
         
-        var log: LogModule.State = .init()
+        var log: LogFeature.State = .init()
         var login: LoginFeature.State = .init()
         var management: ManagementFeature.State = .init()
         var report: ReportFeature.State = .init()
@@ -37,7 +43,7 @@ struct AppFeature: Reducer {
         case sheetSelected(AppRoute?)
         case settingsTapped
         
-        case log(LogModule.Action)
+        case log(LogFeature.Action)
         case login(LoginFeature.Action)
         case management(ManagementFeature.Action)
         case report(ReportFeature.Action)
@@ -59,12 +65,12 @@ struct AppFeature: Reducer {
             return .none
         
         case .settingsTapped:
-            state.settings.router.goBackToRoot()
+            // TODO: state.settings.router.goBackToRoot()
             state.sheet = .settings
             return .none
             
         case .log(let action):
-            return LogModule().reduce(&state.log, action)
+            return LogFeature().reduce(&state.log, action)
                 .map { .log($0) }
                 .eraseToAnyPublisher()
         
@@ -77,7 +83,7 @@ struct AppFeature: Reducer {
                 state.tab = .report
                 return .none
             case .showAssistant:
-                state.management.router.presentCover(.assistant)
+                // TODO: state.management.router.presentCover(.assistant)
                 state.tab = .management
                 return .none
             case .syncKimai:

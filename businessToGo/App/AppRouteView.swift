@@ -1,6 +1,12 @@
 import SwiftUI
 import Redux
 
+import Intro
+import Login
+import Management
+import Report
+import Settings
+
 extension AppRoute {
     @ViewBuilder func view(_ store: StoreOf<AppFeature>) -> some View {
         switch self {

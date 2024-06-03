@@ -19,12 +19,21 @@
       }
     },
     {
-      "identity" : "combine-schedulers",
+      "identity" : "log",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/combine-schedulers",
+      "location" : "https://github.com/ManuelSelch/Log.git",
       "state" : {
-        "revision" : "9dc9cbe4bc45c65164fa653a563d8d8db61b09bb",
-        "version" : "1.0.0"
+        "revision" : "4623e3a38073869f9a89bec3cbbb4ab5ad73a96c",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "loginservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/LoginService.git",
+      "state" : {
+        "revision" : "e500ff924a3863aa58b40cd26b6ba1ede96b366c",
+        "version" : "1.1.3"
       }
     },
     {
@@ -34,6 +43,15 @@
       "state" : {
         "revision" : "c263811c1f3dbf002be9bd83107f7cdc38992b26",
         "version" : "15.0.3"
+      }
+    },
+    {
+      "identity" : "offlinesync",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/OfflineSync.git",
+      "state" : {
+        "revision" : "b9532025fad82edfac718dc0f698fbf44c951fcb",
+        "version" : "1.2.1"
       }
     },
     {
@@ -50,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Pulse.git",
       "state" : {
-        "revision" : "2e5e5f86c31970dc72613e480a1ba0b06bab81a2",
-        "version" : "4.2.1"
+        "revision" : "b7982a03165ebcc63f2e70236cc674d4e4dd3dc9",
+        "version" : "4.2.2"
       }
     },
     {
@@ -70,6 +88,15 @@
       "state" : {
         "revision" : "c43bae3dac73fdd3cb906bd5a1914686ca71ed3c",
         "version" : "6.7.0"
+      }
+    },
+    {
+      "identity" : "redux",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/manuelselch/Redux",
+      "state" : {
+        "revision" : "c5c00145592f25487f84391e6067567d2843879d",
+        "version" : "1.1.6"
       }
     },
     {
@@ -100,33 +127,6 @@
       }
     },
     {
-      "identity" : "swift-clocks",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-clocks",
-      "state" : {
-        "revision" : "a8421d68068d8f45fbceb418fbf22c5dad4afd33",
-        "version" : "1.0.2"
-      }
-    },
-    {
-      "identity" : "swift-concurrency-extras",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
-      "state" : {
-        "revision" : "bb5059bde9022d69ac516803f4f227d8ac967f71",
-        "version" : "1.1.0"
-      }
-    },
-    {
-      "identity" : "swift-dependencies",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-dependencies",
-      "state" : {
-        "revision" : "350e1e119babe8525f9bd155b76640a5de270184",
-        "version" : "1.3.0"
-      }
-    },
-    {
       "identity" : "swift-log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",
@@ -136,21 +136,12 @@
       }
     },
     {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax",
-      "state" : {
-        "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
-        "version" : "510.0.2"
-      }
-    },
-    {
       "identity" : "swipeactions",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/c-villain/SwipeActions.git",
       "state" : {
-        "revision" : "39c6d7f686746881adb3d44638ec330acbeb4f37",
-        "version" : "0.3.3"
+        "revision" : "2c8f262ef508f004193ca5e0d81f0e52d6c4d7b4",
+        "version" : "0.3.5"
       }
     },
     {
@@ -160,15 +151,6 @@
       "state" : {
         "revision" : "a053f58f21a0187817afd65b440911496809d21a",
         "version" : "1.2.1"
-      }
-    },
-    {
-      "identity" : "xctest-dynamic-overlay",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
-      "state" : {
-        "revision" : "6f30bdba373bbd7fbfe241dddd732651f2fbd1e2",
-        "version" : "1.1.2"
       }
     }
   ],

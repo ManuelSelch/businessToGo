@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "dependencies",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/Dependencies.git",
+      "state" : {
+        "revision" : "94ac38716591c5c7e0ce512765e649f06df5f8d8",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya.git",
@@ -32,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/OfflineSync.git",
       "state" : {
-        "revision" : "b9532025fad82edfac718dc0f698fbf44c951fcb",
-        "version" : "1.2.1"
+        "revision" : "59597a9ae5b87e4f434495c3e474d530d4944153",
+        "version" : "1.2.3"
       }
     },
     {

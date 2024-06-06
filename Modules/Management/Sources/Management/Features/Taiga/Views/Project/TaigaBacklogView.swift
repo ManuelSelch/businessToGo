@@ -1,7 +1,7 @@
 import SwiftUI
 import Charts
 
-import ManagementDependencies
+import TaigaCore
 
 struct TaigaBacklogView: View {
     var project: TaigaProject

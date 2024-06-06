@@ -12,11 +12,6 @@ let package = Package(
         .library(
             name: "Management",
             targets: ["Management"]
-        ),
-        
-        .library(
-            name: "ManagementDependencies",
-            targets: ["ManagementDependencies"]
         )
     ],
     dependencies: [
@@ -24,7 +19,9 @@ let package = Package(
         .package(url: "https://github.com/ManuelSelch/OfflineSync.git", .upToNextMajor(from: "1.2.1")),
         .package(url: "https://github.com/ManuelSelch/Chart.git", .upToNextMajor(from: "1.0.3")),
         
-        .package(path: "../../Shared")
+        .package(path: "../../AppCore"),
+        .package(path: "../../Core/KimaiCore"),
+        .package(path: "../../Core/TaigaCore")
     ],
     targets: [
         .target(
@@ -34,15 +31,10 @@ let package = Package(
                 .product(name: "MyChart", package: "Chart"),
                 .product(name: "OfflineSync", package: "OfflineSync"),
             
-                .product(name: "Shared", package: "Shared"),
-                "ManagementDependencies"
-            ]
-        ),
-        
-        .target(
-            name: "ManagementDependencies",
-            dependencies: [
-                .product(name: "OfflineSync", package: "OfflineSync"),
+                .product(name: "AppCore", package: "AppCore"),
+                .product(name: "KimaiCore", package: "KimaiCore"),
+                .product(name: "TaigaCore", package: "TaigaCore")
+                
             ]
         ),
             

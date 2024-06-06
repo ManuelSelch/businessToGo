@@ -65,7 +65,6 @@ struct AppFeature: Reducer {
             return .none
         
         case .settingsTapped:
-            // TODO: state.settings.router.goBackToRoot()
             state.sheet = .settings
             return .none
             

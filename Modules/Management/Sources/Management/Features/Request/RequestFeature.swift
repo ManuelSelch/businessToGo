@@ -2,6 +2,7 @@ import Foundation
 import Redux
 import Moya
 import OfflineSync
+import Dependencies
 
 public struct RequestFeature<Model: TableProtocol, Target: TargetType> {
     var service: RequestService<Model, Target>

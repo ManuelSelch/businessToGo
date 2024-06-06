@@ -1,7 +1,9 @@
 import SwiftUI
 import Redux
-import Shared
-import ManagementDependencies
+
+import AppCore
+import KimaiCore
+import IntegrationsCore
 
 struct ManagementHeaderView: View {
     @Binding var selectedTeam: Int?

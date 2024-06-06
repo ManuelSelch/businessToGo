@@ -2,7 +2,9 @@ import Foundation
 import OfflineSync
 import Combine
 import Redux
-import ManagementDependencies
+import Dependencies
+
+import KimaiCore
 
 /// kimai backend storage
 public struct KimaiFeature: Reducer {

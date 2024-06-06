@@ -1,5 +1,6 @@
 import SwiftUI
-import Shared
+
+import AppCore
 
 struct KimaiLoginView: View {
     

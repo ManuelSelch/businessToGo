@@ -2,6 +2,10 @@ import Foundation
 import Combine
 import Redux
 
+import KimaiCore
+import TaigaCore
+import IntegrationsCore
+
 public extension ManagementFeature {
     
     func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {

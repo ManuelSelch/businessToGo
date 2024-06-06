@@ -1,7 +1,8 @@
 import SwiftUI
-import Shared
 import OfflineSync
-import ManagementDependencies
+
+import AppCore
+import KimaiCore
 
 struct KimaiActivityCard: View {
     let change: DatabaseChange?

@@ -10,12 +10,12 @@
       }
     },
     {
-      "identity" : "chart",
+      "identity" : "dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Chart.git",
+      "location" : "https://github.com/ManuelSelch/Dependencies.git",
       "state" : {
-        "revision" : "36978552d2f1f733aedf194821fc153175f09c01",
-        "version" : "1.0.3"
+        "revision" : "94ac38716591c5c7e0ce512765e649f06df5f8d8",
+        "version" : "1.0.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/OfflineSync.git",
       "state" : {
-        "revision" : "b9532025fad82edfac718dc0f698fbf44c951fcb",
-        "version" : "1.2.1"
+        "revision" : "59597a9ae5b87e4f434495c3e474d530d4944153",
+        "version" : "1.2.3"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/Redux",
       "state" : {
-        "revision" : "125a36bb12ba1cf1c7140dfcad6a70778f4d1d14",
-        "version" : "1.1.3"
+        "revision" : "448befeb2a649b1b8f8dd748e354b487d625ef3e",
+        "version" : "1.1.7"
       }
     },
     {

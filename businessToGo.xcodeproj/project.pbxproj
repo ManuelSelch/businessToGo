@@ -8,20 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8405CBCC2C0E030500A73E8F /* TestKimaiReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405CBCB2C0E030500A73E8F /* TestKimaiReducer.swift */; };
-		8405CBCF2C0E0A2D00A73E8F /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CBCE2C0E0A2D00A73E8F /* OfflineSync */; };
 		8405CBD52C0E0E5900A73E8F /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CBD42C0E0E5900A73E8F /* Log */; };
 		8405CBD82C0E0E8500A73E8F /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CBD72C0E0E8500A73E8F /* Login */; };
 		8405CC522C0E174800A73E8F /* JSONViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405CC512C0E174800A73E8F /* JSONViewer.swift */; };
-		8405CC592C0E5F4A00A73E8F /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC582C0E5F4A00A73E8F /* Shared */; };
 		8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5A2C0E5F5000A73E8F /* Intro */; };
 		8405CC5D2C0E5F5F00A73E8F /* Management in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5C2C0E5F5F00A73E8F /* Management */; };
-		8405CC5F2C0E5F6900A73E8F /* ManagementDependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5E2C0E5F6900A73E8F /* ManagementDependencies */; };
 		8405CC612C0E5F7200A73E8F /* Report in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC602C0E5F7200A73E8F /* Report */; };
 		8405CC652C0E65E700A73E8F /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC642C0E65E700A73E8F /* Settings */; };
 		8416FC0E2C09B013003E30E7 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 8416FC0D2C09B013003E30E7 /* Redux */; };
-		8416FC112C09B0F8003E30E7 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8416FC102C09B0F8003E30E7 /* Log */; };
-		841840532BFCE77200EC9FDF /* MyChart in Frameworks */ = {isa = PBXBuildFile; productRef = 841840522BFCE77200EC9FDF /* MyChart */; };
-		8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */ = {isa = PBXBuildFile; productRef = 8418405D2BFD024E00EC9FDF /* MyChart */; };
 		841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840652BFD414F00EC9FDF /* AppContainer.swift */; };
 		841840692BFD41CC00EC9FDF /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840682BFD41CC00EC9FDF /* AppTabView.swift */; };
 		843A02FB2C0B9FC300A716AF /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 843A02FA2C0B9FC300A716AF /* Login */; };
@@ -29,17 +23,10 @@
 		84410B1C2C0CB0A500D57894 /* MonitorMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */; };
 		84458AE32BC41A720041E40F /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE22BC41A720041E40F /* AppFeature.swift */; };
 		846751022C00B9F70028921A /* AppRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751012C00B9F70028921A /* AppRouteView.swift */; };
-		8467DEC22BDECA300077E331 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC12BDECA300077E331 /* SQLite */; };
-		8467DEC52BDECB500077E331 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC42BDECB500077E331 /* OHHTTPStubs */; };
-		8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
-		8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED72BDEECFC0077E331 /* OfflineSync */; };
-		8472A3D42C010B99006726A1 /* PulseUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D32C010B99006726A1 /* PulseUI */; };
-		8472A3D62C010E3C006726A1 /* Pulse in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D52C010E3C006726A1 /* Pulse */; };
 		8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D82C01161A006726A1 /* PulseLogHandler */; };
 		8486FBCB2BCEB0390052DF18 /* TestableCombinePublishers in Frameworks */ = {isa = PBXBuildFile; productRef = 8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */; };
 		84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F7E2C029428003E83BA /* AppLauncher.swift */; };
-		84977F822C029939003E83BA /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F812C029939003E83BA /* OfflineSync */; };
 		84977F852C0299CE003E83BA /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F842C0299CE003E83BA /* OfflineSync */; };
 		84977F882C0299E8003E83BA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F872C0299E8003E83BA /* Login */; };
 		84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */; };
@@ -48,13 +35,9 @@
 		84C5A2B22BC40EEE00C25A0C /* businessToGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B12BC40EEE00C25A0C /* businessToGoUITests.swift */; };
 		84C5A2B42BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */; };
 		84CD11F72BF410E8006AE4C7 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F62BF410E8006AE4C7 /* Log */; };
-		84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F92BF41393006AE4C7 /* OfflineSync */; };
 		84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11FC2BF413D6006AE4C7 /* OfflineSync */; };
 		84CD981A2BFF8FAA000B4A4C /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD98192BFF8FAA000B4A4C /* OfflineSync */; };
-		84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 84E6DCA52BF400A00051E148 /* OfflineSync */; };
 		84F2EE092C0E6CB600D65512 /* Redux in Frameworks */ = {isa = PBXBuildFile; productRef = 84F2EE082C0E6CB600D65512 /* Redux */; };
-		84F5AE912BF74CA6007EE279 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 84F5AE902BF74CA6007EE279 /* Moya */; };
-		84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 84F5AEB22BF8B7E4007EE279 /* SwipeActions */; };
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
 		84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84FDEDFD2BFFDD1C0071C8FA /* Login */; };
 /* End PBXBuildFile section */
@@ -79,7 +62,6 @@
 /* Begin PBXFileReference section */
 		8405CBCB2C0E030500A73E8F /* TestKimaiReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestKimaiReducer.swift; sourceTree = "<group>"; };
 		8405CC4E2C0E122600A73E8F /* Management */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Management; sourceTree = "<group>"; };
-		8405CC4F2C0E171C00A73E8F /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
 		8405CC512C0E174800A73E8F /* JSONViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONViewer.swift; sourceTree = "<group>"; };
 		8405CC532C0E20E000A73E8F /* Login */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Login; sourceTree = "<group>"; };
 		8405CC552C0E58ED00A73E8F /* Report */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Report; sourceTree = "<group>"; };
@@ -90,6 +72,10 @@
 		841840682BFD41CC00EC9FDF /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorMiddleware.swift; sourceTree = "<group>"; };
 		84458AE22BC41A720041E40F /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
+		8453D8F42C112C80002E992C /* KimaiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = KimaiCore; sourceTree = "<group>"; };
+		8453D8F62C112C96002E992C /* TaigaCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TaigaCore; sourceTree = "<group>"; };
+		8453D8F72C112CFC002E992C /* IntegrationsCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IntegrationsCore; sourceTree = "<group>"; };
+		8453D8F82C112DDC002E992C /* AppCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppCore; sourceTree = "<group>"; };
 		846751012C00B9F70028921A /* AppRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteView.swift; sourceTree = "<group>"; };
 		84977F7E2C029428003E83BA /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		84C5A2922BC40EEC00C25A0C /* businessToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = businessToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,36 +96,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84977F822C029939003E83BA /* OfflineSync in Frameworks */,
-				8472A3D62C010E3C006726A1 /* Pulse in Frameworks */,
-				8416FC112C09B0F8003E30E7 /* Log in Frameworks */,
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
-				8467DEC22BDECA300077E331 /* SQLite in Frameworks */,
-				8405CC592C0E5F4A00A73E8F /* Shared in Frameworks */,
 				843A02FE2C0BE4E500A716AF /* ReduxMonitor in Frameworks */,
 				8405CC5D2C0E5F5F00A73E8F /* Management in Frameworks */,
 				8405CBD82C0E0E8500A73E8F /* Login in Frameworks */,
 				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
 				843A02FB2C0B9FC300A716AF /* Login in Frameworks */,
-				84F5AEB32BF8B7E4007EE279 /* SwipeActions in Frameworks */,
 				84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */,
-				841840532BFCE77200EC9FDF /* MyChart in Frameworks */,
-				84CD11FA2BF41393006AE4C7 /* OfflineSync in Frameworks */,
-				8467DED82BDEECFC0077E331 /* OfflineSync in Frameworks */,
-				84E6DCA62BF400A00051E148 /* OfflineSync in Frameworks */,
 				8405CC612C0E5F7200A73E8F /* Report in Frameworks */,
 				84977F882C0299E8003E83BA /* Login in Frameworks */,
 				8405CC652C0E65E700A73E8F /* Settings in Frameworks */,
 				84CD11FD2BF413D6006AE4C7 /* OfflineSync in Frameworks */,
-				8405CC5F2C0E5F6900A73E8F /* ManagementDependencies in Frameworks */,
 				84977F852C0299CE003E83BA /* OfflineSync in Frameworks */,
-				8405CBCF2C0E0A2D00A73E8F /* OfflineSync in Frameworks */,
 				8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */,
 				8405CBD52C0E0E5900A73E8F /* Log in Frameworks */,
 				8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */,
-				84F5AE912BF74CA6007EE279 /* Moya in Frameworks */,
-				8418405E2BFD024E00EC9FDF /* MyChart in Frameworks */,
-				8472A3D42C010B99006726A1 /* PulseUI in Frameworks */,
 				84F2EE092C0E6CB600D65512 /* Redux in Frameworks */,
 				8416FC0E2C09B013003E30E7 /* Redux in Frameworks */,
 				84CD981A2BFF8FAA000B4A4C /* OfflineSync in Frameworks */,
@@ -151,8 +122,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8486FBCB2BCEB0390052DF18 /* TestableCombinePublishers in Frameworks */,
-				8467DEC72BDECC070077E331 /* OHHTTPStubsSwift in Frameworks */,
-				8467DEC52BDECB500077E331 /* OHHTTPStubs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,10 +188,21 @@
 			path = Middlewares;
 			sourceTree = "<group>";
 		};
+		8453D8F32C112C40002E992C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8453D8F72C112CFC002E992C /* IntegrationsCore */,
+				8453D8F62C112C96002E992C /* TaigaCore */,
+				8453D8F42C112C80002E992C /* KimaiCore */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		84C5A2892BC40EEC00C25A0C = {
 			isa = PBXGroup;
 			children = (
-				8405CC4F2C0E171C00A73E8F /* Shared */,
+				8453D8F82C112DDC002E992C /* AppCore */,
+				8453D8F32C112C40002E992C /* Core */,
 				8405CC4D2C0E120400A73E8F /* Modules */,
 				84C5A2942BC40EEC00C25A0C /* businessToGo */,
 				84C5A2A62BC40EEE00C25A0C /* businessToGoTests */,
@@ -319,36 +299,21 @@
 			);
 			name = businessToGo;
 			packageProductDependencies = (
-				8467DEC12BDECA300077E331 /* SQLite */,
 				8467DED12BDEDC4B0077E331 /* Log */,
-				8467DED72BDEECFC0077E331 /* OfflineSync */,
-				84E6DCA52BF400A00051E148 /* OfflineSync */,
 				84CD11F62BF410E8006AE4C7 /* Log */,
-				84CD11F92BF41393006AE4C7 /* OfflineSync */,
 				84CD11FC2BF413D6006AE4C7 /* OfflineSync */,
-				84F5AE902BF74CA6007EE279 /* Moya */,
-				84F5AEB22BF8B7E4007EE279 /* SwipeActions */,
-				841840522BFCE77200EC9FDF /* MyChart */,
-				8418405D2BFD024E00EC9FDF /* MyChart */,
 				84CD98192BFF8FAA000B4A4C /* OfflineSync */,
 				84FDEDFD2BFFDD1C0071C8FA /* Login */,
-				8472A3D32C010B99006726A1 /* PulseUI */,
-				8472A3D52C010E3C006726A1 /* Pulse */,
 				8472A3D82C01161A006726A1 /* PulseLogHandler */,
-				84977F812C029939003E83BA /* OfflineSync */,
 				84977F842C0299CE003E83BA /* OfflineSync */,
 				84977F872C0299E8003E83BA /* Login */,
 				8416FC0D2C09B013003E30E7 /* Redux */,
-				8416FC102C09B0F8003E30E7 /* Log */,
 				843A02FA2C0B9FC300A716AF /* Login */,
 				843A02FD2C0BE4E500A716AF /* ReduxMonitor */,
-				8405CBCE2C0E0A2D00A73E8F /* OfflineSync */,
 				8405CBD42C0E0E5900A73E8F /* Log */,
 				8405CBD72C0E0E8500A73E8F /* Login */,
-				8405CC582C0E5F4A00A73E8F /* Shared */,
 				8405CC5A2C0E5F5000A73E8F /* Intro */,
 				8405CC5C2C0E5F5F00A73E8F /* Management */,
-				8405CC5E2C0E5F6900A73E8F /* ManagementDependencies */,
 				8405CC602C0E5F7200A73E8F /* Report */,
 				8405CC642C0E65E700A73E8F /* Settings */,
 				84F2EE082C0E6CB600D65512 /* Redux */,
@@ -373,8 +338,6 @@
 			name = businessToGoTests;
 			packageProductDependencies = (
 				8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */,
-				8467DEC42BDECB500077E331 /* OHHTTPStubs */,
-				8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */,
 			);
 			productName = businessToGoTests;
 			productReference = 84C5A2A32BC40EEE00C25A0C /* businessToGoTests.xctest */;
@@ -432,18 +395,11 @@
 			);
 			mainGroup = 84C5A2892BC40EEC00C25A0C;
 			packageReferences = (
-				845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */,
-				8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
-				8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
-				845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */,
-				84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */,
-				8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */,
-				8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */,
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */,
-				8405CBCD2C0E0A2D00A73E8F /* XCRemoteSwiftPackageReference "OfflineSync" */,
 				8405CBD32C0E0E5900A73E8F /* XCRemoteSwiftPackageReference "Log" */,
 				8405CBD62C0E0E8500A73E8F /* XCRemoteSwiftPackageReference "Login" */,
+				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -873,14 +829,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8405CBCD2C0E0A2D00A73E8F /* XCRemoteSwiftPackageReference "OfflineSync" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/OfflineSync.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.1;
-			};
-		};
 		8405CBD32C0E0E5900A73E8F /* XCRemoteSwiftPackageReference "Log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ManuelSelch/Log.git";
@@ -897,14 +845,6 @@
 				minimumVersion = 1.1.1;
 			};
 		};
-		8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/Chart.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.3;
-			};
-		};
 		843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lindebrothers/ReduxMonitor";
@@ -913,44 +853,12 @@
 				minimumVersion = 2.0.9;
 			};
 		};
-		845503E12BCEB15500BCA93B /* XCRemoteSwiftPackageReference "TestableCombinePublishers" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/albertbori/TestableCombinePublishers.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.1;
-			};
-		};
-		845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.0;
-			};
-		};
-		8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.15.3;
-			};
-		};
-		8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.1.0;
-			};
-		};
-		8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */ = {
+		845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Pulse.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.1;
+				minimumVersion = 4.2.3;
 			};
 		};
 		8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */ = {
@@ -961,22 +869,9 @@
 				minimumVersion = 4.0.1;
 			};
 		};
-		84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/c-villain/SwipeActions.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8405CBCE2C0E0A2D00A73E8F /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8405CBCD2C0E0A2D00A73E8F /* XCRemoteSwiftPackageReference "OfflineSync" */;
-			productName = OfflineSync;
-		};
 		8405CBD42C0E0E5900A73E8F /* Log */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8405CBD32C0E0E5900A73E8F /* XCRemoteSwiftPackageReference "Log" */;
@@ -987,10 +882,6 @@
 			package = 8405CBD62C0E0E8500A73E8F /* XCRemoteSwiftPackageReference "Login" */;
 			productName = Login;
 		};
-		8405CC582C0E5F4A00A73E8F /* Shared */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Shared;
-		};
 		8405CC5A2C0E5F5000A73E8F /* Intro */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Intro;
@@ -998,10 +889,6 @@
 		8405CC5C2C0E5F5F00A73E8F /* Management */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Management;
-		};
-		8405CC5E2C0E5F6900A73E8F /* ManagementDependencies */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ManagementDependencies;
 		};
 		8405CC602C0E5F7200A73E8F /* Report */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1015,19 +902,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Redux;
 		};
-		8416FC102C09B0F8003E30E7 /* Log */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Log;
-		};
-		841840522BFCE77200EC9FDF /* MyChart */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MyChart;
-		};
-		8418405D2BFD024E00EC9FDF /* MyChart */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8418405C2BFD024E00EC9FDF /* XCRemoteSwiftPackageReference "Chart" */;
-			productName = MyChart;
-		};
 		843A02FA2C0B9FC300A716AF /* Login */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Login;
@@ -1037,38 +911,9 @@
 			package = 843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */;
 			productName = ReduxMonitor;
 		};
-		8467DEC12BDECA300077E331 /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8467DEC02BDECA300077E331 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
-			productName = SQLite;
-		};
-		8467DEC42BDECB500077E331 /* OHHTTPStubs */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
-			productName = OHHTTPStubs;
-		};
-		8467DEC62BDECC070077E331 /* OHHTTPStubsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8467DEC32BDECB500077E331 /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
-			productName = OHHTTPStubsSwift;
-		};
 		8467DED12BDEDC4B0077E331 /* Log */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Log;
-		};
-		8467DED72BDEECFC0077E331 /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
-		8472A3D32C010B99006726A1 /* PulseUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */;
-			productName = PulseUI;
-		};
-		8472A3D52C010E3C006726A1 /* Pulse */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8472A3D22C010A73006726A1 /* XCRemoteSwiftPackageReference "Pulse" */;
-			productName = Pulse;
 		};
 		8472A3D82C01161A006726A1 /* PulseLogHandler */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1078,10 +923,6 @@
 		8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TestableCombinePublishers;
-		};
-		84977F812C029939003E83BA /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
 		};
 		84977F842C0299CE003E83BA /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1095,10 +936,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Log;
 		};
-		84CD11F92BF41393006AE4C7 /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
 		84CD11FC2BF413D6006AE4C7 /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OfflineSync;
@@ -1107,23 +944,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = OfflineSync;
 		};
-		84E6DCA52BF400A00051E148 /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
 		84F2EE082C0E6CB600D65512 /* Redux */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Redux;
-		};
-		84F5AE902BF74CA6007EE279 /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 845811142BF74BB000AF926A /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
-		84F5AEB22BF8B7E4007EE279 /* SwipeActions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84F5AEB12BF8B7E4007EE279 /* XCRemoteSwiftPackageReference "SwipeActions" */;
-			productName = SwipeActions;
 		};
 		84FDEDFD2BFFDD1C0071C8FA /* Login */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,6 +1,6 @@
 import SwiftUI
 
-import ManagementDependencies
+import TaigaCore
 
 struct TaigaProjectCardView: View {
     private var width: CGFloat = 400

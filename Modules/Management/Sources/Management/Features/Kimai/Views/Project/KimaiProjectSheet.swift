@@ -1,5 +1,6 @@
 import SwiftUI
-import ManagementDependencies
+
+import KimaiCore
 
 struct KimaiProjectSheet: View {
     

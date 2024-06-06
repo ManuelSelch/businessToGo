@@ -1,6 +1,7 @@
 import SwiftUI
 import OfflineSync
-import ManagementDependencies
+
+import KimaiCore
 
 struct KimaiActivityListView: View {
     let activities: [KimaiActivity]

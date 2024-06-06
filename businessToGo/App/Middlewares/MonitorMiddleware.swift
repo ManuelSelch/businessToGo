@@ -5,7 +5,7 @@ import Redux
 import PulseLogHandler
 import Log
 
-import Shared
+import AppCore
 
 struct MonitorMiddleware {
     let monitor = ReduxMonitor(url: URL(string: "wss://redux.dev.manuelselch.de/socketcluster/?transport=websocket"))

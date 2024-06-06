@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "dependencies",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/Dependencies.git",
+      "state" : {
+        "revision" : "94ac38716591c5c7e0ce512765e649f06df5f8d8",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Log.git",
@@ -50,17 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/OfflineSync.git",
       "state" : {
-        "revision" : "b9532025fad82edfac718dc0f698fbf44c951fcb",
-        "version" : "1.2.1"
-      }
-    },
-    {
-      "identity" : "ohhttpstubs",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AliSoftware/OHHTTPStubs.git",
-      "state" : {
-        "revision" : "12f19662426d0434d6c330c6974d53e2eb10ecd9",
-        "version" : "9.1.0"
+        "revision" : "59597a9ae5b87e4f434495c3e474d530d4944153",
+        "version" : "1.2.3"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Pulse.git",
       "state" : {
-        "revision" : "b7982a03165ebcc63f2e70236cc674d4e4dd3dc9",
-        "version" : "4.2.2"
+        "revision" : "2d37916b14718f7b654606d72f6cf23f299dc47a",
+        "version" : "4.2.3"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/Redux",
       "state" : {
-        "revision" : "c5c00145592f25487f84391e6067567d2843879d",
-        "version" : "1.1.6"
+        "revision" : "448befeb2a649b1b8f8dd748e354b487d625ef3e",
+        "version" : "1.1.7"
       }
     },
     {
@@ -133,24 +133,6 @@
       "state" : {
         "revision" : "e97a6fcb1ab07462881ac165fdbb37f067e205d5",
         "version" : "1.5.4"
-      }
-    },
-    {
-      "identity" : "swipeactions",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/c-villain/SwipeActions.git",
-      "state" : {
-        "revision" : "2c8f262ef508f004193ca5e0d81f0e52d6c4d7b4",
-        "version" : "0.3.5"
-      }
-    },
-    {
-      "identity" : "testablecombinepublishers",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/albertbori/TestableCombinePublishers.git",
-      "state" : {
-        "revision" : "a053f58f21a0187817afd65b440911496809d21a",
-        "version" : "1.2.1"
       }
     }
   ],

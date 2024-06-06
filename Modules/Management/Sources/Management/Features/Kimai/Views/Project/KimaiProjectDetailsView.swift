@@ -2,8 +2,8 @@ import SwiftUI
 import MyChart
 import OfflineSync
 
-import ManagementDependencies
-import Shared
+import KimaiCore
+import AppCore
 
 struct KimaiProjectDetailsView: View {
     let project: KimaiProject

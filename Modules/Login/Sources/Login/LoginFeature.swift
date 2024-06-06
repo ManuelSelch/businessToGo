@@ -1,7 +1,10 @@
 import Foundation
 import LoginService
 import Redux
-import ManagementDependencies
+import Dependencies
+
+import KimaiCore
+import TaigaCore
 
 enum LoginScreen: Equatable, Codable {
     case accounts

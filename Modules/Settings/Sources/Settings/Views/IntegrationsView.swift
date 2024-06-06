@@ -1,6 +1,8 @@
 import SwiftUI
 
-import ManagementDependencies
+import KimaiCore
+import TaigaCore
+import IntegrationsCore
 
 struct IntegrationsView: View {
     let customers: [KimaiCustomer]

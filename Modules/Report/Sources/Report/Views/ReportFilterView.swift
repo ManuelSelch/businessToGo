@@ -1,6 +1,6 @@
 import SwiftUI
 
-import ManagementDependencies
+import KimaiCore
 
 struct ReportFilterView: View {
     

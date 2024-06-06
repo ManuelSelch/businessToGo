@@ -1,7 +1,8 @@
 import Foundation
 import Combine
 import Redux
-import Shared
+
+import AppCore
 
 public struct IntroFeature: Reducer {
     public init() {}

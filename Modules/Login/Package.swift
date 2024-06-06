@@ -9,29 +9,30 @@ let package = Package(
         .iOS(.v17)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Login",
             targets: ["Login"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/manuelselch/Redux.git", .upToNextMajor(from: "1.1.5")),
+        .package(url: "https://github.com/manuelselch/Redux.git", .upToNextMajor(from: "1.1.7")),
+        .package(url: "https://github.com/manuelselch/Dependencies.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/ManuelSelch/LoginService.git", .upToNextMajor(from: "1.1.3")),
         
-        .package(path: "../Management"),
-        .package(path: "../../Shared")
+        .package(path: "../../Core/KimaiCore"),
+        .package(path: "../../Core/TaigaCore"),
+        .package(path: "../../AppCore")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Login",
             dependencies: [
                 .product(name: "Redux", package: "Redux"),
+                .product(name: "Dependencies", package: "Dependencies"),
                 .product(name: "LoginService", package: "LoginService"),
                 
-                .product(name: "ManagementDependencies", package: "Management"),
-                .product(name: "Shared", package: "Shared")
+                .product(name: "KimaiCore", package: "KimaiCore"),
+                .product(name: "TaigaCore", package: "TaigaCore"),
+                .product(name: "AppCore", package: "AppCore")
             ]
         ),
         .testTarget(

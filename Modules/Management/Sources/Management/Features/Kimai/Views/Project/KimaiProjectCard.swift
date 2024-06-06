@@ -1,6 +1,7 @@
 import SwiftUI
 import OfflineSync
-import ManagementDependencies
+
+import KimaiCore
 
 struct KimaiProjectCard: View {
     let kimaiProject: KimaiProject

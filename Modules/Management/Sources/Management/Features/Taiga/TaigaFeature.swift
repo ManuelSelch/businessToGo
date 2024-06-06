@@ -1,9 +1,12 @@
 import Foundation
-import SwiftUI
 import OfflineSync
+import SwiftUI
 import Redux
 import Combine
-import ManagementDependencies
+import Dependencies
+
+import TaigaCore
+import IntegrationsCore
 
 public struct TaigaFeature: Reducer {
     @Dependency(\.track) var track

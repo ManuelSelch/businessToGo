@@ -6,7 +6,7 @@ public struct ReportContainer: View {
     
     public init(store: StoreOf<ReportFeature>) {
         self.store = store
-    }
+    } 
     
     public var body: some View {
         RouterView(store: store.lift(\.router, ReportFeature.Action.router)) { route in

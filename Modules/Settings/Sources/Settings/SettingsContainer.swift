@@ -1,7 +1,7 @@
 import SwiftUI
 import Redux
 
-import ManagementDependencies
+import KimaiCore
 
 public struct SettingsContainer: View {
     @ObservedObject var store: StoreOf<SettingsFeature>

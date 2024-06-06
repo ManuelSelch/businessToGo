@@ -1,7 +1,8 @@
 import SwiftUI
 import MyChart
 import OfflineSync
-import ManagementDependencies
+
+import KimaiCore
 
 struct KimaiProjectsListView: View {
     let customer: Int

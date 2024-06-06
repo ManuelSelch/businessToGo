@@ -1,7 +1,9 @@
 import Foundation
 import Redux
 import OfflineSync
-import ManagementDependencies
+import Dependencies
+
+import KimaiCore
 
 public struct ReportFeature: Reducer {
     @Dependency(\.kimai) var kimai

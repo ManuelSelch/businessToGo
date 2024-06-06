@@ -1,8 +1,8 @@
 
 import SwiftUI
 
-import Shared
-import ManagementDependencies
+import AppCore
+import KimaiCore
 
 struct ReportFilterProjectsView: View {
     

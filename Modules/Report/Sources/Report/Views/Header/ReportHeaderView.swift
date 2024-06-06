@@ -1,7 +1,7 @@
 import SwiftUI
 import Redux
 
-import ManagementDependencies
+import KimaiCore
 
 struct ReportHeaderView: View {
     @Binding var selectedReportType: ReportType

@@ -1,8 +1,8 @@
 import SwiftUI
 import OfflineSync
 
-import ManagementDependencies
-import Shared
+import KimaiCore
+import AppCore
 
 public struct KimaiTimesheetsListView: View {
     let projects: [KimaiProject]

@@ -1,6 +1,6 @@
 import SwiftUI
 
-import ManagementDependencies
+import TaigaCore
 
 struct TaigaKanbanView: View {
     let project: TaigaProject

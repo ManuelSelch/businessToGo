@@ -1,6 +1,6 @@
 import SwiftUI
 
-import ManagementDependencies
+import KimaiCore
 
 struct ReportSummaryView: View {
     let timesheets: [KimaiTimesheet]
@@ -33,6 +33,7 @@ struct ReportSummaryView: View {
                     .font(.system(size: 20, weight: .heavy))
             }
             
+            
             Spacer()
             
             VStack(alignment: .leading) {
@@ -45,4 +46,8 @@ struct ReportSummaryView: View {
         }
         .padding()
     }
+}
+
+#Preview {
+    ReportSummaryView(timesheets: [])
 }

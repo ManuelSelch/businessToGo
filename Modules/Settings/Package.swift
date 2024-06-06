@@ -1,6 +1,4 @@
 // swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
 import PackageDescription
 
 let package = Package(
@@ -9,25 +7,28 @@ let package = Package(
         .iOS(.v17)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Settings",
             targets: ["Settings"]),
     ],
     dependencies: [
-        .package(path: "../Management"),
+        .package(path: "../../Core/KimaiCore"),
+        .package(path: "../../Core/TaigaCore"),
+        .package(path: "../../Core/IntegrationsCore"),
         .package(path: "../Login"),
-        .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.1.5"))
+        .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.1.5")),
+        .package(url: "https://github.com/kean/Pulse.git", .upToNextMajor(from: "4.2.3"))
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Settings",
             dependencies: [
                 .product(name: "Redux", package: "Redux"),
-                .product(name: "ManagementDependencies", package: "Management"),
-                .product(name: "Login", package: "Login")
+                .product(name: "KimaiCore", package: "KimaiCore"),
+                .product(name: "TaigaCore", package: "TaigaCore"),
+                .product(name: "IntegrationsCore", package: "IntegrationsCore"),
+                .product(name: "Login", package: "Login"),
+                .product(name: "PulseUI", package: "Pulse")
             ]
         ),
         .testTarget(

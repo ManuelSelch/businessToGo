@@ -2,8 +2,7 @@ import SwiftUI
 import OfflineSync
 import MyChart
 
-import Management
-import ManagementDependencies
+import KimaiCore
 
 struct ReportsView: View {
     
@@ -75,6 +74,9 @@ extension ReportsView {
     
     @ViewBuilder
     func getTimesheets() -> some View {
+        Text("TODO: implement kimai timesheets view")
+            .foregroundStyle(Color.red)
+        /*
         KimaiTimesheetsListView(
             projects: projects,
             timesheets: timesheetsFiltered,
@@ -83,6 +85,7 @@ extension ReportsView {
             deleteTapped: deleteTapped,
             editTapped: { _ in } // TODO: handle edit tapped event
         )
+         */
     }
     
     @ViewBuilder

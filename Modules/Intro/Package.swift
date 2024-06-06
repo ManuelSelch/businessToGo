@@ -16,7 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.1.5")),
-        .package(path: "../../Shared")
+        .package(path: "../../AppCore")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -25,7 +25,7 @@ let package = Package(
             name: "Intro",
             dependencies: [
                 .product(name: "Redux", package: "Redux"),
-                .product(name: "Shared", package: "Shared")
+                .product(name: "AppCore", package: "AppCore")
             ]
         ),
         .testTarget(

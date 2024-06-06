@@ -1,11 +1,14 @@
 import Foundation
 import Redux
 import Combine
+import Dependencies
 
-import Shared
-
-import ManagementDependencies
 import Login
+
+import AppCore
+import KimaiCore
+import TaigaCore
+import IntegrationsCore
 
 public struct SettingsFeature: Reducer {
     @Dependency(\.database) var database

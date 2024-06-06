@@ -1,6 +1,6 @@
 import SwiftUI
 
-import Login
+import LoginCore
 
 struct DebugView: View {
     let account: Account?

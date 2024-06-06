@@ -21,7 +21,8 @@ let package = Package(
         
         .package(path: "../../AppCore"),
         .package(path: "../../Core/KimaiCore"),
-        .package(path: "../../Core/TaigaCore")
+        .package(path: "../../Core/TaigaCore"),
+        .package(path: "../../Core/IntegrationsCore")
     ],
     targets: [
         .target(
@@ -33,7 +34,8 @@ let package = Package(
             
                 .product(name: "AppCore", package: "AppCore"),
                 .product(name: "KimaiCore", package: "KimaiCore"),
-                .product(name: "TaigaCore", package: "TaigaCore")
+                .product(name: "TaigaCore", package: "TaigaCore"),
+                .product(name: "IntegrationsCore", package: "IntegrationsCore")
                 
             ]
         ),

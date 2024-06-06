@@ -20,6 +20,7 @@ let package = Package(
         
         .package(path: "../../Core/KimaiCore"),
         .package(path: "../../Core/TaigaCore"),
+        .package(path: "../../Core/LoginCore"),
         .package(path: "../../AppCore")
     ],
     targets: [
@@ -32,6 +33,7 @@ let package = Package(
                 
                 .product(name: "KimaiCore", package: "KimaiCore"),
                 .product(name: "TaigaCore", package: "TaigaCore"),
+                .product(name: "LoginCore", package: "LoginCore"),
                 .product(name: "AppCore", package: "AppCore")
             ]
         ),

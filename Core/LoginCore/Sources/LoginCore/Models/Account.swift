@@ -9,6 +9,7 @@ public struct Account: IAccount, Hashable {
     public var name: String = ""
     public var kimai: AccountData?
     public var taiga: AccountData?
+
     
 }
 
@@ -17,7 +18,7 @@ public struct AccountData: Codable, Hashable {
     public var password: String
     public var server: String
     
-    init(_ username: String, _ password: String, _ server: String) {
+    public init(_ username: String, _ password: String, _ server: String) {
         self.username = username
         self.password = password
         self.server = server
@@ -25,6 +26,10 @@ public struct AccountData: Codable, Hashable {
 }
 
 public extension Account {
+    init(id: Int) {
+        self.id = id
+    }
+    
     static let demo = Account(
         id: 0,
         name: "DEMO"

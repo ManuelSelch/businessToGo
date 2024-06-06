@@ -12,10 +12,11 @@ let package = Package(
             targets: ["Report"]),
     ],
     dependencies: [
-        .package(path: "../../Core/KimaiCore"),
         .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.1.7")),
         .package(url: "https://github.com/manuelselch/Dependencies", .upToNextMajor(from: "1.0.0")),
-        .package(url: "https://github.com/manuelselch/Chart", .upToNextMajor(from: "1.0.3"))
+        .package(url: "https://github.com/manuelselch/Chart", .upToNextMajor(from: "1.0.3")),
+        
+        .package(path: "../../Core/KimaiCore"),
     ],
     targets: [
         .target(

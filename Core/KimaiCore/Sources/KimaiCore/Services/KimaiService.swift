@@ -6,7 +6,7 @@ import OfflineSync
 import SQLite
 import Dependencies
 
-import AppCore
+import NetworkFoundation
 
 // MARK: - admin middleware
 public class KimaiService {
@@ -36,7 +36,7 @@ public class KimaiService {
         if let url = URL(string: server+"/api") {
             KimaiRequest.server = url
         }else {
-            throw ServiceError.urlDecodeFailed
+            throw NetworkError.urlDecodeFailed
         }
         
         return true // todo: check auth

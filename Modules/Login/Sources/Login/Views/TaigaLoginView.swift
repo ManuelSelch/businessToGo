@@ -1,6 +1,7 @@
 import SwiftUI
 
 import AppCore
+import LoginCore
 
 struct TaigaLoginView: View {
     

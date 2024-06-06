@@ -3,9 +3,8 @@ import Redux
 import Combine
 import Dependencies
 
-import Login
-
 import AppCore
+import LoginCore
 import KimaiCore
 import TaigaCore
 import IntegrationsCore

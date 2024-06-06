@@ -2,6 +2,8 @@ import Foundation
 import Combine
 import Redux
 
+import LoginCore
+
 public extension LoginFeature {
     
     func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {

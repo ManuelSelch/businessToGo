@@ -1,5 +1,7 @@
 import SwiftUI
 
+import LoginCore
+
 struct AccountsView: View {
     
     let accounts: [Account]

@@ -6,6 +6,8 @@ import Dependencies
 import OfflineSync
 import SQLite
 
+import NetworkFoundation
+
 import AppCore
 
 public class TaigaService {
@@ -38,11 +40,11 @@ public class TaigaService {
             throw ServiceError.urlDecodeFailed
         }
         
-        return try await Service.request(provider, .checkLogin(username, password))
+        return try await Network.request(provider, .checkLogin(username, password))
     }
     
     public func updateTaskStory(_ taskStory: TaigaTaskStory) async throws -> TaigaTaskStory {
-        return try await Service.request(provider, .updateTaskStory(taskStory))
+        return try await Network.request(provider, .updateTaskStory(taskStory))
     }
     
     public func loadImage(_ url: String?) -> AnyPublisher<UIImage, Error> {

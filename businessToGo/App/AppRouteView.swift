@@ -2,8 +2,8 @@ import SwiftUI
 import Redux
 
 import Intro
-import Login
-import Management
+import LoginApp
+import ManagementApp
 import Report
 import Settings
 
@@ -20,7 +20,6 @@ extension AppRoute {
             ReportContainer(store: store.lift(\.report, AppFeature.Action.report))
         case .settings:
             SettingsContainer(store: store.lift(\.settings, AppFeature.Action.settings))
-        
         }
     }
 }

@@ -16,16 +16,21 @@ let package = Package(
         .package(url: "https://github.com/manuelselch/Dependencies", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/manuelselch/Chart", .upToNextMajor(from: "1.0.3")),
         
-        .package(path: "../../Core/KimaiCore"),
+        .package(path: "../Kimai"),
+        .package(path: "../../Common")
     ],
     targets: [
         .target(
             name: "Report",
             dependencies: [
-                .product(name: "KimaiCore", package: "KimaiCore"),
+                .product(name: "KimaiCore", package: "Kimai"),
+                .product(name: "KimaiServices", package: "Kimai"),
+                
                 .product(name: "Redux", package: "Redux"),
                 .product(name: "Dependencies", package: "Dependencies"),
-                .product(name: "MyChart", package: "Chart")
+                .product(name: "MyChart", package: "Chart"),
+                
+                .product(name: "CommonCore", package: "Common")
             ]
         ),
         .testTarget(

@@ -3,29 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8405CBCC2C0E030500A73E8F /* TestKimaiReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405CBCB2C0E030500A73E8F /* TestKimaiReducer.swift */; };
-		8405CBD52C0E0E5900A73E8F /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CBD42C0E0E5900A73E8F /* Log */; };
 		8405CC522C0E174800A73E8F /* JSONViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405CC512C0E174800A73E8F /* JSONViewer.swift */; };
 		8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5A2C0E5F5000A73E8F /* Intro */; };
-		8405CC5D2C0E5F5F00A73E8F /* Management in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5C2C0E5F5F00A73E8F /* Management */; };
 		8405CC612C0E5F7200A73E8F /* Report in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC602C0E5F7200A73E8F /* Report */; };
-		8405CC652C0E65E700A73E8F /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC642C0E65E700A73E8F /* Settings */; };
 		841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840652BFD414F00EC9FDF /* AppContainer.swift */; };
-		841840692BFD41CC00EC9FDF /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840682BFD41CC00EC9FDF /* AppTabView.swift */; };
-		843A02FB2C0B9FC300A716AF /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 843A02FA2C0B9FC300A716AF /* Login */; };
 		843A02FE2C0BE4E500A716AF /* ReduxMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 843A02FD2C0BE4E500A716AF /* ReduxMonitor */; };
 		84410B1C2C0CB0A500D57894 /* MonitorMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */; };
 		84458AE32BC41A720041E40F /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE22BC41A720041E40F /* AppFeature.swift */; };
+		844853172C1275DC00E17061 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 844853162C1275DC00E17061 /* Log */; };
+		846421B62C1A43AE0014694B /* ManagementApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B52C1A43AE0014694B /* ManagementApp */; };
+		846421B82C1A43B30014694B /* LoginApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B72C1A43B30014694B /* LoginApp */; };
+		846421BC2C1A47050014694B /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 846421BB2C1A47050014694B /* Settings */; };
 		846751022C00B9F70028921A /* AppRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751012C00B9F70028921A /* AppRouteView.swift */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
 		8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D82C01161A006726A1 /* PulseLogHandler */; };
 		8486FBCB2BCEB0390052DF18 /* TestableCombinePublishers in Frameworks */ = {isa = PBXBuildFile; productRef = 8486FBCA2BCEB0390052DF18 /* TestableCombinePublishers */; };
 		84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84977F7E2C029428003E83BA /* AppLauncher.swift */; };
-		84977F882C0299E8003E83BA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84977F872C0299E8003E83BA /* Login */; };
 		84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */; };
 		84C5A29A2BC40EEE00C25A0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C5A2992BC40EEE00C25A0C /* Assets.xcassets */; };
 		84C5A29E2BC40EEE00C25A0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C5A29D2BC40EEE00C25A0C /* Preview Assets.xcassets */; };
@@ -33,7 +31,6 @@
 		84C5A2B42BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */; };
 		84CD11F72BF410E8006AE4C7 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 84CD11F62BF410E8006AE4C7 /* Log */; };
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
-		84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */ = {isa = PBXBuildFile; productRef = 84FDEDFD2BFFDD1C0071C8FA /* Login */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,15 +60,12 @@
 		8405CC572C0E594300A73E8F /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
 		841083CB2BFBDCE700332A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		841840652BFD414F00EC9FDF /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
-		841840682BFD41CC00EC9FDF /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
+		843EB61E2C1A40B600A6CF0C /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Common; sourceTree = "<group>"; };
 		84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorMiddleware.swift; sourceTree = "<group>"; };
 		84458AE22BC41A720041E40F /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
-		8453D8F42C112C80002E992C /* KimaiCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = KimaiCore; sourceTree = "<group>"; };
-		8453D8F62C112C96002E992C /* TaigaCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TaigaCore; sourceTree = "<group>"; };
-		8453D8F72C112CFC002E992C /* IntegrationsCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IntegrationsCore; sourceTree = "<group>"; };
-		8453D8F82C112DDC002E992C /* AppCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AppCore; sourceTree = "<group>"; };
-		8453D9042C11B310002E992C /* LoginCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LoginCore; sourceTree = "<group>"; };
 		8453D9062C11B44A002E992C /* NetworkFoundation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkFoundation; sourceTree = "<group>"; };
+		846421B92C1A45210014694B /* Kimai */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Kimai; sourceTree = "<group>"; };
+		846421BA2C1A45330014694B /* Taiga */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Taiga; sourceTree = "<group>"; };
 		846751012C00B9F70028921A /* AppRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteView.swift; sourceTree = "<group>"; };
 		84977F7E2C029428003E83BA /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		84C5A2922BC40EEC00C25A0C /* businessToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = businessToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,16 +87,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
+				846421BC2C1A47050014694B /* Settings in Frameworks */,
 				843A02FE2C0BE4E500A716AF /* ReduxMonitor in Frameworks */,
-				8405CC5D2C0E5F5F00A73E8F /* Management in Frameworks */,
+				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
-				843A02FB2C0B9FC300A716AF /* Login in Frameworks */,
-				84FDEDFE2BFFDD1C0071C8FA /* Login in Frameworks */,
 				8405CC612C0E5F7200A73E8F /* Report in Frameworks */,
-				84977F882C0299E8003E83BA /* Login in Frameworks */,
-				8405CC652C0E65E700A73E8F /* Settings in Frameworks */,
+				846421B62C1A43AE0014694B /* ManagementApp in Frameworks */,
+				844853172C1275DC00E17061 /* Log in Frameworks */,
 				8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */,
-				8405CBD52C0E0E5900A73E8F /* Log in Frameworks */,
 				8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +136,8 @@
 		8405CC4D2C0E120400A73E8F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				846421BA2C1A45330014694B /* Taiga */,
+				846421B92C1A45210014694B /* Kimai */,
 				8405CC572C0E594300A73E8F /* Settings */,
 				8405CC562C0E590300A73E8F /* Intro */,
 				8405CC552C0E58ED00A73E8F /* Report */,
@@ -165,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				84FC58572BC9559200594E14 /* AppHeader.swift */,
-				841840682BFD41CC00EC9FDF /* AppTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,17 +169,6 @@
 				84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */,
 			);
 			path = Middlewares;
-			sourceTree = "<group>";
-		};
-		8453D8F32C112C40002E992C /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				8453D9042C11B310002E992C /* LoginCore */,
-				8453D8F72C112CFC002E992C /* IntegrationsCore */,
-				8453D8F62C112C96002E992C /* TaigaCore */,
-				8453D8F42C112C80002E992C /* KimaiCore */,
-			);
-			path = Core;
 			sourceTree = "<group>";
 		};
 		8453D9032C11B10B002E992C /* Foundation */ = {
@@ -200,9 +182,8 @@
 		84C5A2892BC40EEC00C25A0C = {
 			isa = PBXGroup;
 			children = (
-				8453D8F82C112DDC002E992C /* AppCore */,
+				843EB61E2C1A40B600A6CF0C /* Common */,
 				8453D9032C11B10B002E992C /* Foundation */,
-				8453D8F32C112C40002E992C /* Core */,
 				8405CC4D2C0E120400A73E8F /* Modules */,
 				84C5A2942BC40EEC00C25A0C /* businessToGo */,
 				84C5A2A62BC40EEE00C25A0C /* businessToGoTests */,
@@ -301,16 +282,14 @@
 			packageProductDependencies = (
 				8467DED12BDEDC4B0077E331 /* Log */,
 				84CD11F62BF410E8006AE4C7 /* Log */,
-				84FDEDFD2BFFDD1C0071C8FA /* Login */,
 				8472A3D82C01161A006726A1 /* PulseLogHandler */,
-				84977F872C0299E8003E83BA /* Login */,
-				843A02FA2C0B9FC300A716AF /* Login */,
 				843A02FD2C0BE4E500A716AF /* ReduxMonitor */,
-				8405CBD42C0E0E5900A73E8F /* Log */,
 				8405CC5A2C0E5F5000A73E8F /* Intro */,
-				8405CC5C2C0E5F5F00A73E8F /* Management */,
 				8405CC602C0E5F7200A73E8F /* Report */,
-				8405CC642C0E65E700A73E8F /* Settings */,
+				844853162C1275DC00E17061 /* Log */,
+				846421B52C1A43AE0014694B /* ManagementApp */,
+				846421B72C1A43B30014694B /* LoginApp */,
+				846421BB2C1A47050014694B /* Settings */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -391,8 +370,8 @@
 			packageReferences = (
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */,
-				8405CBD32C0E0E5900A73E8F /* XCRemoteSwiftPackageReference "Log" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
+				844853152C1275DC00E17061 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -442,7 +421,6 @@
 				84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */,
 				84458AE32BC41A720041E40F /* AppFeature.swift in Sources */,
 				84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */,
-				841840692BFD41CC00EC9FDF /* AppTabView.swift in Sources */,
 				8405CC522C0E174800A73E8F /* JSONViewer.swift in Sources */,
 				84410B1C2C0CB0A500D57894 /* MonitorMiddleware.swift in Sources */,
 			);
@@ -821,15 +799,14 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		8405CBD32C0E0E5900A73E8F /* XCRemoteSwiftPackageReference "Log" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ManuelSelch/Log.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.1;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		844853152C1275DC00E17061 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/Log;
 		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
 		843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lindebrothers/ReduxMonitor";
@@ -857,35 +834,34 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8405CBD42C0E0E5900A73E8F /* Log */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8405CBD32C0E0E5900A73E8F /* XCRemoteSwiftPackageReference "Log" */;
-			productName = Log;
-		};
 		8405CC5A2C0E5F5000A73E8F /* Intro */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Intro;
-		};
-		8405CC5C2C0E5F5F00A73E8F /* Management */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Management;
 		};
 		8405CC602C0E5F7200A73E8F /* Report */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Report;
 		};
-		8405CC642C0E65E700A73E8F /* Settings */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Settings;
-		};
-		843A02FA2C0B9FC300A716AF /* Login */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Login;
-		};
 		843A02FD2C0BE4E500A716AF /* ReduxMonitor */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */;
 			productName = ReduxMonitor;
+		};
+		844853162C1275DC00E17061 /* Log */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Log;
+		};
+		846421B52C1A43AE0014694B /* ManagementApp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ManagementApp;
+		};
+		846421B72C1A43B30014694B /* LoginApp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LoginApp;
+		};
+		846421BB2C1A47050014694B /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Settings;
 		};
 		8467DED12BDEDC4B0077E331 /* Log */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -900,17 +876,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = TestableCombinePublishers;
 		};
-		84977F872C0299E8003E83BA /* Login */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Login;
-		};
 		84CD11F62BF410E8006AE4C7 /* Log */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Log;
-		};
-		84FDEDFD2BFFDD1C0071C8FA /* Login */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Login;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

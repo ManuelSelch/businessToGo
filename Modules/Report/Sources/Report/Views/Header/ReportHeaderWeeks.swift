@@ -1,5 +1,7 @@
 import SwiftUI
 
+import CommonCore
+
 struct ReportHeaderWeeks: View {
     @Binding var selectedDate: Date
     var firstDay: Date {

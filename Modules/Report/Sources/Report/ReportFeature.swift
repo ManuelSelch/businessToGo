@@ -4,6 +4,7 @@ import OfflineSync
 import Dependencies
 
 import KimaiCore
+import KimaiServices
 
 public struct ReportFeature: Reducer {
     @Dependency(\.kimai) var kimai
@@ -27,7 +28,7 @@ public struct ReportFeature: Reducer {
         var router: RouterFeature<Route>.State = .init(root: .reports)
     }
     
-    public enum Action: Codable {
+    public enum Action: Codable, Equatable {
         case router(RouterFeature<Route>.Action)
         
         case onAppear
@@ -42,24 +43,24 @@ public struct ReportFeature: Reducer {
         
     }
     
-    public enum ReportsAction: Codable {
+    public enum ReportsAction: Codable, Equatable {
         case calendarTapped
         case filterTapped
         case playTapped
         case deleteTapped(KimaiTimesheet)
     }
     
-    public enum CalendarAction: Codable {
+    public enum CalendarAction: Codable, Equatable {
         case lastYearTapped
         case nextYearTapped
         case monthTapped(String)
     }
     
-    public enum FilterAction: Codable {
+    public enum FilterAction: Codable, Equatable {
         case projectsTapped
     }
     
-    public enum FilterProjectsAction: Codable {
+    public enum FilterProjectsAction: Codable, Equatable {
         case allProjectsTapped
         case projectTapped(Int)
     }

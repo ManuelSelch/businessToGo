@@ -1,6 +1,6 @@
 import SwiftUI
 
-import AppCore
+import CommonUI
 
 struct IntroPagesView: View {
     @State var pageIndex = 0

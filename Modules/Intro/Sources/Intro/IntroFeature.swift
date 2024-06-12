@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import Redux
 
-import AppCore
+import CommonServices
 
 public struct IntroFeature: Reducer {
     public init() {}
@@ -38,20 +38,20 @@ public struct IntroFeature: Reducer {
         ]
     }
     
-    public enum Action: Codable {
+    public enum Action: Codable, Equatable {
         case load
         case delegate(Delegate)
     }
     
-    public enum Delegate: Codable {
+    public enum Delegate: Codable, Equatable {
         case showIntro
     }
     
     public func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
         switch(action){
         case .load:
-            let show = UserDefault.isIntro
-            UserDefault.isIntro = false
+            let show = UserDefaultService.isIntro
+            UserDefaultService.isIntro = false
             
             if(show) {
                 return .send(.delegate(.showIntro))

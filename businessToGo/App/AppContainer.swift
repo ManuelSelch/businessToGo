@@ -2,8 +2,6 @@ import SwiftUI
 import Log
 import Redux
 
-import Login
-
 struct AppContainer: View {
     @ObservedObject var store: StoreOf<AppFeature>
     
@@ -15,9 +13,7 @@ struct AppContainer: View {
             )
             
             if(store.state.tab == .login) {
-                LoginContainer(
-                    store: store.lift(\.login, AppFeature.Action.login)
-                )
+                AppRoute.login.view(store)
             } else {
                 TabView(selection:
                     store.binding(for: \.tab, action: AppFeature.Action.tabSelected)

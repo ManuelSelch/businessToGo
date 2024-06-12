@@ -3,10 +3,10 @@ import Log
 import Redux
 import Combine
 
-import Login
+import LoginApp
 import Intro
 import Report
-import Management
+import ManagementApp
 import Settings
 
 
@@ -38,7 +38,7 @@ struct AppFeature: Reducer {
         var settings: SettingsFeature.State = .init()
     }
     
-    enum Action: Codable {
+    enum Action: Codable, Equatable {
         case tabSelected(AppRoute)
         case sheetSelected(AppRoute?)
         case settingsTapped
@@ -136,9 +136,6 @@ struct AppFeature: Reducer {
             return IntroFeature().reduce(&state.intro, action)
                 .map { .intro($0) }
                 .eraseToAnyPublisher()
-            
-        
-            
         }
     }
     

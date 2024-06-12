@@ -1,7 +1,6 @@
 import SwiftUI
 import Combine
 import Redux
-import PulseUI
 import SwiftUI
 import PulseLogHandler
 import os
@@ -20,7 +19,7 @@ struct businessToGoApp: App {
                 MonitorMiddleware().handle
             ],
             errorAction: { error in
-                LoggerStore.shared.storeMessage(label: "Error", level: .warning, message: error.localizedDescription)
+                LoggerStore.shared.storeMessage(label: "Error", level: .warning, message: "\(error)")
                 return .log(.error(error.localizedDescription))
             }
         )

@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/OfflineSync.git",
       "state" : {
-        "revision" : "59597a9ae5b87e4f434495c3e474d530d4944153",
-        "version" : "1.2.3"
+        "revision" : "25e3058eb0089ec9a6a49a281a1be20ea6b8120a",
+        "version" : "1.2.4"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/Redux",
       "state" : {
-        "revision" : "c5c00145592f25487f84391e6067567d2843879d",
-        "version" : "1.1.6"
+        "revision" : "f42955cf35f4e735a44ba9c2a8f9b39ffd02c721",
+        "version" : "1.2.0"
       }
     },
     {

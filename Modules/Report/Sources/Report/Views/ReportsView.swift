@@ -74,8 +74,11 @@ extension ReportsView {
     
     @ViewBuilder
     func getTimesheets() -> some View {
-        Text("TODO: implement kimai timesheets view")
-            .foregroundStyle(Color.red)
+        VStack {
+            Text("TODO: implement kimai timesheets view")
+                .foregroundStyle(Color.red)
+            Spacer()
+        }
         /*
         KimaiTimesheetsListView(
             projects: projects,

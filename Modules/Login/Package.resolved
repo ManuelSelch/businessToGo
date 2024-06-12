@@ -12,7 +12,7 @@
     {
       "identity" : "dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Dependencies.git",
+      "location" : "https://github.com/manuelselch/Dependencies.git",
       "state" : {
         "revision" : "94ac38716591c5c7e0ce512765e649f06df5f8d8",
         "version" : "1.0.0"
@@ -57,10 +57,10 @@
     {
       "identity" : "redux",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/manuelselch/Redux",
+      "location" : "https://github.com/manuelselch/Redux.git",
       "state" : {
-        "revision" : "448befeb2a649b1b8f8dd748e354b487d625ef3e",
-        "version" : "1.1.7"
+        "revision" : "f42955cf35f4e735a44ba9c2a8f9b39ffd02c721",
+        "version" : "1.2.0"
       }
     },
     {

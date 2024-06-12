@@ -1,5 +1,6 @@
 import SwiftUI
 
+import CommonUI
 import LoginCore
 
 struct DebugView: View {

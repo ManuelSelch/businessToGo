@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-import AppCore
+import CommonUI
 import KimaiCore
 
 struct ReportFilterProjectsView: View {

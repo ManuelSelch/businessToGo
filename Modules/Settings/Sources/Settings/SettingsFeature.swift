@@ -3,11 +3,19 @@ import Redux
 import Combine
 import Dependencies
 
-import AppCore
+import CommonServices
+
 import LoginCore
+import LoginServices
+
 import KimaiCore
+import KimaiServices
+
 import TaigaCore
-import IntegrationsCore
+import TaigaServices
+
+import ManagementCore
+import ManagementServices
 
 public struct SettingsFeature: Reducer {
     @Dependency(\.database) var database
@@ -22,8 +30,8 @@ public struct SettingsFeature: Reducer {
         public init() {}
         
         var account: Account?
-        var isLocalLog: Bool = UserDefault.isLocalLog
-        var isRemoteLog: Bool = UserDefault.isRemoteLog
+        var isLocalLog: Bool = UserDefaultService.isLocalLog
+        var isRemoteLog: Bool = UserDefaultService.isRemoteLog
         
         
         var customers: [KimaiCustomer] = []
@@ -34,7 +42,7 @@ public struct SettingsFeature: Reducer {
         var router: RouterFeature<Route>.State = .init(root: .settings)
     }
     
-    public enum Action: Codable {
+    public enum Action: Codable, Equatable {
         case onConnect(_ kimai: Int, _ taiga: Int)
         
         case onLocalLogChanged(Bool)
@@ -47,7 +55,7 @@ public struct SettingsFeature: Reducer {
         case delegate(Delegate)
     }
     
-    public enum SettingsAction: Codable {
+    public enum SettingsAction: Codable, Equatable {
         case integrationsTapped
         case debugTapped
         case logTapped
@@ -55,7 +63,7 @@ public struct SettingsFeature: Reducer {
         case logoutTapped
     }
     
-    public enum Delegate: Codable {
+    public enum Delegate: Codable, Equatable {
         case showIntro
         case logout
         case dismiss
@@ -110,12 +118,12 @@ public struct SettingsFeature: Reducer {
             
         case let .onLocalLogChanged(isLocalLog):
             state.isLocalLog = isLocalLog
-            UserDefault.isLocalLog = isLocalLog
+            UserDefaultService.isLocalLog = isLocalLog
             return .none
             
         case let .onRemoteLogChanged(isRemoteLog):
             state.isRemoteLog = isRemoteLog
-            UserDefault.isRemoteLog = isRemoteLog
+            UserDefaultService.isRemoteLog = isRemoteLog
             return .none
             
         case let .onConnect(kimai, taiga):

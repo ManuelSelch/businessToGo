@@ -19,6 +19,7 @@
 		846421B62C1A43AE0014694B /* ManagementApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B52C1A43AE0014694B /* ManagementApp */; };
 		846421B82C1A43B30014694B /* LoginApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B72C1A43B30014694B /* LoginApp */; };
 		846421BC2C1A47050014694B /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 846421BB2C1A47050014694B /* Settings */; };
+		846421C02C1A4BFD0014694B /* AppArchitecture.png in Resources */ = {isa = PBXBuildFile; fileRef = 846421BF2C1A4BFD0014694B /* AppArchitecture.png */; };
 		846751022C00B9F70028921A /* AppRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751012C00B9F70028921A /* AppRouteView.swift */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
 		8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D82C01161A006726A1 /* PulseLogHandler */; };
@@ -66,6 +67,8 @@
 		8453D9062C11B44A002E992C /* NetworkFoundation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkFoundation; sourceTree = "<group>"; };
 		846421B92C1A45210014694B /* Kimai */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Kimai; sourceTree = "<group>"; };
 		846421BA2C1A45330014694B /* Taiga */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Taiga; sourceTree = "<group>"; };
+		846421BD2C1A4BDC0014694B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		846421BF2C1A4BFD0014694B /* AppArchitecture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppArchitecture.png; sourceTree = "<group>"; };
 		846751012C00B9F70028921A /* AppRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteView.swift; sourceTree = "<group>"; };
 		84977F7E2C029428003E83BA /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		84C5A2922BC40EEC00C25A0C /* businessToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = businessToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +80,6 @@
 		84C5A2AD2BC40EEE00C25A0C /* businessToGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = businessToGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C5A2B12BC40EEE00C25A0C /* businessToGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessToGoUITests.swift; sourceTree = "<group>"; };
 		84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessToGoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		84D7E98E2BD9294D00DE59DA /* Redux */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Redux; sourceTree = "<group>"; };
 		84FC58572BC9559200594E14 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,9 +181,18 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		846421BE2C1A4BEA0014694B /* Doc */ = {
+			isa = PBXGroup;
+			children = (
+				846421BF2C1A4BFD0014694B /* AppArchitecture.png */,
+			);
+			path = Doc;
+			sourceTree = "<group>";
+		};
 		84C5A2892BC40EEC00C25A0C = {
 			isa = PBXGroup;
 			children = (
+				846421BE2C1A4BEA0014694B /* Doc */,
 				843EB61E2C1A40B600A6CF0C /* Common */,
 				8453D9032C11B10B002E992C /* Foundation */,
 				8405CC4D2C0E120400A73E8F /* Modules */,
@@ -258,7 +269,7 @@
 		D35B2B6914CACF30228B3011 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84D7E98E2BD9294D00DE59DA /* Redux */,
+				846421BD2C1A4BDC0014694B /* README.md */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -389,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846421C02C1A4BFD0014694B /* AppArchitecture.png in Resources */,
 				84C5A29E2BC40EEE00C25A0C /* Preview Assets.xcassets in Resources */,
 				84C5A29A2BC40EEE00C25A0C /* Assets.xcassets in Resources */,
 			);

@@ -29,6 +29,9 @@ This SwiftUI iOS application is designed to streamline time and project manageme
 - **Taiga**: An open-source project management platform.
 - **Redux**: A predictable state container adapted for SwiftUI.
 
+## App Architecture
+![App Architecture](Doc/AppArchitecture.png)
+
 ---
 
 For more information, please visit the [Kimai](https://www.kimai.org) and [Taiga](https://www.taiga.io) websites.

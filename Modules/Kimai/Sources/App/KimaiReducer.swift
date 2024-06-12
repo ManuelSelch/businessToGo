@@ -12,7 +12,7 @@ public extension KimaiFeature {
         ])
     }
     
-    public func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
+    func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
         switch(action){
         case let .customerList(action):
             switch(action) {
@@ -22,16 +22,12 @@ public extension KimaiFeature {
                 return .send(.delegate(.route(.customerSheet(customer))))
             case let .saveTapped(customer):
                 if(customer.id == KimaiCustomer.new.id) {
-                    return .merge([
-                        // .send(.customers(.create(customer))),
-                        .send(.delegate(.dismiss))
-                    ])
+                    kimai.customers.create(customer)
                 } else {
-                    return .merge([
-                        // .send(.customers(.update(customer))),
-                        .send(.delegate(.dismiss))
-                    ])
+                    kimai.customers.update(customer)
                 }
+                state.customers = kimai.customers.get()
+                return .send(.delegate(.dismiss))
                 
             case .teamSelected(let team):
                 state.selectedTeam = team
@@ -69,20 +65,23 @@ public extension KimaiFeature {
             case let .projectEditTapped(project):
                 return .send(.delegate(.route(.projectSheet(project))))
             }
+        
         case let .projectSheet(action):
             switch(action) {
             case let .saveTapped(project):
                 if(project.id == KimaiProject.new.id) {
-                    // return .send(.projects(.create(project)))
+                    kimai.projects.create(project)
                 } else {
-                    // return .send(.projects(.update(project)))
+                    kimai.projects.update(project)
                 }
+                state.projects = kimai.projects.get()
+                return .send(.delegate(.dismiss))
             }
         case let .projectDetail(action):
             switch(action) {
             case let .deleteTapped(timesheet):
-                // return .send(.timesheets(.delete(timesheet)))
-                break
+                kimai.timesheets.delete(timesheet)
+                state.timesheets = kimai.timesheets.get()
             case let .editTapped(timesheet):
                 return .send(.delegate(.route(.timesheetSheet(timesheet))))
             }
@@ -90,10 +89,11 @@ public extension KimaiFeature {
             switch(action) {
             case let .saveTapped(timesheet):
                 if(timesheet.id == KimaiTeam.new.id) {
-                    // return .send(.timesheets(.create(timesheet)))
+                    kimai.timesheets.create(timesheet)
                 } else {
-                    // return .send(.timesheets(.update(timesheet)))
+                    kimai.timesheets.update(timesheet)
                 }
+                state.timesheets = kimai.timesheets.get()
             }
             
         case let .synced(action):

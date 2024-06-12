@@ -4,7 +4,7 @@ import KimaiCore
 import TaigaCore
 import ManagementCore
 
-struct IntegrationsView: View {
+public struct IntegrationsView: View {
     let customers: [KimaiCustomer]
     let projects: [KimaiProject]
     let taigaProjects: [TaigaProject]
@@ -27,7 +27,15 @@ struct IntegrationsView: View {
     
     @State var selectedCustomer: Int = 0
     
-    var body: some View {
+    public init(customers: [KimaiCustomer], projects: [KimaiProject], taigaProjects: [TaigaProject], integrations: [Integration], onConnect: @escaping (_: Int, _: Int) -> Void) {
+        self.customers = customers
+        self.projects = projects
+        self.taigaProjects = taigaProjects
+        self.integrations = integrations
+        self.onConnect = onConnect
+    }
+    
+    public var body: some View {
         VStack {
             /*Picker("Kunde", selection: $selectedCustomer) {
                 ForEach(customersFiltered, id: \.id) {

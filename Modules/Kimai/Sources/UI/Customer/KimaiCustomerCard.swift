@@ -8,7 +8,7 @@ struct KimaiCustomerCard: View {
     
     var body: some View {
         HStack {
-            if let color = customer.color {
+            if let color = customer.color, color != "" {
                 Circle()
                     .frame(width: 20, height: 20)
                     .foregroundStyle(Color(hex: color))

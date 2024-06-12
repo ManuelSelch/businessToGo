@@ -15,7 +15,6 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.1.9")),
         .package(url: "https://github.com/ManuelSelch/OfflineSync.git", .upToNextMajor(from: "1.2.1")),
-        .package(url: "https://github.com/ManuelSelch/Chart.git", .upToNextMajor(from: "1.0.3")),
         
         .package(path: "../../Common"),
         
@@ -53,7 +52,6 @@ let package = Package(
             dependencies: [
                 "ManagementCore", "ManagementServices", "ManagementUI",
                 .product(name: "Redux", package: "Redux"),
-                .product(name: "MyChart", package: "Chart"),
                 .product(name: "OfflineSync", package: "OfflineSync"),
             
                 .product(name: "KimaiApp", package: "Kimai"),

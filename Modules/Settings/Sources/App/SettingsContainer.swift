@@ -1,7 +1,7 @@
 import SwiftUI
 import Redux
 
-import KimaiCore
+import SettingsUI
 
 public struct SettingsContainer: View {
     @ObservedObject var store: StoreOf<SettingsFeature>
@@ -9,8 +9,6 @@ public struct SettingsContainer: View {
     public init(store: StoreOf<SettingsFeature>) {
         self.store = store
     }
-    
-    @State var projectView: KimaiProject?
 
     public var body: some View {
         RouterView(store: store.lift(\.router, SettingsFeature.Action.router)) { route in

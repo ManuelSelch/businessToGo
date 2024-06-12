@@ -3,7 +3,7 @@ import SwiftUI
 import CommonUI
 import LoginCore
 
-struct DebugView: View {
+public struct DebugView: View {
     let account: Account?
     @Binding var isLocalLog: Bool
     @Binding var isRemoteLog: Bool
@@ -11,7 +11,15 @@ struct DebugView: View {
     let resetTapped: () -> ()
     let logTapped: () -> ()
     
-    var body: some View {
+    public init(account: Account?, isLocalLog: Binding<Bool>, isRemoteLog: Binding<Bool>, resetTapped: @escaping () -> Void, logTapped: @escaping () -> Void) {
+        self.account = account
+        self._isLocalLog = isLocalLog
+        self._isRemoteLog = isRemoteLog
+        self.resetTapped = resetTapped
+        self.logTapped = logTapped
+    }
+    
+    public var body: some View {
         List {
             Section("General") {
                 

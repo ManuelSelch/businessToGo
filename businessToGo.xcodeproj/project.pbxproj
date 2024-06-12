@@ -18,8 +18,8 @@
 		844853172C1275DC00E17061 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 844853162C1275DC00E17061 /* Log */; };
 		846421B62C1A43AE0014694B /* ManagementApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B52C1A43AE0014694B /* ManagementApp */; };
 		846421B82C1A43B30014694B /* LoginApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B72C1A43B30014694B /* LoginApp */; };
-		846421BC2C1A47050014694B /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = 846421BB2C1A47050014694B /* Settings */; };
 		846421C02C1A4BFD0014694B /* AppArchitecture.png in Resources */ = {isa = PBXBuildFile; fileRef = 846421BF2C1A4BFD0014694B /* AppArchitecture.png */; };
+		846421C32C1A4F6C0014694B /* SettingsApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421C22C1A4F6C0014694B /* SettingsApp */; };
 		846751022C00B9F70028921A /* AppRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751012C00B9F70028921A /* AppRouteView.swift */; };
 		8467DED22BDEDC4B0077E331 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 8467DED12BDEDC4B0077E331 /* Log */; };
 		8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D82C01161A006726A1 /* PulseLogHandler */; };
@@ -89,7 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8467DED22BDEDC4B0077E331 /* Log in Frameworks */,
-				846421BC2C1A47050014694B /* Settings in Frameworks */,
+				846421C32C1A4F6C0014694B /* SettingsApp in Frameworks */,
 				843A02FE2C0BE4E500A716AF /* ReduxMonitor in Frameworks */,
 				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84CD11F72BF410E8006AE4C7 /* Log in Frameworks */,
@@ -189,18 +189,26 @@
 			path = Doc;
 			sourceTree = "<group>";
 		};
+		846421C12C1A4F6C0014694B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84C5A2892BC40EEC00C25A0C = {
 			isa = PBXGroup;
 			children = (
-				846421BE2C1A4BEA0014694B /* Doc */,
+				846421BD2C1A4BDC0014694B /* README.md */,
 				843EB61E2C1A40B600A6CF0C /* Common */,
+				846421BE2C1A4BEA0014694B /* Doc */,
 				8453D9032C11B10B002E992C /* Foundation */,
 				8405CC4D2C0E120400A73E8F /* Modules */,
 				84C5A2942BC40EEC00C25A0C /* businessToGo */,
 				84C5A2A62BC40EEE00C25A0C /* businessToGoTests */,
 				84C5A2B02BC40EEE00C25A0C /* businessToGoUITests */,
 				84C5A2932BC40EEC00C25A0C /* Products */,
-				D35B2B6914CACF30228B3011 /* Frameworks */,
+				846421C12C1A4F6C0014694B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -266,14 +274,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		D35B2B6914CACF30228B3011 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				846421BD2C1A4BDC0014694B /* README.md */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -300,7 +300,7 @@
 				844853162C1275DC00E17061 /* Log */,
 				846421B52C1A43AE0014694B /* ManagementApp */,
 				846421B72C1A43B30014694B /* LoginApp */,
-				846421BB2C1A47050014694B /* Settings */,
+				846421C22C1A4F6C0014694B /* SettingsApp */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -871,9 +871,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = LoginApp;
 		};
-		846421BB2C1A47050014694B /* Settings */ = {
+		846421C22C1A4F6C0014694B /* SettingsApp */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Settings;
+			productName = SettingsApp;
 		};
 		8467DED12BDEDC4B0077E331 /* Log */ = {
 			isa = XCSwiftPackageProductDependency;

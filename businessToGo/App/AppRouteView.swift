@@ -5,7 +5,7 @@ import Intro
 import LoginApp
 import ManagementApp
 import Report
-import Settings
+import SettingsApp
 
 extension AppRoute {
     @ViewBuilder func view(_ store: StoreOf<AppFeature>) -> some View {

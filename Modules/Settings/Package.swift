@@ -7,9 +7,8 @@ let package = Package(
         .iOS(.v17)
     ],
     products: [
-        .library(
-            name: "Settings",
-            targets: ["Settings"]),
+        .library(name: "SettingsUI", targets: ["SettingsUI"]),
+        .library(name: "SettingsApp", targets: ["SettingsApp"]),
     ],
     dependencies: [
         .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.1.5")),
@@ -24,9 +23,9 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Settings",
+            name: "SettingsApp",
             dependencies: [
-                .product(name: "PulseUI", package: "Pulse"),
+                "SettingsUI",
                 .product(name: "Redux", package: "Redux"),
                 
                 .product(name: "KimaiCore", package: "Kimai"),
@@ -41,11 +40,27 @@ let package = Package(
                 .product(name: "LoginCore", package: "Login"),
                 .product(name: "LoginServices", package: "Login"),
                 
-                .product(name: "CommonUI", package: "Common")
-            ]
+                .product(name: "CommonServices", package: "Common")
+                
+            ],
+            path: "Sources/App"
+        ),
+        
+        .target(
+            name: "SettingsUI",
+            dependencies: [
+                .product(name: "PulseUI", package: "Pulse"),
+                .product(name: "CommonUI", package: "Common"),
+                
+                .product(name: "KimaiCore", package: "Kimai"),
+                .product(name: "TaigaCore", package: "Taiga"),
+                .product(name: "ManagementCore", package: "Management"),
+                .product(name: "LoginCore", package: "Login")
+            ],
+            path: "Sources/UI"
         ),
         .testTarget(
             name: "SettingsTests",
-            dependencies: ["Settings"]),
+            dependencies: ["SettingsApp"]),
     ]
 )

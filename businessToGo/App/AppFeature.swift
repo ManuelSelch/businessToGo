@@ -7,7 +7,7 @@ import LoginApp
 import Intro
 import Report
 import ManagementApp
-import Settings
+import SettingsApp
 
 
 enum AppRoute: Identifiable, Codable, Equatable {

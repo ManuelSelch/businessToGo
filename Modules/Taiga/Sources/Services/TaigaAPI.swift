@@ -3,7 +3,7 @@ import Moya
 
 import TaigaCore
 
-public enum TaigaRequest {
+public enum TaigaAPI {
     case checkLogin(_ username: String, _ password: String)
     
     case getProjects
@@ -15,7 +15,7 @@ public enum TaigaRequest {
     case updateTaskStory(TaigaTaskStory)
 }
  
-extension TaigaRequest: TargetType, AccessTokenAuthorizable {
+extension TaigaAPI: TargetType, AccessTokenAuthorizable {
     public var task: Moya.Task {
         switch self{
         case .getProjects, .getStatusList, .getTaskStories, .getTasks, .getMilestones:
@@ -92,7 +92,7 @@ extension TaigaRequest: TargetType, AccessTokenAuthorizable {
     // MARK: - default parameters
     
     public var baseURL: URL {
-        return TaigaRequest.server
+        return TaigaAPI.server
     }
     
     public var headers: [String : String]? {
@@ -112,6 +112,6 @@ extension TaigaRequest: TargetType, AccessTokenAuthorizable {
     }
 }
 
-extension TaigaRequest {
+extension TaigaAPI {
     static var server =  URL(string: "https://project.manuelselch.de/api/v1")!
 }

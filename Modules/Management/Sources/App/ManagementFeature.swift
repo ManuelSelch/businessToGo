@@ -19,11 +19,22 @@ public struct ManagementFeature: Reducer {
     public struct State: Equatable, Codable {
         public init() {}
         
-        var router: RouterFeature<ManagementRoute>.State = .init(root: .kimai(.customersList))
+        public var router: RouterFeature<ManagementRoute>.State = .init(root: .kimai(.customersList))
         
         var kimai: KimaiFeature.State = .init()
         var taiga: TaigaFeature.State = .init()
         var integrations: [Integration] = []
+        
+        public var title: String {
+            switch(router.currentRoute) {
+            case .assistant:
+                return "Setup"
+            case let .kimai(route):
+                return kimai.title(route)
+            case let .taiga(route):
+                return taiga.title(route)
+            }
+        }
     }
     
     public enum Action: Codable, Equatable {

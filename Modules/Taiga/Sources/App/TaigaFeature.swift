@@ -25,6 +25,13 @@ public struct TaigaFeature: Reducer {
         
         var menus: [TaigaMenu] = []
         var selectedMenu: TaigaMenu = .backlog
+        
+        public func title(_ route: TaigaRoute) -> String {
+            switch route {
+            case .project(_, _):
+                return "Projekt"
+            }
+        }
     }
     
     public enum Action: Codable, Equatable {

@@ -25,6 +25,7 @@ let package = Package(
             dependencies: [
                 .product(name: "KimaiCore", package: "Kimai"),
                 .product(name: "KimaiServices", package: "Kimai"),
+                .product(name: "KimaiUI", package: "Kimai"),
                 
                 .product(name: "Redux", package: "Redux"),
                 .product(name: "Dependencies", package: "Dependencies"),

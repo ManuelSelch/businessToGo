@@ -8,4 +8,8 @@ public enum ManagementRoute: Identifiable, Hashable, Codable, Equatable {
     case assistant
     
     public var id: Self {self}
+    
+    public var title: String {
+        return "Management"
+    }
 }

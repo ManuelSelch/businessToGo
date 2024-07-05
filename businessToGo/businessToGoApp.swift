@@ -1,9 +1,12 @@
 import SwiftUI
 import Combine
 import Redux
+import Dependencies
 import SwiftUI
 import PulseLogHandler
 import os
+
+import CommonServices
 
 struct businessToGoApp: App {
     let store: StoreOf<AppFeature>
@@ -11,6 +14,8 @@ struct businessToGoApp: App {
     init() {
         // log network requests
         URLSessionProxyDelegate.enableAutomaticRegistration()
+        
+        DependencyValues.mode = UserDefaultService.isMock ? .mock : .live
         
         store = Store(
             initialState: .init(),

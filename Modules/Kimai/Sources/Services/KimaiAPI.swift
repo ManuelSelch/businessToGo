@@ -3,7 +3,7 @@ import Moya
 
 import KimaiCore
 
-public enum KimaiRequest {
+public enum KimaiAPI {
     case getCustomers
     case insertCustomer(KimaiCustomer)
     case updateCustomer(KimaiCustomer)
@@ -24,7 +24,7 @@ public enum KimaiRequest {
     
 }
  
-extension KimaiRequest: Moya.TargetType {
+extension KimaiAPI: Moya.TargetType {
     public var task: Moya.Task {
         switch self {
         case .getCustomers, .getProjects, .getActivities, .deleteTimesheet(_), .getTeams, .getUsers:
@@ -45,7 +45,7 @@ extension KimaiRequest: Moya.TargetType {
     
     
     public var baseURL: URL {
-        return KimaiRequest.server
+        return KimaiAPI.server
     }
     
     public var path: String {
@@ -155,6 +155,6 @@ extension KimaiRequest: Moya.TargetType {
 }
 
 
-extension KimaiRequest {
+extension KimaiAPI {
     static var server =  URL(string: "https://time.manuelselch.de/api")!
 }

@@ -32,6 +32,7 @@ public struct SettingsFeature: Reducer {
         var account: Account?
         var isLocalLog: Bool = UserDefaultService.isLocalLog
         var isRemoteLog: Bool = UserDefaultService.isRemoteLog
+        var isMock: Bool = UserDefaultService.isMock
         
         
         var customers: [KimaiCustomer] = []
@@ -47,6 +48,7 @@ public struct SettingsFeature: Reducer {
         
         case onLocalLogChanged(Bool)
         case onRemoteLogChanged(Bool)
+        case onMockChanged(Bool)
         
         case resetTapped
         case settings(SettingsAction)
@@ -88,7 +90,6 @@ public struct SettingsFeature: Reducer {
                 state.account = account
                 
                 state.router.push(.debug)
-                return .none
             case .integrationsTapped:
                 state.customers = kimai.customers.get()
                 state.projects = kimai.projects.get()
@@ -96,10 +97,8 @@ public struct SettingsFeature: Reducer {
                 state.integrations = integrations.get()
                 
                 state.router.push(.integrations)
-                return .none
             case .logTapped:
                 state.router.push(.log)
-                return .none
             case .introTapped:
                 return .send(.delegate(.showIntro))
             case .logoutTapped:
@@ -119,17 +118,18 @@ public struct SettingsFeature: Reducer {
         case let .onLocalLogChanged(isLocalLog):
             state.isLocalLog = isLocalLog
             UserDefaultService.isLocalLog = isLocalLog
-            return .none
             
         case let .onRemoteLogChanged(isRemoteLog):
             state.isRemoteLog = isRemoteLog
             UserDefaultService.isRemoteLog = isRemoteLog
-            return .none
+            
+        case let .onMockChanged(isMock):
+            state.isMock = isMock
+            UserDefaultService.isMock = isMock
             
         case let .onConnect(kimai, taiga):
             integrations.setIntegration(kimai, taiga)
             state.integrations = integrations.get()
-            return .none
             
         case let .router(action):
             return RouterFeature<Route>().reduce(&state.router, action)
@@ -139,6 +139,8 @@ public struct SettingsFeature: Reducer {
         case .delegate:
             return .none
         }
+        
+        return .none
     }
     
     

@@ -33,8 +33,11 @@ public struct SettingsContainer: View {
                 case .debug:
                     DebugView(
                         account: store.state.account,
+                        
                         isLocalLog: store.binding(for: \.isLocalLog, action: SettingsFeature.Action.onLocalLogChanged),
                         isRemoteLog: store.binding(for: \.isRemoteLog, action: SettingsFeature.Action.onRemoteLogChanged),
+                        isMock: store.binding(for: \.isMock, action: SettingsFeature.Action.onMockChanged),
+                        
                         resetTapped: { store.send(.resetTapped) },
                         logTapped: { store.send(.settings(.logTapped)) }
                     )

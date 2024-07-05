@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8405CBCC2C0E030500A73E8F /* TestKimaiReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405CBCB2C0E030500A73E8F /* TestKimaiReducer.swift */; };
-		8405CC522C0E174800A73E8F /* JSONViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405CC512C0E174800A73E8F /* JSONViewer.swift */; };
 		8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5A2C0E5F5000A73E8F /* Intro */; };
 		8405CC612C0E5F7200A73E8F /* Report in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC602C0E5F7200A73E8F /* Report */; };
 		841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840652BFD414F00EC9FDF /* AppContainer.swift */; };
 		843A02FE2C0BE4E500A716AF /* ReduxMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 843A02FD2C0BE4E500A716AF /* ReduxMonitor */; };
 		84410B1C2C0CB0A500D57894 /* MonitorMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */; };
+		8442C3B52C28A0B3008C08E9 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442C3B42C28A0B3008C08E9 /* AppRoute.swift */; };
 		84458AE32BC41A720041E40F /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE22BC41A720041E40F /* AppFeature.swift */; };
 		844853172C1275DC00E17061 /* Log in Frameworks */ = {isa = PBXBuildFile; productRef = 844853162C1275DC00E17061 /* Log */; };
 		846421B62C1A43AE0014694B /* ManagementApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B52C1A43AE0014694B /* ManagementApp */; };
@@ -54,7 +54,6 @@
 /* Begin PBXFileReference section */
 		8405CBCB2C0E030500A73E8F /* TestKimaiReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestKimaiReducer.swift; sourceTree = "<group>"; };
 		8405CC4E2C0E122600A73E8F /* Management */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Management; sourceTree = "<group>"; };
-		8405CC512C0E174800A73E8F /* JSONViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONViewer.swift; sourceTree = "<group>"; };
 		8405CC532C0E20E000A73E8F /* Login */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Login; sourceTree = "<group>"; };
 		8405CC552C0E58ED00A73E8F /* Report */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Report; sourceTree = "<group>"; };
 		8405CC562C0E590300A73E8F /* Intro */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Intro; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		841840652BFD414F00EC9FDF /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		843EB61E2C1A40B600A6CF0C /* Common */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Common; sourceTree = "<group>"; };
 		84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorMiddleware.swift; sourceTree = "<group>"; };
+		8442C3B42C28A0B3008C08E9 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		84458AE22BC41A720041E40F /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		8453D9062C11B44A002E992C /* NetworkFoundation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkFoundation; sourceTree = "<group>"; };
 		846421B92C1A45210014694B /* Kimai */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Kimai; sourceTree = "<group>"; };
@@ -149,14 +149,6 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		8405CC502C0E173F00A73E8F /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				8405CC512C0E174800A73E8F /* JSONViewer.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
 		841840642BFD412E00EC9FDF /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +163,14 @@
 				84410B1B2C0CB0A500D57894 /* MonitorMiddleware.swift */,
 			);
 			path = Middlewares;
+			sourceTree = "<group>";
+		};
+		8442C3B32C28A0A2008C08E9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8442C3B42C28A0B3008C08E9 /* AppRoute.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		8453D9032C11B10B002E992C /* Foundation */ = {
@@ -226,7 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				841083CB2BFBDCE700332A6A /* Info.plist */,
-				8405CC502C0E173F00A73E8F /* Helper */,
 				84C5A2C02BC40F4A00C25A0C /* App */,
 				84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */,
 				84977F7E2C029428003E83BA /* AppLauncher.swift */,
@@ -268,6 +267,7 @@
 				84458AE22BC41A720041E40F /* AppFeature.swift */,
 				841840652BFD414F00EC9FDF /* AppContainer.swift */,
 				846751012C00B9F70028921A /* AppRouteView.swift */,
+				8442C3B32C28A0A2008C08E9 /* Core */,
 				84410B1D2C0CB0A800D57894 /* Middlewares */,
 				841840642BFD412E00EC9FDF /* Views */,
 			);
@@ -383,6 +383,7 @@
 				843A02FC2C0BE4E500A716AF /* XCRemoteSwiftPackageReference "ReduxMonitor" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
 				844853152C1275DC00E17061 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */,
+				8442C3B62C28D3DD008C08E9 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -428,12 +429,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				84FC58582BC9559200594E14 /* AppHeader.swift in Sources */,
+				8442C3B52C28A0B3008C08E9 /* AppRoute.swift in Sources */,
 				841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */,
 				846751022C00B9F70028921A /* AppRouteView.swift in Sources */,
 				84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */,
 				84458AE32BC41A720041E40F /* AppFeature.swift in Sources */,
 				84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */,
-				8405CC522C0E174800A73E8F /* JSONViewer.swift in Sources */,
 				84410B1C2C0CB0A500D57894 /* MonitorMiddleware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +813,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		8442C3B62C28D3DD008C08E9 /* XCLocalSwiftPackageReference "../SwiftPackages/OfflineSync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../SwiftPackages/OfflineSync;
+		};
 		844853152C1275DC00E17061 /* XCLocalSwiftPackageReference "../SwiftPackages/Log" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../SwiftPackages/Log;

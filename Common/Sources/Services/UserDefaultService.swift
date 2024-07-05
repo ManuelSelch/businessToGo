@@ -40,6 +40,9 @@ public struct UserDefaultService {
     
     @UserDefaultWrapper(key: "isIntro", defaultValue: true)
     public static var isIntro: Bool
+    
+    @UserDefaultWrapper(key: "isMock", defaultValue: false)
+    public static var isMock: Bool
 }
 
 

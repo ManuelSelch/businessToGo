@@ -5,10 +5,25 @@ import Redux
 struct AppContainer: View {
     @ObservedObject var store: StoreOf<AppFeature>
     
+    var title: String {
+        switch(store.state.tab) {
+        case .login:
+            return "Login"
+        case .management:
+            return store.state.management.title
+        case .report:
+            return "Reports"
+        case .settings:
+            return "Settings"
+        case .intro:
+            return "Intro"
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             AppHeader(
-                title: "Hello World 02",
+                title: store.state.title,
                 settingsTapped: { store.send(.settingsTapped) }
             )
             

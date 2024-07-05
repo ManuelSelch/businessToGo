@@ -40,6 +40,23 @@ public struct KimaiFeature: Reducer {
         
         var steps: [KimaiAssistantStep] = KimaiAssistantStep.allCases
         
+        
+        public func title(_ route: KimaiRoute) -> String {
+            switch(route) {
+            case .customersList:
+                return "Kunden"
+            case let .customerSheet(customer):
+                return customer.name
+            case let .projectsList(customerId):
+                return customers.first(where: { $0.id == customerId })?.name ?? "--"
+            case let .projectSheet(project):
+                return project.name
+            case let .projectDetail(project):
+                return project.name
+            case let .timesheetSheet(timesheet):
+                return "Timesheet"
+            }
+        }
     }
     
     public enum Action: Codable, Equatable {
@@ -69,6 +86,7 @@ public struct KimaiFeature: Reducer {
         case activities([KimaiActivity])
         case teams([KimaiTeam])
         case users([KimaiUser])
+        case timesheets([KimaiTimesheet])
     }
     
     public enum CustomerListAction: Codable, Equatable {

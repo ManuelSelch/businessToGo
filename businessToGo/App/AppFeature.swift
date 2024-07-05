@@ -9,20 +9,6 @@ import Report
 import ManagementApp
 import SettingsApp
 
-
-enum AppRoute: Identifiable, Codable, Equatable {
-    case login
-    
-    case management
-    case report
-    
-    case intro
-    case settings
-    
-    var id: Self {self}
-}
-
-
 struct AppFeature: Reducer {
     
     struct State: Codable, Equatable {
@@ -36,6 +22,21 @@ struct AppFeature: Reducer {
         var intro: IntroFeature.State = .init()
         
         var settings: SettingsFeature.State = .init()
+        
+        var title: String {
+            switch tab {
+            case .login:
+                return "Login"
+            case .management:
+                return management.title
+            case .report:
+                return "Report"
+            case .intro:
+                return "Intro"
+            case .settings:
+                return "Settings"
+            }
+        }
     }
     
     enum Action: Codable, Equatable {
@@ -82,7 +83,7 @@ struct AppFeature: Reducer {
                 state.tab = .report
                 return .none
             case .showAssistant:
-                // TODO: state.management.router.presentCover(.assistant)
+                state.management.router.presentCover(.assistant)
                 state.tab = .management
                 return .none
             case .syncKimai:

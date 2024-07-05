@@ -14,6 +14,7 @@ extension ManagementFeature {
         switch(action) {
         case .sync:
             state.integrations = integrations.get()
+            
             return .merge([
                 KimaiFeature().sync()
                     .map { .intern(.kimai($0)) }

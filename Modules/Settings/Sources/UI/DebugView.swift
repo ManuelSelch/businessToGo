@@ -7,14 +7,18 @@ public struct DebugView: View {
     let account: Account?
     @Binding var isLocalLog: Bool
     @Binding var isRemoteLog: Bool
+    @Binding var isMock: Bool
     
     let resetTapped: () -> ()
     let logTapped: () -> ()
     
-    public init(account: Account?, isLocalLog: Binding<Bool>, isRemoteLog: Binding<Bool>, resetTapped: @escaping () -> Void, logTapped: @escaping () -> Void) {
+    public init(account: Account?, isLocalLog: Binding<Bool>, isRemoteLog: Binding<Bool>, isMock: Binding<Bool>, resetTapped: @escaping () -> Void, logTapped: @escaping () -> Void) {
         self.account = account
+        
         self._isLocalLog = isLocalLog
         self._isRemoteLog = isRemoteLog
+        self._isMock = isMock
+        
         self.resetTapped = resetTapped
         self.logTapped = logTapped
     }
@@ -36,6 +40,7 @@ public struct DebugView: View {
                     Button("Logs", action: { logTapped() })
                         .foregroundStyle(Color.theme)
                 }
+                Toggle("Mocks", isOn: $isMock)
             }
             
             Section("Account"){

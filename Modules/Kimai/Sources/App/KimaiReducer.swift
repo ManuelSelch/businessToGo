@@ -6,8 +6,35 @@ import KimaiCore
 public extension KimaiFeature {
     func sync() -> AnyPublisher<Action, Error> {
         return .merge([
+            .send(.synced(.customers(self.kimai.customers.get()))),
+            .send(.synced(.projects(self.kimai.projects.get()))),
+            .send(.synced(.activities(self.kimai.activities.get()))),
+            .send(.synced(.teams(self.kimai.teams.get()))),
+            .send(.synced(.users(self.kimai.users.get()))),
+            .send(.synced(.timesheets(self.kimai.timesheets.get()))),
+            
             self.kimai.customers.sync()
                 .map { .synced(.customers($0)) }
+                .eraseToAnyPublisher(),
+            
+            self.kimai.projects.sync()
+                .map { .synced(.projects($0)) }
+                .eraseToAnyPublisher(),
+            
+            self.kimai.activities.sync()
+                .map { .synced(.activities($0)) }
+                .eraseToAnyPublisher(),
+            
+            self.kimai.teams.sync()
+                .map { .synced(.teams($0)) }
+                .eraseToAnyPublisher(),
+            
+            self.kimai.users.sync()
+                .map { .synced(.users($0)) }
+                .eraseToAnyPublisher(),
+            
+            self.kimai.timesheets.sync()
+                .map { .synced(.timesheets($0)) }
                 .eraseToAnyPublisher()
         ])
     }
@@ -108,6 +135,8 @@ public extension KimaiFeature {
                 state.teams = records
             case let .users(records):
                 state.users = records
+            case let .timesheets(records):
+                state.timesheets = records
             }
             
         case .delegate:

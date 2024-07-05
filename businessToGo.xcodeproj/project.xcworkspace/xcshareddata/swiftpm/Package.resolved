@@ -46,15 +46,6 @@
       }
     },
     {
-      "identity" : "offlinesync",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/OfflineSync.git",
-      "state" : {
-        "revision" : "25e3058eb0089ec9a6a49a281a1be20ea6b8120a",
-        "version" : "1.2.4"
-      }
-    },
-    {
       "identity" : "pulse",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Pulse.git",

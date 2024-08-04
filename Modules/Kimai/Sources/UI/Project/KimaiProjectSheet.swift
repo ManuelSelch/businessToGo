@@ -21,7 +21,7 @@ public struct KimaiProjectSheet: View {
     }
     
     public var body: some View {
-        NavigationStack {
+        VStack {
             List {
                 TextField("Name", text: $name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())

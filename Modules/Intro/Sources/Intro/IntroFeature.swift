@@ -7,7 +7,7 @@ import CommonServices
 public struct IntroFeature: Reducer {
     public init() {}
     
-    public struct State: Codable, Equatable {
+    public struct State: Codable, Equatable, Hashable {
         public init() {}
         
         var pages: [IntroPage] = [

@@ -14,14 +14,14 @@ public struct TaigaFeature: Reducer {
     @Dependency(\.track) var track
     @Dependency(\.taiga) var taiga
     
-    public struct State: Equatable, Codable {
+    public struct State: Equatable, Codable, Hashable {
         public init() {}
         
-        var projects: [TaigaProject] = []
-        var taskStoryStatus: [TaigaTaskStoryStatus] = []
-        var taskStories: [TaigaTaskStory] = []
-        var tasks: [TaigaTask] = []
-        var milestones: [TaigaMilestone] = []
+        public var projects: [TaigaProject] = []
+        public var taskStoryStatus: [TaigaTaskStoryStatus] = []
+        public var taskStories: [TaigaTaskStory] = []
+        public var tasks: [TaigaTask] = []
+        public var milestones: [TaigaMilestone] = []
         
         var menus: [TaigaMenu] = []
         var selectedMenu: TaigaMenu = .backlog
@@ -35,7 +35,10 @@ public struct TaigaFeature: Reducer {
     }
     
     public enum Action: Codable, Equatable {
-        case synced(SyncAction)
+        case sync
+        case synced(
+            [TaigaProject], [TaigaTaskStoryStatus], [TaigaTaskStory], [TaigaTask], [TaigaMilestone]
+        )
         case project(ProjectAction)
     }
     
@@ -52,30 +55,6 @@ public struct TaigaFeature: Reducer {
         case milestones([TaigaMilestone])
     }
     
-    public func sync() -> AnyPublisher<Action, Error> {
-        return .merge([
-            taiga.projects.sync()
-                .map { .synced(.projects($0)) }
-                .eraseToAnyPublisher(),
-            
-            taiga.taskStoryStatus.sync()
-                .map { .synced(.taskStoryStatus($0)) }
-                .eraseToAnyPublisher(),
-            
-            taiga.taskStories.sync()
-                .map { .synced(.taskStories($0)) }
-                .eraseToAnyPublisher(),
-            
-            taiga.tasks.sync()
-                .map { .synced(.tasks($0)) }
-                .eraseToAnyPublisher(),
-            
-            taiga.milestones.sync()
-                .map { .synced(.milestones($0)) }
-                .eraseToAnyPublisher()
-        ])
-    }
-    
     public func reduce(_ state: inout State, _ action: Action) -> Effect<Action> {
         switch(action) {
         case let .project(action):
@@ -88,19 +67,33 @@ public struct TaigaFeature: Reducer {
                 break
             }
             
-        case let .synced(action):
-            switch(action) {
-            case let .projects(records):
-                state.projects = records
-            case let .taskStoryStatus(records):
-                state.taskStoryStatus = records
-            case let .taskStories(records):
-                state.taskStories = records
-            case let .tasks(records):
-                state.tasks = records
-            case let .milestones(records):
-                state.milestones = records
+        case .sync:
+            state.projects = taiga.projects.get()
+            state.taskStoryStatus = taiga.taskStoryStatus.get()
+            state.taskStories = taiga.taskStories.get()
+            state.tasks = taiga.tasks.get()
+            state.milestones = taiga.milestones.get()
+            
+            return .run { send in
+                do {
+                    let projects = try await taiga.projects.sync()
+                    let taskStoryStatus = try await taiga.taskStoryStatus.sync()
+                    let taskStories = try await taiga.taskStories.sync()
+                    let tasks = try await taiga.tasks.sync()
+                    let milestones = try await taiga.milestones.sync()
+                    
+                    send(.success(.synced(
+                        projects, taskStoryStatus, taskStories, tasks, milestones
+                    )))
+                } catch {}
             }
+            
+        case let .synced(projects, taskStoryStatus, taskStories, tasks, milestones):
+            state.projects = projects
+            state.taskStoryStatus = taskStoryStatus
+            state.taskStories = taskStories
+            state.tasks = tasks
+            state.milestones = milestones
         
         }
         

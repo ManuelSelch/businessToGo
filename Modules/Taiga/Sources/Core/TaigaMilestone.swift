@@ -1,7 +1,7 @@
 import Foundation
 import OfflineSync
 
-public struct TaigaMilestone: TableProtocol, Identifiable, Decodable, Equatable {
+public struct TaigaMilestone: TableProtocol, Hashable {
     public var id: Int
     
     public var closed: Bool

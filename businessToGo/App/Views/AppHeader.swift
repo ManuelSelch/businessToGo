@@ -29,6 +29,7 @@ struct AppHeader: View {
             }
                 
         }
+        .frame(height: 30)
         .padding()
         .background(Color.theme)
     }

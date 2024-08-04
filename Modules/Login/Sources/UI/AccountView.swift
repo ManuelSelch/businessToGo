@@ -22,16 +22,20 @@ public struct AccountView: View {
     
     public var body: some View {
         VStack {
-            HStack {
-                Button(action : {
-                    backTapped()
-                }){
-                    Image(systemName: "arrow.left")
-                        .padding()
-                        .font(.system(size: 20))
-
+            ZStack {
+                Text("Account")
+                    .bold()
+                
+                HStack {
+                    Button(action : {
+                        backTapped()
+                    }){
+                        Image(systemName: "arrow.left")
+                            .font(.system(size: 20))
+                    }
+                    Spacer()
                 }
-                Spacer()
+                
             }
             
             TextField("Workspace", text: $name)
@@ -67,11 +71,11 @@ public struct AccountView: View {
                 Spacer()
             }
         }
-        //.background(Color.background)
+        .padding()
         .onAppear {
             self.name = account.name
         }
-        .onChange(of: name){ _ in 
+        .onChange(of: name){  
             nameChanged(name)
         }
     }

@@ -23,7 +23,7 @@ public struct KimaiCustomerSheet: View {
     }
     
     public var body: some View {
-        NavigationStack {
+        VStack {
             List {
                 HStack {
                     Text("Name: ")

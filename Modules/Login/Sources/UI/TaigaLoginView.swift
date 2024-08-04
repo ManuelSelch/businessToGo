@@ -21,20 +21,17 @@ public struct TaigaLoginView: View {
     }
     
     public var body: some View {
-        VStack {
-            Spacer()
-            
+        VStack {            
             ZStack {
                 Text("Taiga Login")
-                    .font(.title)
+                    .bold()
                 
                 HStack {
                     Button(action : {
                         backTapped()
                     }){
                         Image(systemName: "arrow.left")
-                            .font(.system(size: 25))
-                            // .foregroundColor(Color.contrast)
+                            .font(.system(size: 20))
                     }
                     Spacer()
                 }

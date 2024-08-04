@@ -39,7 +39,7 @@ public struct KimaiTimesheetSheet: View {
     }
     
     public var body: some View {
-        NavigationStack {
+        VStack {
             Form {
                 Section(header: Text("Branch Info")) {
                     Picker("Kunde", selection: $selectedCustomer) {
@@ -108,10 +108,11 @@ public struct KimaiTimesheetSheet: View {
                     }
                 }
             }
+             
             .onAppear {
                 initializeState()
             }
-            #if os(iOS)
+   
             .navigationBarItems(trailing: Button(timesheet.id == KimaiTimesheet.new.id ? "Create" : "Save") {
                 var updatedTimesheet = timesheet
                 updatedTimesheet.project = selectedProject
@@ -122,7 +123,6 @@ public struct KimaiTimesheetSheet: View {
                 
                 saveTapped(updatedTimesheet)
             })
-            #endif
         }
     }
     

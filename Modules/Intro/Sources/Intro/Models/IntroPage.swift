@@ -1,6 +1,6 @@
 import Foundation
 
-struct IntroPage: Identifiable, Equatable, Codable {
+struct IntroPage: Identifiable, Equatable, Codable, Hashable {
     var id = UUID()
     var name: String
     var description: String

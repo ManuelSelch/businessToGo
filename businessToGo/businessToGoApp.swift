@@ -1,15 +1,32 @@
 import SwiftUI
 import Combine
-import Redux
-import Dependencies
-import SwiftUI
-import PulseLogHandler
 import os
+
+import Redux
+import ReduxDebug
+import Dependencies
+import PulseLogHandler
 
 import CommonServices
 
 struct businessToGoApp: App {
     let store: StoreOf<AppFeature>
+    
+    static func onAction(_ action: MonitorMiddleware<AppFeature.Action, AppFeature.State>.ActionType) -> AppFeature.Action {
+        switch(action) {
+        case .reset:
+            return .setState(.init())
+        case let .jumpTo(state):
+            return .setState(state)
+        }
+    }
+    
+    static func showAction(_ action: AppFeature.Action) -> Bool {
+        switch(action) {
+        case .setState: return false
+        default: return true
+        }
+    }
     
     init() {
         // log network requests
@@ -17,16 +34,19 @@ struct businessToGoApp: App {
         
         DependencyValues.mode = UserDefaultService.isMock ? .mock : .live
         
+        let state = AppFeature.State()
+        let monitor = MonitorMiddleware<AppFeature.Action, AppFeature.State>(
+            currentState: state,
+            onAction: Self.onAction,
+            showAction: Self.showAction
+        )
+        
         store = Store(
-            initialState: .init(),
+            initialState: state,
             reducer: AppFeature(),
             middlewares: [
-                MonitorMiddleware().handle
-            ],
-            errorAction: { error in
-                LoggerStore.shared.storeMessage(label: "Error", level: .warning, message: "\(error)")
-                return .log(.error(error.localizedDescription))
-            }
+                monitor.handle
+            ]
         )
         
         

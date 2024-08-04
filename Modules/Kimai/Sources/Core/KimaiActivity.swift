@@ -1,6 +1,6 @@
 import OfflineSync
 
-public struct KimaiActivity: TableProtocol {
+public struct KimaiActivity: TableProtocol, Hashable {
     public var id: Int
     public var project: Int?
     public var name: String

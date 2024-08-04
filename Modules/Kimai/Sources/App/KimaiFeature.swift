@@ -12,7 +12,7 @@ public struct KimaiFeature: Reducer {
     
     public init() {}
     
-    public struct State: Equatable, Codable {
+    public struct State: Equatable, Codable, Hashable {
         public init() {}
         
         public var selectedTeam: Int?
@@ -60,63 +60,38 @@ public struct KimaiFeature: Reducer {
     }
     
     public enum Action: Codable, Equatable {
-        case synced(SyncAction)
+        case sync 
+        case synced(
+            [KimaiCustomer], [KimaiProject], [KimaiActivity], [KimaiTeam], [KimaiUser], [KimaiTimesheet]
+        )
+        
+        
+        
+        case customer(CustomerAction)
+        case project(ProjectAction)
+        case timesheet(TimesheetAction)
         
         case assistant(AssistantAction)
-        
-        case customerList(CustomerListAction)
-        
-        case projectList(ProjectListAction)
-        case projectSheet(ProjectSheetAction)
-        case projectDetail(ProjectDetailAction)
-        
-        case timesheetSheet(TimesheetSheetAction)
-        
-        case delegate(Delegate)
     }
     
-    public enum Delegate: Codable, Equatable {
-        case route(KimaiRoute)
-        case dismiss
-    }
-    
-    public enum SyncAction: Codable, Equatable {
-        case customers([KimaiCustomer])
-        case projects([KimaiProject])
-        case activities([KimaiActivity])
-        case teams([KimaiTeam])
-        case users([KimaiUser])
-        case timesheets([KimaiTimesheet])
-    }
-    
-    public enum CustomerListAction: Codable, Equatable {
+    public enum CustomerAction: Codable, Equatable {
         case teamSelected(Int?)
-        case tapped(Int)
-        case editTapped(KimaiCustomer)
-        case saveTapped(KimaiCustomer)
+        case save(KimaiCustomer)
+    }
+
+    public enum ProjectAction: Codable, Equatable {
+        case save(KimaiProject)
+    }
+    
+    
+    public enum TimesheetAction: Codable, Equatable {
+        case save(KimaiTimesheet)
+        case delete(KimaiTimesheet)
     }
     
     public enum AssistantAction: Codable, Equatable {
         case stepTapped
         case dashboardTapped
-    }
-    
-    public enum ProjectListAction: Codable, Equatable {
-        case projectTapped(Int)
-        case projectEditTapped(KimaiProject)
-    }
-    
-    public enum ProjectSheetAction: Codable, Equatable {
-        case saveTapped(KimaiProject)
-    }
-    
-    public enum ProjectDetailAction: Codable, Equatable {
-        case deleteTapped(KimaiTimesheet)
-        case editTapped(KimaiTimesheet)
-    }
-    
-    public enum TimesheetSheetAction: Codable, Equatable {
-        case saveTapped(KimaiTimesheet)
     }
 }
 

@@ -5,13 +5,15 @@ import LoginUI
 
 public struct LoginContainer: View {
     @ObservedObject var store: StoreOf<LoginFeature>
+    var route: LoginFeature.Route
     
-    public init(store: StoreOf<LoginFeature>) {
+    public init(store: StoreOf<LoginFeature>, route: LoginFeature.Route) {
         self.store = store
+        self.route = route
     }
     
     public var body: some View {
-        switch(store.state.scene){
+        switch(route){
         case .accounts:
             AccountsView(
                 accounts: store.state.accounts,

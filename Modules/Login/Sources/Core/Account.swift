@@ -1,7 +1,7 @@
 import Foundation
 import LoginService
 
-public struct Account: IAccount, Hashable {
+public struct Account: IAccount, Hashable, Equatable {
     public var identifier: String {
         "\(self.id)"
     }

@@ -8,7 +8,7 @@ import TaigaServices
 import LoginCore
 import LoginServices
 
-enum LoginScreen: Equatable, Codable {
+enum LoginScreen: Equatable, Codable, Hashable {
     case accounts
     case account(Account)
     case kimai(Account)
@@ -17,7 +17,6 @@ enum LoginScreen: Equatable, Codable {
 
 
 public struct LoginFeature: Reducer {
-    
     @Dependency(\.kimai) var kimai
     @Dependency(\.taiga) var taiga
     @Dependency(\.keychain) var keychain
@@ -25,13 +24,13 @@ public struct LoginFeature: Reducer {
     
     public init() {}
     
-    public struct State: Equatable, Codable {
+    public struct State: Equatable, Codable, Hashable {
         public init() {}
         
         var scene: LoginScreen = .accounts
         
         var accounts: [Account] = []
-        var current: Account?
+        public var current: Account?
     }
     
     public enum Action: Codable, Equatable {
@@ -42,12 +41,13 @@ public struct LoginFeature: Reducer {
         case editTapped(Account)
         case kimaiAccountTapped(Account)
         case taigaAccountTapped(Account)
-        case resetTapped
+        
         
         case nameChanged(String)
         
-        case logout
         case loginTapped(Account)
+        case logoutTapped
+        case resetTapped
         
         case backTapped
         
@@ -57,14 +57,22 @@ public struct LoginFeature: Reducer {
         
     }
     
-    public enum Delegate: Codable {
-        case showLogin
-        case showHome
+    public enum Delegate: Codable, Equatable {
         case showAssistant
         
-        case syncKimai
-        case syncTaiga
+        case syncKimai(Account)
+        case syncTaiga(Account)
+        
+        case onLogin(Account)
     }
+    
+    public  enum Route: Equatable, Codable, Hashable {
+        case accounts
+        case account(Account)
+        case kimai(Account)
+        case taiga(Account)
+    }
+
 
 
 }

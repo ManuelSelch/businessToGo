@@ -1,7 +1,7 @@
 import Foundation
 import OfflineSync
 
-public struct TaigaTaskStory: TableProtocol, Identifiable, Decodable, Equatable {
+public struct TaigaTaskStory: TableProtocol, Hashable {
     public var id: Int
     public var version: Int
     public var subject: String

@@ -13,18 +13,21 @@ public struct KimaiTimesheetsListView: View {
     let deleteTapped: (KimaiTimesheet) -> ()
     let editTapped: (KimaiTimesheet) -> ()
     
+    
+    // computed properties
+    let timesheetsByDate: Dictionary<Date, [KimaiTimesheet]>
+    let dateKeys: [Dictionary<Date, [KimaiTimesheet]>.Keys.Element]
+    
     public init(projects: [KimaiProject], timesheets: [KimaiTimesheet], activities: [KimaiActivity], deleteTapped: @escaping (KimaiTimesheet) -> Void, editTapped: @escaping (KimaiTimesheet) -> Void) {
         self.projects = projects
         self.timesheets = timesheets
         self.activities = activities
         self.deleteTapped = deleteTapped
         self.editTapped = editTapped
-    }
-    
-    var timesheetsByDate: Dictionary<Date, [KimaiTimesheet]> {
+        
         var timesheets = timesheets
         timesheets.sort(by: { $0.begin > $1.begin })
-        return Dictionary(grouping: timesheets, by: {
+        timesheetsByDate = Dictionary(grouping: timesheets, by: {
             Calendar.current.date(
                 from: Calendar.current.dateComponents(
                     [.year, .month, .day],
@@ -33,12 +36,15 @@ public struct KimaiTimesheetsListView: View {
             ) ?? Date.now
             
         })
+    
+        dateKeys = timesheetsByDate.keys.sorted(by: >)
+        
     }
      
     
     public var body: some View {
         List {
-            ForEach(timesheetsByDate.keys.sorted(by: >), id: \.self){ date in
+            ForEach(dateKeys, id: \.self){ date in
                 
                 HStack {
                     Text(MyFormatter.date(date))
@@ -87,7 +93,6 @@ public struct KimaiTimesheetsListView: View {
                 }
             }
         }
-        // .padding()
     }
   
     

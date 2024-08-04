@@ -3,23 +3,38 @@ import Redux
 
 import Intro
 import LoginApp
-import ManagementApp
 import Report
 import SettingsApp
 
-extension AppRoute {
+extension AppFeature.Route {
     @ViewBuilder func view(_ store: StoreOf<AppFeature>) -> some View {
         switch self {
+        case let .settings(route):
+            SettingsContainer(store: store.projection(SettingsContainer.self), route: route)
+            
         case .intro:
             IntroContainer(store: store.lift(\.intro, AppFeature.Action.intro))
-        case .login:
-            LoginContainer(store: store.lift(\.login, AppFeature.Action.login))
+            
+        case let .login(route):
+            LoginContainer(store: store.lift(\.login, AppFeature.Action.login), route: route)
+            
+        case let .management(route):
+            ManagementContainer(store: store.projection(ManagementContainer.self), route: route)
+            
+        case let .report(route):
+            ReportContainer(store: store.projection(ReportContainer.self), route: route)
+        }
+    }
+}
+
+
+extension AppFeature.TabRoute {
+    @ViewBuilder func label() -> some View {
+        switch self {
         case .management:
-            ManagementContainer(store: store.lift(\.management, AppFeature.Action.management))
+            Label("Projekte", systemImage: "shippingbox.fill")
         case .report:
-            ReportContainer(store: store.lift(\.report, AppFeature.Action.report))
-        case .settings:
-            SettingsContainer(store: store.lift(\.settings, AppFeature.Action.settings))
+            Label("Reports", systemImage: "chart.bar.xaxis.ascending")
         }
     }
 }

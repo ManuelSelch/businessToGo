@@ -1,60 +1,28 @@
 import Foundation
-import Combine
+import Combine 
 
 import KimaiCore
 
+import Redux
+import ReduxDebug
+
 public extension KimaiFeature {
-    func sync() -> AnyPublisher<Action, Error> {
-        return .merge([
-            .send(.synced(.customers(self.kimai.customers.get()))),
-            .send(.synced(.projects(self.kimai.projects.get()))),
-            .send(.synced(.activities(self.kimai.activities.get()))),
-            .send(.synced(.teams(self.kimai.teams.get()))),
-            .send(.synced(.users(self.kimai.users.get()))),
-            .send(.synced(.timesheets(self.kimai.timesheets.get()))),
-            
-            self.kimai.customers.sync()
-                .map { .synced(.customers($0)) }
-                .eraseToAnyPublisher(),
-            
-            self.kimai.projects.sync()
-                .map { .synced(.projects($0)) }
-                .eraseToAnyPublisher(),
-            
-            self.kimai.activities.sync()
-                .map { .synced(.activities($0)) }
-                .eraseToAnyPublisher(),
-            
-            self.kimai.teams.sync()
-                .map { .synced(.teams($0)) }
-                .eraseToAnyPublisher(),
-            
-            self.kimai.users.sync()
-                .map { .synced(.users($0)) }
-                .eraseToAnyPublisher(),
-            
-            self.kimai.timesheets.sync()
-                .map { .synced(.timesheets($0)) }
-                .eraseToAnyPublisher()
-        ])
-    }
     
-    func reduce(_ state: inout State, _ action: Action) -> AnyPublisher<Action, Error> {
+    
+    func reduce(_ state: inout State, _ action: Action) -> Effect<Action> {
         switch(action){
-        case let .customerList(action):
+        case let .customer(action):
             switch(action) {
-            case let .tapped(id):
-                return .send(.delegate(.route(.projectsList(id))))
-            case let .editTapped(customer):
-                return .send(.delegate(.route(.customerSheet(customer))))
-            case let .saveTapped(customer):
+            case let .save(customer):
+                Logger.debug("save customer")
                 if(customer.id == KimaiCustomer.new.id) {
+                    Logger.debug("new customer")
                     kimai.customers.create(customer)
                 } else {
+                    Logger.debug("update customer")
                     kimai.customers.update(customer)
                 }
                 state.customers = kimai.customers.get()
-                return .send(.delegate(.dismiss))
                 
             case .teamSelected(let team):
                 state.selectedTeam = team
@@ -66,9 +34,11 @@ public extension KimaiFeature {
             case .stepTapped:
                 switch(state.currentStep) {
                 case .customer:
-                    return .send(.delegate(.route(.customerSheet(.new))))
+                    // return .send(.delegate(.route(.customerSheet(.new))))
+                    break
                 case .project:
-                    return .send(.delegate(.route(.projectSheet(.new))))
+                    // return .send(.delegate(.route(.projectSheet(.new))))
+                    break
                 case .activity:
                     return .none
                 case .timesheet:
@@ -79,42 +49,29 @@ public extension KimaiFeature {
                 
             case .dashboardTapped:
                 if(state.currentStep == .none) {
-                    return .send(.delegate(.route(.customersList)))
+                    // return .send(.delegate(.route(.customersList)))
+                    break
                 }
             }
                 
-        case let .projectList(action):
-            switch(action) {
-            case let .projectTapped(id):
-                if let project = state.projects.first(where: {$0.id == id}) {
-                    return .send(.delegate(.route(.projectDetail(project))))
-                }
-            case let .projectEditTapped(project):
-                return .send(.delegate(.route(.projectSheet(project))))
-            }
+
         
-        case let .projectSheet(action):
+        case let .project(action):
             switch(action) {
-            case let .saveTapped(project):
+            case let .save(project):
                 if(project.id == KimaiProject.new.id) {
                     kimai.projects.create(project)
                 } else {
                     kimai.projects.update(project)
                 }
                 state.projects = kimai.projects.get()
-                return .send(.delegate(.dismiss))
             }
-        case let .projectDetail(action):
+        case let .timesheet(action):
             switch(action) {
-            case let .deleteTapped(timesheet):
+            case let .delete(timesheet):
                 kimai.timesheets.delete(timesheet)
                 state.timesheets = kimai.timesheets.get()
-            case let .editTapped(timesheet):
-                return .send(.delegate(.route(.timesheetSheet(timesheet))))
-            }
-        case let .timesheetSheet(action):
-            switch(action) {
-            case let .saveTapped(timesheet):
+            case let .save(timesheet):
                 if(timesheet.id == KimaiTeam.new.id) {
                     kimai.timesheets.create(timesheet)
                 } else {
@@ -123,24 +80,38 @@ public extension KimaiFeature {
                 state.timesheets = kimai.timesheets.get()
             }
             
-        case let .synced(action):
-            switch(action) {
-            case let .customers(records):
-                state.customers = records
-            case let .projects(records):
-                state.projects = records
-            case let .activities(records):
-                state.activities = records
-            case let .teams(records):
-                state.teams = records
-            case let .users(records):
-                state.users = records
-            case let .timesheets(records):
-                state.timesheets = records
+            
+        case .sync:
+            state.customers = kimai.customers.get()
+            state.projects = kimai.projects.get()
+            state.activities = kimai.activities.get()
+            state.teams = kimai.teams.get()
+            state.users = kimai.users.get()
+            state.timesheets = kimai.timesheets.get()
+            
+            return .run { send in
+                do {
+                    let customers = try await kimai.customers.sync()
+                    let projects = try await kimai.projects.sync()
+                    let activities = try await kimai.activities.sync()
+                    let teams = try await kimai.teams.sync()
+                    let users = try await kimai.users.sync()
+                    let timesheets = try await kimai.timesheets.sync()
+                    
+                    send(.success(.synced(
+                        customers, projects, activities, teams, users, timesheets
+                    )))
+                } catch {}
+                
             }
             
-        case .delegate:
-            return .none
+        case let .synced(customers, projects, activities, teams, users, timesheets):
+            state.customers = customers
+            state.projects = projects
+            state.activities = activities
+            state.teams = teams
+            state.users = users
+            state.timesheets = timesheets
         
         }
         

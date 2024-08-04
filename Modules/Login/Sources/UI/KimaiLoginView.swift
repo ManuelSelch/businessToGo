@@ -22,19 +22,16 @@ public struct KimaiLoginView: View {
     
     public var body: some View {
         VStack {
-            Spacer()
-            
             ZStack {
                 Text("Kimai Login")
-                    .font(.title)
+                    .bold()
                 
                 HStack {
                     Button(action : {
                         backTapped()
                     }){
                         Image(systemName: "arrow.left")
-                            .font(.system(size: 25))
-                            // .foregroundColor(Color.contrast)
+                            .font(.system(size: 20))
                     }
                     Spacer()
                 }

@@ -1,7 +1,7 @@
 import Foundation
 import OfflineSync
 
-public struct TaigaProject: TableProtocol, Codable, Identifiable, Equatable, Hashable {
+public struct TaigaProject: TableProtocol, Hashable {
     public var id: Int
     public var is_backlog_activated: Bool
     public var logo_big_url: String?

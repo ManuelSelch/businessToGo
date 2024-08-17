@@ -23,13 +23,14 @@ public enum KimaiAPI {
     
     case getTeams
     case getUsers
+    case getMe
     
 }
  
 extension KimaiAPI: Moya.TargetType {
     public var task: Moya.Task {
         switch self {
-        case .getCustomers, .getProjects, .getActivities, .deleteTimesheet(_), .getTeams, .getUsers:
+        case .getCustomers, .getProjects, .getActivities, .deleteTimesheet(_), .getTeams, .getUsers, .getMe:
             return .requestPlain
         case .getTimesheets(_):
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
@@ -76,15 +77,16 @@ extension KimaiAPI: Moya.TargetType {
             
         case .getTeams:
             return "/teams"
-        
         case .getUsers:
             return "/users"
+        case .getMe:
+            return "/users/me"
         }
     }
     
     public var method: Moya.Method {
         switch self {
-        case .getCustomers, .getProjects, .getActivities, .getTimesheets(_), .getTeams, .getUsers:
+        case .getCustomers, .getProjects, .getActivities, .getTimesheets(_), .getTeams, .getUsers, .getMe:
             return .get
         case .insertTimesheet(_), .insertProject(_), .insertCustomer(_), .insertActivity(_):
             return .post
@@ -97,7 +99,7 @@ extension KimaiAPI: Moya.TargetType {
     
     var parameters: [String: Any] {
         switch self {
-        case .getProjects, .getCustomers, .getActivities, .deleteTimesheet(_), .getTeams, .getUsers:
+        case .getProjects, .getCustomers, .getActivities, .deleteTimesheet(_), .getTeams, .getUsers, .getMe:
             return [:]
         case .getTimesheets(let page):
             return [

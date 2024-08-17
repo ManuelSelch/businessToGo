@@ -36,15 +36,6 @@ public struct KimaiService {
         
         return true // todo: check auth
     }
-    
-    public func clear(){
-        /*
-        customers.clear()
-        projects.clear()
-        timesheets.clear()
-        activities.clear()
-        */
-    }
 }
 
 extension KimaiService {

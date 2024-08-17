@@ -19,10 +19,10 @@ public extension KimaiFeature {
         state.users = kimai.users.get()
         state.timesheets = kimai.timesheets.get()
         
-        fetchChanges(&state)
+        getChanges(&state)
     }
     
-    func fetchChanges(_ state: inout State) {
+    func getChanges(_ state: inout State) {
         state.customerChanges = kimai.customers.getCustomerChanges()
         state.projectChanges = kimai.projects.getChanges()
         state.activityChanges = kimai.activities.getChanges()
@@ -168,7 +168,7 @@ public extension KimaiFeature {
             state.users = users
             state.timesheets = timesheets
             
-            fetchChanges(&state)
+            getChanges(&state)
             
         case .delegate: return .none
         }

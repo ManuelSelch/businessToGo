@@ -1,4 +1,5 @@
 import Dependencies
+import Moya
 import OfflineSyncServices
 
 import KimaiCore
@@ -6,8 +7,8 @@ import KimaiCore
 struct TimesheetsKey: DependencyKey {
     static var liveValue: RecordService<KimaiTimesheet> = .init(
         repository: .init("kimai_timesheets"),
-        requestService: RequestService.live(
-            fetchMethod: {KimaiAPI.getTimesheets(0)},
+        requestService: PageRequestService.live(
+            fetchMethod:  KimaiAPI.getTimesheets,
             insertMethod: KimaiAPI.insertTimesheet,
             updateMethod: KimaiAPI.updateTimesheet,
             deleteMethod: KimaiAPI.deleteTimesheet
@@ -15,8 +16,8 @@ struct TimesheetsKey: DependencyKey {
     )
     static var mockValue: RecordService<KimaiTimesheet> = .init(
         repository: .init("kimai_timesheets"),
-        requestService: RequestService.live(
-            fetchMethod: {KimaiAPI.getTimesheets(0)},
+        requestService: PageRequestService.mock(
+            fetchMethod:  KimaiAPI.getTimesheets,
             insertMethod: KimaiAPI.insertTimesheet,
             updateMethod: KimaiAPI.updateTimesheet,
             deleteMethod: KimaiAPI.deleteTimesheet

@@ -4,60 +4,46 @@ import LoginCore
 
 public struct AccountView: View {
     let account: Account
-    
-    let backTapped: () -> ()
-    let kimaiAccountTapped: (Account) -> ()
-    let taigaAccountTapped: (Account) -> ()
-    let nameChanged: (String) -> ()
+
+    let kimaiAccountTapped: () -> ()
+    let taigaAccountTapped: () -> ()
+    let nameSaveTapped: (String) -> ()
  
     @State var name = ""
     
-    public init(account: Account, backTapped: @escaping () -> Void, kimaiAccountTapped: @escaping (Account) -> Void, taigaAccountTapped: @escaping (Account) -> Void, nameChanged: @escaping (String) -> Void) {
+    public init(account: Account, kimaiAccountTapped: @escaping () -> Void, taigaAccountTapped: @escaping () -> Void, nameSaveTapped: @escaping (String) -> Void) {
         self.account = account
-        self.backTapped = backTapped
         self.kimaiAccountTapped = kimaiAccountTapped
         self.taigaAccountTapped = taigaAccountTapped
-        self.nameChanged = nameChanged
+        self.nameSaveTapped = nameSaveTapped
     }
     
     public var body: some View {
         VStack {
-            ZStack {
-                Text("Account")
-                    .bold()
-                
-                HStack {
-                    Button(action : {
-                        backTapped()
-                    }){
-                        Image(systemName: "arrow.left")
-                            .font(.system(size: 20))
-                    }
-                    Spacer()
-                }
-                
-            }
+            Text("Account")
+                .bold()
             
             TextField("Workspace", text: $name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            
+                .onSubmit {
+                    if(name != account.name) {
+                        nameSaveTapped(name)
+                    }
+                }
+                
             
             HStack {
                 Spacer()
                 VStack {
-                    Button(action: {
-                        kimaiAccountTapped(account)
-                    }) {
+                    Button(action: kimaiAccountTapped) {
                         HStack {
                             StatusImage(account.kimai)
                             Text("Kimai")
                         }
                     }
                     
-                    Button(action: {
-                        taigaAccountTapped(account)
-                    }) {
+                    Button(action: taigaAccountTapped) {
                         HStack {
                             StatusImage(account.taiga)
                             Text("Taiga")
@@ -74,9 +60,6 @@ public struct AccountView: View {
         .padding()
         .onAppear {
             self.name = account.name
-        }
-        .onChange(of: name){  
-            nameChanged(name)
         }
     }
     

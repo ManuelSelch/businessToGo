@@ -1,13 +1,11 @@
 import SwiftUI
 
 import KimaiCore
-import TaigaCore
 import IntegrationCore
 
 public struct IntegrationsView: View {
     let customers: [KimaiCustomer]
     let projects: [KimaiProject]
-    let taigaProjects: [TaigaProject]
     let integrations: [Integration]
     
     let onConnect: (_ kimai: Int, _ taiga: Int) -> ()
@@ -27,10 +25,9 @@ public struct IntegrationsView: View {
     
     @State var selectedCustomer: Int = 0
     
-    public init(customers: [KimaiCustomer], projects: [KimaiProject], taigaProjects: [TaigaProject], integrations: [Integration], onConnect: @escaping (_: Int, _: Int) -> Void) {
+    public init(customers: [KimaiCustomer], projects: [KimaiProject], integrations: [Integration], onConnect: @escaping (_: Int, _: Int) -> Void) {
         self.customers = customers
         self.projects = projects
-        self.taigaProjects = taigaProjects
         self.integrations = integrations
         self.onConnect = onConnect
     }
@@ -49,7 +46,7 @@ public struct IntegrationsView: View {
                 ForEach(projectsFiltered, id:\.id){ project in
                     IntegrationCard(
                         kimaiProject: project,
-                        taigaProjects: taigaProjects,
+                        taigaProjects: [],
                         integration: integrations.first { $0.id == project.id },
                         onConnect: { kimai, taiga in onConnect(kimai, taiga) }
                     )

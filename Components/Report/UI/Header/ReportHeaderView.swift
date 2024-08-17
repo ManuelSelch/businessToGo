@@ -17,21 +17,18 @@ struct ReportHeaderView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Button(action: {
-                    calendarTapped()
-                }){
+                Button(action: calendarTapped){
                     Image(systemName: "calendar")
                         
                 }
                 
-                Button(action: {
-                    filterTapped()
-                }) {
+                Button(action: filterTapped) {
                     Image(systemName: "line.3.horizontal.decrease.circle")
                 }
                 
+                let reportTypes = ReportType.allCases.filter({$0 != .day})
                 Picker("Report Date", selection: $selectedReportType){
-                    ForEach(ReportType.allCases) { option in
+                    ForEach(reportTypes) { option in
                         Text(option.rawValue)
                         
                     }
@@ -42,9 +39,7 @@ struct ReportHeaderView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .accentColor(Color.contrast)
                 
-                Button(action: {
-                    playTapped()
-                }){
+                Button(action: playTapped){
                     Image(systemName: "play.fill")
                         .font(.system(size: 20))
                         .foregroundColor(Color.theme)

@@ -38,7 +38,8 @@ struct businessToGoApp: App {
         let monitor = MonitorMiddleware<AppFeature.Action, AppFeature.State>(
             currentState: state,
             onAction: Self.onAction,
-            showAction: Self.showAction
+            showAction: Self.showAction,
+            isRemoteLog: { UserDefaultService.isRemoteLog }
         )
         
         store = Store(

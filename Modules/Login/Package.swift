@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "Login",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v16)
     ],
     products: [
         .library(name: "LoginCore",targets: ["LoginCore"]),
@@ -19,7 +19,6 @@ let package = Package(
         .package(url: "https://github.com/ManuelSelch/LoginService.git", .upToNextMajor(from: "1.1.3")),
         
         .package(path: "../Kimai"),
-        .package(path: "../Taiga"),
         
         .package(path: "../../Common")
     ],
@@ -59,8 +58,7 @@ let package = Package(
                 .product(name: "LoginService", package: "LoginService"),
                 .product(name: "Redux", package: "Redux"),
                 
-                .product(name: "KimaiServices", package: "Kimai"),
-                .product(name: "TaigaServices", package: "Taiga")
+                .product(name: "KimaiServices", package: "Kimai")
             ],
             path: "Sources/App"
         ),

@@ -7,7 +7,7 @@ import IntegrationCore
 struct ManagementHeaderView: View {
     @Binding var selectedTeam: Int?
 
-    let route: ManagementContainer.Route
+    let route: ManagementComponent.Route
     
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
@@ -15,8 +15,16 @@ struct ManagementHeaderView: View {
     let syncTapped: () -> ()
     let projectTapped: (Integration) -> ()
     let playTapped: (KimaiTimesheet) -> ()
+    let settingsTapped: () -> ()
     
-    init(selectedTeam: Binding<Int?>, route: ManagementContainer.Route, projects: [KimaiProject], teams: [KimaiTeam], syncTapped: @escaping () -> Void, projectTapped: @escaping (Integration) -> Void, playTapped: @escaping (KimaiTimesheet) -> Void) {
+    init(
+        selectedTeam: Binding<Int?>, route: ManagementComponent.Route, 
+        projects: [KimaiProject], teams: [KimaiTeam],
+        syncTapped: @escaping () -> Void,
+        projectTapped: @escaping (Integration) -> Void,
+        playTapped: @escaping (KimaiTimesheet) -> Void,
+        settingsTapped: @escaping () -> ()
+    ) {
         self._selectedTeam = selectedTeam
         self.route = route
         self.projects = projects
@@ -24,6 +32,7 @@ struct ManagementHeaderView: View {
         self.syncTapped = syncTapped
         self.projectTapped = projectTapped
         self.playTapped = playTapped
+        self.settingsTapped = settingsTapped
     }
     
     var body: some View {
@@ -43,24 +52,15 @@ struct ManagementHeaderView: View {
                 .frame(width: 200)
                 .clipped()
             
-         
-            case let .taiga(.project(kimai, taiga)):
-                Button(action: {
-                    projectTapped(Integration(kimai, taiga))
-                }){
-                    Image(systemName: "chart.bar.xaxis.ascending")
-                }
-                 
                 
             default: EmptyView()
             }
             
             switch(route) {
-            case .assistant: EmptyView()
+            case .assistant, .kimai(.activitySheet), .kimai(.customerSheet), .kimai(.projectSheet), .kimai(.timesheetSheet):
+                EmptyView()
             default:
-                Button(action: {
-                    syncTapped()
-                }){
+                Button(action: syncTapped){
                     Image(systemName: "arrow.triangle.2.circlepath")
                 }
                 
@@ -84,6 +84,10 @@ struct ManagementHeaderView: View {
                     
                 }){
                     Image(systemName: "play.fill")
+                }
+                
+                Button(action: settingsTapped) {
+                    Image(systemName: "gear")
                 }
             }
       

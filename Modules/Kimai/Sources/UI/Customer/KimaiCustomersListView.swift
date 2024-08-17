@@ -1,12 +1,16 @@
 import SwiftUI
 
+import CommonUI
 import KimaiCore
+import OfflineSyncCore
 
 public struct KimaiCustomersListView: View {
     let customers: [KimaiCustomer]
     
     let customerTapped: (Int) -> ()
     let customerEditTapped: (KimaiCustomer) -> ()
+    let customerDeleteTapped: (KimaiCustomer) -> ()
+    let customerCreated: (KimaiCustomer) -> ()
     
     var customersFiltered: [KimaiCustomer] {
         var c = customers
@@ -14,24 +18,45 @@ public struct KimaiCustomersListView: View {
         return c
     }
     
-    public init(customers: [KimaiCustomer], customerTapped: @escaping (Int) -> Void, customerEditTapped: @escaping (KimaiCustomer) -> Void) {
+    public init(
+        customers: [KimaiCustomer], changes: [DatabaseChange],
+        customerTapped: @escaping (Int) -> Void,
+        customerEditTapped: @escaping (KimaiCustomer) -> Void,
+        customerDeleteTapped: @escaping (KimaiCustomer) -> Void,
+        customerCreated: @escaping (KimaiCustomer) -> Void
+    ) {
         self.customers = customers
         self.customerTapped = customerTapped
         self.customerEditTapped = customerEditTapped
+        self.customerDeleteTapped = customerDeleteTapped
+        self.customerCreated = customerCreated
     }
     
     public var body: some View {
-        VStack {
-            if(customersFiltered.count == 0){
-                Text("no customers loaded yet ...")
+        List {
+            CustomTextField("New Customer") { name in
+                var customer = KimaiCustomer.new
+                customer.name = name
+                customerCreated(customer)
             }
             
-            List(customersFiltered, id: \.id) { customer in
+            
+            
+            ForEach(customersFiltered) { customer in
                 KimaiCustomerCard(
                     customer: customer, 
                     customerTapped: {customerTapped(customer.id) }
                 )
                 .swipeActions(edge: .trailing) {
+                    Button(role: .cancel) {
+                        customerDeleteTapped(customer)
+                    } label: {
+                        Text("Delete")
+                            .foregroundColor(.white)
+                    }
+                    .tint(.red)
+                    .padding()
+                    
                     Button(role: .cancel) {
                         customerEditTapped(customer)
                     } label: {
@@ -41,20 +66,8 @@ public struct KimaiCustomersListView: View {
                     .tint(.gray)
                 }
             }
-            .toolbar {
-                #if os(iOS)
-                ToolbarItem(placement: .topBarTrailing){
-                    Button(action: {
-                        customerEditTapped(KimaiCustomer.new)
-                    }){
-                        Image(systemName: "plus")
-                            .font(.system(size: 20))
-                            .foregroundStyle(Color.theme)
-                    }
-                }
-                #endif
-            }
         }
-        .background(Color.background)
+        .listStyle(.plain)
+    
     }
 }

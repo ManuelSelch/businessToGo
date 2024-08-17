@@ -26,9 +26,7 @@ public struct AccountsView: View {
     public var body: some View {
         VStack {
             HStack {
-                Button(action: {
-                    createAccountTapped()
-                }){
+                Button(action: createAccountTapped){
                     Image(systemName: "plus")
                         .padding()
                         .font(.system(size: 20))
@@ -42,39 +40,39 @@ public struct AccountsView: View {
                     )
                 } else {
                     ForEach(accounts, id: \.identifier){ account in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(account.name)
-                                    .bold()
+                        Button(action: {
+                            loginTapped(account)
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(account.name)
+                                        .bold()
                                     // .foregroundStyle(Color.theme)
+                                    
+                                    if let kimai = account.kimai {
+                                        Text("Kimai: \(kimai.server)")
+                                            .font(.footnote)
+                                        
+                                        Text(kimai.username)
+                                            .font(.footnote)
+                                    }
+                                    Text("")
+                                    if let taiga = account.taiga {
+                                        Text("Taiga: \(taiga.server)")
+                                            .font(.footnote)
+                                        
+                                        Text(taiga.username)
+                                            .font(.footnote)
+                                    }
+                                }
+                                Spacer()
                                 
-                                if let kimai = account.kimai {
-                                    Text("Kimai: \(kimai.server)")
-                                        .font(.footnote)
-                                    
-                                    Text(kimai.username)
-                                        .font(.footnote)
-                                }
-                                Text("")
-                                if let taiga = account.taiga {
-                                    Text("Taiga: \(taiga.server)")
-                                        .font(.footnote)
-                                    
-                                    Text(taiga.username)
-                                        .font(.footnote)
-                                }
-                            }
-                            Spacer()
-                            Button(action: {
-                                loginTapped(account)
-                            }){
                                 Image(systemName: "arrow.right")
                                     .font(.system(size: 20))
                                     .padding()
-                                    // .tint(.theme)
-                                
                             }
                         }
+                        .foregroundStyle(Color.contrast)
                         .buttonStyle(BorderlessButtonStyle())
                         .swipeActions(edge: .trailing) {
                             Button(role: .cancel) {
@@ -99,9 +97,7 @@ public struct AccountsView: View {
             
             Spacer()
             
-            Button(action: {
-                resetTapped()
-            }){
+            Button(action: resetTapped){
                 Text("Reset")
                     .foregroundStyle(Color.red)
             }

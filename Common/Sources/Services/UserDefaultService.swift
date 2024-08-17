@@ -31,10 +31,7 @@ public struct UserDefaultWrapper<T: Codable> {
     }
 }
 
-public struct UserDefaultService {
-    @UserDefaultWrapper(key: "isLocalLog", defaultValue: false)
-    public static var isLocalLog: Bool
-    
+public struct UserDefaultService {    
     @UserDefaultWrapper(key: "isRemoteLog", defaultValue: false)
     public static var isRemoteLog: Bool
     

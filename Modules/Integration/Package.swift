@@ -8,7 +8,8 @@ let package = Package(
         .library(name: "IntegrationApp", targets: ["IntegrationApp"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ManuelSelch/Redux", .upToNextMajor(from: "1.2.12"))
+        .package(url: "https://github.com/ManuelSelch/Redux", .upToNextMajor(from: "1.2.12")),
+        .package(url: "https://github.com/ManuelSelch/OfflineSync", .upToNextMajor(from: "1.2.6"))
     ],
     targets: [
         .target(
@@ -23,6 +24,7 @@ let package = Package(
             .target(
                 name: "IntegrationCore",
                 dependencies: [
+                    .product(name: "OfflineSync", package: "OfflineSync")
                 ],
                 path: "Sources/Core"
             ),

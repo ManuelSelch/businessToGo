@@ -18,9 +18,7 @@ struct AccountsAssistantView: View {
                 .font(.title)
                 .bold()
             
-            Button(action: {
-                assistantTapped()
-            }) {
+            Button(action: assistantTapped) {
                 Text("Assistent starten")
             }
             .padding(10)

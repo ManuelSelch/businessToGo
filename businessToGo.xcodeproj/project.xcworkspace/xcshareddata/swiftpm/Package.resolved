@@ -21,10 +21,10 @@
     {
       "identity" : "chart",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ManuelSelch/Chart.git",
+      "location" : "https://github.com/ManuelSelch/Chart",
       "state" : {
-        "revision" : "36978552d2f1f733aedf194821fc153175f09c01",
-        "version" : "1.0.3"
+        "revision" : "2066bd8a937b016366b8212944de6ec5f656a121",
+        "version" : "1.0.4"
       }
     },
     {
@@ -55,6 +55,24 @@
       }
     },
     {
+      "identity" : "offlinesync",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/OfflineSync",
+      "state" : {
+        "revision" : "0b9c8767d0cce89779b1c08e7e78189c5615d198",
+        "version" : "1.3.1"
+      }
+    },
+    {
+      "identity" : "popupview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/PopupView.git",
+      "state" : {
+        "revision" : "337430278cd6ceff454c143fe815af364276332b",
+        "version" : "3.0.5"
+      }
+    },
+    {
       "identity" : "pulse",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Pulse.git",
@@ -79,6 +97,15 @@
       "state" : {
         "revision" : "c43bae3dac73fdd3cb906bd5a1914686ca71ed3c",
         "version" : "6.7.0"
+      }
+    },
+    {
+      "identity" : "redux",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/manuelselch/Redux",
+      "state" : {
+        "revision" : "4e608714e6bb6a36173f4531a4ad34168e124e3e",
+        "version" : "1.2.14"
       }
     },
     {

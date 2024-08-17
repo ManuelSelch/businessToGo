@@ -48,7 +48,7 @@ public struct KimaiProjectSheet: View {
                         var project = project
                         project.name = name
                         project.customer = selectedCustomer
-                        project.color = color
+                        project.color = color ?? ""
                         saveTapped(project)
                     }){
                         let isCreate = project.id == KimaiProject.new.id

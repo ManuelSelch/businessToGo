@@ -5,17 +5,15 @@ import LoginCore
 
 public struct DebugView: View {
     let account: Account?
-    @Binding var isLocalLog: Bool
     @Binding var isRemoteLog: Bool
     @Binding var isMock: Bool
     
     let resetTapped: () -> ()
     let logTapped: () -> ()
     
-    public init(account: Account?, isLocalLog: Binding<Bool>, isRemoteLog: Binding<Bool>, isMock: Binding<Bool>, resetTapped: @escaping () -> Void, logTapped: @escaping () -> Void) {
+    public init(account: Account?, isRemoteLog: Binding<Bool>, isMock: Binding<Bool>, resetTapped: @escaping () -> Void, logTapped: @escaping () -> Void) {
         self.account = account
         
-        self._isLocalLog = isLocalLog
         self._isRemoteLog = isRemoteLog
         self._isMock = isMock
         
@@ -27,19 +25,14 @@ public struct DebugView: View {
         List {
             Section("General") {
                 
-                Button(action: {
-                    resetTapped()
-                }){
-                    Text("Reset Database")
-                        .foregroundStyle(Color.red)
-                }
+                Button("Reset Database", action: resetTapped)
+                    .foregroundStyle(Color.red)
                 
                 Toggle("Remote Log", isOn: $isRemoteLog)
-                Toggle("Local Log", isOn: $isLocalLog)
-                if(isLocalLog) {
-                    Button("Logs", action: { logTapped() })
-                        .foregroundStyle(Color.theme)
-                }
+                
+                Button("Local Logs", action: logTapped)
+                    .foregroundStyle(Color.theme)
+                
                 Toggle("Mocks", isOn: $isMock)
             }
             
@@ -52,26 +45,6 @@ public struct DebugView: View {
                 Text("Taiga: " + (account?.taiga?.username ?? "--"))
                     .font(.footnote)
             }
-            
-          
-            /* TODO: display debug state
-            Section("State") {
-                if let data = try? JSONEncoder().encode(store.kimai),
-                   let json = String(data: data, encoding: .utf8) {
-                    DebugJsonView(json)
-                }
-                
-                if let data = try? JSONEncoder().encode(store.taiga),
-                   let json = String(data: data, encoding: .utf8) {
-                    DebugJsonView(json)
-                }
-            }
-            */
-            
-            
-            
-            
-          
             
         }
         .listStyle(SidebarListStyle())

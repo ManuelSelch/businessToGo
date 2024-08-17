@@ -10,12 +10,21 @@
       }
     },
     {
+      "identity" : "anycodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AnyCodable.git",
+      "state" : {
+        "revision" : "862808b2070cd908cb04f9aafe7de83d35f81b05",
+        "version" : "0.6.7"
+      }
+    },
+    {
       "identity" : "chart",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ManuelSelch/Chart",
       "state" : {
-        "revision" : "36978552d2f1f733aedf194821fc153175f09c01",
-        "version" : "1.0.3"
+        "revision" : "2066bd8a937b016366b8212944de6ec5f656a121",
+        "version" : "1.0.4"
       }
     },
     {
@@ -37,12 +46,12 @@
       }
     },
     {
-      "identity" : "offlinesync",
+      "identity" : "pulse",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/manuelselch/OfflineSync",
+      "location" : "https://github.com/kean/Pulse.git",
       "state" : {
-        "revision" : "25e3058eb0089ec9a6a49a281a1be20ea6b8120a",
-        "version" : "1.2.4"
+        "revision" : "3ac5ee35ab233e900aa484919803d51791d1e351",
+        "version" : "4.2.7"
       }
     },
     {
@@ -59,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/Redux",
       "state" : {
-        "revision" : "f42955cf35f4e735a44ba9c2a8f9b39ffd02c721",
-        "version" : "1.2.0"
+        "revision" : "43817b433f787a6a9b2efd9915de5d75a800caa8",
+        "version" : "1.2.13"
       }
     },
     {
@@ -79,6 +88,33 @@
       "state" : {
         "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
         "version" : "0.15.3"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream.git",
+      "state" : {
+        "revision" : "c6bfd1af48efcc9a9ad203665db12375ba6b145a",
+        "version" : "4.0.8"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/swiftui-introspect",
+      "state" : {
+        "revision" : "807f73ce09a9b9723f12385e592b4e0aaebd3336",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "swiftui-navigation-transitions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/davdroman/swiftui-navigation-transitions.git",
+      "state" : {
+        "revision" : "ad6ecab3f275fd0ff30959150dec0f14a5b7a245",
+        "version" : "0.13.4"
       }
     }
   ],

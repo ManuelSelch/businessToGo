@@ -1,7 +1,7 @@
 import Foundation
 import Redux
 
-extension SettingsContainer {
+extension SettingsComponent {
     static func reduce(_ state: inout AppFeature.State, _ action: UIAction) -> Effect<AppFeature.Action> {
         switch(action) {
         case .integrationsTapped:

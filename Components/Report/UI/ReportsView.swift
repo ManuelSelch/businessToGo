@@ -1,5 +1,5 @@
 import SwiftUI
-import OfflineSync
+import OfflineSyncCore
 import MyChart
 
 import KimaiCore

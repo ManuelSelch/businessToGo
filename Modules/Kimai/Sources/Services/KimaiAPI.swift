@@ -5,14 +5,16 @@ import KimaiCore
 
 public enum KimaiAPI {
     case getCustomers
-    case insertCustomer(KimaiCustomer)
-    case updateCustomer(KimaiCustomer)
+    case insertCustomer(KimaiCustomerDTO)
+    case updateCustomer(KimaiCustomerDTO)
     
     case getProjects
     case insertProject(KimaiProject)
     case updateProject(KimaiProject)
     
     case getActivities
+    case insertActivity(KimaiActivity)
+    case updateActivity(KimaiActivity)
     
     case getTimesheets(_ page: Int)
     case insertTimesheet(KimaiTimesheet)
@@ -67,8 +69,10 @@ extension KimaiAPI: Moya.TargetType {
         case .deleteTimesheet(let id):
             return "/timesheets/\(id)"
             
-        case .getActivities:
+        case .getActivities, .insertActivity(_):
             return "/activities"
+        case .updateActivity(let activity):
+            return "/activities/\(activity.id)"
             
         case .getTeams:
             return "/teams"
@@ -82,9 +86,9 @@ extension KimaiAPI: Moya.TargetType {
         switch self {
         case .getCustomers, .getProjects, .getActivities, .getTimesheets(_), .getTeams, .getUsers:
             return .get
-        case .insertTimesheet(_), .insertProject(_), .insertCustomer(_):
+        case .insertTimesheet(_), .insertProject(_), .insertCustomer(_), .insertActivity(_):
             return .post
-        case .updateTimesheet(_), .updateProject(_), .updateCustomer(_):
+        case .updateTimesheet(_), .updateProject(_), .updateCustomer(_), .updateActivity(_):
             return .patch
         case .deleteTimesheet(_):
             return .delete
@@ -116,7 +120,7 @@ extension KimaiAPI: Moya.TargetType {
                 "visible": true,
             ]
             
-        case .insertCustomer(let customer):
+        case .insertCustomer(let customer), .updateCustomer(let customer):
             return [
                 "name": customer.name,
                 "number": customer.number as Any,
@@ -124,14 +128,14 @@ extension KimaiAPI: Moya.TargetType {
                 "country": "DE",
                 "currency": "EUR",
                 "timezone": "Europe/Berlin",
-                "visible": true
+                "visible": customer.visible
             ]
-        
-        case .updateCustomer(let customer):
+            
+        case .insertActivity(let activity), .updateActivity(let activity):
             return [
-                "name": customer.name,
-                "number": customer.number as Any,
-                "color": customer.color ?? "" as Any,
+                "name": activity.name,
+                "color": activity.color as Any,
+                "visible": activity.visible
             ]
             
         }

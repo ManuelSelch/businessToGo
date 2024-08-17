@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import Moya
 import CoreData
-import OfflineSync
+import OfflineSyncServices
 import SQLite
 import Dependencies
 
@@ -10,22 +10,20 @@ import NetworkFoundation
 import KimaiCore
 import CommonCore
 
-// MARK: - admin middleware
 public struct KimaiService {
     @Dependency(\.customers) public var customers
     @Dependency(\.projects) public var projects
     @Dependency(\.timesheets) public var timesheets
     @Dependency(\.activities) public var activities
-    @Dependency(\.teams) public var teams
     @Dependency(\.users) public var users
     
     public func setAuth(username: String, password: String) {
         let authPlugin = KimaiAuthPlugin(username, password)
+        
         customers.setPlugins([authPlugin])
         projects.setPlugins([authPlugin])
         timesheets.setPlugins([authPlugin])
         activities.setPlugins([authPlugin])
-        teams.setPlugins([authPlugin])
         users.setPlugins([authPlugin])
     }
     
@@ -40,10 +38,12 @@ public struct KimaiService {
     }
     
     public func clear(){
+        /*
         customers.clear()
         projects.clear()
         timesheets.clear()
         activities.clear()
+        */
     }
 }
 
@@ -62,13 +62,8 @@ struct KimaiAuthPlugin: PluginType {
     
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
-        
-        // Add USER header
         request.addValue(user, forHTTPHeaderField: "X-AUTH-USER")
-        
-        // Add TOKEN header
         request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
-        
         return request
     }
 }

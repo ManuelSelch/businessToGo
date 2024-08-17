@@ -68,16 +68,16 @@ public struct KimaiTimesheetsListView: View {
                         activity: activities.first{ $0.id == timesheet.activity }
                     )
                     .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
+                        Button(role: .cancel) {
                             deleteTapped(timesheet)
                         } label: {
                             Text("Delete")
                                 .foregroundColor(.white)
                         }
+                        .tint(.red)
                         .padding()
-                        .background(.red)
                         
-                        Button {
+                        Button(role: .cancel) {
                             editTapped(timesheet)
                         } label: {
                             Text("Edit")

@@ -1,12 +1,11 @@
 import SwiftUI
 
 import KimaiCore
-import TaigaCore
 import IntegrationCore
 
 struct IntegrationCard: View {
     let kimaiProject: KimaiProject
-    let taigaProjects: [TaigaProject]
+    let taigaProjects: [KimaiProject]
     let integration: Integration?
     
     let onConnect: (_ kimai: Int, _ taiga: Int) -> Void
@@ -32,7 +31,7 @@ struct IntegrationCard: View {
                 selectedTaigaProject = taigaProjects.first?.id ?? 0
             }
         }
-        .onChange(of: selectedTaigaProject){
+        .onChange(of: selectedTaigaProject){ _ in 
             if(selectedTaigaProject != integration?.taigaProjectId){
                 onConnect(kimaiProject.id, selectedTaigaProject)
             }

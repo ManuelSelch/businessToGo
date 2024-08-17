@@ -12,9 +12,12 @@ public struct KimaiProjectDetailsView: View {
     let activities: [KimaiActivity]
     let users: [KimaiUser]
     
-    let deleteTapped: (KimaiTimesheet) -> ()
-    let editTapped: (KimaiTimesheet) -> ()
-    let activityTapped: (KimaiActivity) -> ()
+    let timesheetDeleteTapped: (KimaiTimesheet) -> ()
+    let timesheetEditTapped: (KimaiTimesheet) -> ()
+    
+    let activityEditTapped: (KimaiActivity) -> ()
+    let activityDeleteTapped: (KimaiActivity) -> ()
+    let activityCreated: (KimaiActivity) -> ()
     
     enum ChartSelection: String, CaseIterable {
         case time = "Arbeitszeit"
@@ -48,15 +51,23 @@ public struct KimaiProjectDetailsView: View {
     
     @State var selectedChart: ChartSelection = .time
     
-    public init(project: KimaiProject, customer: KimaiCustomer?, timesheets: [KimaiTimesheet], activities: [KimaiActivity], users: [KimaiUser], deleteTapped: @escaping (KimaiTimesheet) -> Void, editTapped: @escaping (KimaiTimesheet) -> Void, activityTapped: @escaping (KimaiActivity) -> Void) {
+    public init(
+        project: KimaiProject, customer: KimaiCustomer?, timesheets: [KimaiTimesheet], activities: [KimaiActivity], users: [KimaiUser],
+        timesheetEditTapped: @escaping (KimaiTimesheet) -> Void, timesheetDeleteTapped: @escaping (KimaiTimesheet) -> Void,
+        activityEditTapped: @escaping (KimaiActivity) -> Void, activityDeleteTapped: @escaping (KimaiActivity) -> Void, activityCreated: @escaping (KimaiActivity) -> Void
+    ) {
         self.project = project
         self.customer = customer
         self.timesheets = timesheets
         self.activities = activities
         self.users = users
-        self.deleteTapped = deleteTapped
-        self.editTapped = editTapped
-        self.activityTapped = activityTapped
+        
+        self.timesheetDeleteTapped = timesheetDeleteTapped
+        self.timesheetEditTapped = timesheetEditTapped
+        
+        self.activityEditTapped = activityEditTapped
+        self.activityDeleteTapped = activityDeleteTapped
+        self.activityCreated = activityCreated
     }
     
     public var body: some View {
@@ -70,7 +81,7 @@ public struct KimaiProjectDetailsView: View {
                     .tag(Menu.activities)
             }
             .pickerStyle(.segmented)
-            .padding()
+         
             
             switch(selectedMenu){
             case .summary:
@@ -108,23 +119,31 @@ public struct KimaiProjectDetailsView: View {
                     
                     
                 }
+                .listSectionSeparator(.hidden)
+                .listStyle(.plain)
+                
             case .sessions:
                 KimaiTimesheetsListView(
                     projects: [project],
                     timesheets: timesheets.filter { $0.project == project.id },
                     activities: activities,
-                    deleteTapped: deleteTapped,
-                    editTapped: editTapped
+                    deleteTapped: timesheetDeleteTapped,
+                    editTapped: timesheetEditTapped
                 )
             case .activities:
                 KimaiActivityListView(
-                    activities: activities.filter { $0.project == project.id || $0.project == nil },
-                    activityTapped: activityTapped
+                    project: project,
+                    activities: activities,
+                    tapped: { _ in },
+                    editTapped: activityEditTapped,
+                    deleteTapped: activityDeleteTapped,
+                    created: activityCreated
                 )
             }
             
             
         }
+        .padding()
     }
     
     @ViewBuilder func ListItem(_ value: String, label: String) -> some View {

@@ -1,5 +1,5 @@
 import Foundation
-import OfflineSync
+import OfflineSyncCore
 
 public struct KimaiTimesheet: TableProtocol, Hashable {
     public var id: Int
@@ -92,9 +92,25 @@ extension KimaiTimesheet {
     }
     
     public func getDuration() -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        return formatter.string(from: calculateDuration() ?? 0) ?? "--"
+        if let duration = calculateDuration() {
+            let hours = Int(duration) / 3600
+            let minutes = (Int(duration) % 3600) / 60
+            
+            var hoursString = "\(hours)"
+            if(hours < 10) {
+                hoursString = "0\(hours)"
+            }
+            
+            var minutesString = "\(minutes)"
+            if(minutes < 10) {
+                minutesString = "0\(minutes)"
+            }
+            
+            return hoursString + ":" + minutesString
+            
+        } else {
+            return "00:00"
+        }
     }
 }
 

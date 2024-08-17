@@ -1,6 +1,6 @@
 import Redux
 
-extension ReportContainer {
+extension ReportComponent {
     static func reduce(_ state: inout AppFeature.State, _ action: UIAction) -> Effect<AppFeature.Action> {
         switch(action) {
         case .calendarTapped:

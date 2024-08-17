@@ -14,9 +14,7 @@ struct KimaiCustomerCard: View {
                     .foregroundStyle(Color(hex: color))
             }
             
-            Button(action: {
-                customerTapped()
-            }){
+            Button(action: customerTapped){
                 Text(customer.name)
                     .foregroundColor(Color.theme)
             }

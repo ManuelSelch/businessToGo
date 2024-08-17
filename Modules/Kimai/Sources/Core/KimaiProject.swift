@@ -1,7 +1,6 @@
 import Foundation
-import OfflineSync
 
-public struct KimaiProject: TableProtocol, Hashable {
+public struct KimaiProject: KimaiTableProtocol, Hashable {
     public var id: Int
     public var customer: Int
     public var name: String

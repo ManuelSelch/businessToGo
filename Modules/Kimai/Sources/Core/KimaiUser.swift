@@ -1,5 +1,5 @@
 import Foundation
-import OfflineSync
+import OfflineSyncCore
 
 public struct KimaiUser: TableProtocol, Hashable {
     public var id: Int

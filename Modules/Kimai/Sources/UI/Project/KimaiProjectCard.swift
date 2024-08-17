@@ -8,15 +8,13 @@ struct KimaiProjectCard: View {
     
     var body: some View {
         HStack {
-            if let color = kimaiProject.color {
+            if let color = kimaiProject.color, color != "" {
                 Circle()
                     .frame(width: 20, height: 20)
                     .foregroundStyle(Color(hex: color))
             }
             
-            Button(action: {
-                projectTapped()
-            }){
+            Button(action: projectTapped){
                 Text(kimaiProject.name)
                     .foregroundColor(Color.theme)
             }

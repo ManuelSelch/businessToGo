@@ -19,9 +19,7 @@ struct AppHeader: View {
             HStack {
                 Spacer()
                 
-                Button(action: {
-                    settingsTapped()
-                }){
+                Button(action: settingsTapped){
                     Image(systemName: "gearshape")
                         .font(.system(size: 20))
                         .foregroundColor(Color.white)

@@ -48,7 +48,7 @@ public struct KimaiTimesheetSheet: View {
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
-                    .onChange(of: selectedCustomer) { old, new in
+                    .onChange(of: selectedCustomer) { old in
                         if(old != 0){
                             selectedProject = projectsFiltered.first?.id ?? 0
                         }
@@ -60,7 +60,7 @@ public struct KimaiTimesheetSheet: View {
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
-                    .onChange(of: selectedProject) { old, new in
+                    .onChange(of: selectedProject) { old in
                         if(old != 0){
                             selectedActivity = activitiesFiltered.first?.id ?? 0
                         }

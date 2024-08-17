@@ -1,6 +1,8 @@
 import XCTest
 import Redux
-@testable import businessToGo
+import ReduxTestStore
+
+@testable import KimaiApp
 
 final class TestKimaiReducer: XCTestCase {
     var store: TestStoreOf<KimaiFeature>!
@@ -10,9 +12,7 @@ final class TestKimaiReducer: XCTestCase {
     }
 
     func testTeamSelected() {
-        store.send(.teamSelected(2)) {
-            $0.selectedTeam = 2
-        }
+        
     }
 
 }

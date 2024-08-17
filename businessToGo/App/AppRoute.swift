@@ -2,10 +2,10 @@ import Foundation
 
 import LoginApp
 import Intro
-import SettingsApp
 
 extension AppFeature {
     enum TabRoute: Identifiable, Codable, Equatable, Hashable, CaseIterable {
+        case today
         case management
         case report
         
@@ -14,11 +14,12 @@ extension AppFeature {
     
     enum Route: Identifiable, Codable, Equatable, Hashable {
         case login(LoginFeature.Route)
-        case settings(SettingsContainer.Route)
+        case settings(SettingsComponent.Route)
         case intro
         
-        case management(ManagementContainer.Route)
-        case report(ReportContainer.Route)
+        case today(TodayComponent.Route)
+        case management(ManagementComponent.Route)
+        case report(ReportComponent.Route)
         
         var id: Self {self}
     }

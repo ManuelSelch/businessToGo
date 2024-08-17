@@ -18,39 +18,62 @@ public struct SetupAssistantView: View {
     }
     
     public var body: some View {
-        List {
-            Image("no-customers")
-                .resizable()
-                .scaledToFit()
-                .padding()
-                .cornerRadius(10)
-                .padding()
-
+        VStack(alignment: .leading) {
+            HStack {
+                Spacer()
+                Image("no-customers")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .cornerRadius(10)
+                    .padding()
+                Spacer()
+            }
+            
             
             Text("Setup Checklist")
                 .font(.title)
                 .bold()
             
-            /*
-            ForEach(KimaiFeature.Step.allCases) { step in
+            
+            ForEach(steps) { step in
+                
+                var stepColor: Color {
+                    guard let currentStep = currentStep
+                    else { return Color.theme } // all steps already finished
+                    
+                    if(step == currentStep) { return Color.theme } // currently active
+                    else if(step.id <= currentStep.id) { return Color.contrast } // already done
+                    else { return Color.gray } // not yet done
+                }
+                
+                var stepImage: String {
+                    guard let currentStep = currentStep
+                    else { return "checkmark.circle.fill" } // all steps already finished
+                    
+                    if(step.id < currentStep.id) {
+                        return "checkmark.circle.fill" // already done
+                    } else {
+                        return "circle" // not yet done
+                    }
+                }
+                
                 HStack {
-                    Image(systemName: step.index < (currentStep?.index) ?? 0 ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: stepImage)
                         .imageScale(.large)
                     Spacer()
-                    Text(steps[step].rawValue)
+                    Text(step.rawValue)
                 }
-                .foregroundStyle(step == currentStep ? Color.theme : step.index <= (currentStep?.index) ?? 0 ? Color.contrast : Color.gray)
+                .foregroundStyle(stepColor)
                 .onTapGesture {
                     if(step == currentStep) {
                         stepTapped()
                     }
                 }
             }
-             */
             
-            Button(action: {
-                dashboardTapped()
-            }) {
+            
+            Button(action: dashboardTapped) {
                 Text("Dashboard")
             }
             .padding(10)
@@ -59,6 +82,7 @@ public struct SetupAssistantView: View {
             .foregroundStyle(Color.background)
             
         }
+        .padding()
     }
 }
 

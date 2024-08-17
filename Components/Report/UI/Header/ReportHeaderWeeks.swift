@@ -28,11 +28,11 @@ struct ReportHeaderWeeks: View {
                                 .frame(width: geo.size.width, height: 100)
                         }
                     }
-                    .scrollTargetLayout()
+                    // .scrollTargetLayout()
                 }
-                .scrollTargetBehavior(.viewAligned)
+                // .scrollTargetBehavior(.viewAligned)
                 .scrollIndicators(.hidden)
-                .onChange(of: scrolledID){
+                .onChange(of: scrolledID){ _ in
                     if let newID = scrolledID
                     {
                         withAnimation(.easeInOut) {
@@ -45,11 +45,11 @@ struct ReportHeaderWeeks: View {
                         lastID = newID
                     }
                 }
-                .onChange(of: selectedDate) {
+                .onChange(of: selectedDate) { _ in
                     scrolledID = (selectedDate.getWeekOfMonth() ?? 1) - 1
                     lastID = (selectedDate.getWeekOfMonth() ?? 1) - 1
                 }
-                .scrollPosition(id: $scrolledID)
+                // .scrollPosition(id: $scrolledID)
                 
                 
             }

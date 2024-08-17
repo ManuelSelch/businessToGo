@@ -29,6 +29,7 @@ struct ReportSummaryView: View {
             VStack(alignment: .leading) {
                 Text("Zeit")
                     .foregroundStyle(Color.textHeaderSecondary)
+                    .font(.system(.subheadline))
                 Text(totalTime)
                     .font(.system(size: 20, weight: .heavy))
             }
@@ -39,6 +40,7 @@ struct ReportSummaryView: View {
             VStack(alignment: .leading) {
                 Text("Einnahmen")
                     .foregroundStyle(Color.textHeaderSecondary)
+                    .font(.system(.subheadline))
                 Text("\(totalRate)")
                     .font(.system(size: 20, weight: .heavy))
             }

@@ -2,8 +2,8 @@ import SwiftUI
 import Redux
 
 struct ReportContainer: View {
-    @ObservedObject var store: ViewStore
-    var route: Route
+    @ObservedObject var store: ViewStoreOf<ReportComponent>
+    var route: ReportComponent.Route
     
     public var body: some View {
         switch(route) {
@@ -14,9 +14,9 @@ struct ReportContainer: View {
                 projects: store.state.projects,
                 activities: store.state.activities,
                 
-                selectedProject: store.binding(for: \.selectedProject, action: Action.projectSelected),
-                selectedDate: store.binding(for: \.selectedDate, action: Action.dateSelected),
-                selectedReportType: store.binding(for: \.selectedReportType, action: Action.reportTypeSelected),
+                selectedProject: store.binding(for: \.selectedProject, action: ReportComponent.Action.projectSelected),
+                selectedDate: store.binding(for: \.selectedDate, action: ReportComponent.Action.dateSelected),
+                selectedReportType: store.binding(for: \.selectedReportType, action: ReportComponent.Action.reportTypeSelected),
                 
                 calendarTapped: { store.send(.reports(.calendarTapped)) },
                 filterTapped: { store.send(.reports(.filterTapped)) },

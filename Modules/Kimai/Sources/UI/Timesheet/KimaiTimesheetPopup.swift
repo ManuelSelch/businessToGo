@@ -11,7 +11,7 @@ public struct KimaiTimesheetPopup: View {
     let timesheetTapped: () -> ()
     let stopTapped: () -> ()
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
     @State var durationStr = ""
     
     public init(customer: KimaiCustomer, project: KimaiProject, activity: KimaiActivity, timesheet: KimaiTimesheet, timesheetTapped: @escaping () -> Void, stopTapped: @escaping () -> Void) {
@@ -27,9 +27,7 @@ public struct KimaiTimesheetPopup: View {
         HStack {
             Spacer()
             
-            Button(action: {
-                timesheetTapped()
-            }){
+            Button(action: timesheetTapped){
                 VStack(alignment: .leading) {
                     Text(durationStr)
                         .bold()
@@ -49,9 +47,7 @@ public struct KimaiTimesheetPopup: View {
             
             Spacer()
             
-            Button(action: {
-              stopTapped()
-            }){
+            Button(action: stopTapped){
                 Image(systemName: "pause.circle.fill")
                     .font(.system(size: 20))
                     .foregroundStyle(Color.red)
@@ -62,6 +58,14 @@ public struct KimaiTimesheetPopup: View {
            
         }
         .padding()
+        .background(Color.themeGray)
+        .clipShape(.rect(cornerRadius: 10))
+        .padding()
+        
+        .onAppear {
+            durationStr = timesheet.getDuration()
+        }
+        
         .onReceive(timer, perform: { _ in
             durationStr = timesheet.getDuration()
         })

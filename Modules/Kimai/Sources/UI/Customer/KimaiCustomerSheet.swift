@@ -61,7 +61,7 @@ public struct KimaiCustomerSheet: View {
                     Button(action: {
                         var customer = customer
                         customer.name = name
-                        customer.color = color
+                        customer.color = color ?? ""
                         saveTapped(customer)
                     }){
                         let isCreate = (customer.id == KimaiCustomer.new.id)

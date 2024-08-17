@@ -2,11 +2,12 @@ import SwiftUI
 import Redux
 
 import KimaiUI
-import TaigaApp
 
 struct ManagementContainer: View {
-    @ObservedObject var store: ViewStore
-    var route: Route
+    var mainStore: StoreOf<AppFeature>
+    
+    var store: ViewStoreOf<ManagementComponent>
+    var route: ManagementComponent.Route
     
     var isSheet: Bool {
         switch(route) {
@@ -17,23 +18,27 @@ struct ManagementContainer: View {
         }
     }
     
+    init(mainStore: StoreOf<AppFeature>, route: ManagementComponent.Route) {
+        self.mainStore = mainStore
+        self.store = mainStore.projection(ManagementComponent.self)
+        self.route = route
+    }
+    
+    
     var body: some View {
         VStack {
             switch(route) {
             case let .kimai(route):
                 KimaiContainer(
-                    store: store.projection(KimaiContainer.self),
+                    store: mainStore.projection(KimaiComponent.self),
                     route: route
                 )
-            case let .taiga(route):
-                Text("Taiga Container")
             case .assistant:
-               Text("Kimai Assistant")
-                
+                AssistantContainer(store: mainStore.projection(AssistantComponent.self))
             }
             
             
-            if  !isSheet,
+            if  !isSheet, route != .assistant,
                 let timesheet = store.state.kimai.timesheets.first(where: { $0.end == nil }),
                 let activity = store.state.kimai.activities.first(where: { $0.id == timesheet.activity }),
                 let project = store.state.kimai.projects.first(where: { $0.id == timesheet.project }),
@@ -44,7 +49,7 @@ struct ManagementContainer: View {
                     project: project,
                     activity: activity,
                     timesheet: timesheet,
-                    timesheetTapped: { store.send(.kimai(.timesheetEditTapped(timesheet))) },
+                    timesheetTapped: { store.send(.timesheetEditTapped(timesheet)) },
                     stopTapped: { store.send(.stopTapped(timesheet)) }
                 )
             }
@@ -52,13 +57,14 @@ struct ManagementContainer: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 ManagementHeaderView(
-                    selectedTeam: store.binding(for: \.kimai.selectedTeam, action: {Action.kimai(.teamSelected($0))}),
+                    selectedTeam: store.binding(for: \.kimai.selectedTeam, action: {.teamSelected($0)}),
                     route: route,
                     projects: store.state.kimai.projects,
                     teams: store.state.kimai.teams,
                     syncTapped: { store.send(.sync) },
-                    projectTapped: { store.send(.kimai(.projectTapped($0.taigaProjectId))) },
-                    playTapped: { store.send(.playTapped($0)) }
+                    projectTapped: { store.send(.projectTapped($0.taigaProjectId)) },
+                    playTapped: { store.send(.playTapped($0)) },
+                    settingsTapped: { store.send(.settingsTapped) }
                 )
             }
         }

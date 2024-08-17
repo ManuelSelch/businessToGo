@@ -7,36 +7,27 @@ public struct KimaiLoginView: View {
     
     let account: Account
     
-    let backTapped: () -> ()
-    let loginTapped: (Account) -> ()
+    let saveTapped: (Account) -> ()
+    let logoutTapped: () -> ()
     
     @State private var server: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
     
-    public init(account: Account, backTapped: @escaping () -> Void, loginTapped: @escaping (Account) -> Void) {
+    public init(
+        account: Account,
+        saveTapped: @escaping (Account) -> Void,
+        logoutTapped: @escaping () -> Void
+    ) {
         self.account = account
-        self.backTapped = backTapped
-        self.loginTapped = loginTapped
+        self.saveTapped = saveTapped
+        self.logoutTapped = logoutTapped
     }
     
     public var body: some View {
         VStack {
-            ZStack {
-                Text("Kimai Login")
-                    .bold()
-                
-                HStack {
-                    Button(action : {
-                        backTapped()
-                    }){
-                        Image(systemName: "arrow.left")
-                            .font(.system(size: 20))
-                    }
-                    Spacer()
-                }
-                
-            }
+            Text("Kimai Login")
+                .bold()
         
             TextField("Server", text: $server)
                 .keyboardType(.URL)
@@ -55,13 +46,23 @@ public struct KimaiLoginView: View {
             Button(action: {
                 var account = account
                 account.kimai = AccountData(username, password, server)
-                loginTapped(account)
+                saveTapped(account)
             }) {
-                Text("Login")
+                Text("Save")
                     .foregroundColor(.white)
                     .padding()
                     .background(Color.blue)
                     .cornerRadius(8)
+            }
+            
+            if(account.kimai != nil) {
+                Button(action: logoutTapped) {
+                    Text("Logout")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
             }
             
             Spacer()

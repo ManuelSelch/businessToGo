@@ -1,10 +1,10 @@
 import Foundation
 
-public enum KimaiAssistantStep: String, CaseIterable, Codable, Equatable {
+public enum KimaiAssistantStep: String, CaseIterable, Codable, Equatable, Identifiable {
     case customer = "Ersten Kunden anlegen"
     case project = "Erstes Projekt anlegen anlegen"
     case activity = "Erste Tätigkeit anlegen"
-    case timesheet = "Esten Timesheet Eintrag anlegen"
+    case timesheet = "Ersten Timesheet Eintrag anlegen"
     
-    public var index: Int { KimaiAssistantStep.allCases.firstIndex(of: self) ?? 0 }
+    public var id: Int { KimaiAssistantStep.allCases.firstIndex(of: self) ?? 0 }
 }

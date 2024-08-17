@@ -1,6 +1,7 @@
 import SwiftUI
 import MyChart
 
+import CommonUI
 import KimaiCore
 
 public struct KimaiProjectsListView: View {
@@ -10,6 +11,8 @@ public struct KimaiProjectsListView: View {
     
     let projectTapped: (Int) -> ()
     let projectEditTapped: (KimaiProject) -> ()
+    let projectDeleteTapped: (KimaiProject) -> ()
+    let projectCreated: (KimaiProject) -> ()
     
     var projectsFiltered: [KimaiProject] {
         var c = projects.filter { $0.customer == customer }
@@ -21,54 +24,61 @@ public struct KimaiProjectsListView: View {
         calculateProjectTimes()
     }
     
-    public init(customer: Int, projects: [KimaiProject], timesheets: [KimaiTimesheet], projectTapped: @escaping (Int) -> Void, projectEditTapped: @escaping (KimaiProject) -> Void) {
+    public init(
+        customer: Int, projects: [KimaiProject], timesheets: [KimaiTimesheet], 
+        
+        projectTapped: @escaping (Int) -> Void,
+        projectEditTapped: @escaping (KimaiProject) -> Void,
+        projectDeleteTapped: @escaping (KimaiProject) -> Void,
+        projectCreated: @escaping (KimaiProject) -> Void
+    ) {
         self.customer = customer
         self.projects = projects
         self.timesheets = timesheets
+        
         self.projectTapped = projectTapped
         self.projectEditTapped = projectEditTapped
+        self.projectDeleteTapped = projectDeleteTapped
+        self.projectCreated = projectCreated
     }
-
+    
     public var body: some View {
-        VStack {
-            if(projectsFiltered.count > 1) {
-                ChartPieView(projectTimes)
-                    .background(Color.background)
+        List {
+            CustomTextField("New Project") { name in
+                
+                var project = KimaiProject.new
+                project.name = name
+                project.customer = customer
+                projectCreated(project)
             }
             
-            List {
-                ForEach(projectsFiltered) { project in
-                    KimaiProjectCard(
-                        kimaiProject: project,
-                        projectTapped: { projectTapped(project.id) }
-                    )
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .cancel) {
-                            projectEditTapped(project)
-                        } label: {
-                            Text("Edit")
-                                .foregroundColor(.white)
-                        }
-                        .tint(.gray)
+            
+            ForEach(projectsFiltered) { project in
+                KimaiProjectCard(
+                    kimaiProject: project,
+                    projectTapped: { projectTapped(project.id) }
+                )
+                .swipeActions(edge: .trailing) {
+                    Button(role: .cancel) {
+                        projectDeleteTapped(project)
+                    } label: {
+                        Text("Delete")
+                            .foregroundColor(.white)
                     }
-                }
-            }
-            .toolbar {
-                #if os(iOS)
-                ToolbarItem(placement: .topBarTrailing){
-                    Button(action: {
-                        var project = KimaiProject.new
-                        project.customer = customer
+                    .tint(.red)
+                    .padding()
+                    
+                    Button(role: .cancel) {
                         projectEditTapped(project)
-                    }){
-                        Image(systemName: "plus")
-                            .font(.system(size: 20))
-                            .foregroundStyle(Color.theme)
+                    } label: {
+                        Text("Edit")
+                            .foregroundColor(.white)
                     }
+                    .tint(.gray)
                 }
-                #endif
             }
         }
+        .listStyle(.plain)
     }
     
     

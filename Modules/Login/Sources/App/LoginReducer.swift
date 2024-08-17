@@ -7,78 +7,53 @@ import LoginCore
 public extension LoginFeature {
     func reduce(_ state: inout State, _ action: Action) -> Effect<Action> {
         switch(action){
-        case .resetTapped:
+        case .reset:
+            database.reset()
             try? keychain.removeAccounts()
             state.accounts = []
         
-        case .onAppear:
+        case .fetchAccounts:
             state.accounts = (try? keychain.getAccounts()) ?? []
-            if(state.current == nil){
+            if(state.accountId == nil){
                 if let account = try? keychain.getCurrentAccount(state.accounts) {
-                    state.current = account
-                    return login(account)
+                    state.accountId = account.identifier
+                    login(account)
+                    return .send(.delegate(.onLogin(account)))
                 }
             }
-        
-        case .loginTapped(let account):
-            switch(state.scene){
-                case .kimai:
-                    state.scene = .account(account)
-                case .taiga:
-                    state.scene = .account(account)
-                case .accounts:
-                    return login(account)
-                default: return .none
+            
+        case let .create(account):
+            state.accounts.append(account)
+            
+        case let .save(account):
+            if let index = state.accounts.firstIndex(where: {$0.identifier == account.identifier}) {
+                state.accounts[index] = account
+                try? keychain.saveAccount(state.accounts[index])
+                
             }
         
-        case .logoutTapped:
-            state.current = nil
+        case .login(let id):
+            if let account = state.accounts.first(where: {$0.identifier == id}) {
+                state.accountId = account.identifier
+                login(account)
+                return .send(.delegate(.onLogin(account)))
+            }
+        
+        case .logout:
+            state.accountId = nil
             keychain.logout()
         
-        case .createAccountTapped:
-            let id = state.accounts.count
-            let account = Account(id: id)
-            state.scene = .account(account)
-        
-        case .deleteTapped(let account):
-            try? keychain.removeAccount(account)
-            state.accounts.removeAll(where: { $0.identifier == account.identifier })
-        
-        case let .editTapped(account):
-            state.scene = .account(account)
-        
-        case let .kimaiAccountTapped(account):
-            state.scene = .kimai(account)
-        
-        case let .taigaAccountTapped(account):
-            state.scene = .taiga(account)
-        
-        case let .nameChanged(name):
-            switch(state.scene) {
-            case var .account(account):
-                account.name = name
-                try? keychain.saveAccount(account)
-                state.scene = .account(account)
-            default:
-                return .none
-            }
-        
-        case .backTapped:
-            switch(state.scene) {
-            case .account:
-                state.scene = .accounts
-            case let .kimai(account), let .taiga(account):
-                state.scene = .account(account)
-            case .accounts:
-                break
+        case .delete(let id):
+            if let account = state.accounts.first(where: {$0.identifier == id}) {
+                try? keychain.removeAccount(account)
+                state.accounts.removeAll(where: { $0.identifier == account.identifier })
             }
             
-        
-        case .assistantTapped:
+        case .loginDemoAccount:
             let demo = Account.demo
             try? keychain.saveAccount(demo)
-            database.switchDB("businessToGo_\(demo.identifier).sqlite")
-            keychain.login(demo)
+            state.accountId = demo.identifier
+            login(demo)
             return .send(.delegate(.showAssistant))
         
         case .delegate:
@@ -89,10 +64,8 @@ public extension LoginFeature {
     }
     
     
-    func login(_ account: Account) -> AnyPublisher<Action, Error> {
+    func login(_ account: Account) {
         database.switchDB("businessToGo_\(account.identifier).sqlite")
         keychain.login(account)
-        
-        return .send(.delegate(.onLogin(account)))
     }
 }

@@ -10,15 +10,13 @@ struct KimaiActivityCard: View {
     
     var body: some View {
         HStack {
-            if let color = activity.color {
+            if let color = activity.color, color != "" {
                 Circle()
                     .frame(width: 20, height: 20)
                     .foregroundStyle(Color(hex: color))
             }
             
-            Button(action: {
-                activityTapped()
-            }){
+            Button(action: activityTapped){
                 Text(activity.name)
                     .foregroundColor(Color.theme)
             }

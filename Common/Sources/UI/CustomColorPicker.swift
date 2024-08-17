@@ -71,7 +71,10 @@ public struct CustomColorPicker: View {
 
 public extension Color {
     init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+        var hex = hex
+        if(hex == "") { hex = "#000000" }
+        
+        hex = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
         let rgbValue = UInt32(hex, radix: 16)
         let r = Double((rgbValue! & 0xFF0000) >> 16) / 255
         let g = Double((rgbValue! & 0x00FF00) >> 8) / 255

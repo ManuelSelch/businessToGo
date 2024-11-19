@@ -46,6 +46,24 @@
       }
     },
     {
+      "identity" : "offlinesync",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/manuelselch/OfflineSync",
+      "state" : {
+        "revision" : "82ba67576650f0981762030f5bec6b2591451a2f",
+        "version" : "1.3.3"
+      }
+    },
+    {
+      "identity" : "popupview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/PopupView.git",
+      "state" : {
+        "revision" : "b957a8aafd0d56335f3400da7aee663c996278c6",
+        "version" : "3.0.7"
+      }
+    },
+    {
       "identity" : "pulse",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Pulse.git",
@@ -68,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/Redux",
       "state" : {
-        "revision" : "43817b433f787a6a9b2efd9915de5d75a800caa8",
-        "version" : "1.2.13"
+        "revision" : "4e608714e6bb6a36173f4531a4ad34168e124e3e",
+        "version" : "1.2.14"
       }
     },
     {

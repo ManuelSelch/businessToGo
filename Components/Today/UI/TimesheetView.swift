@@ -29,7 +29,7 @@ struct TimesheetView: View {
             DatePicker("Start time", selection: $startTime, displayedComponents: [.date, .hourAndMinute])
               
             
-            DatePicker("End time", selection: $endTime, in: startTime..., displayedComponents: .hourAndMinute)
+            DatePicker("End time", selection: $endTime, in: startTime..., displayedComponents: [.date, .hourAndMinute])
                 
             
     

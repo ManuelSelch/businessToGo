@@ -40,7 +40,16 @@ public struct KimaiTimesheetSheet: View {
     
     public var body: some View {
         VStack {
+           
+            
             Form {
+                Section(header: Text("Debug")) {
+                    Text("debug: ")
+                    Text("customer: \(selectedCustomer)")
+                    Text("project: \(selectedProject)")
+                    Text("activity: \(selectedActivity)")
+                }
+                
                 Section(header: Text("Branch Info")) {
                     Picker("Kunde", selection: $selectedCustomer) {
                         ForEach(customers, id: \.id) {
@@ -82,7 +91,7 @@ public struct KimaiTimesheetSheet: View {
                         VStack {
                             Text("Start time")
                                 .font(.system(size: 8))
-                            DatePicker("start time", selection: $startTime, displayedComponents: .hourAndMinute)
+                            DatePicker("start time", selection: $startTime)
                                 .labelsHidden()
                         }
                         Spacer()
@@ -90,7 +99,7 @@ public struct KimaiTimesheetSheet: View {
                             VStack {
                                 Text("End time")
                                     .font(.system(size: 8))
-                                DatePicker("end time", selection: $endTime, displayedComponents: .hourAndMinute)
+                                DatePicker("end time", selection: $endTime)
                                     .labelsHidden()
                             }
                         } else {
@@ -156,4 +165,14 @@ public struct KimaiTimesheetSheet: View {
         )
         return try? Date(dateStr, strategy: strategy)
     }
+}
+
+#Preview {
+    KimaiTimesheetSheet(
+        timesheet: KimaiTimesheet.sample,
+        customers: [],
+        projects: [],
+        activities: [],
+        saveTapped: { _ in }
+    )
 }

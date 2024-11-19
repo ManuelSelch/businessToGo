@@ -3,6 +3,7 @@ import Dependencies
 import OfflineSyncCore
 import OfflineSyncServices
 import Moya
+import ReduxDebug
 
 
 public class PageRequestService<Model: TableProtocol, API: TargetType>: RequestService<Model, API> {
@@ -38,7 +39,8 @@ public class PageRequestService<Model: TableProtocol, API: TargetType>: RequestS
             records.append(contentsOf: response)
         }
         
-        if let pages = headers["x-total-pages"] as? Int {
+        if let pagesStr = headers["X-Total-Pages"] as? String, let pages = Int(pagesStr) {
+            Logger.debug("x-total-pages: \(pages)")
             for i in 2...pages {
                 if let result: [Model] = try await request(provider, fetchPageMethod(i)) {
                     records.append(contentsOf: result)

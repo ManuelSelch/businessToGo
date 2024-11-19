@@ -44,7 +44,6 @@ public struct KimaiTimesheetSheet: View {
             
             Form {
                 Section(header: Text("Debug")) {
-                    Text("debug: ")
                     Text("customer: \(selectedCustomer)")
                     Text("project: \(selectedProject)")
                     Text("activity: \(selectedActivity)")
@@ -58,9 +57,7 @@ public struct KimaiTimesheetSheet: View {
                     }
                     .pickerStyle(MenuPickerStyle())
                     .onChange(of: selectedCustomer) { old in
-                        if(old != 0){
-                            selectedProject = projectsFiltered.first?.id ?? 0
-                        }
+                        selectedProject = projectsFiltered.first(where: { $0.id == selectedProject })?.id ?? projectsFiltered.first?.id ?? 0
                     }
                     
                     Picker("Projekt", selection: $selectedProject) {
@@ -70,9 +67,9 @@ public struct KimaiTimesheetSheet: View {
                     }
                     .pickerStyle(MenuPickerStyle())
                     .onChange(of: selectedProject) { old in
-                        if(old != 0){
-                            selectedActivity = activitiesFiltered.first?.id ?? 0
-                        }
+                        selectedActivity = activitiesFiltered.first(
+                            where: { $0.id == selectedActivity }
+                        )?.id ?? activitiesFiltered.first?.id ?? 0
                     }
                     
                     Picker("Tätigkeit", selection: $selectedActivity) {
@@ -86,15 +83,13 @@ public struct KimaiTimesheetSheet: View {
                     TextField("Beschreibung", text: $description)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
-                    HStack {
-                        Spacer()
+                    VStack {
                         VStack {
                             Text("Start time")
                                 .font(.system(size: 8))
                             DatePicker("start time", selection: $startTime)
                                 .labelsHidden()
                         }
-                        Spacer()
                         if isEndTime {
                             VStack {
                                 Text("End time")
@@ -113,7 +108,6 @@ public struct KimaiTimesheetSheet: View {
                                     }
                             }
                         }
-                        Spacer()
                     }
                 }
             }

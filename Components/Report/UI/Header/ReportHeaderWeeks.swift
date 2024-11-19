@@ -71,6 +71,5 @@ struct ReportHeaderWeeks: View {
 
 
 #Preview {
-    @State var selectedDate = Date.today
-    return ReportHeaderWeeks(selectedDate: $selectedDate)
+    return ReportHeaderWeeks(selectedDate: .constant(Date.today))
 }

@@ -1,7 +1,9 @@
 import SwiftUI
 import Redux
+import Dependencies
 
 struct SettingsContainer: View {
+    @Dependency(\.router) var router
     var store: ViewStoreOf<SettingsComponent>
     let route: SettingsComponent.Route
     
@@ -10,9 +12,9 @@ struct SettingsContainer: View {
             switch(route) {
             case .settings:
                 SettingsView(
-                    integrationsTapped: { store.send(.integrationsTapped) },
-                    debugTapped: { store.send(.debugTapped) },
-                    introTapped: { store.send(.introTapped) },
+                    integrationsTapped: { router.push(.settings(.integrations)) },
+                    debugTapped: { router.push(.settings(.debug)) },
+                    introTapped: { router.push(.intro) },
                     logoutTapped: { store.send(.logoutTapped) }
                 )
             case .integrations:
@@ -31,7 +33,7 @@ struct SettingsContainer: View {
                     isMock: store.binding(for: \.isMock, action: SettingsComponent.Action.onMockChanged),
                     
                     resetTapped: { store.send(.resetTapped) },
-                    logTapped: { store.send(.logTapped) }
+                    logTapped: { router.push(.settings(.log)) }
                 )
             case .log:
                 LogView()

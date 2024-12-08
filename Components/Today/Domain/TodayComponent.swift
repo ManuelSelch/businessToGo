@@ -24,15 +24,11 @@ struct TodayComponent: ViewModel {
     }
     
     enum Action: ViewAction {
-        case customerTapped(Int)
-        case projectTapped(Int)
         case timesheetSaveTapped(KimaiTimesheet)
         
         var lifted: AppFeature.Action {
             switch self {
-            case let .customerTapped(customer): return .component(.today(.customerTapped(customer)))
-            case let .projectTapped(project): return .component(.today(.projectTapped(project)))
-            case let .timesheetSaveTapped(timesheet): return .component(.today(.timesheetSaveTapped(timesheet)))
+            case let .timesheetSaveTapped(timesheet): return .kimai(.timesheet(.save(timesheet)))
             }
         }
     }
@@ -47,22 +43,5 @@ struct TodayComponent: ViewModel {
         case customerTapped(Int)
         case projectTapped(Int)
         case timesheetSaveTapped(KimaiTimesheet)
-    }
-    
-    
-    
-    static func reduce(_ state: inout AppFeature.State, _ action: UIAction) -> Effect<AppFeature.Action> {
-        switch(action) {
-        case let .customerTapped(customer):
-            state.router.presentSheet(.today(.projects(for: customer)))
-            
-        case let .projectTapped(project):
-            state.router.push(.today(.timesheet(for: project)))
-            
-        case let .timesheetSaveTapped(timesheet):
-            state.router.dismiss()
-            return .send(.kimai(.timesheet(.save(timesheet))))
-        }
-        return .none
     }
 }

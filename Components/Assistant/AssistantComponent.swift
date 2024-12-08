@@ -29,42 +29,12 @@ struct AssistantComponent: ViewModel {
     }
     
     enum Action: ViewAction {
-        case stepTapped(KimaiAssistantStep?)
-        case dashboardTapped
-        
+        case test
+
         var lifted: AppFeature.Action {
-            switch self {
-            case let .stepTapped(step):
-                return .component(.assistant(.stepTapped(step)))
-            case .dashboardTapped:
-                return .component(.assistant(.dashboardTapped))
-            }
+            return .sync
         }
     }
+ 
     
-    enum UIAction: Equatable, Codable {
-        case stepTapped(KimaiAssistantStep?)
-        case dashboardTapped
-    }
-    
-    static func reduce(_ state: inout AppFeature.State, _ action: UIAction) -> Effect<AppFeature.Action> {
-        switch(action) {
-        case let .stepTapped(step):
-            switch(step) {
-            case .customer:
-                state.router.presentSheet(.management(.kimai(.customerSheet(.new))))
-            case .project:
-                state.router.presentSheet(.management(.kimai(.projectSheet(.new))))
-            case .activity:
-                state.router.presentSheet(.management(.kimai(.activitySheet(.new))))
-            case .timesheet:
-                state.router.presentSheet(.management(.kimai(.timesheetSheet(.new))))
-            default:
-                break
-            }
-        case .dashboardTapped:
-            state.router.presentTabScreen(.management, route: .management(.kimai(.customersList)))
-        }
-        return .none
-    }
 }

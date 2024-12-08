@@ -24,33 +24,19 @@ struct ManagementComponent: ViewModel {
     
     enum Action: ViewAction {
         case sync
-        case playTapped(KimaiTimesheet)
         case stopTapped(KimaiTimesheet)
-        case timesheetEditTapped(KimaiTimesheet)
         case teamSelected(Int?)
-        case projectTapped(Int)
-        case settingsTapped
-        
         
         var lifted: AppFeature.Action {
             switch self {
             case .sync: return .sync
-            case let .playTapped(timesheet): return .component(.management(.playTapped(timesheet)))
-            case let .timesheetEditTapped(timesheet): return .component(.kimai(.timesheetEditTapped(timesheet)))
             case let .teamSelected(id): return .kimai(.customer(.teamSelected(id)))
-            case let .projectTapped(id): return .component(.kimai(.projectTapped(id)))
-            case .settingsTapped: return .component(.management(.settingsTapped))
                 
             case var .stopTapped(timesheet):
                 timesheet.end = "\(Date.now)"
                 return .kimai(.timesheet(.save(timesheet)))
             }
         }
-    }
-    
-    enum UIAction: Equatable, Codable {
-        case playTapped(KimaiTimesheet)
-        case settingsTapped
     }
     
     enum Route: Identifiable, Hashable, Codable, Equatable  {

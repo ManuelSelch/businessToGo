@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,12 +17,8 @@
 		841BDF562C660F8B008E3B32 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BDF552C660F8B008E3B32 /* TodayView.swift */; };
 		841BDF5B2C66103A008E3B32 /* TodayContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BDF5A2C66103A008E3B32 /* TodayContainer.swift */; };
 		841BDF5D2C661076008E3B32 /* TodayComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BDF5C2C661076008E3B32 /* TodayComponent.swift */; };
-		842A9D822C5FF05800A133E9 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D812C5FF05800A133E9 /* SettingsReducer.swift */; };
-		842A9D842C5FF09900A133E9 /* ManagementReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D832C5FF09900A133E9 /* ManagementReducer.swift */; };
-		842A9D882C5FF35600A133E9 /* KimaiReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D872C5FF35600A133E9 /* KimaiReducer.swift */; };
 		842A9D8E2C60007200A133E9 /* ReportContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D8D2C60007200A133E9 /* ReportContainer.swift */; };
 		842A9D902C60008500A133E9 /* ReportComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D8F2C60008500A133E9 /* ReportComponent.swift */; };
-		842A9D922C60008D00A133E9 /* ReportReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D912C60008D00A133E9 /* ReportReducer.swift */; };
 		842A9D942C60009F00A133E9 /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D932C60009F00A133E9 /* ReportType.swift */; };
 		842A9D962C6000A500A133E9 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D952C6000A500A133E9 /* WeekDay.swift */; };
 		842A9D992C6000E200A133E9 /* ReportHeaderDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A9D982C6000E200A133E9 /* ReportHeaderDay.swift */; };
@@ -38,7 +34,6 @@
 		84458AE32BC41A720041E40F /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84458AE22BC41A720041E40F /* AppFeature.swift */; };
 		846421B82C1A43B30014694B /* LoginApp in Frameworks */ = {isa = PBXBuildFile; productRef = 846421B72C1A43B30014694B /* LoginApp */; };
 		846421C02C1A4BFD0014694B /* AppArchitecture.png in Resources */ = {isa = PBXBuildFile; fileRef = 846421BF2C1A4BFD0014694B /* AppArchitecture.png */; };
-		846751022C00B9F70028921A /* AppRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846751012C00B9F70028921A /* AppRouteView.swift */; };
 		8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */ = {isa = PBXBuildFile; productRef = 8472A3D82C01161A006726A1 /* PulseLogHandler */; };
 		849224522C5D823F00E4ECFC /* SettingsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849224512C5D823F00E4ECFC /* SettingsContainer.swift */; };
 		849224542C5D848300E4ECFC /* SettingsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849224532C5D848300E4ECFC /* SettingsComponent.swift */; };
@@ -65,7 +60,6 @@
 		84C8C2A92C5E6F31007BF30B /* DebugApp in Frameworks */ = {isa = PBXBuildFile; productRef = 84C8C2A82C5E6F31007BF30B /* DebugApp */; };
 		84C8C2AB2C5E719C007BF30B /* Integration in Resources */ = {isa = PBXBuildFile; fileRef = 84C8C2AA2C5E719C007BF30B /* Integration */; };
 		84C8C2AD2C5E71B3007BF30B /* IntegrationApp in Frameworks */ = {isa = PBXBuildFile; productRef = 84C8C2AC2C5E71B3007BF30B /* IntegrationApp */; };
-		84CEEC4A2C5E3DBA00D8C5DE /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CEEC492C5E3DBA00D8C5DE /* AppRoute.swift */; };
 		84D7962D2C596E4D0083FEBA /* ReduxDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 84D7962C2C596E4D0083FEBA /* ReduxDebug */; };
 		84D7962F2C596E4D0083FEBA /* ReduxTestStore in Frameworks */ = {isa = PBXBuildFile; productRef = 84D7962E2C596E4D0083FEBA /* ReduxTestStore */; };
 		84D7963E2C5990F70083FEBA /* ReduxDebug in Frameworks */ = {isa = PBXBuildFile; productRef = 84D7963D2C5990F70083FEBA /* ReduxDebug */; };
@@ -90,6 +84,8 @@
 		84F827792C695550000D0254 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F827782C695550000D0254 /* ProjectsView.swift */; };
 		84F8277B2C69E76C000D0254 /* TimesheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8277A2C69E76C000D0254 /* TimesheetView.swift */; };
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
+		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
+		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,12 +138,8 @@
 		841BDF552C660F8B008E3B32 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		841BDF5A2C66103A008E3B32 /* TodayContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayContainer.swift; sourceTree = "<group>"; };
 		841BDF5C2C661076008E3B32 /* TodayComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayComponent.swift; sourceTree = "<group>"; };
-		842A9D812C5FF05800A133E9 /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
-		842A9D832C5FF09900A133E9 /* ManagementReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementReducer.swift; sourceTree = "<group>"; };
-		842A9D872C5FF35600A133E9 /* KimaiReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiReducer.swift; sourceTree = "<group>"; };
 		842A9D8D2C60007200A133E9 /* ReportContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportContainer.swift; sourceTree = "<group>"; };
 		842A9D8F2C60008500A133E9 /* ReportComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportComponent.swift; sourceTree = "<group>"; };
-		842A9D912C60008D00A133E9 /* ReportReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReducer.swift; sourceTree = "<group>"; };
 		842A9D932C60009F00A133E9 /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
 		842A9D952C6000A500A133E9 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		842A9D982C6000E200A133E9 /* ReportHeaderDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHeaderDay.swift; sourceTree = "<group>"; };
@@ -166,7 +158,6 @@
 		846421B92C1A45210014694B /* Kimai */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Kimai; sourceTree = "<group>"; };
 		846421BD2C1A4BDC0014694B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		846421BF2C1A4BFD0014694B /* AppArchitecture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppArchitecture.png; sourceTree = "<group>"; };
-		846751012C00B9F70028921A /* AppRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteView.swift; sourceTree = "<group>"; };
 		849224512C5D823F00E4ECFC /* SettingsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainer.swift; sourceTree = "<group>"; };
 		849224532C5D848300E4ECFC /* SettingsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsComponent.swift; sourceTree = "<group>"; };
 		84977F7E2C029428003E83BA /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
@@ -193,7 +184,6 @@
 		84C5A2B32BC40EEE00C25A0C /* businessToGoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = businessToGoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		84C8C2A62C5E6ED6007BF30B /* Debug */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Debug; sourceTree = "<group>"; };
 		84C8C2AA2C5E719C007BF30B /* Integration */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Integration; sourceTree = "<group>"; };
-		84CEEC492C5E3DBA00D8C5DE /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		84E20F822C5E8EEC0075FF81 /* ManagementContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementContainer.swift; sourceTree = "<group>"; };
 		84E20F842C5E8EF80075FF81 /* ManagementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementComponent.swift; sourceTree = "<group>"; };
 		84E20F862C5E95340075FF81 /* KimaiContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiContainer.swift; sourceTree = "<group>"; };
@@ -210,6 +200,7 @@
 		84F827782C695550000D0254 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
 		84F8277A2C69E76C000D0254 /* TimesheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetView.swift; sourceTree = "<group>"; };
 		84FC58572BC9559200594E14 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
+		97E1737B2D063766003764FF /* MyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +224,7 @@
 				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84C8C2A92C5E6F31007BF30B /* DebugApp in Frameworks */,
 				84E20FA02C5EA1720075FF81 /* PulseUI in Frameworks */,
+				97E1737F2D063B82003764FF /* Router in Frameworks */,
 				84E20F9A2C5EA1420075FF81 /* KimaiCore in Frameworks */,
 				8405DDDD2C68A9CB002B553B /* OfflineSync in Frameworks */,
 				84E20F9C2C5EA1530075FF81 /* KimaiApp in Frameworks */,
@@ -344,7 +336,6 @@
 			children = (
 				84E20F822C5E8EEC0075FF81 /* ManagementContainer.swift */,
 				84E20F842C5E8EF80075FF81 /* ManagementComponent.swift */,
-				842A9D832C5FF09900A133E9 /* ManagementReducer.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -354,7 +345,6 @@
 			children = (
 				849224512C5D823F00E4ECFC /* SettingsContainer.swift */,
 				849224532C5D848300E4ECFC /* SettingsComponent.swift */,
-				842A9D812C5FF05800A133E9 /* SettingsReducer.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -374,7 +364,6 @@
 			children = (
 				842A9D8D2C60007200A133E9 /* ReportContainer.swift */,
 				842A9D8F2C60008500A133E9 /* ReportComponent.swift */,
-				842A9D912C60008D00A133E9 /* ReportReducer.swift */,
 				842A9DA32C60044E00A133E9 /* ReportFeature.swift */,
 			);
 			path = Domain;
@@ -564,10 +553,9 @@
 		84C5A2C02BC40F4A00C25A0C /* App */ = {
 			isa = PBXGroup;
 			children = (
+				97E1737B2D063766003764FF /* MyRouter.swift */,
 				84458AE22BC41A720041E40F /* AppFeature.swift */,
 				841840652BFD414F00EC9FDF /* AppContainer.swift */,
-				84CEEC492C5E3DBA00D8C5DE /* AppRoute.swift */,
-				846751012C00B9F70028921A /* AppRouteView.swift */,
 				841840642BFD412E00EC9FDF /* Views */,
 			);
 			path = App;
@@ -587,7 +575,6 @@
 			children = (
 				84E20F862C5E95340075FF81 /* KimaiContainer.swift */,
 				84E20F8A2C5E95560075FF81 /* KimaiComponent.swift */,
-				842A9D872C5FF35600A133E9 /* KimaiReducer.swift */,
 			);
 			path = Kimai;
 			sourceTree = "<group>";
@@ -669,6 +656,7 @@
 				849AB2472C66489D00197D96 /* Redux */,
 				849AB2492C66489D00197D96 /* ReduxDebug */,
 				8405DDDC2C68A9CB002B553B /* OfflineSync */,
+				97E1737E2D063B82003764FF /* Router */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -755,6 +743,7 @@
 			packageReferences = (
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
+				97E1737D2D063B82003764FF /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/Router" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -838,7 +827,6 @@
 				84E20F922C5EA0D50075FF81 /* IntegrationsView.swift in Sources */,
 				842A9DAB2C600AFC00A133E9 /* ReportFilterView.swift in Sources */,
 				842A9D8E2C60007200A133E9 /* ReportContainer.swift in Sources */,
-				846751022C00B9F70028921A /* AppRouteView.swift in Sources */,
 				849AB2432C66375800197D96 /* LoginContainer.swift in Sources */,
 				84E20F962C5EA0D50075FF81 /* SettingsView.swift in Sources */,
 				84977F7F2C029428003E83BA /* AppLauncher.swift in Sources */,
@@ -847,14 +835,12 @@
 				8405DDDA2C6778CD002B553B /* SelectProjectView.swift in Sources */,
 				842A9D992C6000E200A133E9 /* ReportHeaderDay.swift in Sources */,
 				84F827792C695550000D0254 /* ProjectsView.swift in Sources */,
-				842A9D882C5FF35600A133E9 /* KimaiReducer.swift in Sources */,
 				842A9D902C60008500A133E9 /* ReportComponent.swift in Sources */,
 				842A9D942C60009F00A133E9 /* ReportType.swift in Sources */,
-				84CEEC4A2C5E3DBA00D8C5DE /* AppRoute.swift in Sources */,
-				842A9D822C5FF05800A133E9 /* SettingsReducer.swift in Sources */,
 				84458AE32BC41A720041E40F /* AppFeature.swift in Sources */,
 				84E20F832C5E8EEC0075FF81 /* ManagementContainer.swift in Sources */,
 				84F8277B2C69E76C000D0254 /* TimesheetView.swift in Sources */,
+				97E1737C2D063766003764FF /* MyRouter.swift in Sources */,
 				84E20F952C5EA0D50075FF81 /* IntegrationCard.swift in Sources */,
 				841BDF5D2C661076008E3B32 /* TodayComponent.swift in Sources */,
 				841BDF542C660F18008E3B32 /* TodayItem.swift in Sources */,
@@ -865,10 +851,8 @@
 				84E20F872C5E95340075FF81 /* KimaiContainer.swift in Sources */,
 				842A9D962C6000A500A133E9 /* WeekDay.swift in Sources */,
 				84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */,
-				842A9D842C5FF09900A133E9 /* ManagementReducer.swift in Sources */,
 				842A9D9B2C6000F100A133E9 /* ReportHeaderView.swift in Sources */,
 				84E20F8B2C5E95560075FF81 /* KimaiComponent.swift in Sources */,
-				842A9D922C60008D00A133E9 /* ReportReducer.swift in Sources */,
 				842A9DA62C600AC200A133E9 /* ReportCalendarView.swift in Sources */,
 				849224542C5D848300E4ECFC /* SettingsComponent.swift in Sources */,
 			);
@@ -1328,6 +1312,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		97E1737D2D063B82003764FF /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/Router" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../50 Coding/52 iOS/52.01 Packages/Router";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1417,6 +1408,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
+		};
+		97E1737E2D063B82003764FF /* Router */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Router;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

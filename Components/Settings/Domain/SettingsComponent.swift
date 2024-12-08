@@ -42,14 +42,8 @@ struct SettingsComponent: ViewModel {
         case onRemoteLogChanged(Bool)
         case onMockChanged(Bool)
         
-        case integrationsTapped
-        case debugTapped
-        case logTapped
-        case introTapped
-        
         case resetTapped
         case logoutTapped
-        
         
         var lifted: AppFeature.Action {
             switch self {
@@ -58,27 +52,12 @@ struct SettingsComponent: ViewModel {
             case let .onRemoteLogChanged(val): return .debug(.onRemoteLogChanged(val))
             case let .onMockChanged(val): return .debug(.onMockChanged(val))
                 
-           
-                
-            case .integrationsTapped: return .component(.settings(.integrationsTapped))
-            case .debugTapped: return .component(.settings(.debugTapped))
-            case .logTapped: return .component(.settings(.logTapped))
-            case .introTapped: return .component(.settings(.introTapped))
-                
             case .resetTapped: return .user(.reset)
             case .logoutTapped: return .user(.logout)
             }
             
         }
     }
-    
-    enum UIAction: Equatable, Codable {
-        case integrationsTapped
-        case debugTapped
-        case logTapped
-        case introTapped
-    }
-    
     
 
     enum Route: Identifiable, Codable {

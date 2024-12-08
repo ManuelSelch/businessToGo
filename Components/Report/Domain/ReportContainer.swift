@@ -1,7 +1,9 @@
 import SwiftUI
 import Redux
+import Dependencies
 
 struct ReportContainer: View {
+    @Dependency(\.router) var router
     @ObservedObject var store: ViewStoreOf<ReportComponent>
     var route: ReportComponent.Route
     
@@ -18,10 +20,10 @@ struct ReportContainer: View {
                 selectedDate: store.binding(for: \.selectedDate, action: ReportComponent.Action.dateSelected),
                 selectedReportType: store.binding(for: \.selectedReportType, action: ReportComponent.Action.reportTypeSelected),
                 
-                calendarTapped: { store.send(.reports(.calendarTapped)) },
-                filterTapped: { store.send(.reports(.filterTapped)) },
-                playTapped: { store.send(.reports(.playTapped)) },
-                editTapped: { store.send(.reports(.editTapped($0))) },
+                calendarTapped: { router.showSheet(.report(.calendar)) },
+                filterTapped: { router.showSheet(.report(.filter)) },
+                playTapped: { router.showSheet(.management(.kimai(.timesheetSheet(.new)))) },
+                editTapped: { router.showSheet(.management(.kimai(.timesheetSheet($0)))) },
                 deleteTapped: { store.send(.reports(.deleteTapped($0))) }
             )
         case .calendar:
@@ -35,7 +37,7 @@ struct ReportContainer: View {
         case .filter:
             ReportFilterView(
                 selectedProject: store.state.projects.first { $0.id == store.state.selectedProject },
-                filterProjectsTapped: { store.send(.filter(.projectsTapped)) }
+                filterProjectsTapped: { router.push(.report(.filterProjects)) }
             )
         case .filterProjects:
             ReportFilterProjectsView(
@@ -43,7 +45,10 @@ struct ReportContainer: View {
                 projects: store.state.projects,
                 selectedProject: store.state.selectedProject,
                 allProjectsTapped: { store.send(.filterProjects(.allProjectsTapped)) },
-                projectTapped: { store.send(.filterProjects(.projectTapped($0))) }
+                projectTapped: {
+                    router.dismiss()
+                    store.send(.filterProjects(.projectTapped($0)))
+                }
             )
         }
         

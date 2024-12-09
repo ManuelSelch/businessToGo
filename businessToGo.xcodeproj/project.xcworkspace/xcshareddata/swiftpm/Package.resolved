@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:ManuelSelch/Router.git",
       "state" : {
-        "revision" : "d70620b1218ae05fdf441601cb91e92a3e438c29",
-        "version" : "1.0.2"
+        "revision" : "53dcaace5aab3dd11dfa30799ca9818ee219359c",
+        "version" : "1.0.4"
       }
     },
     {

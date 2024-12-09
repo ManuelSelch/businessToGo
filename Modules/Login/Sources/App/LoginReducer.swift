@@ -8,7 +8,7 @@ public extension LoginFeature {
     func reduce(_ state: inout State, _ action: Action) -> Effect<Action> {
         switch(action){
         case .reset:
-            database.reset()
+            database.deleteAllDBs()
             try? keychain.removeAccounts()
             state.accounts = []
         
@@ -47,6 +47,7 @@ public extension LoginFeature {
             if let account = state.accounts.first(where: {$0.identifier == id}) {
                 try? keychain.removeAccount(account)
                 state.accounts.removeAll(where: { $0.identifier == account.identifier })
+                database.deleteDB("businessToGo_\(account.identifier).sqlite")
             }
             
         case .loginDemoAccount:

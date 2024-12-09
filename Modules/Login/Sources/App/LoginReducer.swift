@@ -7,6 +7,9 @@ import LoginCore
 public extension LoginFeature {
     func reduce(_ state: inout State, _ action: Action) -> Effect<Action> {
         switch(action){
+        case .resetDatabases:
+            database.deleteAllDBs()
+            
         case .reset:
             database.deleteAllDBs()
             try? keychain.removeAccounts()

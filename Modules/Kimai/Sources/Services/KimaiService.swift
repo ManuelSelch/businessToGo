@@ -53,9 +53,9 @@ struct KimaiAuthPlugin: PluginType {
     
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
-        // request.addValue(user, forHTTPHeaderField: "X-AUTH-USER")
-        // request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
-        request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+        request.addValue(user, forHTTPHeaderField: "X-AUTH-USER")
+        request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
+        // request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         return request
     }
 }

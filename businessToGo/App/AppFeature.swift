@@ -68,9 +68,10 @@ struct AppFeature: Reducer {
             
         case let .user(action):
             switch(action) {
-            case .reset, .logout:
+            case .reset, .logout, .resetDatabases:
                 state.kimai = .init()
                 state.integration = .init()
+                router.dismiss()
                 router.showRoot(.login(.accounts))
             default: break
             }

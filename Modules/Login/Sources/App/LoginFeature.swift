@@ -32,6 +32,7 @@ public struct LoginFeature: Reducer {
         case loginDemoAccount
         
         case logout
+        case resetDatabases
         case reset
         
         // delegate

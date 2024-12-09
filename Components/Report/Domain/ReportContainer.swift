@@ -3,7 +3,7 @@ import Redux
 import Dependencies
 
 struct ReportContainer: View {
-    @Dependency(\.router) var router
+    @EnvironmentObject var router: MyRouter
     @ObservedObject var store: ViewStoreOf<ReportComponent>
     var route: ReportComponent.Route
     

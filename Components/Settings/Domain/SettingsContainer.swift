@@ -3,7 +3,7 @@ import Redux
 import Dependencies
 
 struct SettingsContainer: View {
-    @Dependency(\.router) var router
+    @EnvironmentObject var router: MyRouter
     var store: ViewStoreOf<SettingsComponent>
     let route: SettingsComponent.Route
     
@@ -15,7 +15,7 @@ struct SettingsContainer: View {
                     integrationsTapped: { router.push(.settings(.integrations)) },
                     debugTapped: { router.push(.settings(.debug)) },
                     introTapped: { router.push(.intro) },
-                    logoutTapped: { store.send(.logoutTapped) }
+                    logoutTapped: { router.dismiss(); store.send(.logoutTapped) }
                 )
             case .integrations:
                 IntegrationsView(

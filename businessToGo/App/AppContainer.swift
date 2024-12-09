@@ -19,7 +19,7 @@ struct AppContainer: View {
             header: {
                 AppHeader(
                     title: "BusinessToGo",
-                    settingsTapped: { store.send(.settingsTapped) }
+                    settingsTapped: { router.showSheet(.settings(.settings)) }
                 )
                  
                 
@@ -34,6 +34,7 @@ struct AppContainer: View {
         .onAppear {
             store.send(.intro(.load))
         }
+        .environmentObject(router)
         
         
     }

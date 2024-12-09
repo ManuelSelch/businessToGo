@@ -7,7 +7,7 @@ import LoginCore
 import LoginUI
 
 struct LoginContainer: View {
-    @EnvironmentObject var router: MyRouter
+    @Dependency(\.router) var router
     var store: Store<LoginComponent.State, LoginComponent.Action>
     var route: LoginFeature.Route
     

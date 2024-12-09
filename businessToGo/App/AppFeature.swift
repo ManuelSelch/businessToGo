@@ -16,7 +16,7 @@ import LoginService
 struct AppFeature: Reducer {
     @Dependency(\.keychain) var keychain
     @Dependency(\.kimai) var kimai
-    @ObservedDependency(\.router) var router
+    @Dependency(\.router) var router
     
     struct State: Codable, Equatable {
         var login: LoginFeature.State = .init()

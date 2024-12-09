@@ -5,7 +5,7 @@ import Dependencies
 import KimaiUI
 
 struct TodayContainer: View {
-    @EnvironmentObject var router: MyRouter
+    @Dependency(\.router) var router
     var store: Store<TodayComponent.State, TodayComponent.Action>
     let route: TodayComponent.Route
     

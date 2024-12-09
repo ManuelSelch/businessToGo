@@ -5,7 +5,7 @@ import Redux
 import KimaiUI
 
 struct ManagementContainer: View {
-    @EnvironmentObject var router: MyRouter
+    @Dependency(\.router)  var router
     
     var mainStore: StoreOf<AppFeature>
     

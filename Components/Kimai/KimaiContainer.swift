@@ -7,7 +7,7 @@ import KimaiUI
 import OfflineSyncCore
 
 struct KimaiContainer: View {
-    @EnvironmentObject var router: MyRouter
+    @Dependency(\.router) var router
     @ObservedObject var store: ViewStoreOf<KimaiComponent>
     let route: KimaiComponent.Route
     

@@ -3,7 +3,7 @@ import Redux
 import Dependencies
 
 struct SettingsContainer: View {
-    @EnvironmentObject var router: MyRouter
+    @Dependency(\.router)  var router
     var store: ViewStoreOf<SettingsComponent>
     let route: SettingsComponent.Route
     

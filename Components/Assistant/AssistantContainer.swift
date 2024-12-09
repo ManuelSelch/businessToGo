@@ -4,7 +4,7 @@ import Dependencies
 import KimaiUI
 
 struct AssistantContainer: View {
-    @EnvironmentObject var router: MyRouter
+    @Dependency(\.router) var router
     @ObservedObject var store: ViewStoreOf<AssistantComponent>
     
    

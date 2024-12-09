@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -86,6 +86,8 @@
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
 		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
 		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
+		97E173822D06D8EA003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E173812D06D8EA003764FF /* Router */; };
+		97E173852D06DA8C003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E173842D06DA8C003764FF /* Router */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,9 +226,11 @@
 				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84C8C2A92C5E6F31007BF30B /* DebugApp in Frameworks */,
 				84E20FA02C5EA1720075FF81 /* PulseUI in Frameworks */,
+				97E173852D06DA8C003764FF /* Router in Frameworks */,
 				97E1737F2D063B82003764FF /* Router in Frameworks */,
 				84E20F9A2C5EA1420075FF81 /* KimaiCore in Frameworks */,
 				8405DDDD2C68A9CB002B553B /* OfflineSync in Frameworks */,
+				97E173822D06D8EA003764FF /* Router in Frameworks */,
 				84E20F9C2C5EA1530075FF81 /* KimaiApp in Frameworks */,
 				849AB2482C66489D00197D96 /* Redux in Frameworks */,
 				8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */,
@@ -657,6 +661,8 @@
 				849AB2492C66489D00197D96 /* ReduxDebug */,
 				8405DDDC2C68A9CB002B553B /* OfflineSync */,
 				97E1737E2D063B82003764FF /* Router */,
+				97E173812D06D8EA003764FF /* Router */,
+				97E173842D06DA8C003764FF /* Router */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -743,7 +749,7 @@
 			packageReferences = (
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
-				97E1737D2D063B82003764FF /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/Router" */,
+				97E173832D06DA8C003764FF /* XCRemoteSwiftPackageReference "Router" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1312,13 +1318,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		97E1737D2D063B82003764FF /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/Router" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../50 Coding/52 iOS/52.01 Packages/Router";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1334,6 +1333,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.1;
+			};
+		};
+		97E173832D06DA8C003764FF /* XCRemoteSwiftPackageReference "Router" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ManuelSelch/Router.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1411,6 +1418,15 @@
 		};
 		97E1737E2D063B82003764FF /* Router */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Router;
+		};
+		97E173812D06D8EA003764FF /* Router */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Router;
+		};
+		97E173842D06DA8C003764FF /* Router */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97E173832D06DA8C003764FF /* XCRemoteSwiftPackageReference "Router" */;
 			productName = Router;
 		};
 /* End XCSwiftPackageProductDependency section */

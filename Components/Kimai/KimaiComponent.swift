@@ -2,7 +2,7 @@ import Foundation
 import Redux
 
 import KimaiCore
-import OfflineSyncCore
+import OfflineSyncCore 
 
 struct KimaiComponent: ViewModel {
     typealias DState = AppFeature.State
@@ -63,34 +63,28 @@ struct KimaiComponent: ViewModel {
             switch self {
             case let .customer(action):
                 switch(action) {
-                case let .tapped(id): return .component(.kimai(.customerTapped(id)))
-                case let .editTapped(customer): return .component(.kimai(.customerEditTapped(customer)))
-                case let .saveTapped(customer): return .component(.kimai(.customerSaveTapped(customer)))
+                case let .saveTapped(customer): return .kimai(.customer(.save(customer)))
                 case let .created(customer): return .kimai(.customer(.save(customer)))
                 case let .deleteTapped(customer): return .kimai(.customer(.delete(customer)))
                 case let .deleteConfirmed(customer): return .kimai(.customer(.deleteConfirmed(customer)))
                 }
             case let .project(action):
                 switch(action) {
-                case let .tapped(id):  return .component(.kimai(.projectTapped(id)))
-                case let .editTapped(project): return .component(.kimai(.projectEditTapped(project)))
-                case let .saveTapped(project): return .component(.kimai(.projectSaveTapped(project)))
+                case let .saveTapped(project): return .kimai(.project(.save(project)))
                 case let .created(project): return .kimai(.project(.save(project)))
                 case let .deleteTapped(project): return .kimai(.project(.delete(project)))
                 case let .deleteConfirmed(project): return .kimai(.project(.deleteConfirmed(project)))
                 }
             case let .activity(action):
                 switch(action){
-                case let .editTapped(activity): return .component(.kimai(.activityEditTapped(activity)))
-                case let .saveTapped(activity): return .component(.kimai(.activitySaveTapped(activity)))
+                case let .saveTapped(activity): return .kimai(.activity(.save(activity)))
                 case let .created(activity): return .kimai(.activity(.save(activity)))
                 case let .deleteTapped(activity): return .kimai(.activity(.delete(activity)))
                 case let .deleteConfirmed(activity): return .kimai(.activity(.deleteConfirmed(activity)))
                 }
             case let .timesheet(action):
                 switch(action){
-                case let .editTapped(timesheet): return .component(.kimai(.timesheetEditTapped(timesheet)))
-                case let .saveTapped(timesheet): return .component(.kimai(.timesheetSaveTapped(timesheet)))
+                case let .saveTapped(timesheet): return .kimai(.timesheet(.save(timesheet)))
                 case let .deleteTapped(timesheet): return .kimai(.timesheet(.delete(timesheet)))
                 case let .deleteConfirmed(timesheet): return .kimai(.timesheet(.deleteConfirmed(timesheet)))
                 }
@@ -102,8 +96,6 @@ struct KimaiComponent: ViewModel {
 
     
     enum CustomerAction: Codable, Equatable {
-        case tapped(Int)
-        case editTapped(KimaiCustomer)
         case deleteTapped(KimaiCustomer)
         case deleteConfirmed(KimaiCustomer)
         case saveTapped(KimaiCustomer)
@@ -111,8 +103,6 @@ struct KimaiComponent: ViewModel {
     }
     
     enum ProjectAction: Codable, Equatable {
-        case tapped(Int)
-        case editTapped(KimaiProject)
         case deleteTapped(KimaiProject)
         case deleteConfirmed(KimaiProject)
         case saveTapped(KimaiProject)
@@ -120,7 +110,6 @@ struct KimaiComponent: ViewModel {
     }
     
     enum ActivityAction: Codable, Equatable {
-        case editTapped(KimaiActivity)
         case deleteTapped(KimaiActivity)
         case deleteConfirmed(KimaiActivity)
         case saveTapped(KimaiActivity)
@@ -129,7 +118,6 @@ struct KimaiComponent: ViewModel {
 
     
     enum TimesheetAction: Codable, Equatable {
-        case editTapped(KimaiTimesheet)
         case deleteTapped(KimaiTimesheet)
         case deleteConfirmed(KimaiTimesheet)
         case saveTapped(KimaiTimesheet)

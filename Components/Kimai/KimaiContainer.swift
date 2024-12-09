@@ -1,4 +1,5 @@
 import SwiftUI
+import Dependencies
 import Redux
 
 import CommonUI
@@ -6,6 +7,7 @@ import KimaiUI
 import OfflineSyncCore
 
 struct KimaiContainer: View {
+    @Dependency(\.router) var router
     @ObservedObject var store: ViewStoreOf<KimaiComponent>
     let route: KimaiComponent.Route
     
@@ -22,8 +24,8 @@ struct KimaiContainer: View {
                 },
                 changes: store.state.customerChanges,
                 
-                customerTapped: { store.send(.customer(.tapped($0))) },
-                customerEditTapped: { store.send(.customer(.editTapped($0))) },
+                customerTapped: { router.push(.management(.kimai(.projectsList(for: $0)))) },
+                customerEditTapped: { router.showSheet(.management(.kimai(.customerSheet($0)))) },
                 customerDeleteTapped: { store.send(.customer(.deleteTapped($0))) },
                 customerCreated: { store.send(.customer(.created($0))) }
             )
@@ -31,7 +33,7 @@ struct KimaiContainer: View {
             KimaiCustomerSheet(
                 customer: customer,
                 teams: store.state.teams,
-                saveTapped: { store.send(.customer(.saveTapped($0))) }
+                saveTapped: { router.dismiss(); store.send(.customer(.saveTapped($0))) }
             )
             
         case let .projectsList(customer):
@@ -40,8 +42,8 @@ struct KimaiContainer: View {
                 projects: store.state.projects,
                 timesheets: store.state.timesheets,
                 
-                projectTapped: { store.send(.project(.tapped($0))) },
-                projectEditTapped: { store.send(.project(.editTapped($0))) },
+                projectTapped: { router.push(.management(.kimai(.projectDetail($0)))) },
+                projectEditTapped: { router.showSheet(.management(.kimai(.projectSheet($0)))) },
                 projectDeleteTapped: { store.send(.project(.deleteTapped($0))) },
                 projectCreated: { store.send(.project(.created($0))) }
             )
@@ -49,7 +51,7 @@ struct KimaiContainer: View {
             KimaiProjectSheet(
                 project: project,
                 customers: store.state.customers,
-                saveTapped: { store.send(.project(.saveTapped($0))) }
+                saveTapped: { router.dismiss(); store.send(.project(.saveTapped($0))) }
             )
         case let .projectDetail(id):
             if let project = store.state.projects.get(id) {
@@ -60,11 +62,11 @@ struct KimaiContainer: View {
                     activities: store.state.activities,
                     users: store.state.users,
                     
-                    timesheetEditTapped: { store.send(.timesheet(.editTapped($0))) },
+                    timesheetEditTapped: { router.showSheet(.management(.kimai(.timesheetSheet($0)))) },
                     timesheetDeleteTapped: { store.send(.timesheet(.deleteTapped($0))) },
                     
                     
-                    activityEditTapped: { store.send(.activity(.editTapped($0))) },
+                    activityEditTapped: { router.showSheet(.management(.kimai(.activitySheet($0)))) },
                     activityDeleteTapped: { store.send(.activity(.deleteTapped($0))) },
                     activityCreated: { store.send(.activity(.created($0))) }
                 )
@@ -76,7 +78,7 @@ struct KimaiContainer: View {
             KimaiActivitySheet(
                 activity: activity,
                 projects: store.state.projects,
-                saveTapped: { store.send(.activity(.saveTapped($0))) }
+                saveTapped: { router.dismiss(); store.send(.activity(.saveTapped($0))) }
             )
         
         case let .timesheetSheet(timesheet):
@@ -85,7 +87,7 @@ struct KimaiContainer: View {
                 customers: store.state.customers,
                 projects: store.state.projects,
                 activities: store.state.activities,
-                saveTapped: { store.send(.timesheet(.saveTapped($0))) }
+                saveTapped: { router.dismiss();store.send(.timesheet(.saveTapped($0))) }
             )
             
         case let .popup(route):

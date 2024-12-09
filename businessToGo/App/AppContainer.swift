@@ -1,8 +1,10 @@
 import SwiftUI
 import Redux
-import PopupView
+import Router
+import Dependencies
 
 struct AppContainer: View {
+    @Dependency(\.router) var router
     @ObservedObject var store: StoreOf<AppFeature>
     
     init(store: StoreOf<AppFeature>) {
@@ -13,15 +15,13 @@ struct AppContainer: View {
 
     var body: some View {
         AppRouterView(
-            store: store.lift(\.router, AppFeature.Action.router),
+            router: router,
             header: {
-                EmptyView()
-                /*
                 AppHeader(
-                    title: store.state.title,
-                    settingsTapped: { store.send(.settingsTapped) }
+                    title: "BusinessToGo",
+                    settingsTapped: { router.showSheet(.settings(.settings)) }
                 )
-                 */
+                 
                 
             },
             content: { route in
@@ -34,6 +34,7 @@ struct AppContainer: View {
         .onAppear {
             store.send(.intro(.load))
         }
+        .environmentObject(router)
         
         
     }

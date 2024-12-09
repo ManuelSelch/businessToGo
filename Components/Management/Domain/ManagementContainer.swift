@@ -1,9 +1,12 @@
 import SwiftUI
+import Dependencies
 import Redux
 
 import KimaiUI
 
 struct ManagementContainer: View {
+    @Dependency(\.router)  var router
+    
     var mainStore: StoreOf<AppFeature>
     
     var store: ViewStoreOf<ManagementComponent>
@@ -49,7 +52,7 @@ struct ManagementContainer: View {
                     project: project,
                     activity: activity,
                     timesheet: timesheet,
-                    timesheetTapped: { store.send(.timesheetEditTapped(timesheet)) },
+                    timesheetTapped: { router.showSheet(.management(.kimai(.timesheetSheet(timesheet)))) },
                     stopTapped: { store.send(.stopTapped(timesheet)) }
                 )
             }
@@ -62,9 +65,9 @@ struct ManagementContainer: View {
                     projects: store.state.kimai.projects,
                     teams: store.state.kimai.teams,
                     syncTapped: { store.send(.sync) },
-                    projectTapped: { store.send(.projectTapped($0.taigaProjectId)) },
-                    playTapped: { store.send(.playTapped($0)) },
-                    settingsTapped: { store.send(.settingsTapped) }
+                    projectTapped: {_ in},
+                    playTapped: { router.showSheet(.management(.kimai(.timesheetSheet($0)))) },
+                    settingsTapped: { router.showSheet(.settings(.settings)) }
                 )
             }
         }

@@ -72,14 +72,16 @@ public struct SetupAssistantView: View {
                 }
             }
             
-            
+           
             Button(action: dashboardTapped) {
                 Text("Dashboard")
             }
             .padding(10)
-            .background(Color.theme)
+            .background(currentStep == nil ? Color.theme : Color.themeGray)
             .cornerRadius(10)
             .foregroundStyle(Color.background)
+            .disabled(currentStep != nil)
+            
             
         }
         .padding()

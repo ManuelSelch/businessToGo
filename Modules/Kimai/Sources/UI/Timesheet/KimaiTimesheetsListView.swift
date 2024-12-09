@@ -18,6 +18,8 @@ public struct KimaiTimesheetsListView: View {
     let timesheetsByDate: Dictionary<Date, [KimaiTimesheet]>
     let dateKeys: [Dictionary<Date, [KimaiTimesheet]>.Keys.Element]
     
+    @State private var isExpanded: Date?
+    
     public init(projects: [KimaiProject], timesheets: [KimaiTimesheet], activities: [KimaiActivity], deleteTapped: @escaping (KimaiTimesheet) -> Void, editTapped: @escaping (KimaiTimesheet) -> Void) {
         self.projects = projects
         self.timesheets = timesheets
@@ -46,53 +48,125 @@ public struct KimaiTimesheetsListView: View {
         List {
             ForEach(dateKeys, id: \.self){ date in
                 
-                HStack {
-                    Text(MyFormatter.date(date))
-                    Spacer()
-                    Text(
-                        MyFormatter.duration(
-                            KimaiTimesheet.totalHours(of: timesheetsByDate[date] ?? [])
-                        )
+                if #available(iOS 17.0, *) {
+                    Section(
+                        isExpanded: Binding<Bool> (
+                            get: {
+                                return isExpanded == date
+                            },
+                            set: { isExpanding in
+                                if isExpanding {
+                                    isExpanded = date
+                                } else {
+                                    isExpanded = nil
+                                }
+                            }
+                        ),
+                        content: {
+                            let timesheetEntries = timesheetsByDate[date] ?? []
+                            ForEach(timesheetEntries){ timesheet in
+                                KimaiTimesheetCard(
+                                    timesheet: timesheet,
+                                    project: projects.first { $0.id == timesheet.project },
+                                    activity: activities.first{ $0.id == timesheet.activity }
+                                )
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .cancel) {
+                                        deleteTapped(timesheet)
+                                    } label: {
+                                        Text("Delete")
+                                            .foregroundColor(.white)
+                                    }
+                                    .tint(.red)
+                                    .padding()
+                                    
+                                    Button(role: .cancel) {
+                                        editTapped(timesheet)
+                                    } label: {
+                                        Text("Edit")
+                                            .foregroundColor(.white)
+                                    }
+                                    .padding()
+                                    .frame(maxHeight: .infinity)
+                                    .background(.gray)
+                                }
+                                
+                                
+                                
+                            }
+                        },
+                        header: {
+                            HStack {
+                                Text(MyFormatter.date(date))
+                                Spacer()
+                                Text(
+                                    MyFormatter.duration(
+                                        KimaiTimesheet.totalHours(of: timesheetsByDate[date] ?? [])
+                                    )
+                                )
+                            }
+                            .font(.system(size: 15))
+                            .textCase(.uppercase)
+                            .foregroundStyle(Color.textHeaderSecondary)
+                        }
+                    )
+                } else {
+                    Section(
+                        content: {
+                            let timesheetEntries = timesheetsByDate[date] ?? []
+                            ForEach(timesheetEntries){ timesheet in
+                                KimaiTimesheetCard(
+                                    timesheet: timesheet,
+                                    project: projects.first { $0.id == timesheet.project },
+                                    activity: activities.first{ $0.id == timesheet.activity }
+                                )
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .cancel) {
+                                        deleteTapped(timesheet)
+                                    } label: {
+                                        Text("Delete")
+                                            .foregroundColor(.white)
+                                    }
+                                    .tint(.red)
+                                    .padding()
+                                    
+                                    Button(role: .cancel) {
+                                        editTapped(timesheet)
+                                    } label: {
+                                        Text("Edit")
+                                            .foregroundColor(.white)
+                                    }
+                                    .padding()
+                                    .frame(maxHeight: .infinity)
+                                    .background(.gray)
+                                }
+                                
+                                
+                                
+                            }
+                        },
+                        header: {
+                            HStack {
+                                Text(MyFormatter.date(date))
+                                Spacer()
+                                Text(
+                                    MyFormatter.duration(
+                                        KimaiTimesheet.totalHours(of: timesheetsByDate[date] ?? [])
+                                    )
+                                )
+                            }
+                            .font(.system(size: 15))
+                            .textCase(.uppercase)
+                            .foregroundStyle(Color.textHeaderSecondary)
+                        }
                     )
                 }
-                .font(.system(size: 15))
-                .textCase(.uppercase)
-                .foregroundStyle(Color.textHeaderSecondary)
                 
+            
                 
-                let timesheetEntries = timesheetsByDate[date] ?? []
-                ForEach(timesheetEntries){ timesheet in
-                    KimaiTimesheetCard(
-                        timesheet: timesheet,
-                        project: projects.first { $0.id == timesheet.project },
-                        activity: activities.first{ $0.id == timesheet.activity }
-                    )
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .cancel) {
-                            deleteTapped(timesheet)
-                        } label: {
-                            Text("Delete")
-                                .foregroundColor(.white)
-                        }
-                        .tint(.red)
-                        .padding()
-                        
-                        Button(role: .cancel) {
-                            editTapped(timesheet)
-                        } label: {
-                            Text("Edit")
-                                .foregroundColor(.white)
-                        }
-                        .padding()
-                        .frame(maxHeight: .infinity)
-                        .background(.gray)
-                    }
-                     
-                    
-                   
-                }
             }
         }
+        .listStyle(.sidebar)
     }
   
     

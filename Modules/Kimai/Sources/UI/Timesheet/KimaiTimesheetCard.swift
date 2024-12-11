@@ -1,11 +1,13 @@
 import SwiftUI
 
+import OfflineSyncCore
 import KimaiCore
 
 struct KimaiTimesheetCard: View {
     let timesheet: KimaiTimesheet
     let project: KimaiProject?
     let activity: KimaiActivity?
+    let isOffline: DatabaseChange?
     
     var body: some View {
         HStack {
@@ -51,6 +53,23 @@ struct KimaiTimesheetCard: View {
             VStack(alignment: .trailing) {
                 Text(timesheet.getDuration())
                     .font(.system(size: 12, weight: .heavy))
+                
+                Spacer()
+                
+                if(isOffline != nil) {
+                    Image(systemName: "ellipsis")
+                        .foregroundStyle(Color.red)
+                        .font(.system(size: 12))
+                        .frame(width: 30, height: 10)
+                        .rotationEffect(.degrees(90))
+                } else {
+                    Image(systemName: "ellipsis")
+                        .foregroundStyle(Color.theme)
+                        .font(.system(size: 12))
+                        .frame(width: 30, height: 10)
+                        .rotationEffect(.degrees(90))
+                }
+                
                 
                 Spacer()
                 

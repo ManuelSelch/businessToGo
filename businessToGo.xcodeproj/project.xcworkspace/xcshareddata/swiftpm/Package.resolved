@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/OfflineSync",
       "state" : {
-        "revision" : "92222724436dae1ab679f259411f81da5882e9a1",
-        "version" : "1.3.4"
+        "revision" : "2dafe61ebba8d8470b0099919c645fc60c504276",
+        "version" : "1.3.7"
       }
     },
     {
@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:ManuelSelch/Router.git",
       "state" : {
-        "revision" : "53dcaace5aab3dd11dfa30799ca9818ee219359c",
-        "version" : "1.0.4"
+        "revision" : "1928ddd65d5ba6f9d255f7a33cc4f1ae9e80abf3",
+        "version" : "1.0.5"
       }
     },
     {

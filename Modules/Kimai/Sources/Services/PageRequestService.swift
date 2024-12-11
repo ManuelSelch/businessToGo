@@ -39,6 +39,10 @@ public class PageRequestService<Model: TableProtocol, API: TargetType>: RequestS
         }
         
         if let pagesStr = headers["X-Total-Pages"] as? String, let pages = Int(pagesStr) {
+            if(pages < 2) {
+                return records
+            }
+            
             for i in 2...pages {
                 if let result: [Model] = try await request(provider, fetchPageMethod(i)) {
                     records.append(contentsOf: result)

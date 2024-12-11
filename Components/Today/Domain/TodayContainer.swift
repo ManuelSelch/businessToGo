@@ -17,7 +17,7 @@ struct TodayContainer: View {
                 customers: store.state.customers,
                 projects: store.state.projects,
                 
-                customerTapped: { router.push(.today(.projects(for: $0.id))) }
+                customerTapped: { router.showSheet(.today(.projects(for: $0.id))) }
             )
         case let .projects(for: customer):
             ProjectsView(
@@ -31,7 +31,7 @@ struct TodayContainer: View {
                 project: project, 
                 activities: store.state.activities,
                 
-                saveTapped: { store.send(.timesheetSaveTapped($0)) }
+                saveTapped: { router.dismiss(); store.send(.timesheetSaveTapped($0)) }
             )
         }
     }

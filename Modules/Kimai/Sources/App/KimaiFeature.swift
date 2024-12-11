@@ -17,6 +17,7 @@ public struct KimaiFeature: Reducer {
     public struct State: Equatable, Codable, Hashable {
         public init() {}
         
+        public var isSyncing = false
         public var selectedTeam: Int?
         
         public var customers: [KimaiCustomer] = []

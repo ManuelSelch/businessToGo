@@ -12,7 +12,7 @@ struct ReportContainer: View {
         case .reports:
             ReportsView(
                 timesheets: store.state.timesheets,
-                timesheetChanges: [],
+                timesheetChanges: store.state.timesheetsChanges,
                 projects: store.state.projects,
                 activities: store.state.activities,
                 

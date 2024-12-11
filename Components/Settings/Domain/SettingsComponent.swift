@@ -52,7 +52,7 @@ struct SettingsComponent: ViewModel {
             case let .onRemoteLogChanged(val): return .debug(.onRemoteLogChanged(val))
             case let .onMockChanged(val): return .debug(.onMockChanged(val))
                 
-            case .resetTapped: return .user(.reset)
+            case .resetTapped: return .user(.resetDatabases)
             case .logoutTapped: return .user(.logout)
             }
             

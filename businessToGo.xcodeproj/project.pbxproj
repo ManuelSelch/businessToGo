@@ -84,6 +84,7 @@
 		84F827792C695550000D0254 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F827782C695550000D0254 /* ProjectsView.swift */; };
 		84F8277B2C69E76C000D0254 /* TimesheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8277A2C69E76C000D0254 /* TimesheetView.swift */; };
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
+		97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 97AC67772D09BBFF00A78370 /* OfflineSync */; };
 		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
 		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
 		97E173822D06D8EA003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E173812D06D8EA003764FF /* Router */; };
@@ -226,6 +227,7 @@
 				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84C8C2A92C5E6F31007BF30B /* DebugApp in Frameworks */,
 				84E20FA02C5EA1720075FF81 /* PulseUI in Frameworks */,
+				97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */,
 				97E173852D06DA8C003764FF /* Router in Frameworks */,
 				97E1737F2D063B82003764FF /* Router in Frameworks */,
 				84E20F9A2C5EA1420075FF81 /* KimaiCore in Frameworks */,
@@ -663,6 +665,7 @@
 				97E1737E2D063B82003764FF /* Router */,
 				97E173812D06D8EA003764FF /* Router */,
 				97E173842D06DA8C003764FF /* Router */,
+				97AC67772D09BBFF00A78370 /* OfflineSync */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -921,7 +924,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -953,7 +956,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1114,7 +1117,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1157,7 +1160,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1340,7 +1343,7 @@
 			repositoryURL = "git@github.com:ManuelSelch/Router.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.0.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1415,6 +1418,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
+		};
+		97AC67772D09BBFF00A78370 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
 		};
 		97E1737E2D063B82003764FF /* Router */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -10,12 +10,20 @@ import NetworkFoundation
 import KimaiCore
 import CommonCore
 
+extension KeyMappingTable {
+    static let shared = KeyMappingTable(
+        relationships: [
+            "kimai_projects": [("customer", "kimai_customers")]
+        ]
+    )
+}
+
 public struct KimaiService {
-    @Dependency(\.customers) public var customers
-    @Dependency(\.projects) public var projects
-    @Dependency(\.timesheets) public var timesheets
-    @Dependency(\.activities) public var activities
-    @Dependency(\.users) public var users
+    public var customers: KimaiCustomerService
+    public var projects: RecordService<KimaiProject>
+    public var timesheets: RecordService<KimaiTimesheet>
+    public var activities: RecordService<KimaiActivity>
+    public var users: RecordService<KimaiUser>
     
     public func setAuth(username: String, password: String) {
         let authPlugin = KimaiAuthPlugin(username, password)
@@ -39,7 +47,21 @@ public struct KimaiService {
 }
 
 extension KimaiService {
-    static var live = KimaiService()
+    static var live = KimaiService(
+        customers: KimaiCustomerService.live,
+        projects: KimaiProjectService.live,
+        timesheets: KimaiTimesheetService.live,
+        activities: KimaiActivityService.live,
+        users: KimaiUserService.live
+    )
+    
+    static var mock = KimaiService(
+        customers: KimaiCustomerService.mock,
+        projects: KimaiProjectService.mock,
+        timesheets: KimaiTimesheetService.mock,
+        activities: KimaiActivityService.mock,
+        users: KimaiUserService.mock
+    )
 }
 
 struct KimaiAuthPlugin: PluginType {
@@ -55,13 +77,14 @@ struct KimaiAuthPlugin: PluginType {
         var request = request
         request.addValue(user, forHTTPHeaderField: "X-AUTH-USER")
         request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
+        // request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         return request
     }
 }
 
 struct KimaiServiceKey: DependencyKey {
     static var liveValue = KimaiService.live
-    static var mockValue = KimaiService.live
+    static var mockValue = KimaiService.mock
 }
 
 public extension DependencyValues {

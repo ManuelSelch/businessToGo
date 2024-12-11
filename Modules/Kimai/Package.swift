@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "KimaiApp", targets: ["KimaiApp"])
     ],
     dependencies: [
-        .package(url: "https://github.com/manuelselch/OfflineSync", .upToNextMajor(from: "1.3.5")),
+        .package(url: "https://github.com/manuelselch/OfflineSync", .upToNextMajor(from: "1.3.6")),
         .package(url: "https://github.com/manuelselch/Redux", .upToNextMajor(from: "1.2.14")),
         .package(url: "https://github.com/manuelselch/Dependencies", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/ManuelSelch/Chart", .upToNextMajor(from: "1.0.4")),

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -84,6 +84,7 @@
 		84F827792C695550000D0254 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F827782C695550000D0254 /* ProjectsView.swift */; };
 		84F8277B2C69E76C000D0254 /* TimesheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8277A2C69E76C000D0254 /* TimesheetView.swift */; };
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
+		97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 97AC67772D09BBFF00A78370 /* OfflineSync */; };
 		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
 		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
 		97E173822D06D8EA003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E173812D06D8EA003764FF /* Router */; };
@@ -226,6 +227,7 @@
 				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84C8C2A92C5E6F31007BF30B /* DebugApp in Frameworks */,
 				84E20FA02C5EA1720075FF81 /* PulseUI in Frameworks */,
+				97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */,
 				97E173852D06DA8C003764FF /* Router in Frameworks */,
 				97E1737F2D063B82003764FF /* Router in Frameworks */,
 				84E20F9A2C5EA1420075FF81 /* KimaiCore in Frameworks */,
@@ -663,6 +665,7 @@
 				97E1737E2D063B82003764FF /* Router */,
 				97E173812D06D8EA003764FF /* Router */,
 				97E173842D06DA8C003764FF /* Router */,
+				97AC67772D09BBFF00A78370 /* OfflineSync */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -750,6 +753,7 @@
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
 				97E173832D06DA8C003764FF /* XCRemoteSwiftPackageReference "Router" */,
+				97AC67762D09BBFF00A78370 /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1318,6 +1322,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		97AC67762D09BBFF00A78370 /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1415,6 +1426,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
+		};
+		97AC67772D09BBFF00A78370 /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
 		};
 		97E1737E2D063B82003764FF /* Router */ = {
 			isa = XCSwiftPackageProductDependency;

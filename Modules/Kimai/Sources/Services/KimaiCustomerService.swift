@@ -39,7 +39,8 @@ public struct KimaiCustomerService {
             repository: customerRepository,
             remoteInsert: { try await requestService.insert( KimaiCustomerDTO(from: $0) ).toModel() },
             remoteUpdate: { try await requestService.update( KimaiCustomerDTO(from: $0) ).toModel() },
-            remoteDelete: nil
+            remoteDelete: nil,
+            keyMapping: KeyMappingTable.shared
         )
     }
     

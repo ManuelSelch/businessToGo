@@ -22,6 +22,8 @@ struct ReportComponent: ViewModel {
         var activities: [KimaiActivity]
         var customers: [KimaiCustomer]
         
+        var timesheetsChanges: [DatabaseChange]
+        
         public static func from(_ state: AppFeature.State) -> Self {
             return State(
                 months: state.report.months,
@@ -32,7 +34,9 @@ struct ReportComponent: ViewModel {
                 timesheets: state.kimai.timesheets,
                 projects: state.kimai.projects,
                 activities: state.kimai.activities,
-                customers: state.kimai.customers
+                customers: state.kimai.customers,
+                
+                timesheetsChanges: state.kimai.timesheetChanges
             )
         }
     }

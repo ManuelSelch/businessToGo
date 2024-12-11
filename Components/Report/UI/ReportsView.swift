@@ -78,6 +78,7 @@ extension ReportsView {
             projects: projects,
             timesheets: timesheetsFiltered,
             activities: activities,
+            timesheetChanges: timesheetChanges,
             deleteTapped: deleteTapped,
             editTapped: editTapped
         )

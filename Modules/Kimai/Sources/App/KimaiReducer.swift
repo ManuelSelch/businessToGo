@@ -72,6 +72,7 @@ public extension KimaiFeature {
                     kimai.customers.updateCustomer(customer)
                 }
                 state.customers = kimai.customers.getCustomers().filter({$0.visible})
+                getChanges(&state)
             
             case let .delete(customer):
                 guard(state.projects.filter({$0.customer == customer.id}).count == 0) else {
@@ -82,6 +83,7 @@ public extension KimaiFeature {
                 
             case let .deleteConfirmed(customer):
                 state.customers = delete(customer, changes: state.customerChanges, service: kimai.customers)
+                getChanges(&state)
                 return .send(.delegate(.dismissPopup))
             }
                 
@@ -96,6 +98,7 @@ public extension KimaiFeature {
                     kimai.projects.update(project)
                 }
                 state.projects = kimai.projects.get().filter({$0.visible})
+                getChanges(&state)
             case let .delete(project):
                 guard(state.activities.filter({$0.project == project.id}).count == 0) else {
                     return .send(.delegate(.popup(.projectDeleteNotAllowed(project))))
@@ -103,6 +106,7 @@ public extension KimaiFeature {
                 return .send(.delegate(.popup(.projectDeleteConfirmation(project))))
             case let .deleteConfirmed(project):
                 state.projects = delete(project, changes: state.projectChanges, service: kimai.projects)
+                getChanges(&state)
                 return .send(.delegate(.dismissPopup))
             }
             
@@ -115,10 +119,12 @@ public extension KimaiFeature {
                     kimai.activities.update(activity)
                 }
                 state.activities = kimai.activities.get().filter({$0.visible})
+                getChanges(&state)
             case let .delete(activity):
                 return .send(.delegate(.popup(.activityDeleteConfirmation(activity))))
             case let .deleteConfirmed(activity):
                 state.activities = delete(activity, changes: state.activityChanges, service: kimai.activities)
+                getChanges(&state)
                 return .send(.delegate(.dismissPopup))
             }
             
@@ -131,11 +137,13 @@ public extension KimaiFeature {
                     kimai.timesheets.update(timesheet)
                 }
                 state.timesheets = kimai.timesheets.get()
+                getChanges(&state)
             case let .delete(timesheet):
                 return .send(.delegate(.popup(.timesheetDeleteConfirmation(timesheet))))
             case let .deleteConfirmed(timesheet):
                 kimai.timesheets.delete(timesheet.id)
                 state.timesheets = kimai.timesheets.get()
+                getChanges(&state)
                 return .send(.delegate(.dismissPopup))
             }
             

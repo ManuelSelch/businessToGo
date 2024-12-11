@@ -3,12 +3,13 @@ import SwiftUI
 import KimaiCore
 import CommonUI
 import CommonCore
+import OfflineSyncCore
 
 public struct KimaiTimesheetsListView: View {
     let projects: [KimaiProject]
-    
     let timesheets: [KimaiTimesheet]
     let activities: [KimaiActivity]
+    let timesheetChanges: [DatabaseChange]
     
     let deleteTapped: (KimaiTimesheet) -> ()
     let editTapped: (KimaiTimesheet) -> ()
@@ -20,10 +21,15 @@ public struct KimaiTimesheetsListView: View {
     
     @State private var isExpanded: Date?
     
-    public init(projects: [KimaiProject], timesheets: [KimaiTimesheet], activities: [KimaiActivity], deleteTapped: @escaping (KimaiTimesheet) -> Void, editTapped: @escaping (KimaiTimesheet) -> Void) {
+    public init(
+        projects: [KimaiProject], timesheets: [KimaiTimesheet], activities: [KimaiActivity],
+        timesheetChanges: [DatabaseChange] = [],
+        deleteTapped: @escaping (KimaiTimesheet) -> Void, editTapped: @escaping (KimaiTimesheet) -> Void
+    ) {
         self.projects = projects
         self.timesheets = timesheets
         self.activities = activities
+        self.timesheetChanges = timesheetChanges
         self.deleteTapped = deleteTapped
         self.editTapped = editTapped
         
@@ -40,7 +46,6 @@ public struct KimaiTimesheetsListView: View {
         })
     
         dateKeys = timesheetsByDate.keys.sorted(by: >)
-        
     }
      
     
@@ -68,7 +73,8 @@ public struct KimaiTimesheetsListView: View {
                                 KimaiTimesheetCard(
                                     timesheet: timesheet,
                                     project: projects.first { $0.id == timesheet.project },
-                                    activity: activities.first{ $0.id == timesheet.activity }
+                                    activity: activities.first{ $0.id == timesheet.activity },
+                                    isOffline: timesheetChanges.first{ $0.recordID == timesheet.id }
                                 )
                                 .swipeActions(edge: .trailing) {
                                     Button(role: .cancel) {
@@ -118,7 +124,8 @@ public struct KimaiTimesheetsListView: View {
                                 KimaiTimesheetCard(
                                     timesheet: timesheet,
                                     project: projects.first { $0.id == timesheet.project },
-                                    activity: activities.first{ $0.id == timesheet.activity }
+                                    activity: activities.first{ $0.id == timesheet.activity },
+                                    isOffline: timesheetChanges.first{ $0.recordID == timesheet.id }
                                 )
                                 .swipeActions(edge: .trailing) {
                                     Button(role: .cancel) {

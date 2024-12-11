@@ -10,10 +10,13 @@ import NetworkFoundation
 import KimaiCore
 import CommonCore
 
+// Customers -> Projects -> Activities -> Timesheets
 extension KeyMappingTable {
     static let shared = KeyMappingTable(
         relationships: [
-            "kimai_projects": [("customer", "kimai_customers")]
+            "kimai_projects": [("customer", "kimai_customers")],
+            "kimai_activities": [("project", "kimai_projects")],
+            "kimai_timesheets": [("project", "kimai_projects"), ("activity", "kimai_activities")]
         ]
     )
 }

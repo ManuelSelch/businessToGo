@@ -149,6 +149,7 @@ public extension KimaiFeature {
             
             
         case .sync:
+            state.isSyncing = true
             fetchOffline(&state)
             
             return .run { send in
@@ -169,6 +170,7 @@ public extension KimaiFeature {
             }
             
         case let .synced(customers, projects, activities, teams, users, timesheets):
+            state.isSyncing = false
             state.customers = customers.filter({$0.visible})
             state.projects = projects.filter({$0.visible})
             state.activities = activities.filter({$0.visible})

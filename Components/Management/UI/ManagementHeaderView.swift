@@ -8,9 +8,10 @@ struct ManagementHeaderView: View {
     @Binding var selectedTeam: Int?
 
     let route: ManagementComponent.Route
-    
+
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
+    var isSyncing: Bool
 
     let syncTapped: () -> ()
     let projectTapped: (Integration) -> ()
@@ -18,8 +19,10 @@ struct ManagementHeaderView: View {
     let settingsTapped: () -> ()
     
     init(
-        selectedTeam: Binding<Int?>, route: ManagementComponent.Route, 
+        selectedTeam: Binding<Int?>, route: ManagementComponent.Route,
         projects: [KimaiProject], teams: [KimaiTeam],
+        isSyncing: Bool,
+        
         syncTapped: @escaping () -> Void,
         projectTapped: @escaping (Integration) -> Void,
         playTapped: @escaping (KimaiTimesheet) -> Void,
@@ -29,6 +32,8 @@ struct ManagementHeaderView: View {
         self.route = route
         self.projects = projects
         self.teams = teams
+        self.isSyncing = isSyncing
+        
         self.syncTapped = syncTapped
         self.projectTapped = projectTapped
         self.playTapped = playTapped
@@ -60,8 +65,12 @@ struct ManagementHeaderView: View {
             case .assistant, .kimai(.activitySheet), .kimai(.customerSheet), .kimai(.projectSheet), .kimai(.timesheetSheet):
                 EmptyView()
             default:
-                Button(action: syncTapped){
-                    Image(systemName: "arrow.triangle.2.circlepath")
+                if(isSyncing) {
+                    ProgressView()
+                } else {
+                    Button(action: syncTapped){
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                    }
                 }
                 
                 Button(action: {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -753,7 +753,6 @@
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
 				97E173832D06DA8C003764FF /* XCRemoteSwiftPackageReference "Router" */,
-				97AC67762D09BBFF00A78370 /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -1321,13 +1320,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		97AC67762D09BBFF00A78370 /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync";
-		};
-/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */ = {

@@ -64,6 +64,7 @@ struct ManagementContainer: View {
                     route: route,
                     projects: store.state.kimai.projects,
                     teams: store.state.kimai.teams,
+                    isSyncing: store.state.kimai.isSyncing,
                     syncTapped: { store.send(.sync) },
                     projectTapped: {_ in},
                     playTapped: { router.showSheet(.management(.kimai(.timesheetSheet($0)))) },

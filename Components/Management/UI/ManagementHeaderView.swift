@@ -11,7 +11,7 @@ struct ManagementHeaderView: View {
 
     var projects: [KimaiProject]
     var teams: [KimaiTeam]
-    var isSyncing: Bool
+    var syncStatus: SyncStatus
 
     let syncTapped: () -> ()
     let projectTapped: (Integration) -> ()
@@ -21,7 +21,7 @@ struct ManagementHeaderView: View {
     init(
         selectedTeam: Binding<Int?>, route: ManagementComponent.Route,
         projects: [KimaiProject], teams: [KimaiTeam],
-        isSyncing: Bool,
+        syncStatus: SyncStatus,
         
         syncTapped: @escaping () -> Void,
         projectTapped: @escaping (Integration) -> Void,
@@ -32,7 +32,7 @@ struct ManagementHeaderView: View {
         self.route = route
         self.projects = projects
         self.teams = teams
-        self.isSyncing = isSyncing
+        self.syncStatus = syncStatus
         
         self.syncTapped = syncTapped
         self.projectTapped = projectTapped
@@ -65,14 +65,20 @@ struct ManagementHeaderView: View {
             case .assistant, .kimai(.activitySheet), .kimai(.customerSheet), .kimai(.projectSheet), .kimai(.timesheetSheet):
                 EmptyView()
             default:
-                if(isSyncing) {
-                    ProgressView()
-                } else {
+                switch(syncStatus) {
+                case .idle:
                     Button(action: syncTapped){
                         Image(systemName: "arrow.triangle.2.circlepath")
                     }
+                case .syncing:
+                    ProgressView()
+                case .failed:
+                    Button(action: syncTapped){
+                        Image(systemName: "exclamationmark.icloud.fill")
+                    }
+                    .foregroundStyle(Color.red)
                 }
-                
+              
                 Button(action: {
                     switch(route){
                     case let .kimai(.projectsList(customer)):

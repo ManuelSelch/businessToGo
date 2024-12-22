@@ -149,7 +149,7 @@ public extension KimaiFeature {
             
             
         case .sync:
-            state.isSyncing = true
+            state.syncStatus = .syncing
             fetchOffline(&state)
             
             return .run { send in
@@ -165,12 +165,13 @@ public extension KimaiFeature {
                     )))
                 } catch {
                     Logger.error("failed syncing kimai")
+                    send(.success(.syncFailed))
                 }
                 
             }
             
         case let .synced(customers, projects, activities, teams, users, timesheets):
-            state.isSyncing = false
+            state.syncStatus = .idle
             state.customers = customers.filter({$0.visible})
             state.projects = projects.filter({$0.visible})
             state.activities = activities.filter({$0.visible})
@@ -179,6 +180,9 @@ public extension KimaiFeature {
             state.timesheets = timesheets
             
             getChanges(&state)
+            
+        case .syncFailed:
+            state.syncStatus = .failed
             
         case .delegate: return .none
         }

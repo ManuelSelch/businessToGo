@@ -13,6 +13,6 @@ public struct MyFormatter {
     }
     
     public static func date(_ date: Date) -> String {
-        return date.formatted(date: .complete, time: .omitted)
+        return date.formatted(date: .numeric, time: .omitted)
     }
 }

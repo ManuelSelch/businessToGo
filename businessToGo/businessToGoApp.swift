@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 import os
+import TipKit
 
 import Redux
 import ReduxDebug
@@ -8,9 +9,13 @@ import Dependencies
 import PulseLogHandler
 
 import CommonServices
+import BoardingUI
+import BoardingCore
+
 
 struct businessToGoApp: App {
     let store: StoreOf<AppFeature>
+    @State private var featureFrames: [FeatureIdentifier: CGRect] = [:]
     
     static func onAction(_ action: MonitorMiddleware<AppFeature.Action, AppFeature.State>.ActionType) -> AppFeature.Action {
         switch(action) {
@@ -54,11 +59,49 @@ struct businessToGoApp: App {
     }
     
     
+    
     var body: some Scene {
         WindowGroup {
-            AppContainer(store: store)
-                .scrollContentBackground(.hidden)
-             
+            VStack {
+                AppContainer(store: store)
+                    .scrollContentBackground(.hidden)
+                
+                if #available(iOS 17.0, *) {
+                    TipView(FavoriteLandmarkTip(), arrowEdge: .bottom)
+                }
+                
+                Text("Hello, World!")
+                    .padding()
+            }
+            .task {
+                if #available(iOS 17.0, *) {
+                    do {
+                        try Tips.configure()
+                    }
+                    catch {
+                        // Handle TipKit errors
+                        print("Error initializing TipKit \(error.localizedDescription)")
+                    }
+                }
+           }
+           
         }
+    }
+}
+
+@available(iOS 17.0, *)
+struct FavoriteLandmarkTip: Tip {
+    var title: Text {
+        Text("Save as a Favorite")
+    }
+
+
+    var message: Text? {
+        Text("Your favorite landmarks always appear at the top of the list.")
+    }
+
+
+    var image: Image? {
+        Image(systemName: "star")
     }
 }

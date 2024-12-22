@@ -17,7 +17,7 @@ public struct KimaiFeature: Reducer {
     public struct State: Equatable, Codable, Hashable {
         public init() {}
         
-        public var isSyncing = false
+        public var syncStatus: SyncStatus = .idle
         public var selectedTeam: Int?
         
         public var customers: [KimaiCustomer] = []
@@ -39,6 +39,7 @@ public struct KimaiFeature: Reducer {
         case synced(
             [KimaiCustomer], [KimaiProject], [KimaiActivity], [KimaiTeam], [KimaiUser], [KimaiTimesheet]
         )
+        case syncFailed
         
         case customer(CustomerAction)
         case project(ProjectAction)

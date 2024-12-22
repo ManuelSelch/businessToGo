@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -50,7 +50,7 @@
 		84A77E9E2C40299B002BF2A9 /* widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A77E9D2C40299B002BF2A9 /* widget.swift */; };
 		84A77EA02C40299B002BF2A9 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A77E9F2C40299B002BF2A9 /* AppIntent.swift */; };
 		84A77EA22C40299F002BF2A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A77EA12C40299F002BF2A9 /* Assets.xcassets */; };
-		84A77EA62C40299F002BF2A9 /* widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84A77E932C40299B002BF2A9 /* widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84A77EA62C40299F002BF2A9 /* widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84A77E932C40299B002BF2A9 /* widgetExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C5A2952BC40EEC00C25A0C /* businessToGoApp.swift */; };
 		84C5A29A2BC40EEE00C25A0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C5A2992BC40EEE00C25A0C /* Assets.xcassets */; };
 		84C5A29E2BC40EEE00C25A0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C5A29D2BC40EEE00C25A0C /* Preview Assets.xcassets */; };
@@ -84,6 +84,8 @@
 		84F827792C695550000D0254 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F827782C695550000D0254 /* ProjectsView.swift */; };
 		84F8277B2C69E76C000D0254 /* TimesheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8277A2C69E76C000D0254 /* TimesheetView.swift */; };
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
+		972FE8A12D09DDB100AC080F /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 972FE8A02D09DDB100AC080F /* OfflineSync */; };
+		97974A282D0ACD1100CD3B40 /* BoardingUI in Frameworks */ = {isa = PBXBuildFile; productRef = 97974A272D0ACD1100CD3B40 /* BoardingUI */; };
 		97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 97AC67772D09BBFF00A78370 /* OfflineSync */; };
 		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
 		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
@@ -203,6 +205,7 @@
 		84F827782C695550000D0254 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
 		84F8277A2C69E76C000D0254 /* TimesheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesheetView.swift; sourceTree = "<group>"; };
 		84FC58572BC9559200594E14 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
+		97974A262D0AC97D00CD3B40 /* Boarding */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Boarding; sourceTree = "<group>"; };
 		97E1737B2D063766003764FF /* MyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +233,7 @@
 				97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */,
 				97E173852D06DA8C003764FF /* Router in Frameworks */,
 				97E1737F2D063B82003764FF /* Router in Frameworks */,
+				97974A282D0ACD1100CD3B40 /* BoardingUI in Frameworks */,
 				84E20F9A2C5EA1420075FF81 /* KimaiCore in Frameworks */,
 				8405DDDD2C68A9CB002B553B /* OfflineSync in Frameworks */,
 				97E173822D06D8EA003764FF /* Router in Frameworks */,
@@ -237,6 +241,7 @@
 				849AB2482C66489D00197D96 /* Redux in Frameworks */,
 				8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */,
 				8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */,
+				972FE8A12D09DDB100AC080F /* OfflineSync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +285,7 @@
 		8405CC4D2C0E120400A73E8F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				97974A262D0AC97D00CD3B40 /* Boarding */,
 				846421B92C1A45210014694B /* Kimai */,
 				8405CC562C0E590300A73E8F /* Intro */,
 				8405CC532C0E20E000A73E8F /* Login */,
@@ -666,6 +672,8 @@
 				97E173812D06D8EA003764FF /* Router */,
 				97E173842D06DA8C003764FF /* Router */,
 				97AC67772D09BBFF00A78370 /* OfflineSync */,
+				972FE8A02D09DDB100AC080F /* OfflineSync */,
+				97974A272D0ACD1100CD3B40 /* BoardingUI */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -753,6 +761,7 @@
 				8472A3D72C01161A006726A1 /* XCRemoteSwiftPackageReference "PulseLogHandler" */,
 				845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */,
 				97E173832D06DA8C003764FF /* XCRemoteSwiftPackageReference "Router" */,
+				972FE89F2D09DDB100AC080F /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync" */,
 			);
 			productRefGroup = 84C5A2932BC40EEC00C25A0C /* Products */;
 			projectDirPath = "";
@@ -889,6 +898,7 @@
 /* Begin PBXTargetDependency section */
 		84A77EA52C40299F002BF2A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 84A77E922C40299B002BF2A9 /* widgetExtension */;
 			targetProxy = 84A77EA42C40299F002BF2A9 /* PBXContainerItemProxy */;
 		};
@@ -1120,9 +1130,11 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1163,9 +1175,11 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = de.selch.businessToGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1321,6 +1335,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		972FE89F2D09DDB100AC080F /* XCLocalSwiftPackageReference "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../50 Coding/52 iOS/52.01 Packages/OfflineSync";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1418,6 +1439,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
+		};
+		972FE8A02D09DDB100AC080F /* OfflineSync */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OfflineSync;
+		};
+		97974A272D0ACD1100CD3B40 /* BoardingUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BoardingUI;
 		};
 		97AC67772D09BBFF00A78370 /* OfflineSync */ = {
 			isa = XCSwiftPackageProductDependency;

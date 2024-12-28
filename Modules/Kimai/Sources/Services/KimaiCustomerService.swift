@@ -119,16 +119,3 @@ public extension KimaiCustomerService {
         )
     }
 }
-
-struct CustomersKey: DependencyKey {
-    static var liveValue: KimaiCustomerService = .live
-    static var mockValue: KimaiCustomerService = .mock
-}
-
-
-extension DependencyValues {
-    var customers: KimaiCustomerService {
-        get { Self[CustomersKey.self] }
-        set { Self[CustomersKey.self] = newValue }
-    }
-}

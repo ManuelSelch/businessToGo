@@ -100,7 +100,13 @@ extension ReportsView {
                 .init(id: 5, name: "Sa", value: getTotalTime(for: timesheetsFiltered, weekday: 7)),
                 .init(id: 6, name: "So", value: getTotalTime(for: timesheetsFiltered, weekday: 1))
             ], Color.theme)
-        default: EmptyView()
+        default:
+            ChartPieView([
+                .init(id: 1, name: "Kunde A", value: 10),
+                .init(id: 2, name: "Kunde B", value: 10),
+                .init(id: 3, name: "Kunde C", value: 10),
+                .init(id: 4, name: "Kunde D", value: 10)
+            ])
         }
     }
 }

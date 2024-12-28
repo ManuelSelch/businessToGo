@@ -1,10 +1,11 @@
 import Foundation
 import Combine
 import Moya
-import CoreData
-import OfflineSyncServices
 import SQLite
 import Dependencies
+
+import OfflineSyncCore
+import OfflineSyncServices
 
 import NetworkFoundation
 import KimaiCore
@@ -46,6 +47,40 @@ public struct KimaiService {
         }
         
         return true // todo: check auth
+    }
+    
+    public func save(_ model: any TableProtocol) {
+        if let customer = model as? KimaiCustomer {
+            if(customer.id == -1) {
+                customers.createCustomer(customer)
+            } else {
+                customers.updateCustomer(customer)
+            }
+        } else if let project = model as? KimaiProject {
+            if(project.id == -1) {
+                projects.create(project)
+            } else {
+                projects.update(project)
+            }
+        } else if let timesheet = model as? KimaiTimesheet {
+            if(timesheet.id == -1) {
+                timesheets.create(timesheet)
+            } else {
+                timesheets.update(timesheet)
+            }
+        } else if let activity = model as? KimaiActivity {
+            if(activity.id == -1) {
+                activities.create(activity)
+            } else {
+                activities.update(activity)
+            }
+        } else if let user = model as? KimaiUser {
+            if(user.id == -1) {
+                users.create(user)
+            } else {
+                users.update(user)
+            }
+        }
     }
 }
 

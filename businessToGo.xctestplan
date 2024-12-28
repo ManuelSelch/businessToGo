@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "43D2B1BE-972B-45E9-9882-16565CD36A75",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:businessToGo.xcodeproj",
+      "identifier" : "84C5A2912BC40EEC00C25A0C",
+      "name" : "businessToGo"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:businessToGo.xcodeproj",
+        "identifier" : "84C5A2A22BC40EEE00C25A0C",
+        "name" : "businessToGoTests"
+      }
+    }
+  ],
+  "version" : 1
+}

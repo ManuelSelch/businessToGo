@@ -55,6 +55,19 @@ public extension KimaiFeature {
         return service.getCustomers().filter({$0.visible})
     }
     
+    func save(_ customer: KimaiCustomer) {
+        Logger.debug("save customer")
+        if(customer.id == KimaiCustomer.new.id) {
+            Logger.debug("new customer")
+            kimai.customers.createCustomer(customer)
+        } else {
+            Logger.debug("update customer")
+            kimai.customers.updateCustomer(customer)
+        }
+    }
+    
+    
+    
     func reduce(_ state: inout State, _ action: Action) -> Effect<Action> {
         switch(action){
         case let .customer(action):
@@ -63,14 +76,7 @@ public extension KimaiFeature {
                 state.selectedTeam = team
                 
             case let .save(customer):
-                Logger.debug("save customer")
-                if(customer.id == KimaiCustomer.new.id) {
-                    Logger.debug("new customer")
-                    kimai.customers.createCustomer(customer)
-                } else {
-                    Logger.debug("update customer")
-                    kimai.customers.updateCustomer(customer)
-                }
+                kimai.save(customer)
                 state.customers = kimai.customers.getCustomers().filter({$0.visible})
                 getChanges(&state)
             
@@ -86,17 +92,11 @@ public extension KimaiFeature {
                 getChanges(&state)
                 return .send(.delegate(.dismissPopup))
             }
-                
-
         
         case let .project(action):
             switch(action) {
             case let .save(project):
-                if(project.id == KimaiProject.new.id) {
-                    kimai.projects.create(project)
-                } else {
-                    kimai.projects.update(project)
-                }
+                kimai.save(project)
                 state.projects = kimai.projects.get().filter({$0.visible})
                 getChanges(&state)
             case let .delete(project):
@@ -113,11 +113,7 @@ public extension KimaiFeature {
         case let .activity(action):
             switch(action) {
             case let .save(activity):
-                if(activity.id == KimaiActivity.new.id) {
-                    kimai.activities.create(activity)
-                } else {
-                    kimai.activities.update(activity)
-                }
+                kimai.save(activity)
                 state.activities = kimai.activities.get().filter({$0.visible})
                 getChanges(&state)
             case let .delete(activity):
@@ -131,11 +127,7 @@ public extension KimaiFeature {
         case let .timesheet(action):
             switch(action) {
             case let .save(timesheet):
-                if(timesheet.id == KimaiTeam.new.id) {
-                    kimai.timesheets.create(timesheet)
-                } else {
-                    kimai.timesheets.update(timesheet)
-                }
+                kimai.save(timesheet)
                 state.timesheets = kimai.timesheets.get()
                 getChanges(&state)
             case let .delete(timesheet):
@@ -189,4 +181,6 @@ public extension KimaiFeature {
         
         return .none
     }
+    
+    
 }

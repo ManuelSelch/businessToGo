@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Integration",
-    platforms: [ .iOS(.v16) ],
+    platforms: [ .iOS(.v16), .macOS(.v14) ],
     products: [
         .library(name: "IntegrationApp", targets: ["IntegrationApp"]),
     ],

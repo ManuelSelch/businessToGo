@@ -17,12 +17,14 @@ struct AppContainer: View {
         AppRouterView(
             router: router,
             header: {
+                EmptyView()
+                
+                /*
                 AppHeader(
                     title: "BusinessToGo",
                     settingsTapped: { router.showSheet(.settings(.settings)) }
                 )
-                 
-                
+                */
             },
             content: { route in
                 route.view(store)

@@ -62,46 +62,8 @@ struct businessToGoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            VStack {
-                AppContainer(store: store)
-                    .scrollContentBackground(.hidden)
-                
-                if #available(iOS 17.0, *) {
-                    TipView(FavoriteLandmarkTip(), arrowEdge: .bottom)
-                }
-                
-                Text("Hello, World!")
-                    .padding()
-            }
-            .task {
-                if #available(iOS 17.0, *) {
-                    do {
-                        try Tips.configure()
-                    }
-                    catch {
-                        // Handle TipKit errors
-                        print("Error initializing TipKit \(error.localizedDescription)")
-                    }
-                }
-           }
-           
+            AppContainer(store: store)
+                .scrollContentBackground(.hidden)
         }
-    }
-}
-
-@available(iOS 17.0, *)
-struct FavoriteLandmarkTip: Tip {
-    var title: Text {
-        Text("Save as a Favorite")
-    }
-
-
-    var message: Text? {
-        Text("Your favorite landmarks always appear at the top of the list.")
-    }
-
-
-    var image: Image? {
-        Image(systemName: "star")
     }
 }

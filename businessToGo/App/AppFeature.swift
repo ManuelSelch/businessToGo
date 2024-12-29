@@ -121,11 +121,12 @@ struct AppFeature: Reducer {
             return .none
         }
         
+        self.kimai.setAuth(username: kimai.username, password: kimai.password)
+        try? keychain.saveAccount(account)
+        
         return .run { send in
             if let success = try? await self.kimai.login(server: kimai.server) {
                 if(success){
-                    self.kimai.setAuth(username: kimai.username, password: kimai.password)
-                    try? keychain.saveAccount(account)
                     send(.success(.kimai(.sync)))
                 }
             }

@@ -61,11 +61,12 @@ public class KimaiService {
     public func login(server: String) async throws -> Bool {
         if let url = URL(string: server+"/api") {
             KimaiAPI.server = url
-        }else {
+        } else {
             throw NetworkError.urlDecodeFailed
         }
         
-        return true // todo: check auth
+        // let success = (await users.fetch()) != []
+        return true
     }
     
     public func save(_ model: any TableProtocol) {

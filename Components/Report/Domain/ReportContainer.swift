@@ -15,6 +15,7 @@ struct ReportContainer: View {
                 timesheetChanges: store.state.timesheetsChanges,
                 projects: store.state.projects,
                 activities: store.state.activities,
+                customers: store.state.customers,
                 
                 selectedProject: store.binding(for: \.selectedProject, action: ReportComponent.Action.projectSelected),
                 selectedDate: store.binding(for: \.selectedDate, action: ReportComponent.Action.dateSelected),

@@ -35,7 +35,6 @@ struct ReportHeaderView: View {
                 }
                 .pickerStyle(.segmented)
                 .labelsHidden()
-                .background(Color.themeGray)
                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .accentColor(Color.contrast)
                 
@@ -56,7 +55,6 @@ struct ReportHeaderView: View {
             
         }
         .padding()
-        .background(Color.themeGray)
         .foregroundStyle(Color.contrast)
     }
 }

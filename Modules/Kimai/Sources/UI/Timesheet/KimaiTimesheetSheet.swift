@@ -48,6 +48,7 @@ public struct KimaiTimesheetSheet: View {
                     Text("project: \(selectedProject)")
                     Text("activity: \(selectedActivity)")
                 }
+                .listRowBackground(Color.clear)
                 
                 Section(header: Text("Branch Info")) {
                     Picker("Kunde", selection: $selectedCustomer) {
@@ -110,6 +111,7 @@ public struct KimaiTimesheetSheet: View {
                         }
                     }
                 }
+                .listRowBackground(Color.clear)
             }
              
             .onAppear {

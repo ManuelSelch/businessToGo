@@ -39,6 +39,7 @@ public struct KimaiCustomersListView: View {
                 customer.name = name
                 customerCreated(customer)
             }
+            .listRowBackground(Color.clear)
             
             
             
@@ -47,6 +48,8 @@ public struct KimaiCustomersListView: View {
                     customer: customer, 
                     customerTapped: {customerTapped(customer.id) }
                 )
+                .listRowBackground(Color.clear)
+                
                 .swipeActions(edge: .trailing) {
                     Button(role: .cancel) {
                         customerDeleteTapped(customer)
@@ -67,7 +70,9 @@ public struct KimaiCustomersListView: View {
                 }
             }
         }
-        .listStyle(.plain)
-    
+       
+        .scrollContentBackground(.hidden)
+        .background(Color.clear)
+        
     }
 }

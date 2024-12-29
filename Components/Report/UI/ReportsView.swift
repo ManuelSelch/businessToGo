@@ -11,6 +11,7 @@ struct ReportsView: View {
     let timesheetChanges: [DatabaseChange]
     let projects: [KimaiProject]
     let activities: [KimaiActivity]
+    let customers: [KimaiCustomer]
     @Binding var selectedProject: Int?
     @Binding var selectedDate: Date
     @Binding var selectedReportType: ReportType
@@ -101,12 +102,7 @@ extension ReportsView {
                 .init(id: 6, name: "So", value: getTotalTime(for: timesheetsFiltered, weekday: 1))
             ], Color.theme)
         default:
-            ChartPieView([
-                .init(id: 1, name: "Kunde A", value: 10),
-                .init(id: 2, name: "Kunde B", value: 10),
-                .init(id: 3, name: "Kunde C", value: 10),
-                .init(id: 4, name: "Kunde D", value: 10)
-            ])
+            ChartPieView(customers.map { .init(id: $0.id, name: $0.name, value: 10) })
         }
     }
 }

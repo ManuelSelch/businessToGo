@@ -120,7 +120,6 @@ public struct KimaiProjectDetailsView: View {
                     
                 }
                 .listSectionSeparator(.hidden)
-                .listStyle(.plain)
                 
             case .sessions:
                 KimaiTimesheetsListView(

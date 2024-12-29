@@ -63,6 +63,7 @@ struct businessToGoApp: App {
     var body: some Scene {
         WindowGroup {
             AppContainer(store: store)
+                .background(Color.red)
                 .scrollContentBackground(.hidden)
         }
     }

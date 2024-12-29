@@ -21,7 +21,7 @@ struct ProjectsView: View {
                                     RoundedRectangle(cornerRadius: 6)
                                 )
                                 .aspectRatio(1/1, contentMode: .fit)
-                                .shadow(radius: 2)
+                                .shadow(color: Color.black.opacity(0.5), radius: 2)
                             
                             VStack(alignment: .leading) {
                                 HStack {

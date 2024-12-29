@@ -51,6 +51,7 @@ public struct KimaiProjectsListView: View {
                 project.customer = customer
                 projectCreated(project)
             }
+            .listRowBackground(Color.clear)
             
             
             ForEach(projectsFiltered) { project in
@@ -58,6 +59,7 @@ public struct KimaiProjectsListView: View {
                     kimaiProject: project,
                     projectTapped: { projectTapped(project.id) }
                 )
+                .listRowBackground(Color.clear)
                 .swipeActions(edge: .trailing) {
                     Button(role: .cancel) {
                         projectDeleteTapped(project)
@@ -78,7 +80,6 @@ public struct KimaiProjectsListView: View {
                 }
             }
         }
-        .listStyle(.plain)
     }
     
     

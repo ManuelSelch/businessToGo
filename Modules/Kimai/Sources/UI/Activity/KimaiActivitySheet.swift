@@ -26,6 +26,7 @@ public struct KimaiActivitySheet: View {
             List {
                 TextField("Name", text: $name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .listRowBackground(Color.clear)
                     .padding()
                 
                 Picker("Project", selection: $selectedProject) {
@@ -34,6 +35,7 @@ public struct KimaiActivitySheet: View {
                         Text(project.name).tag(project.id as Int?)
                     }
                 }
+                .listRowBackground(Color.clear)
                 .pickerStyle(.menu)
                 
                 HStack {
@@ -41,6 +43,7 @@ public struct KimaiActivitySheet: View {
                     Spacer()
                     CustomColorPicker(selectedColor: $color)
                 }
+                .listRowBackground(Color.clear)
                 
             }
             .toolbar {

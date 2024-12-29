@@ -4,7 +4,7 @@ import Foundation
 public struct MyFormatter {
     public static func duration(_ duration: Double) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.allowedUnits = [.hour, .minute]
         return formatter.string(from: duration) ?? "--"
     }
     

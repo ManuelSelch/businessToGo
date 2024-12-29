@@ -22,21 +22,40 @@ extension KeyMappingTable {
     )
 }
 
-public struct KimaiService {
+public class KimaiService {
     public var customers: KimaiCustomerService
     public var projects: RecordService<KimaiProject>
     public var timesheets: RecordService<KimaiTimesheet>
     public var activities: RecordService<KimaiActivity>
     public var users: RecordService<KimaiUser>
     
-    public func setAuth(username: String, password: String) {
-        let authPlugin = KimaiAuthPlugin(username, password)
-        
+    private var user: String = ""
+    private var token: String = ""
+    
+    init(
+        customers: KimaiCustomerService,
+        projects: RecordService<KimaiProject>,
+        timesheets: RecordService<KimaiTimesheet>,
+        activities: RecordService<KimaiActivity>,
+        users: RecordService<KimaiUser>
+    ) {
+        self.customers = customers
+        self.projects = projects
+        self.timesheets = timesheets
+        self.activities = activities
+        self.users = users
+
+        let authPlugin = KimaiAuthPlugin({self.user}, {self.token})
         customers.setPlugins([authPlugin])
         projects.setPlugins([authPlugin])
         timesheets.setPlugins([authPlugin])
         activities.setPlugins([authPlugin])
         users.setPlugins([authPlugin])
+    }
+    
+    public func setAuth(username: String, password: String) {
+        self.user = username
+        self.token = password
     }
     
     public func login(server: String) async throws -> Bool {
@@ -102,19 +121,32 @@ extension KimaiService {
     )
 }
 
-struct KimaiAuthPlugin: PluginType {
-    let user: String
-    let token: String
+class AuthProvider {
+    var user: String
+    var token: String
     
-    init(_ user: String, _ token: String) {
+    init(user: String, token: String) {
         self.user = user
         self.token = token
     }
     
+    
+}
+
+struct KimaiAuthPlugin: PluginType {
+    let getUser: () -> String
+    let getToken: () -> String
+    
+    init(_ getUser: @escaping () -> String, _ getToken: @escaping () -> String) {
+        self.getUser = getUser
+        self.getToken = getToken
+    }
+    
+    
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
-        request.addValue(user, forHTTPHeaderField: "X-AUTH-USER")
-        request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
+        request.addValue(getUser(), forHTTPHeaderField: "X-AUTH-USER")
+        request.addValue(getToken(), forHTTPHeaderField: "X-AUTH-TOKEN")
         // request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         return request
     }

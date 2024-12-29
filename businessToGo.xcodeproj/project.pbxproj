@@ -84,6 +84,8 @@
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
 		972FE8A12D09DDB100AC080F /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 972FE8A02D09DDB100AC080F /* OfflineSync */; };
 		97974A282D0ACD1100CD3B40 /* BoardingUI in Frameworks */ = {isa = PBXBuildFile; productRef = 97974A272D0ACD1100CD3B40 /* BoardingUI */; };
+		97A5AA4A2D205B9500F23B8F /* KimaiAssistantStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5AA492D205B9500F23B8F /* KimaiAssistantStep.swift */; };
+		97A5AA4C2D205BA900F23B8F /* SetupAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5AA4B2D205BA900F23B8F /* SetupAssistantView.swift */; };
 		97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 97AC67772D09BBFF00A78370 /* OfflineSync */; };
 		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
 		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
@@ -195,6 +197,8 @@
 		84FC58572BC9559200594E14 /* AppHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeader.swift; sourceTree = "<group>"; };
 		97974A262D0AC97D00CD3B40 /* Boarding */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Boarding; sourceTree = "<group>"; };
 		97A5AA452D1EEEC800F23B8F /* businessToGo.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = businessToGo.xctestplan; sourceTree = "<group>"; };
+		97A5AA492D205B9500F23B8F /* KimaiAssistantStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimaiAssistantStep.swift; sourceTree = "<group>"; };
+		97A5AA4B2D205BA900F23B8F /* SetupAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAssistantView.swift; sourceTree = "<group>"; };
 		97E1737B2D063766003764FF /* MyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -585,10 +589,36 @@
 		84E20FA12C5EDC8E0075FF81 /* Assistant */ = {
 			isa = PBXGroup;
 			children = (
+				97A5AA462D205B7800F23B8F /* Domain */,
+				97A5AA472D205B8100F23B8F /* UI */,
+				97A5AA482D205B8600F23B8F /* Core */,
+			);
+			path = Assistant;
+			sourceTree = "<group>";
+		};
+		97A5AA462D205B7800F23B8F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
 				84E20FA22C5EDC960075FF81 /* AssistantContainer.swift */,
 				84E20FA42C5EDD030075FF81 /* AssistantComponent.swift */,
 			);
-			path = Assistant;
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		97A5AA472D205B8100F23B8F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				97A5AA4B2D205BA900F23B8F /* SetupAssistantView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		97A5AA482D205B8600F23B8F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				97A5AA492D205B9500F23B8F /* KimaiAssistantStep.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -807,6 +837,7 @@
 				84E20F852C5E8EF80075FF81 /* ManagementComponent.swift in Sources */,
 				84E20FA72C5EE1570075FF81 /* ManagementHeaderView.swift in Sources */,
 				84E20F932C5EA0D50075FF81 /* DebugView.swift in Sources */,
+				97A5AA4A2D205B9500F23B8F /* KimaiAssistantStep.swift in Sources */,
 				84E20F872C5E95340075FF81 /* KimaiContainer.swift in Sources */,
 				842A9D962C6000A500A133E9 /* WeekDay.swift in Sources */,
 				84C5A2962BC40EEC00C25A0C /* businessToGoApp.swift in Sources */,
@@ -814,6 +845,7 @@
 				84E20F8B2C5E95560075FF81 /* KimaiComponent.swift in Sources */,
 				842A9DA62C600AC200A133E9 /* ReportCalendarView.swift in Sources */,
 				849224542C5D848300E4ECFC /* SettingsComponent.swift in Sources */,
+				97A5AA4C2D205BA900F23B8F /* SetupAssistantView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

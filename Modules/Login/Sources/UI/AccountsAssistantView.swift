@@ -10,6 +10,7 @@ struct AccountsAssistantView: View {
             Image("no-accounts")
                 .resizable()
                 .scaledToFit()
+                .frame(maxWidth: 800)
                 .padding()
                 .cornerRadius(10)
                 .padding()

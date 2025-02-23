@@ -33,12 +33,13 @@ public struct AccountsView: View {
                 }
                 Spacer()
             }
-            List {
-                if(accounts.count == 0){
-                    AccountsAssistantView(
-                        assistantTapped: assistantTapped
-                    )
-                } else {
+            if(accounts.count == 0) {
+                AccountsAssistantView(
+                    assistantTapped: assistantTapped
+                )
+            } else {
+                List {
+                
                     ForEach(accounts, id: \.identifier){ account in
                         Button(action: {
                             loginTapped(account)

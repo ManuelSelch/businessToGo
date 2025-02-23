@@ -32,40 +32,55 @@ public struct CustomColorPicker: View {
         "#E6E6FA"
     ]
     
+    let layout = [
+            GridItem(.adaptive(minimum: 20))
+        ]
+    
     public init(selectedColor: Binding<String?>) {
         self._selectedColor = selectedColor
     }
     
     public var body: some View {
-        let layout = [
-                GridItem(.adaptive(minimum: 20))
-            ]
-        
-        LazyVGrid(columns: layout) {
-            ForEach(colors, id: \.self){ color in
-                Circle()
-                    .foregroundStyle(Color(hex: color))
-                    .frame(width: 20, height: 20)
-                    .opacity(color == selectedColor ? 0.8 : 1.0)
-                    .onTapGesture {
-                        if(selectedColor == color){
-                            selectedColor = nil
-                        } else {
-                            selectedColor = color
-                        }
-                    }
-                    .overlay(
-                        Circle()
-                            .stroke(.black, lineWidth: 1)
-                            .opacity(color == selectedColor ? 1.0 : 0.0)
-                    )
+        VStack {
+            HStack {
+                Text("Selected Color: ")
+                if let color = selectedColor {
+                    Circle()
+                        .foregroundStyle(Color(hex: color))
+                        .frame(width: 20, height: 20)
+                } else {
+                    Image(systemName: "xmark.circle")
+                        .foregroundStyle(Color.contrast)
+                        .frame(width: 20, height: 20)
+                }
                     
             }
+            LazyVGrid(columns: layout) {
+                ForEach(colors, id: \.self){ color in
+                    Circle()
+                        .foregroundStyle(Color(hex: color))
+                        .frame(width: 20, height: 20)
+                        .opacity(color == selectedColor ? 0.8 : 1.0)
+                        .onTapGesture {
+                            if(selectedColor == color){
+                                selectedColor = nil
+                            } else {
+                                selectedColor = color
+                            }
+                        }
+                        .overlay(
+                            Circle()
+                                .stroke(.black, lineWidth: 3)
+                                .opacity(color == selectedColor ? 1.0 : 0.0)
+                        )
+                    
+                }
+            }
+            .padding()
+            .background(.thinMaterial)
+            .cornerRadius(20)
+            .padding(.horizontal)
         }
-        .padding()
-        .background(.thinMaterial)
-        .cornerRadius(20)
-        .padding(.horizontal)
     }
 }
 

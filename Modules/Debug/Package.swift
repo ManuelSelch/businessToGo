@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "Debug",
-    platforms: [ .iOS(.v16) ],
+    platforms: [ .iOS(.v16), .macOS(.v14) ],
     products: [
         .library(name: "DebugApp", targets: ["DebugApp"]),
     ],

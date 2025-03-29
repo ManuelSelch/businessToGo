@@ -39,8 +39,8 @@ public struct KimaiCustomerService {
             repository: customerRepository,
             remoteInsert: { try await requestService.insert( KimaiCustomerDTO(from: $0) ).toModel() },
             remoteUpdate: { try await requestService.update( KimaiCustomerDTO(from: $0) ).toModel() },
-            remoteDelete: nil,
-            keyMapping: KeyMappingTable.shared
+            remoteDelete: nil
+            // keyMapping: KeyMappingTable.shared
         )
     }
     
@@ -117,18 +117,5 @@ public extension KimaiCustomerService {
                 updateMethod: KimaiAPI.updateCustomer
             )
         )
-    }
-}
-
-struct CustomersKey: DependencyKey {
-    static var liveValue: KimaiCustomerService = .live
-    static var mockValue: KimaiCustomerService = .mock
-}
-
-
-extension DependencyValues {
-    var customers: KimaiCustomerService {
-        get { Self[CustomersKey.self] }
-        set { Self[CustomersKey.self] = newValue }
     }
 }

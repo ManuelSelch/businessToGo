@@ -3,13 +3,13 @@ import PackageDescription
 
 let package = Package(
     name: "Integration",
-    platforms: [ .iOS(.v16) ],
+    platforms: [ .iOS(.v16), .macOS(.v14) ],
     products: [
         .library(name: "IntegrationApp", targets: ["IntegrationApp"]),
     ],
     dependencies: [
         .package(url: "https://github.com/ManuelSelch/Redux", .upToNextMajor(from: "1.2.12")),
-        .package(url: "https://github.com/ManuelSelch/OfflineSync", .upToNextMajor(from: "1.3.7"))
+        .package(url: "https://github.com/ManuelSelch/OfflineSync", .upToNextMajor(from: "1.3.9"))
     ],
     targets: [
         .target(

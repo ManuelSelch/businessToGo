@@ -1,10 +1,11 @@
 import Foundation
 import Combine
 import Moya
-import CoreData
-import OfflineSyncServices
 import SQLite
 import Dependencies
+
+import OfflineSyncCore
+import OfflineSyncServices
 
 import NetworkFoundation
 import KimaiCore
@@ -21,16 +22,30 @@ extension KeyMappingTable {
     )
 }
 
-public struct KimaiService {
+public class KimaiService {
     public var customers: KimaiCustomerService
     public var projects: RecordService<KimaiProject>
     public var timesheets: RecordService<KimaiTimesheet>
     public var activities: RecordService<KimaiActivity>
     public var users: RecordService<KimaiUser>
     
-    public func setAuth(username: String, password: String) {
-        let authPlugin = KimaiAuthPlugin(username, password)
-        
+    private var user: String = ""
+    private var token: String = ""
+    
+    init(
+        customers: KimaiCustomerService,
+        projects: RecordService<KimaiProject>,
+        timesheets: RecordService<KimaiTimesheet>,
+        activities: RecordService<KimaiActivity>,
+        users: RecordService<KimaiUser>
+    ) {
+        self.customers = customers
+        self.projects = projects
+        self.timesheets = timesheets
+        self.activities = activities
+        self.users = users
+
+        let authPlugin = KimaiAuthPlugin({self.user}, {self.token})
         customers.setPlugins([authPlugin])
         projects.setPlugins([authPlugin])
         timesheets.setPlugins([authPlugin])
@@ -38,14 +53,54 @@ public struct KimaiService {
         users.setPlugins([authPlugin])
     }
     
+    public func setAuth(username: String, password: String) {
+        self.user = username
+        self.token = password
+    }
+    
     public func login(server: String) async throws -> Bool {
         if let url = URL(string: server+"/api") {
             KimaiAPI.server = url
-        }else {
+        } else {
             throw NetworkError.urlDecodeFailed
         }
         
-        return true // todo: check auth
+        // let success = (await users.fetch()) != []
+        return true
+    }
+    
+    public func save(_ model: any TableProtocol) {
+        if let customer = model as? KimaiCustomer {
+            if(customer.id == -1) {
+                customers.createCustomer(customer)
+            } else {
+                customers.updateCustomer(customer)
+            }
+        } else if let project = model as? KimaiProject {
+            if(project.id == -1) {
+                projects.create(project)
+            } else {
+                projects.update(project)
+            }
+        } else if let timesheet = model as? KimaiTimesheet {
+            if(timesheet.id == -1) {
+                timesheets.create(timesheet)
+            } else {
+                timesheets.update(timesheet)
+            }
+        } else if let activity = model as? KimaiActivity {
+            if(activity.id == -1) {
+                activities.create(activity)
+            } else {
+                activities.update(activity)
+            }
+        } else if let user = model as? KimaiUser {
+            if(user.id == -1) {
+                users.create(user)
+            } else {
+                users.update(user)
+            }
+        }
     }
 }
 
@@ -67,19 +122,32 @@ extension KimaiService {
     )
 }
 
-struct KimaiAuthPlugin: PluginType {
-    let user: String
-    let token: String
+class AuthProvider {
+    var user: String
+    var token: String
     
-    init(_ user: String, _ token: String) {
+    init(user: String, token: String) {
         self.user = user
         self.token = token
     }
     
+    
+}
+
+struct KimaiAuthPlugin: PluginType {
+    let getUser: () -> String
+    let getToken: () -> String
+    
+    init(_ getUser: @escaping () -> String, _ getToken: @escaping () -> String) {
+        self.getUser = getUser
+        self.getToken = getToken
+    }
+    
+    
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
-        request.addValue(user, forHTTPHeaderField: "X-AUTH-USER")
-        request.addValue(token, forHTTPHeaderField: "X-AUTH-TOKEN")
+        request.addValue(getUser(), forHTTPHeaderField: "X-AUTH-USER")
+        request.addValue(getToken(), forHTTPHeaderField: "X-AUTH-TOKEN")
         // request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         return request
     }

@@ -3,6 +3,8 @@ import Redux
 import Router
 import Dependencies
 
+import CommonUI
+
 struct AppContainer: View {
     @Dependency(\.router) var router
     @ObservedObject var store: StoreOf<AppFeature>
@@ -17,15 +19,13 @@ struct AppContainer: View {
         AppRouterView(
             router: router,
             header: {
-                AppHeader(
-                    title: "BusinessToGo",
-                    settingsTapped: { router.showSheet(.settings(.settings)) }
-                )
-                 
-                
+                EmptyView()
             },
             content: { route in
-                route.view(store)
+                ZStack(alignment: .top)  {
+                    Color.background.edgesIgnoringSafeArea(.all)
+                    route.view(store)
+                }
             },
             label: { tab in
                 tab.label()
@@ -35,7 +35,5 @@ struct AppContainer: View {
             store.send(.intro(.load))
         }
         .environmentObject(router)
-        
-        
     }
 }

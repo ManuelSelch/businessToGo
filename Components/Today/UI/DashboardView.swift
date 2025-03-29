@@ -13,8 +13,6 @@ struct DashboardView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            Color.background.edgesIgnoringSafeArea(.all)
-            
             Image.background
                 .resizable()
                 .scaledToFill()
@@ -35,7 +33,7 @@ struct DashboardView: View {
                     Rectangle()
                         .fill(Color.themeGray.opacity(0.9))
                         .clipShape(.rect(cornerRadius: 10))
-                        .shadow(color: Color.white.opacity(0.5), radius: 5)
+                        .shadow(color: Color.black.opacity(0.5), radius: 5)
                         
                     
                     VStack {
@@ -66,7 +64,7 @@ struct DashboardView: View {
                                         .clipShape(.rect(cornerRadius: 10))
                                         .aspectRatio(1/1, contentMode: .fit)
                                         // .frame(maxWidth: 100)
-                                        .shadow(color: Color.contrast.opacity(0.2), radius: 5)
+                                        .shadow(color: Color.black.opacity(0.5), radius: 2)
                                     
                                     VStack(alignment: .leading) {
                                         HStack {

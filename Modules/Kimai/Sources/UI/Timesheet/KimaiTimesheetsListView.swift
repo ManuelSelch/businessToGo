@@ -116,6 +116,7 @@ public struct KimaiTimesheetsListView: View {
                             .foregroundStyle(Color.textHeaderSecondary)
                         }
                     )
+                    .listRowBackground(Color.clear)
                 } else {
                     Section(
                         content: {
@@ -167,6 +168,7 @@ public struct KimaiTimesheetsListView: View {
                             .foregroundStyle(Color.textHeaderSecondary)
                         }
                     )
+                    .listRowBackground(Color.clear)
                 }
                 
             

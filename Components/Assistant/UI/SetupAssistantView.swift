@@ -24,6 +24,7 @@ public struct SetupAssistantView: View {
                 Image("no-customers")
                     .resizable()
                     .scaledToFit()
+                    .frame(maxWidth: 800)
                     .padding()
                     .cornerRadius(10)
                     .padding()
@@ -84,6 +85,7 @@ public struct SetupAssistantView: View {
             
             
         }
+        .frame(maxWidth: 2000)
         .padding()
     }
 }

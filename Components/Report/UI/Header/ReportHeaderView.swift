@@ -17,11 +17,6 @@ struct ReportHeaderView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Button(action: calendarTapped){
-                    Image(systemName: "calendar")
-                        
-                }
-                
                 Button(action: filterTapped) {
                     Image(systemName: "line.3.horizontal.decrease.circle")
                 }
@@ -35,7 +30,6 @@ struct ReportHeaderView: View {
                 }
                 .pickerStyle(.segmented)
                 .labelsHidden()
-                .background(Color.themeGray)
                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .accentColor(Color.contrast)
                 
@@ -49,14 +43,25 @@ struct ReportHeaderView: View {
             .foregroundStyle(Color.theme)
             
             switch(selectedReportType){
-            case .day: ReportHeaderWeeks(selectedDate: $selectedDate)
-            default: EmptyView()
+            case .day:
+                ReportHeaderWeeks(selectedDate: $selectedDate)
+            case .week:
+                EmptyView()
+            case .month:
+                HStack {
+                    Image(systemName: "arrow.left")
+                    Spacer()
+                    Text("Dez. 2024")
+                    Spacer()
+                    Image(systemName: "arrow.right")
+                }
+                .padding()
+            case .year: EmptyView()
             }
             
             
         }
         .padding()
-        .background(Color.themeGray)
         .foregroundStyle(Color.contrast)
     }
 }

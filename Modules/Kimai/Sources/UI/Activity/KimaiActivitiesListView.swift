@@ -41,6 +41,7 @@ public struct KimaiActivityListView: View {
                 activity.project = project.id
                 created(activity)
             }
+            .listRowBackground(Color.clear)
             
             
             ForEach(activities) { activity in
@@ -48,6 +49,7 @@ public struct KimaiActivityListView: View {
                     activity: activity,
                     activityTapped: { tapped(activity) }
                 )
+                .listRowBackground(Color.clear)
                 .swipeActions(edge: .trailing) {
                     Button(role: .cancel) {
                         deleteTapped(activity)
@@ -69,6 +71,5 @@ public struct KimaiActivityListView: View {
             }
             
         }
-        .listStyle(.plain)
     }
 }

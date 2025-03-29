@@ -11,7 +11,7 @@ public struct KimaiActivitySheet: View {
     let saveTapped: (KimaiActivity) -> ()
     
     @State var name = ""
-    @State var selectedProject: Int = 0
+    @State var selectedProject: Int?
     @State var color: String?
     
     public init(activity: KimaiActivity, projects: [KimaiProject], saveTapped: @escaping (KimaiActivity) -> Void) {
@@ -26,13 +26,16 @@ public struct KimaiActivitySheet: View {
             List {
                 TextField("Name", text: $name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .listRowBackground(Color.clear)
                     .padding()
                 
                 Picker("Project", selection: $selectedProject) {
-                    ForEach(projects, id: \.id) {
-                        Text($0.name)
+                    Text("----").tag(nil as Int?)
+                    ForEach(projects, id: \.id) { project in
+                        Text(project.name).tag(project.id as Int?)
                     }
                 }
+                .listRowBackground(Color.clear)
                 .pickerStyle(.menu)
                 
                 HStack {
@@ -40,6 +43,7 @@ public struct KimaiActivitySheet: View {
                     Spacer()
                     CustomColorPicker(selectedColor: $color)
                 }
+                .listRowBackground(Color.clear)
                 
             }
             .toolbar {
@@ -62,7 +66,12 @@ public struct KimaiActivitySheet: View {
         }
         .onAppear {
             name = activity.name
-            selectedProject = projects.first { $0.id == activity.project }?.id ?? projects.first?.id ?? 0
+            if(activity.project == nil) {
+                selectedProject = nil
+            } else {
+                selectedProject = projects.first { $0.id == activity.project }?.id ?? projects.first?.id
+            }
+            
             color = activity.color
         }
     }

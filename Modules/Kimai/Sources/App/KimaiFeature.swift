@@ -79,6 +79,49 @@ public struct KimaiFeature: Reducer {
         case popup(KimaiPopupRoute)
         case dismissPopup
     }
+    
+    public enum Route: Codable, Equatable, Hashable {
+        case customersList
+        case customerSheet(KimaiCustomer)
+        
+        case projectsList(for: Int)
+        case projectSheet(KimaiProject)
+        case projectDetail(Int)
+        
+        case activitySheet(KimaiActivity)
+        
+        case timesheetSheet(KimaiTimesheet)
+        
+        case popup(KimaiPopupRoute)
+        
+        var title: String {
+            switch self {
+            case .customersList: return "Customers"
+            case let .customerSheet(customer): return customer.name
+                
+            case .projectsList(_): return "Projects"
+            case let .projectSheet(project):
+                if(project.id == KimaiProject.new.id) {
+                    return "New Project"
+                } else {
+                    return project.name
+                }
+                
+            case let .activitySheet(activity):
+                if(activity.id == KimaiActivity.new.id) {
+                    return "New Activity"
+                } else {
+                    return activity.name
+                }
+                
+            case .projectDetail(_): return "Project"
+            case .timesheetSheet(_): return "Timesheet"
+            
+            case .popup(_): return "Popup"
+                
+            }
+        }
+    }
 }
 
 

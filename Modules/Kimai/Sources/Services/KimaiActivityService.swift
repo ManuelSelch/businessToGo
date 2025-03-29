@@ -11,8 +11,8 @@ struct KimaiActivityService {
             insertMethod: KimaiAPI.insertActivity,
             updateMethod: KimaiAPI.updateActivity,
             deleteMethod: nil
-        ),
-        keyMapping: KeyMappingTable.shared
+        )
+        // keyMapping: KeyMappingTable.shared
     )
     static var mock: RecordService<KimaiActivity> = .init(
         repository: .init("kimai_activities"),
@@ -21,7 +21,7 @@ struct KimaiActivityService {
             insertMethod: KimaiAPI.insertActivity,
             updateMethod: KimaiAPI.updateActivity,
             deleteMethod: nil
-        ),
-        keyMapping: KeyMappingTable.shared
+        )
+        // keyMapping: KeyMappingTable.shared
     )
 }

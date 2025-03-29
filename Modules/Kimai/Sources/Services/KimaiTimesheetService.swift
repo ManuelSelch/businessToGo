@@ -12,8 +12,8 @@ struct KimaiTimesheetService {
             insertMethod: KimaiAPI.insertTimesheet,
             updateMethod: KimaiAPI.updateTimesheet,
             deleteMethod: KimaiAPI.deleteTimesheet
-        ),
-        keyMapping: KeyMappingTable.shared
+        )
+        // keyMapping: KeyMappingTable.shared
     )
     static var mock: RecordService<KimaiTimesheet> = .init(
         repository: .init("kimai_timesheets"),
@@ -22,7 +22,7 @@ struct KimaiTimesheetService {
             insertMethod: KimaiAPI.insertTimesheet,
             updateMethod: KimaiAPI.updateTimesheet,
             deleteMethod: KimaiAPI.deleteTimesheet
-        ),
-        keyMapping: KeyMappingTable.shared
+        )
+        // keyMapping: KeyMappingTable.shared
     )
 }

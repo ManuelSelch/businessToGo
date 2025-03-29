@@ -11,7 +11,6 @@
 		8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */ = {isa = PBXBuildFile; productRef = 8405CC5A2C0E5F5000A73E8F /* Intro */; };
 		8405DDD82C677592002B553B /* ChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405DDD72C677592002B553B /* ChangeView.swift */; };
 		8405DDDA2C6778CD002B553B /* SelectProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405DDD92C6778CD002B553B /* SelectProjectView.swift */; };
-		8405DDDD2C68A9CB002B553B /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 8405DDDC2C68A9CB002B553B /* OfflineSync */; };
 		841840662BFD414F00EC9FDF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841840652BFD414F00EC9FDF /* AppContainer.swift */; };
 		841BDF542C660F18008E3B32 /* TodayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BDF532C660F18008E3B32 /* TodayItem.swift */; };
 		841BDF562C660F8B008E3B32 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BDF552C660F8B008E3B32 /* TodayView.swift */; };
@@ -82,12 +81,9 @@
 		84FC58582BC9559200594E14 /* AppHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC58572BC9559200594E14 /* AppHeader.swift */; };
 		9722EBC92D6B3A52004F5AB8 /* KimaiContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722EBC82D6B3A52004F5AB8 /* KimaiContainer.swift */; };
 		9722EBCB2D6B3A5A004F5AB8 /* KimaiComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9722EBCA2D6B3A5A004F5AB8 /* KimaiComponent.swift */; };
-		972FE8A12D09DDB100AC080F /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 972FE8A02D09DDB100AC080F /* OfflineSync */; };
 		97974A282D0ACD1100CD3B40 /* BoardingUI in Frameworks */ = {isa = PBXBuildFile; productRef = 97974A272D0ACD1100CD3B40 /* BoardingUI */; };
 		97A5AA4A2D205B9500F23B8F /* KimaiAssistantStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5AA492D205B9500F23B8F /* KimaiAssistantStep.swift */; };
 		97A5AA4C2D205BA900F23B8F /* SetupAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5AA4B2D205BA900F23B8F /* SetupAssistantView.swift */; };
-		97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 97AC67772D09BBFF00A78370 /* OfflineSync */; };
-		97BB04122D983E0000D2B0E7 /* OfflineSync in Frameworks */ = {isa = PBXBuildFile; productRef = 97BB04112D983E0000D2B0E7 /* OfflineSync */; };
 		97E1737C2D063766003764FF /* MyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E1737B2D063766003764FF /* MyRouter.swift */; };
 		97E1737F2D063B82003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E1737E2D063B82003764FF /* Router */; };
 		97E173822D06D8EA003764FF /* Router in Frameworks */ = {isa = PBXBuildFile; productRef = 97E173812D06D8EA003764FF /* Router */; };
@@ -224,19 +220,15 @@
 				846421B82C1A43B30014694B /* LoginApp in Frameworks */,
 				84C8C2A92C5E6F31007BF30B /* DebugApp in Frameworks */,
 				84E20FA02C5EA1720075FF81 /* PulseUI in Frameworks */,
-				97AC67782D09BBFF00A78370 /* OfflineSync in Frameworks */,
 				97E173852D06DA8C003764FF /* Router in Frameworks */,
 				97E1737F2D063B82003764FF /* Router in Frameworks */,
 				97974A282D0ACD1100CD3B40 /* BoardingUI in Frameworks */,
 				84E20F9A2C5EA1420075FF81 /* KimaiCore in Frameworks */,
-				8405DDDD2C68A9CB002B553B /* OfflineSync in Frameworks */,
 				97E173822D06D8EA003764FF /* Router in Frameworks */,
 				84E20F9C2C5EA1530075FF81 /* KimaiApp in Frameworks */,
-				97BB04122D983E0000D2B0E7 /* OfflineSync in Frameworks */,
 				849AB2482C66489D00197D96 /* Redux in Frameworks */,
 				8405CC5B2C0E5F5000A73E8F /* Intro in Frameworks */,
 				8472A3D92C01161A006726A1 /* PulseLogHandler in Frameworks */,
-				972FE8A12D09DDB100AC080F /* OfflineSync in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,14 +663,10 @@
 				84E20F9F2C5EA1720075FF81 /* PulseUI */,
 				849AB2472C66489D00197D96 /* Redux */,
 				849AB2492C66489D00197D96 /* ReduxDebug */,
-				8405DDDC2C68A9CB002B553B /* OfflineSync */,
 				97E1737E2D063B82003764FF /* Router */,
 				97E173812D06D8EA003764FF /* Router */,
 				97E173842D06DA8C003764FF /* Router */,
-				97AC67772D09BBFF00A78370 /* OfflineSync */,
-				972FE8A02D09DDB100AC080F /* OfflineSync */,
 				97974A272D0ACD1100CD3B40 /* BoardingUI */,
-				97BB04112D983E0000D2B0E7 /* OfflineSync */,
 			);
 			productName = businessToGo;
 			productReference = 84C5A2922BC40EEC00C25A0C /* businessToGo.app */;
@@ -1281,10 +1269,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Intro;
 		};
-		8405DDDC2C68A9CB002B553B /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
 		846421B72C1A43B30014694B /* LoginApp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LoginApp;
@@ -1347,21 +1331,9 @@
 			package = 845F00872C0F1C470007FAA7 /* XCRemoteSwiftPackageReference "Pulse" */;
 			productName = PulseUI;
 		};
-		972FE8A02D09DDB100AC080F /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
 		97974A272D0ACD1100CD3B40 /* BoardingUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BoardingUI;
-		};
-		97AC67772D09BBFF00A78370 /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
-		};
-		97BB04112D983E0000D2B0E7 /* OfflineSync */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OfflineSync;
 		};
 		97E1737E2D063B82003764FF /* Router */ = {
 			isa = XCSwiftPackageProductDependency;

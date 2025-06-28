@@ -14,8 +14,8 @@ public struct KimaiTimesheetSheet: View {
     @State private var selectedProject: Int = 0
     @State private var selectedActivity: Int = 0
     @State private var description: String = ""
-    @State private var startTime: Date = Date()
-    @State private var endTime: Date = Date()
+    @State private var startTime: Date = Date().roundTo15Minutes()
+    @State private var endTime: Date = Date().roundTo15Minutes()
     @State private var isEndTime: Bool = false
     
     var projectsFiltered: [KimaiProject] {

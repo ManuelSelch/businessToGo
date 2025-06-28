@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/manuelselch/OfflineSync",
       "state" : {
-        "revision" : "2dafe61ebba8d8470b0099919c645fc60c504276",
-        "version" : "1.3.7"
+        "revision" : "24eec6bc27c494f97072d09823fbbd32122ee690",
+        "version" : "1.3.9"
       }
     },
     {

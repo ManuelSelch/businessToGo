@@ -55,6 +55,15 @@
       }
     },
     {
+      "identity" : "offlinesync",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ManuelSelch/OfflineSync",
+      "state" : {
+        "revision" : "24eec6bc27c494f97072d09823fbbd32122ee690",
+        "version" : "1.3.9"
+      }
+    },
+    {
       "identity" : "popupview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/exyte/PopupView.git",

@@ -9,8 +9,8 @@ struct TimesheetView: View {
     
     let saveTapped: (KimaiTimesheet) -> ()
     
-    @State private var startTime: Date = Date()
-    @State private var endTime: Date = Date()
+    @State private var startTime: Date = Date().roundTo15Minutes()
+    @State private var endTime: Date = Date().roundTo15Minutes()
     @State private var activity: Int?
     
     var body: some View {

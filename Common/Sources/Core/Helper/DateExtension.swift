@@ -1,6 +1,11 @@
 import Foundation
 
 public extension Date {
+    func roundTo15Minutes() -> Date {
+        let calendar = Calendar.current
+        return calendar.date(bySetting: .second, value: 0, of: self) ?? self
+    }
+    
     static var today: Date {
         let calendar = Calendar.current
         let now = Date.now
